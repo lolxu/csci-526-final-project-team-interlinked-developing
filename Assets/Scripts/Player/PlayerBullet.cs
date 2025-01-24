@@ -9,6 +9,7 @@ public class PlayerBullet : MonoBehaviour
     public float m_speed;
     public float m_lifeTime = 5.0f;
     public Vector2 m_direction;
+    public int m_penetrateNum = 1;
     
     private Rigidbody2D m_RB;
 
@@ -27,13 +28,13 @@ public class PlayerBullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        Debug.Log("Hit " + other.gameObject);
+        m_penetrateNum--;
+        //if (m_penetrateNum <= 0)
         {
-            
+            Destroy(gameObject);
         }
-        
-        Destroy(gameObject);
     }
 }
