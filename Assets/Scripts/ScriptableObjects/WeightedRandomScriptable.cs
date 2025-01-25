@@ -19,15 +19,26 @@ public class WeightedRandomScriptable : ScriptableObject
         ExtremelyRare,
         Exotic
     }
+
+    public enum ItemType
+    {
+        Bullet,
+        StatsUpgrade,
+        RuleUpgrade,
+        Linkable
+    }
     
     [Serializable]
-    public struct UpgradeItem
+    public class UpgradeItem
     {
         public string m_itemName;
         public int m_id;
+        public Sprite m_itemIcon;
+        public ItemType m_itemType;
         public Rarity m_rarity;
         public float m_price;
         public string m_description;
+        public GameObject m_itemPrefab;
     }
     
     [Serializable]
@@ -42,9 +53,9 @@ public class WeightedRandomScriptable : ScriptableObject
     
     private HashSet<int> m_idLookup = new HashSet<int>();
     
-    public string GetRandomValue()
+    public UpgradeItem GetRandomItem()
     {
-        string output = null;
+        UpgradeItem output = null;
         
         // Generate random value based on list
         float totalWeight = 0.0f;
@@ -61,9 +72,14 @@ public class WeightedRandomScriptable : ScriptableObject
             processedWeight += weightedItem.m_weightedValue;
             if (randomValue <= processedWeight)
             {
-                output = weightedItem.m_item.m_itemName;
+                output = weightedItem.m_item;
                 break;
             }
+        }
+
+        if (output == null)
+        {
+            Debug.LogError("Something bad happened with random picker");
         }
 
         return output;

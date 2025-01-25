@@ -1,16 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerControl : MonoBehaviour
 {
-    [Header("Movement Settings")]
-    public Rigidbody2D m_RB;
+    [Header("Movement Settings")] 
+    public PlayerInput m_input;
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
     
@@ -20,18 +21,25 @@ public class PlayerControl : MonoBehaviour
     public List<GameObject> m_linkedObjects = new List<GameObject>();
 
     [Header("Visual Settings")] 
-    public CinemachineCamera m_cinemachine;
+    public CinemachineVirtualCamera m_cinemachine;
     public float m_cameraZoomFactor = 0.025f;
     public GameObject m_face;
     public float m_faceMoveFactor = 0.5f;
     public GameObject m_gun;
+    public Light2D m_muzzleFlash;
+    public float m_muzzleFlashIntensity = 10.0f;
 
     [Header("Fire Projectile Settings")] 
     public GameObject m_bulletPrefab;
-    public float m_fireRate;
-    
-    private float m_horiVal;
-    private float m_vertVal;
+    public int m_fireRateChange = 0;
+    public float m_recoilChange = 0.0f;
+    public int m_penetrationChange = 0;
+
+    private Rigidbody2D m_RB;
+
+    private bool m_isMouseDown;
+
+    private Vector2 m_moveDirection;
     private Vector2 m_drawpos;
     private float m_orgZoom;
     private float m_fireTimeout = 0.0f;
@@ -40,7 +48,8 @@ public class PlayerControl : MonoBehaviour
     {
         // Adding self to linked object list first
         m_linkedObjects.Add(gameObject);
-        m_orgZoom = m_cinemachine.Lens.OrthographicSize;
+        m_orgZoom = m_cinemachine.m_Lens.OrthographicSize;
+        m_RB = GetComponent<Rigidbody2D>();
     }
 
     /// <summary>
@@ -48,15 +57,18 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     private void FixedUpdate()
     {
-        Vector2 moveDir = new Vector2(m_horiVal, m_vertVal);
-        Vector3 faceDir = new Vector3(moveDir.x, moveDir.y, 0.0f) * m_faceMoveFactor;
+        float hori = Input.GetAxis("Horizontal");
+        float vert = Input.GetAxis("Vertical");
+        
+        Vector3 faceDir = new Vector3(hori, vert, 0.0f) * m_faceMoveFactor;
         m_face.transform.localPosition = faceDir;
+        
         if (m_RB.velocity.magnitude < m_maxSpeed)
         {
-            m_RB.velocity += moveDir * m_acceleration * Time.fixedDeltaTime;
+            m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
         }
         
-        Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
         float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
         m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
     }
@@ -72,61 +84,46 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        // Getting inputs & stuff...
-        m_horiVal = Input.GetAxis("Horizontal");
-        m_vertVal = Input.GetAxis("Vertical");
-
-        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-
-        // Using mouse clicks to connect components
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            // Checking if mouse hits the pickups
-            RaycastHit2D pickupHit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
-                LayerMask.GetMask("Unconnected"));
-            if (pickupHit)
-            {
-                Rigidbody2D hitBody = pickupHit.rigidbody;
-                // Double checking in case weird shit adds this thing twice
-                if (!m_linkedObjects.Contains(hitBody.gameObject))
-                {
-                    RequestRopeConnect(hitBody);
-                }
-            }
-            else
-            {
-                // Here's the shooty controls
-                m_fireTimeout -= Time.deltaTime;
-                if (m_fireTimeout <= 0.0f)
-                {
-                    m_fireTimeout = 60.0f / m_fireRate;
-                    GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
-                    PlayerBullet bulletScript = bullet.GetComponent<PlayerBullet>();
-                    bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
-                }
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
-                LayerMask.GetMask("Connected"));
-            if (hit.rigidbody != m_RB && m_linkedObjects.Contains(hit.rigidbody.gameObject))
-            {
-                // needs some work...
-                Debug.Log("Disconnected " + hit.rigidbody.gameObject); 
-                RopeGenerator targetRope = hit.rigidbody.gameObject.GetComponent<RopeGenerator>();
-                targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(hit.rigidbody.gameObject);
-                
-                Debug.Log("Removed " + hit.rigidbody.gameObject);
-                m_linkedObjects.Remove(hit.rigidbody.gameObject);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
+        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+        if (m_isMouseDown)
+        {
+            // Here's the shooty controls
+            m_fireTimeout -= Time.deltaTime;
+            if (m_fireTimeout <= 0.0f)
+            {
+                m_muzzleFlash.intensity = m_muzzleFlashIntensity;
+                
+                GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
+                BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
+                
+                //TODO: Make sure things don't go negative...
+                // Modding stats for bullets
+                bulletScript.m_penetrateNum += m_penetrationChange;
+                m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
+                bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+                
+                // Add some recoil;
+                m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange), ForceMode2D.Impulse);
+            }
+            else
+            {
+                m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
+                if (m_muzzleFlash.intensity < 0.0f)
+                {
+                    m_muzzleFlash.intensity = 0.0f;
+                }
+            }
+        }
+        else
+        {
+            m_muzzleFlash.intensity = 0.0f;
         }
 
         CameraZoomControl();
@@ -140,7 +137,7 @@ public class PlayerControl : MonoBehaviour
         // Do a circle cast
         RaycastHit2D[] results = new RaycastHit2D[100];
         int numHit = Physics2D.CircleCastNonAlloc(hitBody.position, m_connectRadius, 
-            Vector2.zero, results, m_connectRadius, LayerMask.GetMask("Connected"));
+            Vector2.zero, results, m_connectRadius, LayerMask.GetMask("Player"));
         Debug.Log(numHit);
         
         float minDist = Single.MaxValue;
@@ -167,7 +164,7 @@ public class PlayerControl : MonoBehaviour
             bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
 
             hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
-            hitObject.layer = 7; // Connected layer number
+            hitObject.layer = 7; // Connected layer number (player)
             hitObject.tag = "Player"; // Change tag to player too
             m_linkedObjects.Add(hitObject);
         }
@@ -187,6 +184,66 @@ public class PlayerControl : MonoBehaviour
             minCorner = Vector2.Min(minCorner, pos);
         }
         
-        m_cinemachine.Lens.OrthographicSize = Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
+        m_cinemachine.m_Lens.OrthographicSize = Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
+    }
+    
+    public void Move(InputAction.CallbackContext context)
+    {
+        Debug.Log("Moving!");
+
+        m_moveDirection = context.ReadValue<Vector2>();
+    }
+
+    public void Fire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log("Fire");
+            m_isMouseDown = true;
+        }
+        else
+        {
+            m_isMouseDown = false;
+        }
+    }
+
+    public void RopeOperations(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            // Checking if mouse hits the unconnected hit boxes
+            RaycastHit2D pickupHit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
+                LayerMask.GetMask("Unconnected"));
+            if (pickupHit)
+            {
+                Rigidbody2D hitBody = pickupHit.rigidbody;
+                // Double checking in case weird shit adds this thing twice
+                if (!m_linkedObjects.Contains(hitBody.gameObject))
+                {
+                    RequestRopeConnect(hitBody);
+                }
+
+                return;
+            }
+
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
+                LayerMask.GetMask("Player"));
+
+            if (hit && hit.rigidbody != m_RB && m_linkedObjects.Contains(hit.rigidbody.gameObject))
+            {
+                // needs some work...
+                Debug.Log("Disconnected " + hit.rigidbody.gameObject);
+                RopeGenerator targetRope = hit.rigidbody.gameObject.GetComponent<RopeGenerator>();
+
+                if (targetRope.m_prev != null)
+                {
+                    targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(hit.rigidbody.gameObject);
+                    Debug.Log("Removed " + hit.rigidbody.gameObject);
+                    m_linkedObjects.Remove(hit.rigidbody.gameObject);
+                }
+            }
+        }
     }
 }
