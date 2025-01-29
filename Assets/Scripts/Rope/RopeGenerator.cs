@@ -118,7 +118,7 @@ public class RopeGenerator : MonoBehaviour
                 nextRope.DetachAll();
             }
 
-            SingletonMaster.Instance.PlayerController.m_linkedObjects.Remove(nextObject);
+            SingletonMaster.Instance.PlayerBase.m_linkedObjects.Remove(nextObject);
             m_next.RemoveAt(i);
         }
     }

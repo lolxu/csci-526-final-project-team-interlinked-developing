@@ -9,11 +9,13 @@ public class SingletonMaster : MonoBehaviour
     private static SingletonMaster _instance;
     public static SingletonMaster Instance { get { return _instance; } }
 
-    [Header("Player Things")] 
-    public PlayerControl PlayerController;
+    [FormerlySerializedAs("PlayerController")] [Header("Game Things")] 
+    public PlayerBase PlayerBase;
+    public EnemySpawner EnemySpawnerScript;
 
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
+    public EnemySpawnScriptable EnemySpawnScriptableObject;
 
     [Header("Feel Manager Settings")] 
     public FeelManager FeelManager;

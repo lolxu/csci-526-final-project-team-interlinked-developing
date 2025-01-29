@@ -2,18 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerBase : MonoBehaviour
 {
-    [Header("Movement Settings")] 
+    [Header("Basic Settings")] 
+    public float m_health = 10.0f;
     public PlayerInput m_input;
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
+    public float m_invincibleTime = 1.0f;
     
     [Header("Rope Settings")]
     public RopeGenerator m_rope;
@@ -35,7 +39,14 @@ public class PlayerControl : MonoBehaviour
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
 
+    [Header("Events")] 
+    public UnityEvent<float, GameObject> PlayerDamageEvent = new UnityEvent<float, GameObject>();
+    public UnityEvent<GameObject> PlayerDeathEvent = new UnityEvent<GameObject>();
+    
     private Rigidbody2D m_RB;
+    private SpriteRenderer m_spriteRenderer;
+    private Color m_orgColor;
+    private Vector3 m_orgScale;
 
     private bool m_isMouseDown;
 
@@ -44,12 +55,27 @@ public class PlayerControl : MonoBehaviour
     private float m_orgZoom;
     private float m_fireTimeout = 0.0f;
 
+    private Sequence m_damageTween = null;
+    private bool m_isInvincible = false;
+
     private void Start()
     {
         // Adding self to linked object list first
         m_linkedObjects.Add(gameObject);
         m_orgZoom = m_cinemachine.m_Lens.OrthographicSize;
         m_RB = GetComponent<Rigidbody2D>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_orgColor = m_spriteRenderer.color;
+        m_orgScale = transform.localScale;
+        
+        PlayerDamageEvent.AddListener(OnPlayerDamage);
+        PlayerDeathEvent.AddListener(OnPlayerDeath);
+    }
+
+    private void OnDisable()
+    {
+        PlayerDamageEvent.RemoveListener(OnPlayerDamage);
+        PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
     /// <summary>
@@ -228,6 +254,7 @@ public class PlayerControl : MonoBehaviour
                 return;
             }
 
+            // Checking if mouse hits connected loot
             RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
                 LayerMask.GetMask("Player"));
 
@@ -245,5 +272,71 @@ public class PlayerControl : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnPlayerDamage(float damage, GameObject instigator)
+    {
+        if (!m_isInvincible && m_health > 0)
+        {
+            // Do some juice stuff here
+            if (m_damageTween != null)
+            {
+                m_damageTween.Kill(true);
+            }
+
+            StartCoroutine(InvincibleSequence());
+            StartCoroutine(HitStop());
+            
+            // Juice Stuff
+            SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
+            m_health -= damage;
+            if (m_health <= 0.0f)
+            {
+                m_damageTween.Kill();
+                m_damageTween = DOTween.Sequence();
+                m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                    .SetLoops(1, LoopType.Yoyo)
+                    .SetEase(Ease.InOutFlash));
+                m_damageTween.Insert(0,
+                    transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
+                m_damageTween.OnComplete(() =>
+                {
+                    PlayerDeathEvent.Invoke(instigator);
+                });
+            }
+            else
+            {
+                m_damageTween = DOTween.Sequence();
+                m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                    .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
+                    .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
+                m_damageTween.Insert(0,
+                    transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
+                    {
+                        transform.localScale = m_orgScale;
+                    }));
+            }
+        }
+    }
+
+    private void OnPlayerDeath(GameObject killer)
+    {
+        m_isInvincible = false;
+        Destroy(gameObject);
+    }
+
+    private IEnumerator InvincibleSequence()
+    {
+        m_isInvincible = true;
+        yield return new WaitForSeconds(m_invincibleTime);
+        m_isInvincible = false;
+    }
+
+    private IEnumerator HitStop()
+    {
+        float orgTimeScale = Time.timeScale;
+        Time.timeScale = 0.0f;
+        yield return new WaitForSecondsRealtime(0.2f);
+        Time.timeScale = orgTimeScale;
     }
 }

@@ -13,6 +13,7 @@ public class BasePlayerBullet : MonoBehaviour
     
     // Needs to be object pooled perhaps
     public BulletType m_bulletType;
+    public float m_damage = 4.0f;
     public float m_speed;
     public float m_lifeTime = 5.0f;
     public Vector2 m_direction;
@@ -61,7 +62,7 @@ public class BasePlayerBullet : MonoBehaviour
                         BaseEnemyBehavior enemy = hit.collider.gameObject.GetComponent<BaseEnemyBehavior>();
                         if (enemy)
                         {
-                            enemy.EnemyDamagedEvent.Invoke();
+                            enemy.EnemyDamagedEvent.Invoke(m_damage);
                             hit.rigidbody.AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
                         }
                     }
@@ -86,7 +87,7 @@ public class BasePlayerBullet : MonoBehaviour
                 BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
                 if (enemy)
                 {
-                    enemy.EnemyDamagedEvent.Invoke();
+                    enemy.EnemyDamagedEvent.Invoke(m_damage);
                     other.GetComponent<Rigidbody2D>().AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
                 }
             }
