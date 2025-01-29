@@ -22,7 +22,7 @@ public class ItemPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.gameObject.GetComponent<PlayerBase>() != null)
         {
             switch (m_item.m_itemType)
             {
@@ -33,6 +33,12 @@ public class ItemPickup : MonoBehaviour
                     {
                         comp.m_bulletPrefab = m_item.m_itemPrefab;
                     }
+                    break;
+                }
+                case WeightedRandomScriptable.ItemType.Linkable:
+                {
+                    // Spawn the prefab
+                    Instantiate(m_item.m_itemPrefab, transform.position, Quaternion.identity);
                     break;
                 }
             }
