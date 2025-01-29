@@ -21,10 +21,11 @@ public class BaseEnemyBehavior : MonoBehaviour
     public BaseEnemyAI m_AI;
     
     [Header("Visual Settings")] 
-    public GameObject m_face;
-    public float m_faceMoveFactor = 0.25f;
+    [SerializeField] private GameObject m_face;
+    [SerializeField] private float m_faceMoveFactor = 0.25f;
     
-    public UnityEvent<float> EnemyDamagedEvent { private set; get; } = new UnityEvent<float>();
+    [Header("Enemy Events")]
+    public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
     
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
@@ -97,7 +98,7 @@ public class BaseEnemyBehavior : MonoBehaviour
             m_health -= amount;
             if (m_health < 0.0f)
             {
-                SingletonMaster.Instance.EnemySpawnerScript.EnemyDeathEvent.Invoke(gameObject);
+                SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
             }
         });
         
@@ -111,7 +112,7 @@ public class BaseEnemyBehavior : MonoBehaviour
             PlayerBase player = other.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.PlayerDamageEvent.Invoke(m_damage, gameObject);
+                SingletonMaster.Instance.EventManager.PlayerDamageEvent.Invoke(m_damage, gameObject);
             }
         }
     }

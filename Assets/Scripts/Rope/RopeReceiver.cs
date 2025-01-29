@@ -5,6 +5,7 @@ using UnityEngine;
 public class RopeReceiver : MonoBehaviour
 {
     public List<GameObject> m_links = new List<GameObject>();
+    public int m_length = 15;
     
     public void ConnectToRope(Rigidbody2D ropeEnd)
     {

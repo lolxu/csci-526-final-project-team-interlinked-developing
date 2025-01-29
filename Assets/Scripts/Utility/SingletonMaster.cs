@@ -9,9 +9,12 @@ public class SingletonMaster : MonoBehaviour
     private static SingletonMaster _instance;
     public static SingletonMaster Instance { get { return _instance; } }
 
-    [FormerlySerializedAs("PlayerController")] [Header("Game Things")] 
+    [Header("Game Things")] 
     public PlayerBase PlayerBase;
     public EnemySpawner EnemySpawnerScript;
+
+    [Header("Event Manager")] 
+    public EventManager EventManager;
 
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;

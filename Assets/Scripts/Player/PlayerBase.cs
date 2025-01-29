@@ -25,24 +25,11 @@ public class PlayerBase : MonoBehaviour
     public List<GameObject> m_linkedObjects = new List<GameObject>();
 
     [Header("Visual Settings")] 
-    public CinemachineVirtualCamera m_cinemachine;
-    public float m_cameraZoomFactor = 0.025f;
-    public GameObject m_face;
-    public float m_faceMoveFactor = 0.5f;
-    public GameObject m_gun;
-    public Light2D m_muzzleFlash;
-    public float m_muzzleFlashIntensity = 10.0f;
+    [SerializeField] private CinemachineVirtualCamera m_cinemachine;
+    [SerializeField] private float m_cameraZoomFactor = 0.025f;
+    [SerializeField] private GameObject m_face;
+    [SerializeField] private float m_faceMoveFactor = 0.25f;
 
-    [Header("Fire Projectile Settings")] 
-    public GameObject m_bulletPrefab;
-    public int m_fireRateChange = 0;
-    public float m_recoilChange = 0.0f;
-    public int m_penetrationChange = 0;
-
-    [Header("Events")] 
-    public UnityEvent<float, GameObject> PlayerDamageEvent = new UnityEvent<float, GameObject>();
-    public UnityEvent<GameObject> PlayerDeathEvent = new UnityEvent<GameObject>();
-    
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
@@ -53,7 +40,6 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_moveDirection;
     private Vector2 m_drawpos;
     private float m_orgZoom;
-    private float m_fireTimeout = 0.0f;
 
     private Sequence m_damageTween = null;
     private bool m_isInvincible = false;
@@ -68,14 +54,14 @@ public class PlayerBase : MonoBehaviour
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
-        PlayerDamageEvent.AddListener(OnPlayerDamage);
-        PlayerDeathEvent.AddListener(OnPlayerDeath);
+        SingletonMaster.Instance.EventManager.PlayerDamageEvent.AddListener(OnPlayerDamage);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
     }
 
     private void OnDisable()
     {
-        PlayerDamageEvent.RemoveListener(OnPlayerDamage);
-        PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        SingletonMaster.Instance.EventManager.PlayerDamageEvent.RemoveListener(OnPlayerDamage);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
     /// <summary>
@@ -93,10 +79,6 @@ public class PlayerBase : MonoBehaviour
         {
             m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
         }
-        
-        Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-        float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
-        m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
     }
 
     /// <summary>
@@ -113,43 +95,6 @@ public class PlayerBase : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        
-        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-
-        if (m_isMouseDown)
-        {
-            // Here's the shooty controls
-            m_fireTimeout -= Time.deltaTime;
-            if (m_fireTimeout <= 0.0f)
-            {
-                m_muzzleFlash.intensity = m_muzzleFlashIntensity;
-                
-                GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
-                BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
-                
-                //TODO: Make sure things don't go negative...
-                // Modding stats for bullets
-                bulletScript.m_penetrateNum += m_penetrationChange;
-                m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
-                bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
-                
-                // Add some recoil;
-                m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange), ForceMode2D.Impulse);
-            }
-            else
-            {
-                m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
-                if (m_muzzleFlash.intensity < 0.0f)
-                {
-                    m_muzzleFlash.intensity = 0.0f;
-                }
-            }
-        }
-        else
-        {
-            m_muzzleFlash.intensity = 0.0f;
         }
 
         CameraZoomControl();
@@ -220,19 +165,6 @@ public class PlayerBase : MonoBehaviour
         m_moveDirection = context.ReadValue<Vector2>();
     }
 
-    public void Fire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("Fire");
-            m_isMouseDown = true;
-        }
-        else
-        {
-            m_isMouseDown = false;
-        }
-    }
-
     public void RopeOperations(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -301,7 +233,7 @@ public class PlayerBase : MonoBehaviour
                     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
                 m_damageTween.OnComplete(() =>
                 {
-                    PlayerDeathEvent.Invoke(instigator);
+                    SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
                 });
             }
             else

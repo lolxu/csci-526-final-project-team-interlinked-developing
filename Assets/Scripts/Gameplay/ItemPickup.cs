@@ -28,7 +28,11 @@ public class ItemPickup : MonoBehaviour
             {
                 case WeightedRandomScriptable.ItemType.Bullet:
                 {
-                    SingletonMaster.Instance.PlayerBase.m_bulletPrefab = m_item.m_itemPrefab;
+                    var comp = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<ShootComponent>();
+                    if (comp != null)
+                    {
+                        comp.m_bulletPrefab = m_item.m_itemPrefab;
+                    }
                     break;
                 }
             }

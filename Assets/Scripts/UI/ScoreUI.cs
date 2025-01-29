@@ -12,14 +12,14 @@ public class ScoreUI : MonoBehaviour
     
     private void Start()
     {
-        SingletonMaster.Instance.EnemySpawnerScript.EnemyDeathEvent.AddListener(AddKill);
-        SingletonMaster.Instance.PlayerBase.PlayerDeathEvent.AddListener(OnPlayerDeath);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(AddKill);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
     }
 
     private void OnDisable()
     {
-        SingletonMaster.Instance.EnemySpawnerScript.EnemyDeathEvent.RemoveListener(AddKill);
-        SingletonMaster.Instance.PlayerBase.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(AddKill);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
     private void Update()

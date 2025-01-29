@@ -9,52 +9,59 @@ public class RopeGenerator : MonoBehaviour
     public GameObject m_linkPrefab;
     public List<GameObject> m_next = new List<GameObject>();
     public GameObject m_prev;
-    public int m_length = 10;
 
     public void GenerateRope(GameObject connectTo)
     {
         Rigidbody2D prevRB = m_anchorObject;
-        
-        for (int i = 0; i < m_length; i++)
-        {
-            // Instantiating a rope link and randomizing scale
-            GameObject link = Instantiate(m_linkPrefab, m_rope.transform, true);
-            link.transform.position = transform.position;
-            float randScale = Random.Range(0.25f, 0.5f);
-            link.transform.localScale = new Vector3(randScale, randScale, randScale);
-            
-            HingeJoint2D joint = link.GetComponent<HingeJoint2D>();
-            joint.connectedBody = prevRB;
-            joint.autoConfigureConnectedAnchor = false;
-            
-            // Determining the connection offset
-            // Making it randomized in the middle
-            if (i == 0)
-            {
-                joint.connectedAnchor = Vector2.zero;
-            }
-            else
-            {
-                joint.connectedAnchor = Random.insideUnitCircle * 0.75f;
-            }
-            
-            // joint.distance = m_ropeOffset;
-            if (i == m_length - 1)
-            {
-                var connector = connectTo.GetComponent<RopeReceiver>();
-                if (connector != null)
-                {
-                    connector.ConnectToRope(link.GetComponent<Rigidbody2D>());
-                }
-            }
-            else
-            {
-                prevRB = link.GetComponent<Rigidbody2D>();
-            }
-            
-            connectTo.GetComponent<RopeReceiver>().m_links.Add(link);
-        }
 
+        var receiver = connectTo.GetComponent<RopeReceiver>();
+        if (receiver != null)
+        {
+            var length = receiver.m_length;
+            for (int i = 0; i < length; i++)
+            {
+                // Instantiating a rope link and randomizing scale
+                GameObject link = Instantiate(m_linkPrefab, m_rope.transform, true);
+                link.transform.position = transform.position;
+                float randScale = Random.Range(0.5f, 0.5f);
+                link.transform.localScale = new Vector3(randScale, randScale, randScale);
+            
+                HingeJoint2D joint = link.GetComponent<HingeJoint2D>();
+                joint.connectedBody = prevRB;
+                joint.autoConfigureConnectedAnchor = false;
+            
+                // Determining the connection offset
+                // Making it randomized in the middle
+                if (i == 0)
+                {
+                    joint.connectedAnchor = Vector2.zero;
+                }
+                else
+                {
+                    joint.connectedAnchor = Random.insideUnitCircle * 0.75f;
+                }
+            
+                // joint.distance = m_ropeOffset;
+                if (i == length - 1)
+                {
+                    var connector = connectTo.GetComponent<RopeReceiver>();
+                    if (connector != null)
+                    {
+                        connector.ConnectToRope(link.GetComponent<Rigidbody2D>());
+                    }
+                }
+                else
+                {
+                    prevRB = link.GetComponent<Rigidbody2D>();
+                }
+            
+                connectTo.GetComponent<RopeReceiver>().m_links.Add(link);
+            }
+        }
+        else
+        {
+            Debug.LogError("Connecting component does NOT have Rope Receiver");
+        }
     }
 
     /// <summary>

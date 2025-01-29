@@ -12,20 +12,19 @@ public class EnemySpawner : MonoBehaviour
     public float m_waveIncreaseTime = 60.0f;
     public int m_maxEnemyCount = 20;
     public float m_spawnPadding = 1.0f;
-    public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>();
-
+    
     private List<GameObject> m_enemies = new List<GameObject>();
     private float m_timer;
     private float m_waveTimer;
 
     private void Start()
     {
-        EnemyDeathEvent.AddListener(RemoveEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
     }
 
     private void OnDisable()
     {
-        EnemyDeathEvent.RemoveListener(RemoveEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
     }
 
     void Update()
