@@ -220,7 +220,7 @@ public class PlayerBase : MonoBehaviour
             StartCoroutine(HitStop());
             
             // Juice Stuff
-            SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
+            // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
             m_health -= damage;
             if (m_health <= 0.0f)
             {
