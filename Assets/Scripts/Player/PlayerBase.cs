@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -41,7 +40,8 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_drawpos;
     private float m_orgZoom;
 
-    private Sequence m_damageTween = null;
+    // private Sequence m_damageTween = null;
+    private Coroutine m_damageSequence = null;
     private bool m_isInvincible = false;
 
     private void Start()
@@ -160,8 +160,6 @@ public class PlayerBase : MonoBehaviour
     
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("Moving!");
-
         m_moveDirection = context.ReadValue<Vector2>();
     }
 
@@ -208,47 +206,74 @@ public class PlayerBase : MonoBehaviour
 
     private void OnPlayerDamage(float damage, GameObject instigator)
     {
-        if (!m_isInvincible && m_health > 0)
+        if (!m_isInvincible && m_health > 0.0f)
         {
             // Do some juice stuff here
-            if (m_damageTween != null)
+            // if (m_damageTween != null)
+            // {
+            //     m_damageTween.Kill(true);
+            // }
+            
+            if (m_damageSequence != null)
             {
-                m_damageTween.Kill(true);
+                // StopCoroutine(m_damageSequence);
+                // m_spriteRenderer.color = m_orgColor;
+                // transform.localScale = m_orgScale;
             }
 
+            Vector2 dir = -(instigator.transform.position - transform.position).normalized;
+            m_damageSequence = StartCoroutine(PlayerHurtSequence(dir));
+
             StartCoroutine(InvincibleSequence());
-            StartCoroutine(HitStop());
+            // StartCoroutine(HitStop());
             
             // Juice Stuff
             // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
             m_health -= damage;
             if (m_health <= 0.0f)
             {
-                m_damageTween.Kill();
-                m_damageTween = DOTween.Sequence();
-                m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                    .SetLoops(1, LoopType.Yoyo)
-                    .SetEase(Ease.InOutFlash));
-                m_damageTween.Insert(0,
-                    transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
-                m_damageTween.OnComplete(() =>
-                {
-                    SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
-                });
+                Time.timeScale = 1.0f;
+                StopAllCoroutines();
+                // m_damageTween.Kill();
+                // m_damageTween = DOTween.Sequence();
+                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                //     .SetLoops(1, LoopType.Yoyo)
+                //     .SetEase(Ease.InOutFlash));
+                // m_damageTween.Insert(0,
+                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
+                // m_damageTween.OnComplete(() =>
+                // {
+                //     SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
+                // });
+                
+                SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
             }
             else
             {
-                m_damageTween = DOTween.Sequence();
-                m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                    .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
-                    .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
-                m_damageTween.Insert(0,
-                    transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
-                    {
-                        transform.localScale = m_orgScale;
-                    }));
+                // m_damageTween = DOTween.Sequence();
+                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                //     .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
+                //     .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
+                // m_damageTween.Insert(0,
+                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
+                //     {
+                //         transform.localScale = m_orgScale;
+                //     }));
             }
         }
+    }
+    
+    private IEnumerator PlayerHurtSequence(Vector2 dir)
+    {
+        int flashCount = 0;
+        m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
+        m_spriteRenderer.color = Color.white;
+        yield return new WaitForSecondsRealtime(0.25f);
+        m_spriteRenderer.color = m_orgColor;
+        yield return new WaitForSecondsRealtime(0.25f);
+        m_spriteRenderer.color = Color.white;
+        yield return new WaitForSecondsRealtime(0.25f);
+        m_spriteRenderer.color = m_orgColor;
     }
 
     private void OnPlayerDeath(GameObject killer)
@@ -260,7 +285,7 @@ public class PlayerBase : MonoBehaviour
     private IEnumerator InvincibleSequence()
     {
         m_isInvincible = true;
-        yield return new WaitForSeconds(m_invincibleTime);
+        yield return new WaitForSecondsRealtime(m_invincibleTime);
         m_isInvincible = false;
     }
 

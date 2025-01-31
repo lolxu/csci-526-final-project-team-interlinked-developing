@@ -36,7 +36,7 @@ MonoBehaviour:
   - m_item:
       m_itemName: Hammer
       m_id: 2
-      m_itemIcon: {fileID: 21300000, guid: 6fd0b649401ca5b419a5ebf5df170c0f, type: 3}
+      m_itemIcon: {fileID: 7482667652216324306, guid: c82c9f847f98830478ba7511b2fe6f0d, type: 3}
       m_itemType: 3
       m_rarity: 1
       m_price: 5

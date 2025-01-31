@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,7 +29,9 @@ public class BaseEnemyBehavior : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
     private Vector3 m_orgScale;
-    private Sequence m_damageTween = null;
+    
+    // private Sequence m_damageTween = null;
+    private Coroutine m_damageSequence = null;
     
     /// <summary>
     /// Overwrite this for custom start behavior
@@ -77,35 +78,57 @@ public class BaseEnemyBehavior : MonoBehaviour
     protected virtual void OnDamaged(float amount)
     {
         // Kills tween if still playing
-        if (m_damageTween != null)
-        {
-            m_damageTween.Kill(true);
-        }
+        // if (m_damageTween != null)
+        // {
+        //     m_damageTween.Kill(true);
+        // }
         
         // Juice Tweens
-        m_damageTween = DOTween.Sequence();
-        m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f).SetLoops(1, LoopType.Yoyo)
-            .SetEase(Ease.InOutFlash).OnComplete(() =>
-            {
-                m_spriteRenderer.color = m_orgColor;
-            }));
-        m_damageTween.Insert(0, transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
+        // m_damageTween = DOTween.Sequence();
+        // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f).SetLoops(1, LoopType.Yoyo)
+        //     .SetEase(Ease.InOutFlash).OnComplete(() =>
+        //     {
+        //         m_spriteRenderer.color = m_orgColor;
+        //     }));
+        // m_damageTween.Insert(0, transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
+        // {
+        //     transform.localScale = m_orgScale;
+        // }));
+        // m_damageTween.OnComplete(() =>
+        // {
+        //     m_health -= amount;
+        //     if (m_health < 0.0f)
+        //     {
+        //         SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+        //     }
+        // });
+        if (m_damageSequence != null)
         {
+            StopCoroutine(m_damageSequence);
+            m_spriteRenderer.color = m_orgColor;
             transform.localScale = m_orgScale;
-        }));
-        m_damageTween.OnComplete(() =>
+        }
+        m_damageSequence = StartCoroutine(EnemyHurtSequence());
+        
+        m_health -= amount;
+        if (m_health < 0.0f)
         {
-            m_health -= amount;
-            if (m_health < 0.0f)
-            {
-                SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
-            }
-        });
+            SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+        }
         
         Debug.Log(gameObject + " enemy damaged");
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private IEnumerator EnemyHurtSequence()
+    {
+        transform.localScale = m_orgScale * 0.85f;
+        m_spriteRenderer.color = Color.white;
+        yield return new WaitForSecondsRealtime(0.15f);
+        m_spriteRenderer.color = m_orgColor;
+        transform.localScale = m_orgScale;
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.collider.CompareTag("Player"))
         {
