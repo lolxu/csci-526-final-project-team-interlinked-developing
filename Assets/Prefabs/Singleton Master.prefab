@@ -835,9 +835,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d1c40e65679e94186b77219fe2a34c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_spawnTimeout: 100
-  m_waveIncreaseTime: 10000
-  m_maxEnemyCount: 0
+  m_spawnTimeout: 10
+  m_waveIncreaseTime: 120
+  m_maxEnemyCount: 10
   m_spawnPadding: 2
   m_canSpawn: 0
   m_enemyDropLootRate: 0.615
