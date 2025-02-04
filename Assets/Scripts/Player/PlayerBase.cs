@@ -13,6 +13,7 @@ using UnityEngine.Rendering.Universal;
 public class PlayerBase : MonoBehaviour
 {
     [Header("Basic Settings")] 
+    public GameObject m_playerEntity;
     public float m_health = 10.0f;
     public PlayerInput m_input;
     public float m_acceleration = 50.0f;
@@ -22,6 +23,7 @@ public class PlayerBase : MonoBehaviour
     [Header("Rope Settings")]
     public RopeGenerator m_rope;
     public float m_connectRadius = 10.0f;
+    public GameObject m_linkObjectsParent;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
 
     [Header("Visual Settings")] 
@@ -182,6 +184,7 @@ public class PlayerBase : MonoBehaviour
                 {
                     GameObject usingRope = hitBody.gameObject.GetComponent<RopeGenerator>().m_myRopePrefab;
                     
+                    hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
                     RequestRopeConnect(hitBody, usingRope);
                 }
 

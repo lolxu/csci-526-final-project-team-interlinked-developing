@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class RopeGenerator : MonoBehaviour
 {
-    public GameObject m_rope;
     public Rigidbody2D m_anchorObject;
     
     [Tooltip("The rope asset that is used to connect to this object")]
@@ -14,6 +15,13 @@ public class RopeGenerator : MonoBehaviour
     public GameObject m_usingRopePrefab;
     public List<GameObject> m_next = new List<GameObject>();
     public GameObject m_prev;
+
+    private GameObject m_rope;
+
+    private void Start()
+    {
+        m_rope = GameObject.FindGameObjectWithTag("Rope");
+    }
 
     public void GenerateRope(GameObject connectTo)
     {
@@ -97,6 +105,7 @@ public class RopeGenerator : MonoBehaviour
                     strongJoint.connectedBody = null;
                     strongJoint.enabled = false;
                 }
+                nextObject.transform.SetParent(null, true);
                 
                 RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
                 RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
@@ -137,6 +146,7 @@ public class RopeGenerator : MonoBehaviour
                 strongJoint.connectedBody = null;
                 strongJoint.enabled = false;
             }
+            nextObject.transform.SetParent(null, true);
             
             RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
             RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
