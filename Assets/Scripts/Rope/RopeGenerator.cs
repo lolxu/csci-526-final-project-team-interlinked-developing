@@ -111,8 +111,7 @@ public class RopeGenerator : MonoBehaviour
                 RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
                 if (nextRope != null && nextConn != null)
                 {
-                    nextObject.tag = "Untagged";
-                    nextObject.layer = 6;
+                    nextObject.layer = SingletonMaster.Instance.UNCONNECTED_LAYER;
                     
                     nextRope.m_prev = null;
                     nextConn.DestroyRope();
@@ -152,8 +151,7 @@ public class RopeGenerator : MonoBehaviour
             RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
             if (nextRope != null && nextConn != null)
             {
-                nextObject.tag = "Untagged";
-                nextObject.layer = 6;
+                nextObject.layer = SingletonMaster.Instance.UNCONNECTED_LAYER;
                 
                 nextRope.m_prev = null;
                 nextConn.DestroyRope();

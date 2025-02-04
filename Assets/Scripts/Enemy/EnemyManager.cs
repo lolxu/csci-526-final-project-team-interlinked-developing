@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     public float m_waveIncreaseTime = 60.0f;
     public int m_maxEnemyCount = 20;
     public float m_spawnPadding = 1.0f;
+    public bool m_canSpawn = false;
 
     [Header("Enemy Settings")] 
     [Range(0.0f, 1.0f)] public float m_enemyDropLootRate = 0.0f;
@@ -35,23 +37,35 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        int enemyCount = m_enemies.Count;
-        if (enemyCount == 0 || m_timer <= 0.0f)
+        if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
         {
-            m_timer = m_spawnTimeout;
-            SpawnEnemies(m_maxEnemyCount - enemyCount);
-        
-            // TODO: Remove magic numbers
-            if (m_waveTimer <= 0.0f)
-            {
-                m_waveIncreaseTime += Random.Range(10.0f, 30.0f);
-                m_waveTimer = m_waveIncreaseTime;
-                m_maxEnemyCount += Random.Range(1, 5);
-            }
+            m_canSpawn = true;
         }
+        else
+        {
+            m_canSpawn = false;
+        }
+        
+        if (m_canSpawn)
+        {
+            int enemyCount = m_enemies.Count;
+            if (enemyCount == 0 || m_timer <= 0.0f)
+            {
+                m_timer = m_spawnTimeout;
+                SpawnEnemies(m_maxEnemyCount - enemyCount);
 
-        m_waveTimer -= Time.deltaTime;
-        m_timer -= Time.deltaTime;
+                // TODO: Remove magic numbers
+                if (m_waveTimer <= 0.0f)
+                {
+                    m_waveIncreaseTime += Random.Range(10.0f, 30.0f);
+                    m_waveTimer = m_waveIncreaseTime;
+                    m_maxEnemyCount += Random.Range(1, 5);
+                }
+            }
+
+            m_waveTimer -= Time.deltaTime;
+            m_timer -= Time.deltaTime;
+        }
     }
 
     private void SpawnEnemies(int num)

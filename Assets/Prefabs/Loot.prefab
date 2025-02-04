@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 4674145358176723063}
   - component: {fileID: 4584792919673794714}
   - component: {fileID: 3323771633237118107}
+  - component: {fileID: 9213061921122860656}
   m_Layer: 6
   m_Name: Loot
-  m_TagString: Untagged
+  m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4f52792d830234bb8ee9adbf081f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rope: {fileID: 0}
   m_anchorObject: {fileID: 2019106842575681331}
   m_myRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
   m_usingRopePrefab: {fileID: 0}
@@ -223,3 +223,16 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
+--- !u!114 &9213061921122860656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181414071359833202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72b1ac47d2bab0479b7cd8fdb37a254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shrinkSpeed: 1.25

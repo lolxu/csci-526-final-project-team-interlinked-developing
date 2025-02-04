@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,10 +22,12 @@ public class PlayerBase : MonoBehaviour
     public float m_invincibleTime = 1.0f;
     
     [Header("Rope Settings")]
-    public RopeGenerator m_rope;
+    public GameObject m_rope;
     public float m_connectRadius = 10.0f;
     public GameObject m_linkObjectsParent;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
+    private List<Vector3> m_linkedDisplacements = new List<Vector3>();
+    private List<Vector3> m_ropeDisplacements = new List<Vector3>();
 
     [Header("Visual Settings")] 
     [SerializeField] private CinemachineVirtualCamera m_cinemachine;
@@ -59,6 +62,56 @@ public class PlayerBase : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.PlayerDamageEvent.AddListener(OnPlayerDamage);
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnSceneUnloaded(Scene arg0)
+    {
+        m_linkedDisplacements.Clear();
+        m_ropeDisplacements.Clear();
+        
+        foreach (var obj in m_linkedObjects)
+        {
+            Vector3 disp = obj.transform.position - transform.position;
+            m_linkedDisplacements.Add(disp);
+            obj.GetComponent<Rigidbody2D>().isKinematic = true;
+            Debug.Log(disp);
+        }
+
+        for (int i = 0; i < m_rope.transform.childCount; i++)
+        {
+            Rigidbody2D rb = m_rope.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
+            rb.isKinematic = true;
+            Vector3 disp = m_rope.transform.GetChild(i).position - transform.position;
+            m_ropeDisplacements.Add(disp);
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        transform.position = Vector3.zero;
+        StartCoroutine(InitCoroutine());
+    }
+
+    private IEnumerator InitCoroutine()
+    {
+        // yield return new WaitForSeconds(0.5f);
+        yield return null;
+        for (int i = 0; i < m_linkedObjects.Count; i++)
+        {
+            Debug.Log(m_linkedDisplacements[i]);
+            m_linkedObjects[i].transform.position = transform.position + m_linkedDisplacements[i];
+            m_linkedObjects[i].GetComponent<Rigidbody2D>().isKinematic = false;
+        }
+        
+        for (int i = 0; i < m_rope.transform.childCount; i++)
+        {
+            Rigidbody2D rb = m_rope.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
+            m_rope.transform.GetChild(i).position = transform.position + m_ropeDisplacements[i];
+            rb.isKinematic = false;
+        }
     }
 
     private void OnDisable()
@@ -139,8 +192,7 @@ public class PlayerBase : MonoBehaviour
             bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
 
             hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
-            hitObject.layer = 7; // Connected layer number (player)
-            hitObject.tag = "Player"; // Change tag to player too
+            hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
             m_linkedObjects.Add(hitObject);
         }
     }
@@ -203,7 +255,9 @@ public class PlayerBase : MonoBehaviour
 
                 if (targetRope.m_prev != null)
                 {
+                    // Detaching rope !!
                     targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(hit.rigidbody.gameObject);
+                    
                     Debug.Log("Removed " + hit.rigidbody.gameObject);
                     m_linkedObjects.Remove(hit.rigidbody.gameObject);
                 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class SingletonMaster : MonoBehaviour
@@ -24,6 +25,14 @@ public class SingletonMaster : MonoBehaviour
     public CameraShake CameraShakeManager;
     public FeelManager FeelManager;
     
+    [Header("Constants")]
+    public int UNCONNECTED_LAYER = 6;
+    public int PLAYER_LAYER = 7;
+
+    [Header("Scene Names")] 
+    public string HubName = "Prototype - Hub";
+    public string BattlefieldName = "Prototype - Battlefield";
+    
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -33,6 +42,7 @@ public class SingletonMaster : MonoBehaviour
         else 
         {
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }
