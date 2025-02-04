@@ -11,7 +11,7 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Game Things")] 
     public PlayerBase PlayerBase;
-    public EnemySpawner EnemySpawnerScript;
+    public EnemyManager EnemyManager;
 
     [Header("Event Manager")] 
     public EventManager EventManager;

@@ -5,13 +5,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-    [Header("Spawner Settings")] 
+    [Header("Spawning Settings")] 
     public float m_spawnTimeout = 10.0f;
     public float m_waveIncreaseTime = 60.0f;
     public int m_maxEnemyCount = 20;
     public float m_spawnPadding = 1.0f;
+
+    [Header("Enemy Settings")] 
+    [Range(0.0f, 1.0f)] public float m_enemyDropLootRate = 0.0f;
+    public GameObject m_dropLoot;
     
     private List<GameObject> m_enemies = new List<GameObject>();
     private float m_timer;
@@ -20,11 +24,13 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
     }
 
     void Update()
@@ -89,6 +95,15 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return new Vector2(x, y);
+    }
+
+    private void SpawnLoot(GameObject enemy)
+    {
+        float roll = Random.Range(0.0f, 1.0f);
+        if (roll <= m_enemyDropLootRate)
+        {
+            Instantiate(m_dropLoot, enemy.transform.position, Quaternion.identity);
+        }
     }
 
     private void RemoveEnemy(GameObject enemy)
