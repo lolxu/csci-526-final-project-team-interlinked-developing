@@ -6,14 +6,33 @@ public class RopeGenerator : MonoBehaviour
 {
     public GameObject m_rope;
     public Rigidbody2D m_anchorObject;
-    public GameObject m_linkPrefab;
+    
+    [Tooltip("The rope asset that is used to connect to this object")]
+    public GameObject m_myRopePrefab;
+    
+    [Tooltip("The rope asset that is using to connect to other objects")]
+    public GameObject m_usingRopePrefab;
     public List<GameObject> m_next = new List<GameObject>();
     public GameObject m_prev;
 
     public void GenerateRope(GameObject connectTo)
     {
-        Rigidbody2D prevRB = m_anchorObject;
+        if (connectTo.GetComponent<RelativeJoint2D>() != null)
+        {
+            Vector2 offset = transform.position - connectTo.transform.position;
+            RelativeJoint2D joint = connectTo.GetComponent<RelativeJoint2D>();
+            joint.enabled = true;
+            joint.connectedBody = m_anchorObject;
+            joint.autoConfigureOffset = false;
+            joint.linearOffset = offset;
+        }
+        
+        CreateVisualRope(connectTo);
+    }
 
+    private void CreateVisualRope(GameObject connectTo)
+    {
+        Rigidbody2D prevRB = m_anchorObject;
         var receiver = connectTo.GetComponent<RopeReceiver>();
         if (receiver != null)
         {
@@ -21,12 +40,13 @@ public class RopeGenerator : MonoBehaviour
             for (int i = 0; i < length; i++)
             {
                 // Instantiating a rope link and randomizing scale
-                GameObject link = Instantiate(m_linkPrefab, m_rope.transform, true);
+                GameObject link = Instantiate(m_usingRopePrefab, m_rope.transform, true);
                 link.transform.position = transform.position;
                 float randScale = Random.Range(0.5f, 0.5f);
                 link.transform.localScale = new Vector3(randScale, randScale, randScale);
             
                 HingeJoint2D joint = link.GetComponent<HingeJoint2D>();
+                
                 joint.connectedBody = prevRB;
                 joint.autoConfigureConnectedAnchor = false;
             
@@ -36,12 +56,7 @@ public class RopeGenerator : MonoBehaviour
                 {
                     joint.connectedAnchor = Vector2.zero;
                 }
-                else
-                {
-                    joint.connectedAnchor = Random.insideUnitCircle * 0.75f;
-                }
-            
-                // joint.distance = m_ropeOffset;
+                
                 if (i == length - 1)
                 {
                     var connector = connectTo.GetComponent<RopeReceiver>();
@@ -76,6 +91,13 @@ public class RopeGenerator : MonoBehaviour
             
             if (disconnectTarget == nextObject)
             {
+                RelativeJoint2D strongJoint = nextObject.GetComponent<RelativeJoint2D>();
+                if (strongJoint != null)
+                {
+                    strongJoint.connectedBody = null;
+                    strongJoint.enabled = false;
+                }
+                
                 RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
                 RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
                 if (nextRope != null && nextConn != null)
@@ -94,19 +116,28 @@ public class RopeGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// This is a shit function that detach all stuff connected to this current segment in rope...
+    /// This is a function that detach all stuff connected to this current segment in rope...
     /// </summary>
     public void DetachAll()
     {
-        HingeJoint2D myJoint = GetComponent<HingeJoint2D>();
-        if (myJoint)
+        
+        if (GetComponent<HingeJoint2D>() != null)
         {
+            HingeJoint2D myJoint = GetComponent<HingeJoint2D>();
             Destroy(myJoint);
         }
         
         for (int i = m_next.Count - 1; i >= 0; i--)
         {
             GameObject nextObject = m_next[i];
+            
+            RelativeJoint2D strongJoint = nextObject.GetComponent<RelativeJoint2D>();
+            if (strongJoint != null)
+            {
+                strongJoint.connectedBody = null;
+                strongJoint.enabled = false;
+            }
+            
             RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
             RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
             if (nextRope != null && nextConn != null)
@@ -117,11 +148,17 @@ public class RopeGenerator : MonoBehaviour
                 nextRope.m_prev = null;
                 nextConn.DestroyRope();
                 
-                HingeJoint2D nextJoint = GetComponent<HingeJoint2D>();
-                if (nextJoint)
+                if (GetComponent<HingeJoint2D>() != null)
                 {
+                    HingeJoint2D nextJoint = GetComponent<HingeJoint2D>();
                     Destroy(nextJoint);
                 }
+                else if (GetComponent<RelativeJoint2D>() != null)
+                {
+                    RelativeJoint2D nextJoint = GetComponent<RelativeJoint2D>();
+                    Destroy(nextJoint);
+                }
+                
                 nextRope.DetachAll();
             }
 

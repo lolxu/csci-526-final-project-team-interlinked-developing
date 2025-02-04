@@ -100,7 +100,7 @@ public class PlayerBase : MonoBehaviour
         CameraZoomControl();
     }
 
-    private void RequestRopeConnect(Rigidbody2D hitBody)
+    private void RequestRopeConnect(Rigidbody2D hitBody, GameObject usingRope)
     {
         GameObject hitObject = hitBody.gameObject;
         m_drawpos = hitBody.position;
@@ -132,6 +132,7 @@ public class PlayerBase : MonoBehaviour
         {
             Debug.Log("Connected " + hitObject + " to " + bestConnector); 
             bestConnector.GetComponent<RopeGenerator>().m_next.Add(hitObject);
+            bestConnector.GetComponent<RopeGenerator>().m_usingRopePrefab = usingRope;
             bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
 
             hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
@@ -178,7 +179,9 @@ public class PlayerBase : MonoBehaviour
                 // Double checking in case weird shit adds this thing twice
                 if (!m_linkedObjects.Contains(hitBody.gameObject))
                 {
-                    RequestRopeConnect(hitBody);
+                    GameObject usingRope = hitBody.gameObject.GetComponent<RopeGenerator>().m_myRopePrefab;
+                    
+                    RequestRopeConnect(hitBody, usingRope);
                 }
 
                 return;
