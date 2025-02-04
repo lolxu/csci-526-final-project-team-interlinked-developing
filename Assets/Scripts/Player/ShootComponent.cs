@@ -12,6 +12,7 @@ public class ShootComponent : MonoBehaviour
     public int m_fireRateChange = 0;
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
+    public bool m_canShoot = false;
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject m_gun;
@@ -20,73 +21,86 @@ public class ShootComponent : MonoBehaviour
     
     private Rigidbody2D m_RB;
     private float m_fireTimeout = 0.0f;
-    private bool m_isMouseDown;
+    private bool m_isMouseDown = false;
     
     // Start is called before the first frame update
     private void Start()
     {
         m_RB = GetComponent<Rigidbody2D>();
+        
+        SingletonMaster.Instance.EventManager.StartFireEvent.AddListener(StartFiring);
+        SingletonMaster.Instance.EventManager.StopFireEvent.AddListener(StopFiring);
+    }
+
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
+        SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
     }
 
     private void FixedUpdate()
     {
-        Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-        float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
-        m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+        if (m_canShoot)
+        {
+            Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
+            float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
+            m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+        }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-
-        // SHOOTING!!
-        if (m_isMouseDown && m_bulletPrefab != null)
+        if (m_canShoot)
         {
-            // Here's the shooty controls
-            m_fireTimeout -= Time.deltaTime;
-            if (m_fireTimeout <= 0.0f)
+            Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            // SHOOTING!!
+            if (m_isMouseDown && m_bulletPrefab != null)
             {
-                m_muzzleFlash.intensity = m_muzzleFlashIntensity;
-                
-                GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
-                BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
-                
-                //TODO: Make sure things don't go negative...
-                // Modding stats for bullets
-                bulletScript.m_penetrateNum += m_penetrationChange;
-                m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
-                bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
-                
-                // Add some recoil;
-                m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange), ForceMode2D.Impulse);
+                // Here's the shooty controls
+                m_fireTimeout -= Time.deltaTime;
+                if (m_fireTimeout <= 0.0f)
+                {
+                    m_muzzleFlash.intensity = m_muzzleFlashIntensity;
+
+                    GameObject bullet = Instantiate(m_bulletPrefab, transform.position, Quaternion.identity);
+                    BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
+
+                    //TODO: Make sure things don't go negative...
+                    // Modding stats for bullets
+                    bulletScript.m_penetrateNum += m_penetrationChange;
+                    m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
+                    bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+
+                    // Add some recoil;
+                    m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange),
+                        ForceMode2D.Impulse);
+                }
+                else
+                {
+                    m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
+                    if (m_muzzleFlash.intensity < 0.0f)
+                    {
+                        m_muzzleFlash.intensity = 0.0f;
+                    }
+                }
             }
             else
             {
-                m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
-                if (m_muzzleFlash.intensity < 0.0f)
-                {
-                    m_muzzleFlash.intensity = 0.0f;
-                }
+                m_muzzleFlash.intensity = 0.0f;
             }
         }
-        else
-        {
-            m_muzzleFlash.intensity = 0.0f;
-        }
     }
-    
-    public void Fire(InputAction.CallbackContext context)
+
+    private void StartFiring()
     {
-        if (context.performed)
-        {
-            Debug.Log("Fire");
-            m_isMouseDown = true;
-        }
-        else
-        {
-            m_isMouseDown = false;
-        }
+        m_isMouseDown = true;
+    }
+
+    private void StopFiring()
+    {
+        m_isMouseDown = false;
     }
 }

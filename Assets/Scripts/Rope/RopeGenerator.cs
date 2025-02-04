@@ -107,6 +107,13 @@ public class RopeGenerator : MonoBehaviour
                 }
                 nextObject.transform.SetParent(null, true);
                 
+                // Processing link object specific stuff here ---------------------------------------------
+                var shootComp = nextObject.GetComponent<ShootComponent>();
+                if (shootComp != null)
+                {
+                    shootComp.m_canShoot = false;
+                }
+                
                 RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
                 RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();
                 if (nextRope != null && nextConn != null)
@@ -146,6 +153,13 @@ public class RopeGenerator : MonoBehaviour
                 strongJoint.enabled = false;
             }
             nextObject.transform.SetParent(null, true);
+            
+            // Processing link object specific stuff here ---------------------------------------------
+            var shootComp = nextObject.GetComponent<ShootComponent>();
+            if (shootComp != null)
+            {
+                shootComp.m_canShoot = false;
+            }
             
             RopeGenerator nextRope = nextObject.GetComponent<RopeGenerator>();
             RopeReceiver nextConn = nextObject.GetComponent<RopeReceiver>();

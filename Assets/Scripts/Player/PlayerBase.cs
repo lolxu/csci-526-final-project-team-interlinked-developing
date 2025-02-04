@@ -21,6 +21,7 @@ public class PlayerBase : MonoBehaviour
     public float m_maxSpeed = 100.0f;
     public float m_invincibleTime = 1.0f;
     
+    
     [Header("Rope Settings")]
     public GameObject m_rope;
     public float m_connectRadius = 10.0f;
@@ -194,6 +195,13 @@ public class PlayerBase : MonoBehaviour
             hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
             hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
             m_linkedObjects.Add(hitObject);
+            
+            // Processing link object specific stuff here ---------------------------------------------
+            var shootComp = hitObject.GetComponent<ShootComponent>();
+            if (shootComp != null)
+            {
+                shootComp.m_canShoot = true;
+            }
         }
     }
 
@@ -217,6 +225,18 @@ public class PlayerBase : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDirection = context.ReadValue<Vector2>();
+    }
+    
+    public void Fire(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SingletonMaster.Instance.EventManager.StartFireEvent.Invoke();
+        }
+        else
+        {
+            SingletonMaster.Instance.EventManager.StopFireEvent.Invoke();
+        }
     }
 
     public void RopeOperations(InputAction.CallbackContext context)
