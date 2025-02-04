@@ -349,7 +349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rope: {fileID: 0}
   m_anchorObject: {fileID: 1539305663811603641}
-  m_linkPrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_myRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_usingRopePrefab: {fileID: 0}
   m_next: []
   m_prev: {fileID: 0}
 --- !u!114 &423610885533714436

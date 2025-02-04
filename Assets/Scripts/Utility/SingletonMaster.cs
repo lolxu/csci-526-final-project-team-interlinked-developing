@@ -20,7 +20,8 @@ public class SingletonMaster : MonoBehaviour
     public WeightedRandomScriptable WeightedRandomItems;
     public EnemySpawnScriptable EnemySpawnScriptableObject;
 
-    [Header("Feel Manager Settings")] 
+    [Header("Juice Settings")] 
+    public CameraShake CameraShakeManager;
     public FeelManager FeelManager;
     
     private void Awake()

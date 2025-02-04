@@ -35,6 +35,7 @@ public class BasePlayerBullet : MonoBehaviour
         if (m_bulletType == BulletType.Scanhit)
         {
             // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks();
+            SingletonMaster.Instance.CameraShakeManager.Shake(2.5f, 0.1f);
         }
     }
 

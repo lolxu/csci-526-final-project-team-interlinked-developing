@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -228,10 +229,11 @@ public class PlayerBase : MonoBehaviour
             m_damageSequence = StartCoroutine(PlayerHurtSequence(dir));
 
             StartCoroutine(InvincibleSequence());
-            // StartCoroutine(HitStop());
+            StartCoroutine(HitStop());
             
             // Juice Stuff
             // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
+            SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
             m_health -= damage;
             if (m_health <= 0.0f)
             {
@@ -268,14 +270,16 @@ public class PlayerBase : MonoBehaviour
     
     private IEnumerator PlayerHurtSequence(Vector2 dir)
     {
-        int flashCount = 0;
+        float flashDuration = 0.0f;
         m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
-        m_spriteRenderer.color = Color.white;
-        yield return new WaitForSecondsRealtime(0.25f);
-        m_spriteRenderer.color = m_orgColor;
-        yield return new WaitForSecondsRealtime(0.25f);
-        m_spriteRenderer.color = Color.white;
-        yield return new WaitForSecondsRealtime(0.25f);
+        while (flashDuration <= m_invincibleTime)
+        {
+            m_spriteRenderer.color = Color.white;
+            yield return new WaitForSecondsRealtime(0.1f);
+            m_spriteRenderer.color = m_orgColor;
+            yield return new WaitForSecondsRealtime(0.1f);
+            flashDuration += 0.2f;
+        }
         m_spriteRenderer.color = m_orgColor;
     }
 
