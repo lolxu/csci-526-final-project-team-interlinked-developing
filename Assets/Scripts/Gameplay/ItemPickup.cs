@@ -8,12 +8,11 @@ using UnityEngine;
 public class ItemPickup : MonoBehaviour
 {
     public TextMeshPro m_text;
-    private SpriteRenderer m_spriteRenderer;
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
     private WeightedRandomScriptable.UpgradeItem m_item;
-    
-    private void Start()
+
+    public void SpawnItem()
     {
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_item = SingletonMaster.Instance.WeightedRandomItems.GetRandomItem();
 
         m_spriteRenderer.sprite = m_item.m_itemIcon;
@@ -42,7 +41,7 @@ public class ItemPickup : MonoBehaviour
                     break;
                 }
             }
-
+            SingletonMaster.Instance.EventManager.ItemCollected.Invoke();
             Destroy(gameObject);
         }
     }

@@ -27,25 +27,38 @@ public class EnemyManager : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
+        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
         {
-            m_canSpawn = true;
+            StartCoroutine(StartSpawnTimeout());
         }
         else
         {
             m_canSpawn = false;
         }
-        
+    }
+
+    private IEnumerator StartSpawnTimeout()
+    {
+        yield return new WaitForSeconds(1.25f);
+        m_canSpawn = true;
+    }
+
+    void Update()
+    {
         if (m_canSpawn)
         {
             int enemyCount = m_enemies.Count;

@@ -5,11 +5,14 @@ using UnityEngine;
 public class Loot : MonoBehaviour
 {
     [SerializeField] private float m_shrinkSpeed = 1.25f;
+    private Coroutine shrinkCoroutine = null;
     
     public void StartShrinking()
     {
-        SingletonMaster.Instance.EventManager.LootCollected.Invoke();
-        StartCoroutine(ShrinkSequence());
+        if (shrinkCoroutine == null)
+        {
+            shrinkCoroutine = StartCoroutine(ShrinkSequence());
+        }
     }
 
     private IEnumerator ShrinkSequence()
@@ -19,7 +22,7 @@ public class Loot : MonoBehaviour
             transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
             yield return null;
         }
-
+        SingletonMaster.Instance.EventManager.LootCollected.Invoke();
         transform.localScale = Vector3.zero;
         Destroy(gameObject);
     }
