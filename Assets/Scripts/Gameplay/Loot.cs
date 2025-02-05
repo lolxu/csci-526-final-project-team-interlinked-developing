@@ -24,6 +24,7 @@ public class Loot : MonoBehaviour
         }
         SingletonMaster.Instance.EventManager.LootCollected.Invoke();
         transform.localScale = Vector3.zero;
+        yield return new WaitForSeconds(0.1f);
         Destroy(gameObject);
     }
 }

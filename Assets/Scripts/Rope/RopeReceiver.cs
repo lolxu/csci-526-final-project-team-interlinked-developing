@@ -16,22 +16,6 @@ public class RopeReceiver : MonoBehaviour
         joint.connectedAnchor = Vector2.zero;
 
         GetComponent<Rigidbody2D>().totalForce = Vector2.zero;
-
-        // if (GetComponent<HingeJoint2D>() != null)
-        // {
-        //     HingeJoint2D joint = GetComponent<HingeJoint2D>();
-        //     joint.autoConfigureConnectedAnchor = false;
-        //     joint.connectedBody = ropeEnd;
-        //     joint.anchor = Vector2.zero;
-        //     joint.connectedAnchor = Vector2.zero;
-        // }
-        // else if (GetComponent<RelativeJoint2D>() != null)
-        // {
-        //     RelativeJoint2D joint = GetComponent<RelativeJoint2D>();
-        //     joint.autoConfigureOffset = false;
-        //     joint.connectedBody = ropeEnd;
-        //     joint.linearOffset = Vector2.zero;
-        // }
     }
 
     public void DestroyRope()

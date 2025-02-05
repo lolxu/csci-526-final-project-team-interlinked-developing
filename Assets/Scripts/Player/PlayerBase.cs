@@ -70,30 +70,36 @@ public class PlayerBase : MonoBehaviour
 
     private void OnSceneUnloaded(Scene arg0)
     {
-        m_linkedDisplacements.Clear();
-        m_ropeDisplacements.Clear();
-        
-        foreach (var obj in m_linkedObjects)
+        if (this != null)
         {
-            Vector3 disp = obj.transform.position - transform.position;
-            m_linkedDisplacements.Add(disp);
-            obj.GetComponent<Rigidbody2D>().isKinematic = true;
-            Debug.Log(disp);
-        }
+            m_linkedDisplacements.Clear();
+            m_ropeDisplacements.Clear();
 
-        for (int i = 0; i < m_rope.transform.childCount; i++)
-        {
-            Rigidbody2D rb = m_rope.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
-            rb.isKinematic = true;
-            Vector3 disp = m_rope.transform.GetChild(i).position - transform.position;
-            m_ropeDisplacements.Add(disp);
+            foreach (var obj in m_linkedObjects)
+            {
+                Vector3 disp = obj.transform.position - transform.position;
+                m_linkedDisplacements.Add(disp);
+                obj.GetComponent<Rigidbody2D>().isKinematic = true;
+                Debug.Log(disp);
+            }
+
+            for (int i = 0; i < m_rope.transform.childCount; i++)
+            {
+                Rigidbody2D rb = m_rope.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
+                rb.isKinematic = true;
+                Vector3 disp = m_rope.transform.GetChild(i).position - transform.position;
+                m_ropeDisplacements.Add(disp);
+            }
         }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        transform.position = Vector3.zero;
-        StartCoroutine(InitCoroutine());
+        if (this != null)
+        {
+            transform.position = Vector3.zero;
+            StartCoroutine(InitCoroutine());
+        }
     }
 
     private IEnumerator InitCoroutine()

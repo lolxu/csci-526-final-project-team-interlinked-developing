@@ -42,7 +42,6 @@ public class ItemPickup : MonoBehaviour
                 }
             }
             SingletonMaster.Instance.EventManager.ItemCollected.Invoke();
-            Destroy(gameObject);
         }
     }
 }

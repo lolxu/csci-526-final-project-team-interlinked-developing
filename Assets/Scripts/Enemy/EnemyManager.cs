@@ -47,6 +47,7 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
+            m_enemies.Clear();
             m_canSpawn = false;
         }
     }
