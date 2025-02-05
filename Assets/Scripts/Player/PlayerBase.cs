@@ -201,6 +201,7 @@ public class PlayerBase : MonoBehaviour
             hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
             hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
             m_linkedObjects.Add(hitObject);
+            hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
             
             // Processing link object specific stuff here ---------------------------------------------
             var shootComp = hitObject.GetComponent<ShootComponent>();
@@ -262,7 +263,6 @@ public class PlayerBase : MonoBehaviour
                 {
                     GameObject usingRope = hitBody.gameObject.GetComponent<RopeGenerator>().m_myRopePrefab;
                     
-                    hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
                     RequestRopeConnect(hitBody, usingRope);
                 }
 
