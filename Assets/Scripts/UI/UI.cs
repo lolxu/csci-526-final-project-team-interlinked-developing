@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class UI : MonoBehaviour
 {
     public TextMeshProUGUI m_scoreText;
     public TextMeshProUGUI m_coolDownText;
-    
+    public GameObject m_healthBarPrefab;
+
     private int m_killCount = 0;
     
     private void Start()
@@ -23,6 +25,15 @@ public class UI : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
         SingletonMaster.Instance.EventManager.CooldownStarted.RemoveListener(ShowCooldown);
+    }
+
+    public GameObject AddHealthBar(HealthComponent healthComponent)
+    {
+        Debug.Log("Added health bar: " + healthComponent.gameObject);
+        GameObject newHealthBar = Instantiate(m_healthBarPrefab, transform, true);
+        HealthBar healthBarComp = newHealthBar.GetComponent<HealthBar>();
+        healthBarComp.m_healthComp = healthComponent;
+        return newHealthBar;
     }
 
     private void ShowCooldown(float time)

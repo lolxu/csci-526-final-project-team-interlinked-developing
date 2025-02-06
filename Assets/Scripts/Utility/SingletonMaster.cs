@@ -14,6 +14,7 @@ public class SingletonMaster : MonoBehaviour
     public PlayerBase PlayerBase;
     public EnemyManager EnemyManager;
     public LootManager LootManager;
+    public UI UI;
 
     [Header("Event Manager")] 
     public EventManager EventManager;

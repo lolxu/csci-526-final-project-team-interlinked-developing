@@ -9,6 +9,7 @@ TagManager:
   - Loot
   - Background
   - Linkable
+  - Garbage
   layers:
   - Default
   - TransparentFX

@@ -46,6 +46,8 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_drawpos;
     private float m_orgZoom;
 
+    private bool m_isInitiated = false;
+
     private void Start()
     {
         // Adding self to linked object list first
@@ -55,7 +57,7 @@ public class PlayerBase : MonoBehaviour
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
-        
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }

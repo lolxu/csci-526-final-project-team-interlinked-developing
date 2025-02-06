@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 5
+  m_maxHealth: 5
   m_invincibleTime: 1
   DamageEvent:
     m_PersistentCalls:

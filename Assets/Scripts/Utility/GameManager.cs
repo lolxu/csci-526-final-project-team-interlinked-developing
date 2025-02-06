@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         // FOR DEBUG ONLY
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Background").transform, true);
+            SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
             SceneManager.LoadScene("Prototype - Hub");
         }
     }

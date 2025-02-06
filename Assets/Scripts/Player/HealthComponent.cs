@@ -7,6 +7,7 @@ public class HealthComponent : MonoBehaviour
 {
     [Header("Health Settings")] 
     public float m_health = 10.0f;
+    public float m_maxHealth = 10.0f;
     public float m_invincibleTime = 1.0f;
     public UnityEvent<float, GameObject> DamageEvent = new UnityEvent<float, GameObject>();
     public UnityEvent<GameObject> DeathEvent = new UnityEvent<GameObject>();
@@ -17,6 +18,7 @@ public class HealthComponent : MonoBehaviour
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
+    private GameObject m_healthBar = null;
 
     private void Start()
     {
@@ -26,10 +28,18 @@ public class HealthComponent : MonoBehaviour
         
         DamageEvent.AddListener(OnDamage);
         DeathEvent.AddListener(OnDeath);
+        
+        // Create Health bar
+        m_healthBar = SingletonMaster.Instance.UI.AddHealthBar(this);
     }
 
     private void OnDisable()
     {
+        if (m_healthBar != null)
+        {
+            Destroy(m_healthBar);
+        }
+        
         DamageEvent.RemoveListener(OnDamage);
         DeathEvent.RemoveListener(OnDeath);
     }

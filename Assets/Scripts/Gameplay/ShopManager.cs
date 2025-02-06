@@ -31,10 +31,13 @@ public class ShopManager : MonoBehaviour
 
     public void EnableShopItems()
     {
-        m_itemsHolder.SetActive(true);
-        foreach (var item in m_items)
+        if (!m_itemsHolder.activeInHierarchy)
         {
-            item.GetComponent<ItemPickup>().SpawnItem();
+            m_itemsHolder.SetActive(true);
+            foreach (var item in m_items)
+            {
+                item.GetComponent<ItemPickup>().SpawnItem();
+            }
         }
     }
 

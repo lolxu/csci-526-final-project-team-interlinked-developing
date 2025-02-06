@@ -16,13 +16,13 @@ MonoBehaviour:
   - m_item:
       m_itemName: Pistol Turret
       m_id: 0
-      m_itemIcon: {fileID: -2413806693520163455, guid: 7fd6f1e784f17eb42926e85e1927da85, type: 3}
+      m_itemIcon: {fileID: 21300000, guid: 7fd6f1e784f17eb42926e85e1927da85, type: 3}
       m_itemType: 3
       m_rarity: 0
       m_price: 1.5
       m_description: This is a normal bullet turret
       m_itemPrefab: {fileID: 9075601628434340090, guid: df551c70e4b25a54b9359f426d704b19, type: 3}
-    m_weightedValue: 1
+    m_weightedValue: 0.801
   - m_item:
       m_itemName: Sniper Turret
       m_id: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
       m_price: 5
       m_description: 'This is a sniper '
       m_itemPrefab: {fileID: 8530877139266957305, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
-    m_weightedValue: 0.452
+    m_weightedValue: 0.276
   - m_item:
       m_itemName: Hammer
       m_id: 2
@@ -42,4 +42,4 @@ MonoBehaviour:
       m_price: 5
       m_description: Hammer
       m_itemPrefab: {fileID: 3366563785461408539, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
-    m_weightedValue: 0.845
+    m_weightedValue: 0.702
