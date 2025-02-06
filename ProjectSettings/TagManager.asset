@@ -8,6 +8,7 @@ TagManager:
   - Rope
   - Loot
   - Background
+  - Linkable
   layers:
   - Default
   - TransparentFX

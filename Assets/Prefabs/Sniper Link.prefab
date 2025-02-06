@@ -100,9 +100,10 @@ GameObject:
   - component: {fileID: 8364223692582115563}
   - component: {fileID: 403880921096744247}
   - component: {fileID: -1093668108574859229}
+  - component: {fileID: 8708359387787587630}
   m_Layer: 6
   m_Name: Sniper Link
-  m_TagString: Untagged
+  m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,6 +320,26 @@ RelativeJoint2D:
   m_AutoConfigureOffset: 0
   m_LinearOffset: {x: 0, y: 0}
   m_AngularOffset: 0
+--- !u!114 &8708359387787587630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8530877139266957305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcb963f5e843504782d76758b428327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 5
+  m_invincibleTime: 1
+  DamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3888456369123500200
 PrefabInstance:
   m_ObjectHideFlags: 0

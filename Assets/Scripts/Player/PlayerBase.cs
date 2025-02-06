@@ -15,11 +15,10 @@ public class PlayerBase : MonoBehaviour
 {
     [Header("Basic Settings")] 
     public GameObject m_playerEntity;
-    public float m_health = 10.0f;
+    public HealthComponent m_healthComponent;
     public PlayerInput m_input;
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
-    public float m_invincibleTime = 1.0f;
     
     
     [Header("Rope Settings")]
@@ -47,10 +46,6 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_drawpos;
     private float m_orgZoom;
 
-    // private Sequence m_damageTween = null;
-    private Coroutine m_damageSequence = null;
-    private bool m_isInvincible = false;
-
     private void Start()
     {
         // Adding self to linked object list first
@@ -60,9 +55,6 @@ public class PlayerBase : MonoBehaviour
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
-        
-        SingletonMaster.Instance.EventManager.PlayerDamageEvent.AddListener(OnPlayerDamage);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
         
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -80,7 +72,7 @@ public class PlayerBase : MonoBehaviour
                 Vector3 disp = obj.transform.position - transform.position;
                 m_linkedDisplacements.Add(disp);
                 obj.GetComponent<Rigidbody2D>().isKinematic = true;
-                Debug.Log(disp);
+                // Debug.Log(disp);
             }
 
             for (int i = 0; i < m_rope.transform.childCount; i++)
@@ -108,7 +100,7 @@ public class PlayerBase : MonoBehaviour
         yield return null;
         for (int i = 0; i < m_linkedObjects.Count; i++)
         {
-            Debug.Log(m_linkedDisplacements[i]);
+            // Debug.Log(m_linkedDisplacements[i]);
             m_linkedObjects[i].transform.position = transform.position + m_linkedDisplacements[i];
             m_linkedObjects[i].GetComponent<Rigidbody2D>().isKinematic = false;
         }
@@ -119,12 +111,6 @@ public class PlayerBase : MonoBehaviour
             m_rope.transform.GetChild(i).position = transform.position + m_ropeDisplacements[i];
             rb.isKinematic = false;
         }
-    }
-
-    private void OnDisable()
-    {
-        SingletonMaster.Instance.EventManager.PlayerDamageEvent.RemoveListener(OnPlayerDamage);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
     /// <summary>
@@ -155,61 +141,7 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
         CameraZoomControl();
-    }
-
-    private void RequestRopeConnect(Rigidbody2D hitBody, GameObject usingRope)
-    {
-        GameObject hitObject = hitBody.gameObject;
-        m_drawpos = hitBody.position;
-        
-        // Do a circle cast
-        RaycastHit2D[] results = new RaycastHit2D[100];
-        int numHit = Physics2D.CircleCastNonAlloc(hitBody.position, m_connectRadius, 
-            Vector2.zero, results, m_connectRadius, LayerMask.GetMask("Player"));
-        Debug.Log(numHit);
-        
-        float minDist = Single.MaxValue;
-        GameObject bestConnector = null;
-        for (int i = 0; i < numHit; i++)
-        {
-            // if (results[i].transform.gameObject != gameObject)
-            RopeGenerator rp = results[i].rigidbody.gameObject.GetComponent<RopeGenerator>();
-            if (rp != null)
-            {
-                float dist = Vector2.Distance(results[i].rigidbody.gameObject.transform.position, hitBody.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    bestConnector = results[i].rigidbody.gameObject;
-                }
-            }
-        }
-        
-        if (bestConnector != null)
-        {
-            Debug.Log("Connected " + hitObject + " to " + bestConnector); 
-            bestConnector.GetComponent<RopeGenerator>().m_next.Add(hitObject);
-            bestConnector.GetComponent<RopeGenerator>().m_usingRopePrefab = usingRope;
-            bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
-
-            hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
-            hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
-            m_linkedObjects.Add(hitObject);
-            hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
-            
-            // Processing link object specific stuff here ---------------------------------------------
-            var shootComp = hitObject.GetComponent<ShootComponent>();
-            if (shootComp != null)
-            {
-                shootComp.m_canShoot = true;
-            }
-        }
     }
 
     private void CameraZoomControl()
@@ -265,7 +197,6 @@ public class PlayerBase : MonoBehaviour
                     
                     RequestRopeConnect(hitBody, usingRope);
                 }
-
                 return;
             }
 
@@ -273,117 +204,80 @@ public class PlayerBase : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
                 LayerMask.GetMask("Player"));
 
-            if (hit && hit.rigidbody != m_RB && m_linkedObjects.Contains(hit.rigidbody.gameObject))
+            if (hit && hit.rigidbody != m_RB)
             {
-                // needs some work...
-                Debug.Log("Disconnected " + hit.rigidbody.gameObject);
-                RopeGenerator targetRope = hit.rigidbody.gameObject.GetComponent<RopeGenerator>();
-
-                if (targetRope.m_prev != null)
-                {
-                    // Detaching rope !!
-                    targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(hit.rigidbody.gameObject);
-                    
-                    Debug.Log("Removed " + hit.rigidbody.gameObject);
-                    m_linkedObjects.Remove(hit.rigidbody.gameObject);
-                }
-            }
-        }
-    }
-
-    private void OnPlayerDamage(float damage, GameObject instigator)
-    {
-        if (!m_isInvincible && m_health > 0.0f)
-        {
-            // Do some juice stuff here
-            // if (m_damageTween != null)
-            // {
-            //     m_damageTween.Kill(true);
-            // }
-            
-            if (m_damageSequence != null)
-            {
-                // StopCoroutine(m_damageSequence);
-                // m_spriteRenderer.color = m_orgColor;
-                // transform.localScale = m_orgScale;
-            }
-
-            Vector2 dir = -(instigator.transform.position - transform.position).normalized;
-            m_damageSequence = StartCoroutine(PlayerHurtSequence(dir));
-
-            StartCoroutine(InvincibleSequence());
-            StartCoroutine(HitStop());
-            
-            // Juice Stuff
-            // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
-            SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
-            m_health -= damage;
-            if (m_health <= 0.0f)
-            {
-                Time.timeScale = 1.0f;
-                StopAllCoroutines();
-                // m_damageTween.Kill();
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops(1, LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
-                // m_damageTween.OnComplete(() =>
-                // {
-                //     SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
-                // });
-                
-                SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
-            }
-            else
-            {
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
-                //     {
-                //         transform.localScale = m_orgScale;
-                //     }));
+                RemoveLinkedObject(hit.rigidbody.gameObject);
             }
         }
     }
     
-    private IEnumerator PlayerHurtSequence(Vector2 dir)
+    // For connecting ropes
+    private void RequestRopeConnect(Rigidbody2D hitBody, GameObject usingRope)
     {
-        float flashDuration = 0.0f;
-        m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
-        while (flashDuration <= m_invincibleTime)
+        GameObject hitObject = hitBody.gameObject;
+        m_drawpos = hitBody.position;
+        
+        // Do a circle cast
+        RaycastHit2D[] results = new RaycastHit2D[100];
+        int numHit = Physics2D.CircleCastNonAlloc(hitBody.position, m_connectRadius, 
+            Vector2.zero, results, m_connectRadius, LayerMask.GetMask("Player"));
+        // Debug.Log(numHit);
+        
+        float minDist = Single.MaxValue;
+        GameObject bestConnector = null;
+        for (int i = 0; i < numHit; i++)
         {
-            m_spriteRenderer.color = Color.white;
-            yield return new WaitForSecondsRealtime(0.1f);
-            m_spriteRenderer.color = m_orgColor;
-            yield return new WaitForSecondsRealtime(0.1f);
-            flashDuration += 0.2f;
+            // if (results[i].transform.gameObject != gameObject)
+            RopeGenerator rp = results[i].rigidbody.gameObject.GetComponent<RopeGenerator>();
+            if (rp != null)
+            {
+                float dist = Vector2.Distance(results[i].rigidbody.gameObject.transform.position, hitBody.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    bestConnector = results[i].rigidbody.gameObject;
+                }
+            }
         }
-        m_spriteRenderer.color = m_orgColor;
+        
+        if (bestConnector != null)
+        {
+            Debug.Log("Connected " + hitObject + " to " + bestConnector); 
+            bestConnector.GetComponent<RopeGenerator>().m_next.Add(hitObject);
+            bestConnector.GetComponent<RopeGenerator>().m_usingRopePrefab = usingRope;
+            bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
+
+            hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
+            hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
+            m_linkedObjects.Add(hitObject);
+            hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
+            
+            // Processing link object specific stuff here ---------------------------------------------
+            var shootComp = hitObject.GetComponent<ShootComponent>();
+            if (shootComp != null)
+            {
+                shootComp.m_canShoot = true;
+            }
+        }
     }
 
-    private void OnPlayerDeath(GameObject killer)
+    // For removing linked objects
+    public void RemoveLinkedObject(GameObject obj)
     {
-        m_isInvincible = false;
-        Destroy(gameObject);
+        if (m_linkedObjects.Contains(obj))
+        {
+            RopeGenerator targetRope = obj.GetComponent<RopeGenerator>();
+
+            if (targetRope.m_prev != null)
+            {
+                // Detaching rope !!
+                targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(obj);
+
+                Debug.Log("Removed " + obj);
+                m_linkedObjects.Remove(obj);
+            }
+        }
     }
 
-    private IEnumerator InvincibleSequence()
-    {
-        m_isInvincible = true;
-        yield return new WaitForSecondsRealtime(m_invincibleTime);
-        m_isInvincible = false;
-    }
-
-    private IEnumerator HitStop()
-    {
-        float orgTimeScale = Time.timeScale;
-        Time.timeScale = 0.0f;
-        yield return new WaitForSecondsRealtime(0.2f);
-        Time.timeScale = orgTimeScale;
-    }
+    
 }

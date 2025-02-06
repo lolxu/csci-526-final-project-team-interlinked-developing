@@ -12,7 +12,7 @@ using Vector2 = UnityEngine.Vector2;
 public class BaseEnemyBehavior : MonoBehaviour
 {
     [Header("Basic Settings")] 
-    public string m_name = "John";
+    public List<string> m_names = new List<string>();
     public float m_health = 10.0f;
     public float m_damage = 2.0f;
     
@@ -135,7 +135,21 @@ public class BaseEnemyBehavior : MonoBehaviour
             PlayerBase player = other.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                SingletonMaster.Instance.EventManager.PlayerDamageEvent.Invoke(m_damage, gameObject);
+                player.m_healthComponent.DamageEvent.Invoke(m_damage, gameObject);
+            }
+        }
+
+        if (other.collider.CompareTag("Loot"))
+        {
+            SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(other.gameObject);
+        }
+
+        if (other.collider.CompareTag("Linkable"))
+        {
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health != null)
+            {
+                health.DamageEvent.Invoke(m_damage, gameObject);
             }
         }
     }

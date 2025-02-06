@@ -33,17 +33,18 @@ public class SingletonMaster : MonoBehaviour
     [Header("Scene Names")] 
     public string HubName = "Prototype - Hub";
     public string BattlefieldName = "Prototype - Battlefield";
+
+    private bool m_restart = false;
     
     private void Awake()
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         } 
         else 
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 }

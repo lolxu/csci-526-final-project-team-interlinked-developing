@@ -289,7 +289,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &3361417928740886691
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -347,7 +347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4f52792d830234bb8ee9adbf081f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rope: {fileID: 0}
   m_anchorObject: {fileID: 1539305663811603641}
   m_myRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
   m_usingRopePrefab: {fileID: 0}
@@ -393,7 +392,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 58662
+  m_InstanceId: 64840
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -409,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379c7d22f2d0c634b88ea2ec83ff6521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 10
+  m_damage: 20
   m_velocityThreshold: 2
   m_knockBackStrength: 100
   m_trail: {fileID: 3796873893522015177}
@@ -654,7 +653,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
