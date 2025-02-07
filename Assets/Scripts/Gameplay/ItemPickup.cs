@@ -45,6 +45,7 @@ public class ItemPickup : MonoBehaviour
             }
             
             // Checking loot count
+            SingletonMaster.Instance.LootManager.m_hasCollected = true;
             SingletonMaster.Instance.LootManager.CheckLoot();
             
         }

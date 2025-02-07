@@ -11,8 +11,7 @@ public class LootManager : MonoBehaviour
     [Header("Loot Settings")] 
     public int m_currentLootCount = 0;
     public int m_goalLoot = 5;
-
-    private ShopManager m_shopManager;
+    public bool m_hasCollected = true;
 
     private void Start()
     {
@@ -33,16 +32,20 @@ public class LootManager : MonoBehaviour
 
     public void CheckLoot()
     {
-        if (m_currentLootCount >= m_goalLoot)
+        if (m_hasCollected)
         {
-            Debug.Log("Can Spawn Items");
-            GameObject.FindWithTag("Shop").GetComponent<ShopManager>().EnableShopItems();
-            m_goalLoot += Random.Range(15, 20);
-        }
-        else
-        {
-            GameObject.FindWithTag("Shop").GetComponent<ShopManager>().DisableShopItems();
-            Debug.Log("Cannot Spawn!!!!!! Not enough loot");
+            if (m_currentLootCount >= m_goalLoot)
+            {
+                Debug.Log("Can Spawn Items");
+                GameObject.FindWithTag("Shop").GetComponent<ShopManager>().EnableShopItems();
+                m_goalLoot += Random.Range(15, 20);
+                m_hasCollected = false;
+            }
+            else
+            {
+                GameObject.FindWithTag("Shop").GetComponent<ShopManager>().DisableShopItems();
+                Debug.Log("Cannot Spawn!!!!!! Not enough loot");
+            }
         }
     }
 }

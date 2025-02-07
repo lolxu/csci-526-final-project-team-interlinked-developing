@@ -9,7 +9,8 @@ public class ShopManager : MonoBehaviour
     public TextMeshPro m_text;
     public GameObject m_itemsHolder;
     public List<GameObject> m_items = new List<GameObject>();
-
+    private Coroutine m_shopRoutine = null;
+    
     private void Update()
     {
         int currentLoot = SingletonMaster.Instance.LootManager.m_currentLootCount;
@@ -19,7 +20,13 @@ public class ShopManager : MonoBehaviour
 
     public void EnableShopItems()
     {
-        StartCoroutine(RollForShop());
+        if (m_shopRoutine != null)
+        {
+            StopCoroutine(m_shopRoutine);
+            m_itemsHolder.SetActive(false);
+        }
+        
+        m_shopRoutine = StartCoroutine(RollForShop());
     }
 
     private IEnumerator RollForShop()
