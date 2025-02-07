@@ -16,7 +16,7 @@ MonoBehaviour:
   - m_loot:
       m_prefab: {fileID: 1181414071359833202, guid: 6aaa44ba98ceb7d4f9bbb345c24faf93, type: 3}
       m_lootType: 0
-    m_weightedValue: 0.25
+    m_weightedValue: 0.35
   - m_loot:
       m_prefab: {fileID: 1181414071359833202, guid: 19c66eab27a3d144da9dc23d46b9ec75, type: 3}
       m_lootType: 0

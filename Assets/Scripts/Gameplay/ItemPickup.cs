@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
+    [SerializeField] private ShopManager m_shopManager;
     public TextMeshPro m_text;
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     private WeightedRandomScriptable.UpgradeItem m_item;
@@ -41,7 +43,10 @@ public class ItemPickup : MonoBehaviour
                     break;
                 }
             }
-            SingletonMaster.Instance.EventManager.ItemCollected.Invoke();
+            
+            // Checking loot count
+            SingletonMaster.Instance.LootManager.CheckLoot();
+            
         }
     }
 }

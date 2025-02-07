@@ -11,8 +11,6 @@ public class EventManager : MonoBehaviour
     public UnityEvent<int> LootCollected = new UnityEvent<int>();
     public UnityEvent StartFireEvent = new UnityEvent();
     public UnityEvent StopFireEvent = new UnityEvent();
-    public UnityEvent ItemSpawnEvent = new UnityEvent();
-    public UnityEvent ItemCollected = new UnityEvent();
     public UnityEvent<float> CooldownStarted = new UnityEvent<float>();
     
     [Header("Common Enemy Events")]

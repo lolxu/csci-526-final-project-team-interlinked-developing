@@ -10,18 +10,6 @@ public class ShopManager : MonoBehaviour
     public GameObject m_itemsHolder;
     public List<GameObject> m_items = new List<GameObject>();
 
-    private void Start()
-    {
-        SingletonMaster.Instance.EventManager.ItemSpawnEvent.AddListener(EnableShopItems);
-        SingletonMaster.Instance.EventManager.ItemCollected.AddListener(DisableShopItems);
-    }
-
-    private void OnDisable()
-    {
-        SingletonMaster.Instance.EventManager.ItemSpawnEvent.RemoveListener(EnableShopItems);
-        SingletonMaster.Instance.EventManager.ItemCollected.RemoveListener(DisableShopItems);
-    }
-
     private void Update()
     {
         int currentLoot = SingletonMaster.Instance.LootManager.m_currentLootCount;
@@ -31,13 +19,17 @@ public class ShopManager : MonoBehaviour
 
     public void EnableShopItems()
     {
-        if (!m_itemsHolder.activeInHierarchy)
+        StartCoroutine(RollForShop());
+    }
+
+    private IEnumerator RollForShop()
+    {
+        m_itemsHolder.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        m_itemsHolder.SetActive(true);
+        foreach (var item in m_items)
         {
-            m_itemsHolder.SetActive(true);
-            foreach (var item in m_items)
-            {
-                item.GetComponent<ItemPickup>().SpawnItem();
-            }
+            item.GetComponent<ItemPickup>().SpawnItem();
         }
     }
 
