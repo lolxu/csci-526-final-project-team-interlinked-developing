@@ -26,6 +26,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     [Header("Enemy Events")]
     public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
     
+    public float m_lootDropRate { get; set; } = 0.0f;
+    
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
     private Vector3 m_orgScale;

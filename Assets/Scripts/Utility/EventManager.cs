@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
 {
     [Header("Player Events")] 
     public UnityEvent<GameObject> PlayerDeathEvent = new UnityEvent<GameObject>();
-    public UnityEvent LootCollected = new UnityEvent();
+    public UnityEvent<int> LootCollected = new UnityEvent<int>();
     public UnityEvent StartFireEvent = new UnityEvent();
     public UnityEvent StopFireEvent = new UnityEvent();
     public UnityEvent ItemSpawnEvent = new UnityEvent();

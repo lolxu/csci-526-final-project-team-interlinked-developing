@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3323771633237118107}
   - component: {fileID: 9213061921122860656}
   m_Layer: 6
-  m_Name: Loot
+  m_Name: HV_Loot
   m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 34160
+  m_InstanceId: 30814
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72b1ac47d2bab0479b7cd8fdb37a254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxValue: 1
+  m_maxValue: 10
   m_scaleFactor: 1
   m_valueText: {fileID: 1095494415204129773}
   m_curve:
@@ -284,7 +284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4146180617795949055
 RectTransform:
   m_ObjectHideFlags: 0

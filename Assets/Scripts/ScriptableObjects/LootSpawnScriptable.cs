@@ -5,44 +5,36 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "EnemySpawn_SO", menuName = "ScriptableObjects/EnemySpawn", order = 1)]
-public class EnemySpawnScriptable : ScriptableObject
+[CreateAssetMenu(fileName = "LootSpawn_SO", menuName = "ScriptableObjects/LootSpawn", order = 1)]
+public class LootSpawnScriptable : ScriptableObject
 {
     [Serializable]
-    public class Enemy
+    public class LootSpawn
     {
-        public enum EnemyType
+        public enum LootType
         {
             Basic,
-            Brute,
-            Stealer,
-            Shooter,
-            Shield,
-            Spawner,
-            Teleporter
+            Environmental
         }
 
         public GameObject m_prefab;
-        public EnemyType m_enemyType;
-
-        [Range(0.0f, 1.0f)] 
-        public float m_lootSpawnRate;
+        public LootType m_lootType;
     }
 
     [Serializable]
-    public struct WeightedEnemySpawn
+    public struct WeightedLootSpawn
     {
-        public Enemy m_enemy;
+        public LootSpawn m_loot;
         
         [Range(0.0f, 1.0f)]
         public float m_weightedValue;
     }
     
-    public List<WeightedEnemySpawn> m_weightedSpawns = new List<WeightedEnemySpawn>();
+    public List<WeightedLootSpawn> m_weightedSpawns = new List<WeightedLootSpawn>();
     
-    public Enemy GetRandomEnemyToSpawn()
+    public LootSpawn GetRandomLootToSpawn()
     {
-        Enemy output = null;
+        LootSpawn output = null;
         
         // Generate random value based on list
         float totalWeight = 0.0f;
@@ -59,7 +51,7 @@ public class EnemySpawnScriptable : ScriptableObject
             processedWeight += weightedItem.m_weightedValue;
             if (randomValue <= processedWeight)
             {
-                output = weightedItem.m_enemy;
+                output = weightedItem.m_loot;
                 break;
             }
         }
@@ -76,7 +68,7 @@ public class EnemySpawnScriptable : ScriptableObject
     {
         // Sort list based on Enemy Type
         m_weightedSpawns = m_weightedSpawns
-            .OrderBy(item => item.m_enemy.m_enemyType)
+            .OrderBy(item => item.m_loot.m_lootType)
             .ToList();
         
     }

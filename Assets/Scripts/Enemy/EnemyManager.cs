@@ -14,10 +14,6 @@ public class EnemyManager : MonoBehaviour
     public int m_maxEnemyCount = 20;
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
-
-    [Header("Enemy Settings")] 
-    [Range(0.0f, 1.0f)] public float m_enemyDropLootRate = 0.0f;
-    public GameObject m_dropLoot;
     
     private List<GameObject> m_enemies = new List<GameObject>();
     private float m_timer = 0.0f;
@@ -103,6 +99,7 @@ public class EnemyManager : MonoBehaviour
             EnemySpawnScriptable.Enemy newEnemy = SingletonMaster.Instance.EnemySpawnScriptableObject.GetRandomEnemyToSpawn();
             GameObject enemyPrefab = newEnemy.m_prefab;
             GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            spawned.GetComponent<BaseEnemyBehavior>().m_lootDropRate = newEnemy.m_lootSpawnRate;
             m_enemies.Add(spawned);
         }
     }
@@ -140,9 +137,10 @@ public class EnemyManager : MonoBehaviour
     private void SpawnLoot(GameObject enemy)
     {
         float roll = Random.Range(0.0f, 1.0f);
-        if (roll <= m_enemyDropLootRate)
+        if (roll <= enemy.GetComponent<BaseEnemyBehavior>().m_lootDropRate)
         {
-            Instantiate(m_dropLoot, enemy.transform.position, Quaternion.identity);
+            GameObject loot = SingletonMaster.Instance.LootSpawnScriptableObject.GetRandomLootToSpawn().m_prefab;
+            Instantiate(loot, enemy.transform.position, Quaternion.identity);
         }
     }
 

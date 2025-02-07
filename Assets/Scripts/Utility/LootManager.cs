@@ -41,14 +41,14 @@ public class LootManager : MonoBehaviour
         }
     }
 
-    private void AddLoot()
+    private void AddLoot(int value)
     {
-        m_currentLootCount++;
+        m_currentLootCount += value;
 
-        if (m_currentLootCount == m_goalLoot)
+        if (m_currentLootCount >= m_goalLoot)
         {
             SingletonMaster.Instance.EventManager.ItemSpawnEvent.Invoke();
-            m_goalLoot += Random.Range(10, 20);
+            m_goalLoot += Random.Range(15, 20);
         }
     }
 }

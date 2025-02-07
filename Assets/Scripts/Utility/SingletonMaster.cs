@@ -22,6 +22,7 @@ public class SingletonMaster : MonoBehaviour
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
     public EnemySpawnScriptable EnemySpawnScriptableObject;
+    public LootSpawnScriptable LootSpawnScriptableObject;
 
     [Header("Juice Settings")] 
     public CameraShake CameraShakeManager;

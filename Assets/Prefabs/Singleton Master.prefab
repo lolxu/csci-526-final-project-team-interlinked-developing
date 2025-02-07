@@ -927,6 +927,7 @@ MonoBehaviour:
   EventManager: {fileID: 3902737660301123325}
   WeightedRandomItems: {fileID: 11400000, guid: 6fbd8e8c1b0421446abcb48b658de6c9, type: 2}
   EnemySpawnScriptableObject: {fileID: 11400000, guid: a6ac919355032ab42a5612664c4ed1b0, type: 2}
+  LootSpawnScriptableObject: {fileID: 11400000, guid: 4eb21cccd984a434283410d846842646, type: 2}
   CameraShakeManager: {fileID: 5982766004866435576}
   FeelManager: {fileID: 9077600127211253942}
   UNCONNECTED_LAYER: 6
@@ -1164,8 +1165,6 @@ MonoBehaviour:
   m_maxEnemyCount: 10
   m_spawnPadding: 2
   m_canSpawn: 0
-  m_enemyDropLootRate: 0.615
-  m_dropLoot: {fileID: 1181414071359833202, guid: 6aaa44ba98ceb7d4f9bbb345c24faf93, type: 3}
 --- !u!1 &5750788562390285542
 GameObject:
   m_ObjectHideFlags: 0
