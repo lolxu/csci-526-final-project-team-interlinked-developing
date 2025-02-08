@@ -107,7 +107,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -211,7 +211,7 @@ RelativeJoint2D:
   m_BreakAction: 3
   m_MaxForce: 1000
   m_MaxTorque: 1000
-  m_CorrectionScale: 0.3
+  m_CorrectionScale: 0.1
   m_AutoConfigureOffset: 1
   m_LinearOffset: {x: 0, y: 0}
   m_AngularOffset: 0

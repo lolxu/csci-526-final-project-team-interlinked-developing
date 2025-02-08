@@ -7,5 +7,13 @@ using UnityEngine;
 public class AbilityScriptable : ScriptableObject
 {
     public string m_name;
-    public bool m_enabled;
+    public bool m_enabled = false;
+    // THIS IS TEMPORARY!!!!
+    public int m_count = 0;
+
+    private void OnEnable()
+    {
+        m_enabled = false;
+        m_count = 0;
+    }
 }
