@@ -58,6 +58,8 @@ public class PlayerBase : MonoBehaviour
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
 
+        m_healthComponent.m_isLinked = true;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }

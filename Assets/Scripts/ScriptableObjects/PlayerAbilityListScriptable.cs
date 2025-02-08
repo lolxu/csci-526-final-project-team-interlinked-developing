@@ -12,4 +12,13 @@ public class PlayerAbilityListScriptable : ScriptableObject
     {
         return ability.m_enabled;
     }
+
+    public void ResetAbilities()
+    {
+        foreach (var ability in m_abilities)
+        {
+            ability.m_count = 0;
+            ability.m_enabled = false;
+        }
+    }
 }
