@@ -23,7 +23,11 @@ public class AbilityComponent : MonoBehaviour
     {
         if (obj == gameObject)
         {
-            m_ability.m_enabled = false;
+            m_ability.m_count--;
+            if (m_ability.m_count == 0)
+            {
+                m_ability.m_enabled = false;
+            }
         }
     }
 
@@ -31,6 +35,7 @@ public class AbilityComponent : MonoBehaviour
     {
         if (obj == gameObject)
         {
+            m_ability.m_count++;
             m_ability.m_enabled = true;
         }
     }
