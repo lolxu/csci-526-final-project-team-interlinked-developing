@@ -31,8 +31,8 @@ public class RopeGenerator : MonoBehaviour
             RelativeJoint2D joint = connectTo.GetComponent<RelativeJoint2D>();
             joint.enabled = true;
             joint.connectedBody = m_anchorObject;
-            joint.autoConfigureOffset = false;
-            joint.linearOffset = offset;
+            joint.autoConfigureOffset = true;
+            // joint.linearOffset = offset;
         }
         
         CreateVisualRope(connectTo);
@@ -86,6 +86,8 @@ public class RopeGenerator : MonoBehaviour
             Debug.LogError("Connecting component does NOT have Rope Receiver");
         }
     }
+    
+    // TODO: Make detach better!!!!!
 
     /// <summary>
     /// This is a function to detach this specific target component from the rope
@@ -106,6 +108,7 @@ public class RopeGenerator : MonoBehaviour
                     strongJoint.enabled = false;
                 }
                 nextObject.transform.SetParent(GameObject.FindGameObjectWithTag("Garbage").transform, true);
+                SingletonMaster.Instance.EventManager.UnlinkEvent.Invoke(nextObject);
                 
                 // Processing link object specific stuff here ---------------------------------------------
                 var shootComp = nextObject.GetComponent<ShootComponent>();
@@ -153,6 +156,7 @@ public class RopeGenerator : MonoBehaviour
                 strongJoint.enabled = false;
             }
             nextObject.transform.SetParent(GameObject.FindGameObjectWithTag("Garbage").transform, true);
+            SingletonMaster.Instance.EventManager.UnlinkEvent.Invoke(nextObject);
             
             // Processing link object specific stuff here ---------------------------------------------
             var shootComp = nextObject.GetComponent<ShootComponent>();

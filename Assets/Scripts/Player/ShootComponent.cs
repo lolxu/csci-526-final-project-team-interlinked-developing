@@ -13,9 +13,14 @@ public class ShootComponent : MonoBehaviour
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
     public bool m_canShoot = false;
+    public bool m_canAim = false;
+
+    [Header("Ability Settings")] 
+    [SerializeField] private AbilityScriptable m_aimAbility;
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject m_gun;
+    [SerializeField] private GameObject m_muzzle;
     [SerializeField] private Light2D m_muzzleFlash;
     [SerializeField] private float m_muzzleFlashIntensity = 5.0f;
     
@@ -30,17 +35,39 @@ public class ShootComponent : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.StartFireEvent.AddListener(StartFiring);
         SingletonMaster.Instance.EventManager.StopFireEvent.AddListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+    }
+
+    private void OnUnlinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canShoot = false;
+        }
+    }
+
+    private void OnLinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canShoot = true;
+        }
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
         SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
 
     private void FixedUpdate()
     {
-        if (m_canShoot)
+        if (m_canAim)
         {
             Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
             float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
@@ -51,10 +78,12 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        m_canAim = m_aimAbility.m_enabled && m_canShoot;
+        
         if (m_canShoot)
         {
             Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+            Vector2 muzzlePosition = m_muzzle.transform.position;
 
             // SHOOTING!!
             if (m_isMouseDown && m_bulletPrefab != null)
@@ -72,7 +101,8 @@ public class ShootComponent : MonoBehaviour
                     // Modding stats for bullets
                     bulletScript.m_penetrateNum += m_penetrationChange;
                     m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
-                    bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+                    // bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+                    bulletScript.m_direction = (muzzlePosition - myPos).normalized;
 
                     // Add some recoil;
                     m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange),

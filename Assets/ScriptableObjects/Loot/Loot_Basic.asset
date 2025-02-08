@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518bee725cf78204a922942b934c5734, type: 3}
-  m_Name: LootSpawn_SO
+  m_Script: {fileID: 11500000, guid: f73a5de0afdb4544093e2a1b4ef00121, type: 3}
+  m_Name: Loot_Basic
   m_EditorClassIdentifier: 
-  m_weightedSpawns:
-  - {fileID: 11400000, guid: 24c66b8e6621ece40b7320fb7d6d0fd2, type: 2}
-  - {fileID: 11400000, guid: 6980c73911471a14f9f52e48f38ae67e, type: 2}
+  loot:
+    m_loot:
+      m_prefab: {fileID: 1181414071359833202, guid: 19c66eab27a3d144da9dc23d46b9ec75, type: 3}
+      m_lootType: 0
+    m_weightedValue: 0.859

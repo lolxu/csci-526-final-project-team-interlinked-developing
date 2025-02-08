@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HammerComponent : MonoBehaviour
+public class MeleeComponent : MonoBehaviour
 {
     [Header("Damage Settings")]
     [SerializeField] private float m_damage = 10.0f;
