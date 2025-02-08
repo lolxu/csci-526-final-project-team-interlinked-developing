@@ -12,6 +12,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent StartFireEvent = new UnityEvent();
     public UnityEvent StopFireEvent = new UnityEvent();
     public UnityEvent<float> CooldownStarted = new UnityEvent<float>();
+    public UnityEvent<GameObject> LinkEvent = new UnityEvent<GameObject>();
+    public UnityEvent<GameObject> UnlinkEvent = new UnityEvent<GameObject>();
     
     [Header("Common Enemy Events")]
     public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>();

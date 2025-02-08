@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 518bee725cf78204a922942b934c5734, type: 3}
-  m_Name: LootSpawn_SO
+  m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
+  m_Name: Enemy_Basic
   m_EditorClassIdentifier: 
-  m_weightedSpawns:
-  - {fileID: 11400000, guid: 24c66b8e6621ece40b7320fb7d6d0fd2, type: 2}
-  - {fileID: 11400000, guid: 6980c73911471a14f9f52e48f38ae67e, type: 2}
+  enemy:
+    m_enemy:
+      m_prefab: {fileID: 3226217970767368422, guid: d26e06ec22c8c674ca22ece821b66f09, type: 3}
+      m_enemyType: 0
+      m_lootSpawnRate: 0.35
+    m_weightedValue: 1

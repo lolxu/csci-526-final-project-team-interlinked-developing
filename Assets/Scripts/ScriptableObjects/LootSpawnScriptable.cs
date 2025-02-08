@@ -5,42 +5,20 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "LootSpawn_SO", menuName = "ScriptableObjects/LootSpawn", order = 1)]
+[CreateAssetMenu(fileName = "LootSpawn_SO", menuName = "ScriptableObjects/LootSpawn")]
 public class LootSpawnScriptable : ScriptableObject
 {
-    [Serializable]
-    public class LootSpawn
-    {
-        public enum LootType
-        {
-            Basic,
-            Environmental
-        }
-
-        public GameObject m_prefab;
-        public LootType m_lootType;
-    }
-
-    [Serializable]
-    public struct WeightedLootSpawn
-    {
-        public LootSpawn m_loot;
-        
-        [Range(0.0f, 1.0f)]
-        public float m_weightedValue;
-    }
+    public List<LootScriptable> m_weightedSpawns = new List<LootScriptable>();
     
-    public List<WeightedLootSpawn> m_weightedSpawns = new List<WeightedLootSpawn>();
-    
-    public LootSpawn GetRandomLootToSpawn()
+    public LootScriptable.LootSpawn GetRandomLootToSpawn()
     {
-        LootSpawn output = null;
+        LootScriptable.LootSpawn output = null;
         
         // Generate random value based on list
         float totalWeight = 0.0f;
         foreach (var weightedItem in m_weightedSpawns)
         {
-            totalWeight += weightedItem.m_weightedValue;
+            totalWeight += weightedItem.loot.m_weightedValue;
         }
         float randomValue = Random.Range(0.0f, totalWeight);
             
@@ -48,10 +26,10 @@ public class LootSpawnScriptable : ScriptableObject
         float processedWeight = 0.0f;
         foreach (var weightedItem in m_weightedSpawns)
         {
-            processedWeight += weightedItem.m_weightedValue;
+            processedWeight += weightedItem.loot.m_weightedValue;
             if (randomValue <= processedWeight)
             {
-                output = weightedItem.m_loot;
+                output = weightedItem.loot.m_loot;
                 break;
             }
         }
@@ -68,7 +46,7 @@ public class LootSpawnScriptable : ScriptableObject
     {
         // Sort list based on Enemy Type
         m_weightedSpawns = m_weightedSpawns
-            .OrderBy(item => item.m_loot.m_lootType)
+            .OrderBy(item => item.loot.m_loot.m_lootType)
             .ToList();
         
     }

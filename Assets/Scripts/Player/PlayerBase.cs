@@ -254,12 +254,15 @@ public class PlayerBase : MonoBehaviour
             m_linkedObjects.Add(hitObject);
             hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
             
+            // Firing Link Event
+            SingletonMaster.Instance.EventManager.LinkEvent.Invoke(hitObject);
+            
             // Processing link object specific stuff here ---------------------------------------------
-            var shootComp = hitObject.GetComponent<ShootComponent>();
-            if (shootComp != null)
-            {
-                shootComp.m_canShoot = true;
-            }
+            // var shootComp = hitObject.GetComponent<ShootComponent>();
+            // if (shootComp != null)
+            // {
+            //     shootComp.m_canShoot = true;
+            // }
         }
     }
 
