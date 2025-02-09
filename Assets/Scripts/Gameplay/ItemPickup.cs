@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ItemPickup : MonoBehaviour
 {
@@ -29,6 +28,7 @@ public class ItemPickup : MonoBehaviour
             
             // Checking loot count
             SingletonMaster.Instance.LootManager.m_hasCollected = true;
+            SingletonMaster.Instance.LootManager.m_goalLoot += Random.Range(15, 20);
             SingletonMaster.Instance.LootManager.CheckLoot();
             
         }

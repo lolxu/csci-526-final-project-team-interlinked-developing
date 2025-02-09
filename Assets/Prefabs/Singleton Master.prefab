@@ -805,8 +805,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_currentLootCount: 0
-  m_goalLoot: 5
-  m_hasCollected: 1
+  m_goalLoot: 0
+  m_hasCollected: 0
 --- !u!1 &1433852046395236380
 GameObject:
   m_ObjectHideFlags: 0

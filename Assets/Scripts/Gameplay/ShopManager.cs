@@ -32,12 +32,13 @@ public class ShopManager : MonoBehaviour
     private IEnumerator RollForShop()
     {
         m_itemsHolder.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
-        m_itemsHolder.SetActive(true);
         foreach (var item in m_items)
         {
             item.GetComponent<ItemPickup>().SpawnItem();
         }
+        yield return new WaitForSeconds(0.5f);
+        m_itemsHolder.SetActive(true);
+        
     }
 
     public void DisableShopItems()
