@@ -205,8 +205,8 @@ public class PlayerBase : MonoBehaviour
             }
 
             // Checking if mouse hits connected loot
-            RaycastHit2D hit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Player"));
+            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
+                LayerMask.GetMask("Player"));
 
             if (hit && hit.rigidbody != m_RB)
             {
