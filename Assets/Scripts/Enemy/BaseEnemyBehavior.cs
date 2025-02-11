@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -25,6 +24,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     
     [Header("Enemy Events")]
     public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
+    
+    public float m_lootDropRate { get; set; } = 0.0f;
     
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;

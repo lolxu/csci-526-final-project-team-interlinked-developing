@@ -192,7 +192,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -234,7 +234,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 5
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -297,7 +297,11 @@ MonoBehaviour:
   m_recoilChange: 0
   m_penetrationChange: 0
   m_canShoot: 0
+  m_canAutoAim: 0
+  m_autoAimAbility: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
+  m_autoAimRadius: 10
   m_gun: {fileID: 4490041388324594877}
+  m_muzzle: {fileID: 7201080177151140710}
   m_muzzleFlash: {fileID: 3653092808152997679}
   m_muzzleFlashIntensity: 5
 --- !u!254 &275255261024882216
@@ -314,10 +318,10 @@ RelativeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_MaxForce: 1000
-  m_MaxTorque: 1000
-  m_CorrectionScale: 0.3
-  m_AutoConfigureOffset: 0
+  m_MaxForce: 5000
+  m_MaxTorque: 2500
+  m_CorrectionScale: 0.1
+  m_AutoConfigureOffset: 1
   m_LinearOffset: {x: 0, y: 0}
   m_AngularOffset: 0
 --- !u!114 &-7147653903229845349
@@ -333,6 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 5
+  m_maxHealth: 5
   m_invincibleTime: 1
   DamageEvent:
     m_PersistentCalls:
@@ -340,6 +345,7 @@ MonoBehaviour:
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_isLinked: 0
 --- !u!1001 &7810157226798264904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -426,7 +432,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6832281777986137447, guid: a125b468d8068904db03537955ad5dc7, type: 3}
   m_PrefabInstance: {fileID: 7810157226798264904}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 7201080177151140710}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -440,5 +446,10 @@ GameObject:
 --- !u!4 &7018857408943713312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 938082696829591144, guid: a125b468d8068904db03537955ad5dc7, type: 3}
+  m_PrefabInstance: {fileID: 7810157226798264904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7201080177151140710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1120306530155090222, guid: a125b468d8068904db03537955ad5dc7, type: 3}
   m_PrefabInstance: {fileID: 7810157226798264904}
   m_PrefabAsset: {fileID: 0}

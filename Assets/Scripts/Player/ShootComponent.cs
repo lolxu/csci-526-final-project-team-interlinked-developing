@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 
 public class ShootComponent : MonoBehaviour
 {
@@ -13,9 +14,15 @@ public class ShootComponent : MonoBehaviour
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
     public bool m_canShoot = false;
+    public bool m_canAutoAim = false;
+
+    [Header("Ability Settings")] 
+    [SerializeField] private AbilityScriptable m_autoAimAbility;
+    public float m_autoAimRadius = 10.0f;
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject m_gun;
+    [SerializeField] private GameObject m_muzzle;
     [SerializeField] private Light2D m_muzzleFlash;
     [SerializeField] private float m_muzzleFlashIntensity = 5.0f;
     
@@ -30,20 +37,69 @@ public class ShootComponent : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.StartFireEvent.AddListener(StartFiring);
         SingletonMaster.Instance.EventManager.StopFireEvent.AddListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+    }
+
+    private void OnUnlinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canShoot = false;
+        }
+    }
+
+    private void OnLinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canShoot = true;
+        }
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
         SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
 
     private void FixedUpdate()
     {
         if (m_canShoot)
         {
-            Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-            float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
+            Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
+
+            if (m_canAutoAim)
+            {
+                RaycastHit2D[] results = new RaycastHit2D[50];
+                var size = Physics2D.CircleCastNonAlloc(transform.position, m_autoAimRadius, Vector2.zero, results, 0.0f, LayerMask.GetMask("Enemy"));
+                float minDist = float.MaxValue;
+                GameObject bestTarget = null;
+                for (int i = 0; i < size; i++)
+                {
+                    RaycastHit2D enemy = results[i];
+                    float dist = Vector2.Distance(enemy.transform.position, transform.position);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        bestTarget = enemy.collider.gameObject;
+                    }
+                }
+            
+                Debug.Log(bestTarget);
+
+                if (bestTarget != null)
+                {
+                    selfToTarget = bestTarget.transform.position - transform.position;
+                }
+            }
+            
+            // Rotating the gun
+            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
             m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
         }
     }
@@ -51,10 +107,12 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
+        
         if (m_canShoot)
         {
             Vector2 myPos = new Vector2(transform.position.x, transform.position.y);
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+            Vector2 muzzlePosition = m_muzzle.transform.position;
 
             // SHOOTING!!
             if (m_isMouseDown && m_bulletPrefab != null)
@@ -72,7 +130,8 @@ public class ShootComponent : MonoBehaviour
                     // Modding stats for bullets
                     bulletScript.m_penetrateNum += m_penetrationChange;
                     m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
-                    bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+                    // bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
+                    bulletScript.m_direction = (muzzlePosition - myPos).normalized;
 
                     // Add some recoil;
                     m_RB.AddForce(-bulletScript.m_direction * (bulletScript.m_recoil + m_recoilChange),

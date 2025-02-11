@@ -13,7 +13,4 @@ MonoBehaviour:
   m_Name: EnemySpawn_SO
   m_EditorClassIdentifier: 
   m_weightedSpawns:
-  - m_enemy:
-      m_prefab: {fileID: 3226217970767368422, guid: d26e06ec22c8c674ca22ece821b66f09, type: 3}
-      m_enemyType: 0
-    m_weightedValue: 1
+  - {fileID: 11400000, guid: 839c87b460772a64bada72f7a73a2130, type: 2}

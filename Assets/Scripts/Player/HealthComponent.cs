@@ -7,9 +7,11 @@ public class HealthComponent : MonoBehaviour
 {
     [Header("Health Settings")] 
     public float m_health = 10.0f;
+    public float m_maxHealth = 10.0f;
     public float m_invincibleTime = 1.0f;
     public UnityEvent<float, GameObject> DamageEvent = new UnityEvent<float, GameObject>();
     public UnityEvent<GameObject> DeathEvent = new UnityEvent<GameObject>();
+    public bool m_isLinked = false;
     
     // private Sequence m_damageTween = null;
     private Coroutine m_damageSequence = null;
@@ -17,6 +19,8 @@ public class HealthComponent : MonoBehaviour
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
+    private GameObject m_healthBar = null;
+    
 
     private void Start()
     {
@@ -26,10 +30,37 @@ public class HealthComponent : MonoBehaviour
         
         DamageEvent.AddListener(OnDamage);
         DeathEvent.AddListener(OnDeath);
+
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        
+        // Create Health bar
+        m_healthBar = SingletonMaster.Instance.UI.AddHealthBar(this);
+    }
+
+    private void OnUnlinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_isLinked = false;
+        }
+    }
+
+    private void OnLinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_isLinked = true;
+        }
     }
 
     private void OnDisable()
     {
+        if (m_healthBar != null)
+        {
+            Destroy(m_healthBar);
+        }
+        
         DamageEvent.RemoveListener(OnDamage);
         DeathEvent.RemoveListener(OnDeath);
     }
@@ -55,11 +86,20 @@ public class HealthComponent : MonoBehaviour
             m_damageSequence = StartCoroutine(HurtSequence(dir));
 
             StartCoroutine(InvincibleSequence());
-            StartCoroutine(HitStop());
             
             // Juice Stuff
             // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
-            SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
+
+            // Only do screen shake on damage when linked to player
+            if (m_isLinked)
+            {
+                if (gameObject.CompareTag("Player"))
+                {
+                    StartCoroutine(HitStop());
+                }
+                SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
+            }
+            
             m_health -= damage;
             if (m_health <= 0.0f)
             {

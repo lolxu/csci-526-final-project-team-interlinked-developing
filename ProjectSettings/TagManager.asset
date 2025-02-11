@@ -9,6 +9,8 @@ TagManager:
   - Loot
   - Background
   - Linkable
+  - Garbage
+  - Shop
   layers:
   - Default
   - TransparentFX

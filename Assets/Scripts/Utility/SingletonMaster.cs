@@ -14,6 +14,7 @@ public class SingletonMaster : MonoBehaviour
     public PlayerBase PlayerBase;
     public EnemyManager EnemyManager;
     public LootManager LootManager;
+    public UI UI;
 
     [Header("Event Manager")] 
     public EventManager EventManager;
@@ -21,6 +22,8 @@ public class SingletonMaster : MonoBehaviour
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
     public EnemySpawnScriptable EnemySpawnScriptableObject;
+    public LootSpawnScriptable LootSpawnScriptableObject;
+    public PlayerAbilityListScriptable PlayerAbilities;
 
     [Header("Juice Settings")] 
     public CameraShake CameraShakeManager;

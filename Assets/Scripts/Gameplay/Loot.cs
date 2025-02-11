@@ -1,11 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Loot : MonoBehaviour
 {
+    public int m_value { private set; get; } = 0;
+    public int m_maxValue = 10;
+    public float m_scaleFactor = 0.5f;
+    public TextMeshPro m_valueText;
+    [SerializeField] private AnimationCurve m_curve;
     [SerializeField] private Color m_uncollectedColor;
     [SerializeField] private Color m_collectedColor;
     [SerializeField] private float m_shrinkSpeed = 1.25f;
@@ -17,6 +24,13 @@ public class Loot : MonoBehaviour
     private void Start()
     {
         m_spriteRend = GetComponent<SpriteRenderer>();
+        m_value = Random.Range(1, m_maxValue);
+        float scale = transform.localScale.x + m_curve.Evaluate((float)m_value / (float)m_maxValue);
+        m_valueText.text = m_value.ToString();
+        if (m_value > 1)
+        {
+            transform.localScale *= scale * m_scaleFactor;
+        }
     }
 
     private void Update()
@@ -50,7 +64,7 @@ public class Loot : MonoBehaviour
         if (shrinkCoroutine == null)
         {
             shrinkCoroutine = StartCoroutine(ShrinkSequence());
-            SingletonMaster.Instance.EventManager.LootCollected.Invoke();
+            SingletonMaster.Instance.EventManager.LootCollected.Invoke(m_value);
         }
     }
 

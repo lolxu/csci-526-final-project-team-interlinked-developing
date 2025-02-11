@@ -10,35 +10,41 @@ public class LootManager : MonoBehaviour
 {
     [Header("Loot Settings")] 
     public int m_currentLootCount = 0;
-    public int m_goalLoot = 5;
-
-    public bool m_isFirstSpawn = true;
-    // public AnimationCurve m_lootIncreaseCurve;
+    public int m_goalLoot = 0;
+    public bool m_hasCollected = false;
 
     private void Start()
     {
         SingletonMaster.Instance.EventManager.LootCollected.AddListener(AddLoot);
-        
+        GameObject.FindWithTag("Shop").GetComponent<ShopManager>().EnableShopItems();
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        // Spawn all items the first time
-        if (m_isFirstSpawn)
-        {
-            SingletonMaster.Instance.EventManager.ItemSpawnEvent.Invoke();
-            m_isFirstSpawn = false;
-        }
+        SingletonMaster.Instance.EventManager.LootCollected.RemoveListener(AddLoot);
     }
 
-    private void AddLoot()
+    private void AddLoot(int value)
     {
-        m_currentLootCount++;
+        m_currentLootCount += value;
+        CheckLoot();
+    }
 
-        if (m_currentLootCount == m_goalLoot)
+    public void CheckLoot()
+    {
+        if (m_hasCollected)
         {
-            SingletonMaster.Instance.EventManager.ItemSpawnEvent.Invoke();
-            m_goalLoot += Random.Range(10, 20);
+            if (m_currentLootCount >= m_goalLoot)
+            {
+                Debug.Log("Can Spawn Items " + m_currentLootCount + "/" + m_goalLoot);
+                GameObject.FindWithTag("Shop").GetComponent<ShopManager>().EnableShopItems();
+                m_hasCollected = false;
+            }
+            else
+            {
+                GameObject.FindWithTag("Shop").GetComponent<ShopManager>().DisableShopItems();
+                Debug.Log("Cannot Spawn!!!!!! Not enough loot");
+            }
         }
     }
 }

@@ -20,9 +20,9 @@ public class PlayerBase : MonoBehaviour
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
     
-    
     [Header("Rope Settings")]
     public GameObject m_rope;
+    public float m_clickRadius = 1.0f;
     public float m_connectRadius = 10.0f;
     public GameObject m_linkObjectsParent;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
@@ -46,6 +46,8 @@ public class PlayerBase : MonoBehaviour
     private Vector2 m_drawpos;
     private float m_orgZoom;
 
+    private bool m_isInitiated = false;
+
     private void Start()
     {
         // Adding self to linked object list first
@@ -55,7 +57,9 @@ public class PlayerBase : MonoBehaviour
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
-        
+
+        m_healthComponent.m_isLinked = true;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
@@ -185,8 +189,8 @@ public class PlayerBase : MonoBehaviour
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
 
             // Checking if mouse hits the unconnected hit boxes
-            RaycastHit2D pickupHit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
-                LayerMask.GetMask("Unconnected"));
+            RaycastHit2D pickupHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
+                0.0f, LayerMask.GetMask("Unconnected"));
             if (pickupHit)
             {
                 Rigidbody2D hitBody = pickupHit.rigidbody;
@@ -252,12 +256,15 @@ public class PlayerBase : MonoBehaviour
             m_linkedObjects.Add(hitObject);
             hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
             
+            // Firing Link Event
+            SingletonMaster.Instance.EventManager.LinkEvent.Invoke(hitObject);
+            
             // Processing link object specific stuff here ---------------------------------------------
-            var shootComp = hitObject.GetComponent<ShootComponent>();
-            if (shootComp != null)
-            {
-                shootComp.m_canShoot = true;
-            }
+            // var shootComp = hitObject.GetComponent<ShootComponent>();
+            // if (shootComp != null)
+            // {
+            //     shootComp.m_canShoot = true;
+            // }
         }
     }
 

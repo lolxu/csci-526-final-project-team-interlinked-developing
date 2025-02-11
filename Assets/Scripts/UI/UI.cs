@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class UI : MonoBehaviour
 {
     public TextMeshProUGUI m_scoreText;
     public TextMeshProUGUI m_coolDownText;
-    
+    public GameObject m_healthBarPrefab;
+
+    private Coroutine m_cooldown;
     private int m_killCount = 0;
     
     private void Start()
@@ -25,10 +29,31 @@ public class UI : MonoBehaviour
         SingletonMaster.Instance.EventManager.CooldownStarted.RemoveListener(ShowCooldown);
     }
 
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == SingletonMaster.Instance.HubName)
+        {
+            if (m_cooldown != null)
+            {
+                StopCoroutine(m_cooldown);
+                m_coolDownText.enabled = false;
+            }
+        }
+    }
+
+    public GameObject AddHealthBar(HealthComponent healthComponent)
+    {
+        Debug.Log("Added health bar: " + healthComponent.gameObject);
+        GameObject newHealthBar = Instantiate(m_healthBarPrefab, transform, true);
+        HealthBar healthBarComp = newHealthBar.GetComponent<HealthBar>();
+        healthBarComp.m_healthComp = healthComponent;
+        return newHealthBar;
+    }
+
     private void ShowCooldown(float time)
     {
         m_coolDownText.enabled = true;
-        StartCoroutine(CooldownSequence(time));
+        m_cooldown = StartCoroutine(CooldownSequence(time));
     }
 
     private IEnumerator CooldownSequence(float time)

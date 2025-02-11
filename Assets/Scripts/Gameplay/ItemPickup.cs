@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ItemPickup : MonoBehaviour
 {
+    [SerializeField] private ShopManager m_shopManager;
     public TextMeshPro m_text;
     [SerializeField] private SpriteRenderer m_spriteRenderer;
-    private WeightedRandomScriptable.UpgradeItem m_item;
+    private UpgradeItemScriptable.UpgradeItem m_item;
 
     public void SpawnItem()
     {
@@ -23,25 +24,13 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.gameObject.GetComponent<PlayerBase>() != null)
         {
-            switch (m_item.m_itemType)
-            {
-                case WeightedRandomScriptable.ItemType.Bullet:
-                {
-                    var comp = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<ShootComponent>();
-                    if (comp != null)
-                    {
-                        comp.m_bulletPrefab = m_item.m_itemPrefab;
-                    }
-                    break;
-                }
-                case WeightedRandomScriptable.ItemType.Linkable:
-                {
-                    // Spawn the prefab
-                    Instantiate(m_item.m_itemPrefab, transform.position, Quaternion.identity);
-                    break;
-                }
-            }
-            SingletonMaster.Instance.EventManager.ItemCollected.Invoke();
+            Instantiate(m_item.m_itemPrefab, transform.position, Quaternion.identity);
+            
+            // Checking loot count
+            SingletonMaster.Instance.LootManager.m_hasCollected = true;
+            SingletonMaster.Instance.LootManager.m_goalLoot += Random.Range(15, 20);
+            SingletonMaster.Instance.LootManager.CheckLoot();
+            
         }
     }
 }
