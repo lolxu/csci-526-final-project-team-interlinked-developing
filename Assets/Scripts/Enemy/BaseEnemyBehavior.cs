@@ -19,15 +19,15 @@ public class BaseEnemyBehavior : MonoBehaviour
     public BaseEnemyAI m_AI;
     
     [Header("Visual Settings")] 
-    [SerializeField] private GameObject m_face;
-    [SerializeField] private float m_faceMoveFactor = 0.25f;
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+    [SerializeField] protected GameObject m_face;
+    [SerializeField] protected float m_faceMoveFactor = 0.25f;
     
     [Header("Enemy Events")]
     public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
     
     public float m_lootDropRate { get; set; } = 0.0f;
     
-    private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
     private Vector3 m_orgScale;
     
@@ -46,14 +46,12 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     private void Start()
     {
-        OnStart();
-        
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
-
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
         EnemyDamagedEvent.AddListener(OnDamaged);
+        
+        OnStart();
     }
 
     private void OnDisable()
