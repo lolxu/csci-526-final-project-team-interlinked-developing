@@ -93,7 +93,10 @@ public class HealthComponent : MonoBehaviour
             // Only do screen shake on damage when linked to player
             if (m_isLinked)
             {
-                StartCoroutine(HitStop());
+                if (gameObject.CompareTag("Player"))
+                {
+                    StartCoroutine(HitStop());
+                }
                 SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
             }
             

@@ -5147,7 +5147,7 @@ MonoBehaviour:
   m_acceleration: 100
   m_maxSpeed: 10
   m_rope: {fileID: 3582586625695924295}
-  m_clickRadius: 1
+  m_clickRadius: 0.5
   m_connectRadius: 5
   m_linkObjectsParent: {fileID: 2758825225473693082}
   m_linkedObjects: []
@@ -5362,7 +5362,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 77758
+  m_InstanceId: 119428
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 0.49999988, y: 0.5, z: 0}
