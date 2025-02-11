@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 public class EnemyManager : MonoBehaviour
 {
     [Header("Spawning Settings")] 
-    public float m_spawnTimeout = 10.0f;
-    public float m_waveIncreaseTime = 60.0f;
+    public float m_waveTime = 60.0f;
+    public float m_waveCoolDown = 30.0f;
     public int m_maxEnemyCount = 20;
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
@@ -20,51 +20,77 @@ public class EnemyManager : MonoBehaviour
     public GameObject m_dropLoot;
     
     private List<GameObject> m_enemies = new List<GameObject>();
-    private float m_timer;
-    private float m_waveTimer;
+    private float m_timer = 0.0f;
 
     private void Start()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
+        
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void Update()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
+        {
+            StartCoroutine(StartSpawnTimeout());
+        }
+        else
+        {
+            m_enemies.Clear();
+            m_canSpawn = false;
+        }
+    }
+
+    private IEnumerator StartSpawnTimeout()
+    {
+        yield return new WaitForSeconds(1.25f);
+        m_canSpawn = true;
+        m_timer = m_waveTime;
+    }
+
+    private IEnumerator StartCooldown()
+    {
+        yield return new WaitForSeconds(m_waveCoolDown);
         if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
         {
             m_canSpawn = true;
         }
-        else
-        {
-            m_canSpawn = false;
-        }
-        
+    }
+
+    void Update()
+    {
         if (m_canSpawn)
         {
             int enemyCount = m_enemies.Count;
-            if (enemyCount == 0 || m_timer <= 0.0f)
+            if (enemyCount < m_maxEnemyCount)
             {
-                m_timer = m_spawnTimeout;
                 SpawnEnemies(m_maxEnemyCount - enemyCount);
-
-                // TODO: Remove magic numbers
-                if (m_waveTimer <= 0.0f)
-                {
-                    m_waveIncreaseTime += Random.Range(10.0f, 30.0f);
-                    m_waveTimer = m_waveIncreaseTime;
-                    m_maxEnemyCount += Random.Range(1, 5);
-                }
             }
 
-            m_waveTimer -= Time.deltaTime;
-            m_timer -= Time.deltaTime;
+            if (m_timer <= 0.0f)
+            {
+                m_waveTime += Random.Range(10.0f, 30.0f);
+                m_timer = m_waveTime;
+                m_maxEnemyCount += Random.Range(1, 5);
+                m_canSpawn = false;
+                SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
+                StartCoroutine(StartCooldown());
+                Debug.Log("Starting wave cool down. You have " + m_waveCoolDown + " seconds.");
+            }
+            else
+            {
+                m_timer -= Time.deltaTime;
+            }
         }
     }
 

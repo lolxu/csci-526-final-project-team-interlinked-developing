@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1780909331452712775}
   m_Layer: 6
   m_Name: Structural Link
-  m_TagString: Untagged
+  m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &2925372555523924136
 MonoBehaviour:
@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4f52792d830234bb8ee9adbf081f98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rope: {fileID: 0}
   m_anchorObject: {fileID: 4296092175667086579}
   m_myRopePrefab: {fileID: 3641976607573275392, guid: 619ca5c20a5efca47bfb2705acc096a9, type: 3}
   m_usingRopePrefab: {fileID: 0}

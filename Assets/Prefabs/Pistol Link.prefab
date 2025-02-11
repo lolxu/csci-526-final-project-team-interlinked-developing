@@ -100,9 +100,10 @@ GameObject:
   - component: {fileID: 2976784438650790189}
   - component: {fileID: 8266512757109852032}
   - component: {fileID: 275255261024882216}
+  - component: {fileID: -7147653903229845349}
   m_Layer: 6
   m_Name: Pistol Link
-  m_TagString: Untagged
+  m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,7 +247,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!114 &5133368167884296385
 MonoBehaviour:
@@ -319,6 +320,26 @@ RelativeJoint2D:
   m_AutoConfigureOffset: 0
   m_LinearOffset: {x: 0, y: 0}
   m_AngularOffset: 0
+--- !u!114 &-7147653903229845349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075601628434340090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcb963f5e843504782d76758b428327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 5
+  m_invincibleTime: 1
+  DamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &7810157226798264904
 PrefabInstance:
   m_ObjectHideFlags: 0

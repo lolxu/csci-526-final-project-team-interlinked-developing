@@ -105,7 +105,7 @@ public class RopeGenerator : MonoBehaviour
                     strongJoint.connectedBody = null;
                     strongJoint.enabled = false;
                 }
-                nextObject.transform.SetParent(null, true);
+                nextObject.transform.SetParent(GameObject.FindGameObjectWithTag("Background").transform, true);
                 
                 // Processing link object specific stuff here ---------------------------------------------
                 var shootComp = nextObject.GetComponent<ShootComponent>();
@@ -152,7 +152,7 @@ public class RopeGenerator : MonoBehaviour
                 strongJoint.connectedBody = null;
                 strongJoint.enabled = false;
             }
-            nextObject.transform.SetParent(null, true);
+            nextObject.transform.SetParent(GameObject.FindGameObjectWithTag("Background").transform, true);
             
             // Processing link object specific stuff here ---------------------------------------------
             var shootComp = nextObject.GetComponent<ShootComponent>();

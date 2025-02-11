@@ -13,6 +13,7 @@ public class SingletonMaster : MonoBehaviour
     [Header("Game Things")] 
     public PlayerBase PlayerBase;
     public EnemyManager EnemyManager;
+    public LootManager LootManager;
 
     [Header("Event Manager")] 
     public EventManager EventManager;
@@ -32,17 +33,18 @@ public class SingletonMaster : MonoBehaviour
     [Header("Scene Names")] 
     public string HubName = "Prototype - Hub";
     public string BattlefieldName = "Prototype - Battlefield";
+
+    private bool m_restart = false;
     
     private void Awake()
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         } 
         else 
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 }
