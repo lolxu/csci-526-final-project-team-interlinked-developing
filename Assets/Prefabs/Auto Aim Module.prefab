@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5456398729669359706}
   - component: {fileID: -3312218313773432131}
   m_Layer: 6
-  m_Name: Aim Module
+  m_Name: Auto Aim Module
   m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

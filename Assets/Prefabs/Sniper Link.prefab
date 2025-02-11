@@ -297,8 +297,9 @@ MonoBehaviour:
   m_recoilChange: 0
   m_penetrationChange: 0
   m_canShoot: 0
-  m_canAim: 0
-  m_aimAbility: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
+  m_canAutoAim: 0
+  m_autoAimAbility: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
+  m_autoAimRadius: 10
   m_gun: {fileID: 7483300548563121757}
   m_muzzle: {fileID: 4213876860666769798}
   m_muzzleFlash: {fileID: 7721340629984923087}
@@ -344,6 +345,7 @@ MonoBehaviour:
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_isLinked: 0
 --- !u!1001 &3888456369123500200
 PrefabInstance:
   m_ObjectHideFlags: 0
