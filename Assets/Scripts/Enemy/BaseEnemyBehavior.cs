@@ -19,7 +19,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     public BaseEnemyAI m_AI;
     
     [Header("Visual Settings")] 
-    [SerializeField] private GameObject m_face;
+    [SerializeField] protected GameObject m_face;
     [SerializeField] private float m_faceMoveFactor = 0.25f;
     
     [Header("Enemy Events")]
