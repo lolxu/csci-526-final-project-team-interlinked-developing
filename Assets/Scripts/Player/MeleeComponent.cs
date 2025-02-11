@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MeleeComponent : MonoBehaviour
 {
@@ -15,10 +16,53 @@ public class MeleeComponent : MonoBehaviour
 
     private Rigidbody2D m_RB;
     private bool m_canDamage = false;
+    private bool m_canFlick = false;
+    private bool m_isMouseDown = false;
     
     private void Start()
     {
         m_RB = GetComponent<Rigidbody2D>();
+        
+        SingletonMaster.Instance.EventManager.StartFireEvent.AddListener(StartFiring);
+        SingletonMaster.Instance.EventManager.StopFireEvent.AddListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+    }
+
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
+        SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+    }
+
+    private void OnUnlinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canFlick = false;
+        }
+    }
+
+    private void OnLinked(GameObject obj)
+    {
+        if (obj == gameObject)
+        {
+            m_canFlick = true;
+        }
+    }
+
+    private void StopFiring()
+    {
+        m_isMouseDown = false;
+    }
+
+    private void StartFiring()
+    {
+        m_isMouseDown = true;
     }
 
     private void FixedUpdate()
@@ -32,6 +76,16 @@ public class MeleeComponent : MonoBehaviour
         {
             m_trail.enabled = false;
             m_canDamage = false;
+        }
+    }
+
+    private void Update()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+        if (m_isMouseDown)
+        {
+            
         }
     }
 

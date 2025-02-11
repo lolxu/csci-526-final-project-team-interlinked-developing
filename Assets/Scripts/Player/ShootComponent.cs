@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 
 public class ShootComponent : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class ShootComponent : MonoBehaviour
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
     public bool m_canShoot = false;
-    public bool m_canAim = false;
+    public bool m_canAutoAim = false;
 
     [Header("Ability Settings")] 
-    [SerializeField] private AbilityScriptable m_aimAbility;
+    [SerializeField] private AbilityScriptable m_autoAimAbility;
+    public float m_autoAimRadius = 10.0f;
     
     [Header("Visual Settings")]
     [SerializeField] private GameObject m_gun;
@@ -67,10 +69,37 @@ public class ShootComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (m_canAim)
+        if (m_canShoot)
         {
-            Vector3 selfToMouse = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-            float angle = Mathf.Atan2(selfToMouse.y, selfToMouse.x) * Mathf.Rad2Deg;
+            Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
+
+            if (m_canAutoAim)
+            {
+                RaycastHit2D[] results = new RaycastHit2D[50];
+                var size = Physics2D.CircleCastNonAlloc(transform.position, m_autoAimRadius, Vector2.zero, results, 0.0f, LayerMask.GetMask("Enemy"));
+                float minDist = float.MaxValue;
+                GameObject bestTarget = null;
+                for (int i = 0; i < size; i++)
+                {
+                    RaycastHit2D enemy = results[i];
+                    float dist = Vector2.Distance(enemy.transform.position, transform.position);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        bestTarget = enemy.collider.gameObject;
+                    }
+                }
+            
+                Debug.Log(bestTarget);
+
+                if (bestTarget != null)
+                {
+                    selfToTarget = bestTarget.transform.position - transform.position;
+                }
+            }
+            
+            // Rotating the gun
+            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
             m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
         }
     }
@@ -78,7 +107,7 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        m_canAim = m_aimAbility.m_enabled && m_canShoot;
+        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
         
         if (m_canShoot)
         {
