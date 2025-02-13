@@ -14,6 +14,7 @@ public class BasePlayerBullet : MonoBehaviour
     // Needs to be object pooled perhaps
     public string m_bulletTargetTag;
     public BulletType m_bulletType;
+    public LayerMask m_scanHitLayerMask;
     public float m_damage = 4.0f;
     public float m_speed;
     public float m_lifeTime = 5.0f;
@@ -53,23 +54,24 @@ public class BasePlayerBullet : MonoBehaviour
         if (m_bulletType == BulletType.Scanhit && !m_hasRaycasted)
         {
             m_hasRaycasted = true;
-            RaycastHit2D[] hitTargets = Physics2D.RaycastAll(transform.position, m_direction, 100.0f, LayerMask.GetMask("Enemy"));
+            RaycastHit2D[] hitTargets = Physics2D.RaycastAll(transform.position, m_direction, 100.0f, m_scanHitLayerMask);
 
             int hitCount = m_penetrateNum;
             foreach (var hit in hitTargets)
             {
                 if (hitCount > 0)
                 {
-                    if (hit.collider.CompareTag("Enemy"))
+                    if (hit.collider.CompareTag(m_bulletTargetTag))
                     {
-                        BaseEnemyBehavior enemy = hit.collider.gameObject.GetComponent<BaseEnemyBehavior>();
-                        if (enemy)
+                        HealthComponent health = hit.collider.gameObject.GetComponent<HealthComponent>();
+                        if (health)
                         {
-                            enemy.EnemyDamagedEvent.Invoke(m_damage);
-                            hit.rigidbody.AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
+                            health.DamageEvent.Invoke(m_damage, m_owner);
                         }
+                        
+                        hitCount--;
                     }
-                    hitCount--;
+                    
                 }
                 else
                 {
@@ -87,23 +89,10 @@ public class BasePlayerBullet : MonoBehaviour
             
             if (other.CompareTag(m_bulletTargetTag))
             {
-                if (m_bulletTargetTag == "Enemy")
+                HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+                if (health)
                 {
-                    BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
-                    if (enemy)
-                    {
-                        enemy.EnemyDamagedEvent.Invoke(m_damage);
-                        other.GetComponent<Rigidbody2D>().AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
-                    }
-                }
-
-                if (m_bulletTargetTag == "Player")
-                {
-                    HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
-                    if (health)
-                    {
-                        health.DamageEvent.Invoke(m_damage, m_owner);
-                    }
+                    health.DamageEvent.Invoke(m_damage, m_owner);
                 }
             }
             

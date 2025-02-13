@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7336159394674500823}
   - component: {fileID: 2022712343863421665}
   - component: {fileID: 5027475639068769531}
+  - component: {fileID: -6405796710895356872}
   m_Layer: 6
   m_Name: Dummy Enemy
   m_TagString: Enemy
@@ -289,13 +290,9 @@ MonoBehaviour:
   - Enemy_1
   - LOL
   - Lmao
-  m_health: 5
   m_damage: 0
   m_AI: {fileID: 2022712343863421665}
   m_spriteRenderer: {fileID: 6936977421228449923}
-  EnemyDamagedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2022712343863421665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +334,29 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+--- !u!114 &-6405796710895356872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226217970767368422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcb963f5e843504782d76758b428327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canDamage: 1
+  m_health: 10
+  m_maxHealth: 10
+  m_invincibleTime: 1
+  DamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_isLinked: 0
 --- !u!1 &7145515124838183232
 GameObject:
   m_ObjectHideFlags: 0

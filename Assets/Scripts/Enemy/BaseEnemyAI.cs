@@ -89,7 +89,7 @@ public class BaseEnemyAI : MonoBehaviour
             }
             else
             {
-                Debug.Log("Tug of war");
+                // Debug.Log("Tug of war");
                 Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
                 m_moveDirection = -playerDir;
                 faceDir = m_moveDirection;

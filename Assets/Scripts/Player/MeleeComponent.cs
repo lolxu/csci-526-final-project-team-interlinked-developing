@@ -7,13 +7,15 @@ using UnityEngine.InputSystem;
 public class MeleeComponent : MonoBehaviour
 {
     [Header("Damage Settings")] 
-    [SerializeField] private int m_durability = 20;
     [SerializeField] private float m_damage = 10.0f;
     [SerializeField] private float m_velocityThreshold = 2.0f;
     [SerializeField] private float m_knockBackStrength = 100.0f;
     
     [Header("Visual Settings")] 
     [SerializeField] private TrailRenderer m_trail;
+
+    [Header("Durability")] 
+    public DurabilityComponent m_durabilityComponent;
 
     private Rigidbody2D m_RB;
     private bool m_canDamage = false;
@@ -94,17 +96,13 @@ public class MeleeComponent : MonoBehaviour
     {
         if (other.collider.CompareTag("Enemy") && m_canDamage)
         {
-            BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
-            if (enemy != null)
+            other.rigidbody.AddForce(m_RB.velocity.normalized * m_knockBackStrength, ForceMode2D.Impulse);
+            m_durabilityComponent.UseDurability();
+            
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health)
             {
-                Rigidbody2D enemyRB = enemy.gameObject.GetComponent<Rigidbody2D>();
-                if (enemyRB != null)
-                {
-                    enemyRB.AddForce(m_RB.velocity.normalized * m_knockBackStrength, ForceMode2D.Impulse);
-                }
-
-                m_durability--;
-                enemy.EnemyDamagedEvent.Invoke(m_damage);
+                health.DamageEvent.Invoke(m_damage, gameObject);
             }
         }
     }

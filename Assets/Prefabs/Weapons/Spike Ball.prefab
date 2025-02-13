@@ -180,10 +180,10 @@ GameObject:
   - component: {fileID: 102004276771326100}
   - component: {fileID: 1539305663811603641}
   - component: {fileID: 3361417928740886691}
-  - component: {fileID: 10237048558912307}
-  - component: {fileID: 423610885533714436}
   - component: {fileID: 129217800401549174}
+  - component: {fileID: 4461724212443155177}
   - component: {fileID: 2435060846806669093}
+  - component: {fileID: 5045196581505246787}
   m_Layer: 6
   m_Name: Spike Ball
   m_TagString: Untagged
@@ -335,37 +335,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &10237048558912307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366563785461408539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4f52792d830234bb8ee9adbf081f98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_anchorObject: {fileID: 1539305663811603641}
-  m_myRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
-  m_usingRopePrefab: {fileID: 0}
-  m_next: []
-  m_prev: {fileID: 0}
---- !u!114 &423610885533714436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3366563785461408539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d629f928eef5841a21f15f66d9f82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_links: []
-  m_length: 20
 --- !u!114 &129217800401549174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,10 +361,30 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 64840
+  m_InstanceId: 179952
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
+--- !u!114 &4461724212443155177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3366563785461408539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff17c247fc0dae4428d6a1d2cb4ef69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_connectedTo: []
+  m_receivedFrom: []
+  m_ropeLinksEnemy: []
+  m_ropeLinksPlayer: []
+  m_ropeLength: 20
+  m_isConnectedToPlayer: 0
+  m_isConnectedToEnemy: 0
+  m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
 --- !u!114 &2435060846806669093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +401,25 @@ MonoBehaviour:
   m_velocityThreshold: 2
   m_knockBackStrength: 100
   m_trail: {fileID: 3796873893522015177}
+  m_durabilityComponent: {fileID: 5045196581505246787}
+--- !u!114 &5045196581505246787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3366563785461408539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932e7e6317e190249bfa362e386867b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxDurability: 10
+  m_currentDurability: 10
+  UsedDurabilityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_shrinkSpeed: 0.25
 --- !u!1 &4843092081184736760
 GameObject:
   m_ObjectHideFlags: 0

@@ -147,7 +147,7 @@ public class RopeComponent : MonoBehaviour
         if (m_isConnectedToEnemy && m_isConnectedToPlayer)
         {
             SingletonMaster.Instance.EventManager.StealStartedEvent.Invoke(gameObject, m_enemyObject);
-            m_enemyJoint.breakForce = 1000.0f;
+            m_enemyJoint.breakForce = 1500.0f;
         }
     }
 

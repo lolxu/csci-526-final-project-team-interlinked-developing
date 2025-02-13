@@ -21,5 +21,6 @@ public class EventManager : MonoBehaviour
     public UnityEvent<GameObject, GameObject> StealSuccessEvent = new UnityEvent<GameObject, GameObject>();
     
     [Header("Common Enemy Events")]
-    public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>();
+    // Pass in enemy
+    public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>(); 
 }

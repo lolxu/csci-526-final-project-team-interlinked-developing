@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 1735640896833669055}
   - component: {fileID: 3180717305116179837}
   - component: {fileID: 8266512757109852032}
-  - component: {fileID: -7147653903229845349}
   - component: {fileID: 2100424916176755081}
+  - component: {fileID: 8098651125329348806}
   m_Layer: 6
   m_Name: Pistol Link
   m_TagString: Linkable
@@ -259,9 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4684526548e3f924ba9cc97e48067477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_type: 0
   m_playerBulletPrefab: {fileID: 6801614998805923817, guid: ef906323d43884047b518d7fac6754eb, type: 3}
   m_enemyBulletPrefab: {fileID: 6801614998805923817, guid: 3d1c2c68a8aceb649b9c342abf9258ec, type: 3}
-  m_ammoCount: 50
   m_fireRateChange: 0
   m_recoilChange: 0
   m_penetrationChange: 0
@@ -271,31 +271,10 @@ MonoBehaviour:
   m_autoAimRadius: 20
   m_gun: {fileID: 4490041388324594877}
   m_muzzle: {fileID: 7201080177151140710}
+  m_laser: {fileID: 0}
   m_muzzleFlash: {fileID: 3653092808152997679}
   m_muzzleFlashIntensity: 5
---- !u!114 &-7147653903229845349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9075601628434340090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bcb963f5e843504782d76758b428327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_canDamage: 0
-  m_health: 5
-  m_maxHealth: 5
-  m_invincibleTime: 1
-  DamageEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  DeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_isLinked: 0
+  m_durabilityComponent: {fileID: 8098651125329348806}
 --- !u!114 &2100424916176755081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +295,24 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+--- !u!114 &8098651125329348806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075601628434340090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932e7e6317e190249bfa362e386867b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxDurability: 10
+  m_currentDurability: 10
+  UsedDurabilityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_shrinkSpeed: 0.25
 --- !u!1001 &7810157226798264904
 PrefabInstance:
   m_ObjectHideFlags: 0

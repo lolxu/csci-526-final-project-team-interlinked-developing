@@ -9,10 +9,17 @@ using Random = UnityEngine.Random;
 
 public class ShootComponent : MonoBehaviour
 {
+    public enum GunType
+    {
+        Pistol,
+        Sniper,
+        Shotgun
+    }
+
     [Header("Fire Projectile Settings")] 
+    public GunType m_type;
     public GameObject m_playerBulletPrefab;
     public GameObject m_enemyBulletPrefab;
-    public int m_ammoCount = 50;
     public int m_fireRateChange = 0;
     public float m_recoilChange = 0.0f;
     public int m_penetrationChange = 0;
@@ -26,14 +33,22 @@ public class ShootComponent : MonoBehaviour
     [Header("Visual Settings")]
     [SerializeField] private GameObject m_gun;
     [SerializeField] private GameObject m_muzzle;
+    [SerializeField] private LineRenderer m_laser;
     [SerializeField] private Light2D m_muzzleFlash;
     [SerializeField] private float m_muzzleFlashIntensity = 5.0f;
+
+    [Header("Durability")] 
+    public DurabilityComponent m_durabilityComponent;
     
     private Rigidbody2D m_RB;
     private float m_fireTimeout = 0.0f;
     private bool m_isMouseDown = false;
     private bool m_isOwnerEnemy = false;
     private Vector2 m_aimOffset = Vector2.zero;
+    private bool m_hasTarget = false;
+    private bool m_canTurnToPlayer = true;
+
+    private Coroutine m_enemyFireRoutine = null;
     
     // Start is called before the first frame update
     private void Start()
@@ -60,11 +75,35 @@ public class ShootComponent : MonoBehaviour
             if (instigator.CompareTag("Player"))
             {
                 m_canShoot = false;
+                
+                Debug.Log(instigator + " " + m_isOwnerEnemy);
+
+                if (m_isOwnerEnemy && m_enemyFireRoutine == null)
+                {
+                    if (m_type == GunType.Pistol)
+                    {
+                        m_canTurnToPlayer = true;
+                        m_enemyFireRoutine = StartCoroutine(EnemyPistolShoot());
+                    }
+                    else if (m_type == GunType.Sniper)
+                    {
+                        m_canTurnToPlayer = true;
+                        m_enemyFireRoutine = StartCoroutine(EnemySniperShoot());
+                    }
+                }
             }
             
             if (instigator.CompareTag("Enemy"))
             {
                 m_isOwnerEnemy = false;
+
+                if (m_enemyFireRoutine != null)
+                {
+                    StopCoroutine(m_enemyFireRoutine);
+                    m_enemyFireRoutine = null;
+                    m_canTurnToPlayer = false;
+                    m_fireTimeout = 0.0f;
+                }
             }
         }
     }
@@ -74,7 +113,35 @@ public class ShootComponent : MonoBehaviour
         if (obj == gameObject)
         {
             m_canShoot = instigator.CompareTag("Player");
-            m_isOwnerEnemy = instigator.CompareTag("Enemy");
+
+            if (!m_isOwnerEnemy && instigator.CompareTag("Enemy"))
+            {
+                m_isOwnerEnemy = true;
+            }
+
+            if (m_canShoot)
+            {
+                if (m_enemyFireRoutine != null)
+                {
+                    StopCoroutine(m_enemyFireRoutine);
+                    m_enemyFireRoutine = null;
+                    m_canTurnToPlayer = false;
+                    m_fireTimeout = 0.0f;
+                }
+            }
+            else if (m_isOwnerEnemy && m_enemyFireRoutine == null)
+            {
+                if (m_type == GunType.Pistol)
+                {
+                    m_canTurnToPlayer = true;
+                    m_enemyFireRoutine = StartCoroutine(EnemyPistolShoot());
+                }
+                else if (m_type == GunType.Sniper)
+                {
+                    m_canTurnToPlayer = true;
+                    m_enemyFireRoutine = StartCoroutine(EnemySniperShoot());
+                }
+            }
         }
     }
 
@@ -105,14 +172,15 @@ public class ShootComponent : MonoBehaviour
         }
         else if (m_isOwnerEnemy)
         {
-            Vector2 selfToTarget = Vector2.zero;
+            Vector3 selfToTarget = Vector3.zero;
             selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Player"));
             
-            // Debug.Log(selfToTarget);
-            
             // Rotating the gun
-            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
-            m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            if (m_hasTarget && m_canTurnToPlayer)
+            {
+                float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
+                m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            }
         }
     }
 
@@ -127,43 +195,59 @@ public class ShootComponent : MonoBehaviour
         if (m_canShoot)
         {
             // SHOOTING!!
-            if (m_isMouseDown && m_playerBulletPrefab != null && m_ammoCount > 0)
+            if (m_isMouseDown && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
             {
                 // Here's the shooty controls
                 m_fireTimeout -= Time.deltaTime;
                 if (m_fireTimeout <= 0.0f)
                 {
                     ShootBullet(muzzlePosition, myPos, m_playerBulletPrefab);
-                    m_ammoCount--;
+                    m_durabilityComponent.UseDurability();
                 }
-                else
-                {
-                    m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
-                    if (m_muzzleFlash.intensity < 0.0f)
-                    {
-                        m_muzzleFlash.intensity = 0.0f;
-                    }
-                }
-            }
-            else
-            {
-                m_muzzleFlash.intensity = 0.0f;
             }
         }
-        else if (m_isOwnerEnemy && m_playerBulletPrefab != null)
+        
+        m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
+        if (m_muzzleFlash.intensity <= 0.0f)
         {
-            m_fireTimeout -= Time.deltaTime;
-            if (m_fireTimeout <= 0.0f)
+            m_muzzleFlash.intensity = 0.0f;
+        }
+    }
+
+    private IEnumerator EnemyPistolShoot()
+    {
+        while (m_isOwnerEnemy)
+        {
+            yield return new WaitForSeconds(m_fireTimeout);
+            Vector2 myPos = transform.position;
+            Vector2 muzzlePosition = m_muzzle.transform.position;
+            ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
+        }
+    }
+
+    private IEnumerator EnemySniperShoot()
+    {
+        if (m_laser != null)
+        {
+            while (m_isOwnerEnemy)
             {
+                yield return new WaitForSeconds(m_fireTimeout);
+                Vector2 myPos = transform.position;
+                Vector2 muzzlePosition = m_muzzle.transform.position;
+                m_canTurnToPlayer = false;
+                Gradient oldGrad = m_laser.colorGradient;
+                yield return new WaitForSeconds(0.15f);
+                m_laser.colorGradient.colorKeys[0].color = Color.white;
+                m_laser.colorGradient.colorKeys[1].color = Color.white;
+                yield return new WaitForSeconds(0.15f);
+                m_laser.colorGradient = oldGrad;
+                yield return new WaitForSeconds(0.15f);
+                m_laser.colorGradient.colorKeys[0].color = Color.white;
+                m_laser.colorGradient.colorKeys[1].color = Color.white;
+                yield return new WaitForSeconds(0.15f);
+                m_laser.colorGradient = oldGrad;
                 ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
-            }
-            else
-            {
-                m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
-                if (m_muzzleFlash.intensity < 0.0f)
-                {
-                    m_muzzleFlash.intensity = 0.0f;
-                }
+                m_canTurnToPlayer = true;
             }
         }
     }
@@ -185,11 +269,16 @@ public class ShootComponent : MonoBehaviour
             }
         }
             
-        Debug.Log(bestTarget);
+        // Debug.Log(bestTarget);
 
         if (bestTarget != null)
         {
             selfToTarget = bestTarget.transform.position - transform.position;
+            m_hasTarget = true;
+        }
+        else
+        {
+            m_hasTarget = false;
         }
 
         return selfToTarget;
@@ -202,7 +291,6 @@ public class ShootComponent : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
         bulletScript.m_owner = gameObject;
-        
         
         //TODO: Make sure things don't go negative...
         // Modding stats for bullets
