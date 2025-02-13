@@ -397,7 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379c7d22f2d0c634b88ea2ec83ff6521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damage: 20
+  m_playerDamage: 3
+  m_damage: 8
   m_velocityThreshold: 2
   m_knockBackStrength: 100
   m_trail: {fileID: 3796873893522015177}
