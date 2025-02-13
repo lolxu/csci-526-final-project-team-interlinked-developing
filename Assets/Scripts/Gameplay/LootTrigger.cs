@@ -9,7 +9,7 @@ public class LootTrigger : MonoBehaviour
     {
         if (other.CompareTag("Loot") && other.gameObject.layer == SingletonMaster.Instance.UNCONNECTED_LAYER)
         {
-            other.gameObject.GetComponent<Loot>().StartShrinking();
+            other.gameObject.GetComponent<HealthPickup>().StartShrinking();
         }
     }
 }
