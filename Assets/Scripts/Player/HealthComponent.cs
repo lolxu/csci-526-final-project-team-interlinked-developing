@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class HealthComponent : MonoBehaviour
 {
     [Header("Health Settings")] 
+    public bool m_canDamage = true;
     public float m_health = 10.0f;
     public float m_maxHealth = 10.0f;
     public float m_invincibleTime = 1.0f;
@@ -38,7 +39,7 @@ public class HealthComponent : MonoBehaviour
         m_healthBar = SingletonMaster.Instance.UI.AddHealthBar(this);
     }
 
-    private void OnUnlinked(GameObject obj)
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -46,7 +47,7 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    private void OnLinked(GameObject obj)
+    private void OnLinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -67,69 +68,73 @@ public class HealthComponent : MonoBehaviour
     
     private void OnDamage(float damage, GameObject instigator)
     {
-        if (!m_isInvincible && m_health > 0.0f)
+        if (m_canDamage)
         {
-            // Do some juice stuff here
-            // if (m_damageTween != null)
-            // {
-            //     m_damageTween.Kill(true);
-            // }
-            
-            if (m_damageSequence != null)
+            if (!m_isInvincible && m_health > 0.0f)
             {
-                // StopCoroutine(m_damageSequence);
-                // m_spriteRenderer.color = m_orgColor;
-                // transform.localScale = m_orgScale;
-            }
-
-            Vector2 dir = -(instigator.transform.position - transform.position).normalized;
-            m_damageSequence = StartCoroutine(HurtSequence(dir));
-
-            StartCoroutine(InvincibleSequence());
-            
-            // Juice Stuff
-            // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
-
-            // Only do screen shake on damage when linked to player
-            if (m_isLinked)
-            {
-                if (gameObject.CompareTag("Player"))
-                {
-                    StartCoroutine(HitStop());
-                }
-                SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
-            }
-            
-            m_health -= damage;
-            if (m_health <= 0.0f)
-            {
-                Time.timeScale = 1.0f;
-                StopAllCoroutines();
-                // m_damageTween.Kill();
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops(1, LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
-                // m_damageTween.OnComplete(() =>
+                // Do some juice stuff here
+                // if (m_damageTween != null)
                 // {
-                //     SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
-                // });
-                
-                DeathEvent.Invoke(instigator);
-            }
-            else
-            {
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
-                //     {
-                //         transform.localScale = m_orgScale;
-                //     }));
+                //     m_damageTween.Kill(true);
+                // }
+
+                if (m_damageSequence != null)
+                {
+                    // StopCoroutine(m_damageSequence);
+                    // m_spriteRenderer.color = m_orgColor;
+                    // transform.localScale = m_orgScale;
+                }
+
+                Vector2 dir = -(instigator.transform.position - transform.position).normalized;
+                m_damageSequence = StartCoroutine(HurtSequence(dir));
+
+                StartCoroutine(InvincibleSequence());
+
+                // Juice Stuff
+                // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
+
+                // Only do screen shake on damage when linked to player
+                if (m_isLinked)
+                {
+                    if (gameObject.CompareTag("Player"))
+                    {
+                        StartCoroutine(HitStop());
+                    }
+
+                    SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
+                }
+
+                m_health -= damage;
+                if (m_health <= 0.0f)
+                {
+                    Time.timeScale = 1.0f;
+                    StopAllCoroutines();
+                    // m_damageTween.Kill();
+                    // m_damageTween = DOTween.Sequence();
+                    // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                    //     .SetLoops(1, LoopType.Yoyo)
+                    //     .SetEase(Ease.InOutFlash));
+                    // m_damageTween.Insert(0,
+                    //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
+                    // m_damageTween.OnComplete(() =>
+                    // {
+                    //     SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
+                    // });
+
+                    DeathEvent.Invoke(instigator);
+                }
+                else
+                {
+                    // m_damageTween = DOTween.Sequence();
+                    // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
+                    //     .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
+                    //     .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
+                    // m_damageTween.Insert(0,
+                    //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
+                    //     {
+                    //         transform.localScale = m_orgScale;
+                    //     }));
+                }
             }
         }
     }

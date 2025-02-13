@@ -16,9 +16,11 @@ public class PlayerBase : MonoBehaviour
     [Header("Basic Settings")] 
     public GameObject m_playerEntity;
     public HealthComponent m_healthComponent;
+    public RopeComponent m_ropeComponent;
     public PlayerInput m_input;
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
+    public Vector2 m_moveDirection;
     
     [Header("Rope Settings")]
     public GameObject m_rope;
@@ -41,8 +43,7 @@ public class PlayerBase : MonoBehaviour
     private Vector3 m_orgScale;
 
     private bool m_isMouseDown;
-
-    private Vector2 m_moveDirection;
+    
     private Vector2 m_drawpos;
     private float m_orgZoom;
 
@@ -59,9 +60,28 @@ public class PlayerBase : MonoBehaviour
         m_orgScale = transform.localScale;
 
         m_healthComponent.m_isLinked = true;
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinkedItem);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinkedItem);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+
+    private void OnUnlinkedItem(GameObject obj, GameObject instigator)
+    {
+        if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+        {
+            m_linkedObjects.Remove(obj);
+        }
+    }
+
+    private void OnLinkedItem(GameObject obj, GameObject instigator)
+    {
+        if (!m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+        {
+            m_linkedObjects.Add(obj);
+        }
     }
 
     private void OnSceneUnloaded(Scene arg0)
@@ -156,10 +176,13 @@ public class PlayerBase : MonoBehaviour
 
         foreach (var link in m_linkedObjects)
         {
-            Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
-            
-            maxCorner = Vector2.Max(maxCorner, pos);
-            minCorner = Vector2.Min(minCorner, pos);
+            if (link != null)
+            {
+                Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
+
+                maxCorner = Vector2.Max(maxCorner, pos);
+                minCorner = Vector2.Min(minCorner, pos);
+            }
         }
         
         m_cinemachine.m_Lens.OrthographicSize = Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
@@ -190,101 +213,55 @@ public class PlayerBase : MonoBehaviour
 
             // Checking if mouse hits the unconnected hit boxes
             RaycastHit2D pickupHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Unconnected"));
+                0.0f, LayerMask.GetMask("Connectable"));
             if (pickupHit)
             {
                 Rigidbody2D hitBody = pickupHit.rigidbody;
                 // Double checking in case weird shit adds this thing twice
                 if (!m_linkedObjects.Contains(hitBody.gameObject))
                 {
-                    GameObject usingRope = hitBody.gameObject.GetComponent<RopeGenerator>().m_myRopePrefab;
-                    
-                    RequestRopeConnect(hitBody, usingRope);
+                    RequestRopeConnect(hitBody);
+                    return;
                 }
-                return;
             }
 
-            // Checking if mouse hits connected loot
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero, 1.0f,
-                LayerMask.GetMask("Player"));
-
-            if (hit && hit.rigidbody != m_RB)
+            // Checking if mouse hits connected items
+            RaycastHit2D removeHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
+                0.0f, LayerMask.GetMask("Connectable"));
+            if (removeHit && removeHit.rigidbody != m_RB)
             {
-                RemoveLinkedObject(hit.rigidbody.gameObject);
+                if (m_linkedObjects.Contains(removeHit.rigidbody.gameObject))
+                {
+                    RemoveLinkedObject(removeHit.rigidbody.gameObject);
+                }
             }
         }
     }
     
     // For connecting ropes
-    private void RequestRopeConnect(Rigidbody2D hitBody, GameObject usingRope)
+    private void RequestRopeConnect(Rigidbody2D hitBody)
     {
+        Debug.Log("Requesting Connect to: " + hitBody.gameObject);
         GameObject hitObject = hitBody.gameObject;
         m_drawpos = hitBody.position;
         
-        // Do a circle cast
-        RaycastHit2D[] results = new RaycastHit2D[100];
-        int numHit = Physics2D.CircleCastNonAlloc(hitBody.position, m_connectRadius, 
-            Vector2.zero, results, m_connectRadius, LayerMask.GetMask("Player"));
-        // Debug.Log(numHit);
-        
-        float minDist = Single.MaxValue;
-        GameObject bestConnector = null;
-        for (int i = 0; i < numHit; i++)
+        // Do a distance check - For Player
+        float dist = (hitBody.transform.position - transform.position).magnitude;
+        if (dist <= m_connectRadius)
         {
-            // if (results[i].transform.gameObject != gameObject)
-            RopeGenerator rp = results[i].rigidbody.gameObject.GetComponent<RopeGenerator>();
-            if (rp != null)
-            {
-                float dist = Vector2.Distance(results[i].rigidbody.gameObject.transform.position, hitBody.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    bestConnector = results[i].rigidbody.gameObject;
-                }
-            }
-        }
-        
-        if (bestConnector != null)
-        {
-            Debug.Log("Connected " + hitObject + " to " + bestConnector); 
-            bestConnector.GetComponent<RopeGenerator>().m_next.Add(hitObject);
-            bestConnector.GetComponent<RopeGenerator>().m_usingRopePrefab = usingRope;
-            bestConnector.GetComponent<RopeGenerator>().GenerateRope(hitObject);
-
-            hitObject.GetComponent<RopeGenerator>().m_prev = bestConnector;
-            hitObject.layer = SingletonMaster.Instance.PLAYER_LAYER; // Connected layer number (player)
-            m_linkedObjects.Add(hitObject);
-            hitBody.gameObject.transform.SetParent(m_linkObjectsParent.transform, true);
-            
-            // Firing Link Event
-            SingletonMaster.Instance.EventManager.LinkEvent.Invoke(hitObject);
-            
-            // Processing link object specific stuff here ---------------------------------------------
-            // var shootComp = hitObject.GetComponent<ShootComponent>();
-            // if (shootComp != null)
-            // {
-            //     shootComp.m_canShoot = true;
-            // }
+            Debug.Log("Connected " + hitObject + " to player"); 
+            m_ropeComponent.GenerateRope(hitObject);
         }
     }
 
     // For removing linked objects
     public void RemoveLinkedObject(GameObject obj)
     {
-        if (m_linkedObjects.Contains(obj))
+        RopeComponent targetRope = obj.GetComponent<RopeComponent>();
+        if (targetRope != null)
         {
-            RopeGenerator targetRope = obj.GetComponent<RopeGenerator>();
-
-            if (targetRope.m_prev != null)
-            {
-                // Detaching rope !!
-                targetRope.m_prev.GetComponent<RopeGenerator>().DetachRope(obj);
-
-                Debug.Log("Removed " + obj);
-                m_linkedObjects.Remove(obj);
-            }
+            targetRope.DetachRope(gameObject);
         }
     }
-
     
 }

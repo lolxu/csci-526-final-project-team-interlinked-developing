@@ -75,9 +75,9 @@ public class UI : MonoBehaviour
 
     private void OnPlayerDeath(GameObject killer)
     {
-        m_scoreText.enabled = true;
-        BaseEnemyBehavior enemy = killer.GetComponent<BaseEnemyBehavior>();
-        string name = enemy.m_names[Random.Range(0, enemy.m_names.Count)];
-        m_scoreText.text = "Killed by " + name;
+        // m_scoreText.enabled = true;
+        // BaseEnemyBehavior enemy = killer.GetComponent<BaseEnemyBehavior>();
+        // string name = enemy.m_names[Random.Range(0, enemy.m_names.Count)];
+        // m_scoreText.text = "Killed by " + name;
     }
 }

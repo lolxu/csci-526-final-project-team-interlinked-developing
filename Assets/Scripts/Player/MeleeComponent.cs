@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class MeleeComponent : MonoBehaviour
 {
-    [Header("Damage Settings")]
+    [Header("Damage Settings")] 
+    [SerializeField] private int m_durability = 20;
     [SerializeField] private float m_damage = 10.0f;
     [SerializeField] private float m_velocityThreshold = 2.0f;
     [SerializeField] private float m_knockBackStrength = 100.0f;
@@ -39,7 +40,7 @@ public class MeleeComponent : MonoBehaviour
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
 
-    private void OnUnlinked(GameObject obj)
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -47,7 +48,7 @@ public class MeleeComponent : MonoBehaviour
         }
     }
 
-    private void OnLinked(GameObject obj)
+    private void OnLinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -101,6 +102,8 @@ public class MeleeComponent : MonoBehaviour
                 {
                     enemyRB.AddForce(m_RB.velocity.normalized * m_knockBackStrength, ForceMode2D.Impulse);
                 }
+
+                m_durability--;
                 enemy.EnemyDamagedEvent.Invoke(m_damage);
             }
         }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8953922714236440567}
   - component: {fileID: 1366890672317589681}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,8 @@ GameObject:
   - component: {fileID: 2332430352931814790}
   - component: {fileID: 7336159394674500823}
   - component: {fileID: 2022712343863421665}
-  m_Layer: 9
+  - component: {fileID: 5027475639068769531}
+  m_Layer: 6
   m_Name: Dummy Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,8 +189,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 5
+  m_Mass: 2
+  m_LinearDrag: 0.25
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -264,7 +265,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 43548
+  m_InstanceId: 99080
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -292,8 +293,6 @@ MonoBehaviour:
   m_damage: 0
   m_AI: {fileID: 2022712343863421665}
   m_spriteRenderer: {fileID: 6936977421228449923}
-  m_face: {fileID: 7865120234502870273}
-  m_faceMoveFactor: 0.25
   EnemyDamagedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -316,6 +315,28 @@ MonoBehaviour:
   m_pathfindIgnoreMasks:
     serializedVersion: 2
     m_Bits: 900
+  m_face: {fileID: 7865120234502870273}
+  m_faceMoveFactor: 0.25
+--- !u!114 &5027475639068769531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226217970767368422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff17c247fc0dae4428d6a1d2cb4ef69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_connectedTo: []
+  m_receivedFrom: []
+  m_ropeLinksEnemy: []
+  m_ropeLinksPlayer: []
+  m_ropeLength: 20
+  m_isConnectedToPlayer: 0
+  m_isConnectedToEnemy: 0
+  m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
 --- !u!1 &7145515124838183232
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1359027183483110287}
   - component: {fileID: 8347528055085071491}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236374298986023673}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +465,7 @@ GameObject:
   - component: {fileID: 6689062635643009997}
   - component: {fileID: 1212444252733767888}
   - component: {fileID: 4367145769455692605}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +635,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5686170090783161562}
   - component: {fileID: 6936977421228449923}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Hexagon Pointed-Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}

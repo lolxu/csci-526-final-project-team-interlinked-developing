@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 6756901816810338105}
   - component: {fileID: 2019106842575681331}
   - component: {fileID: 3803772929382620364}
-  - component: {fileID: 4674145358176723063}
-  - component: {fileID: 4584792919673794714}
   - component: {fileID: 3323771633237118107}
   - component: {fileID: 9213061921122860656}
+  - component: {fileID: 7608748412327736384}
   m_Layer: 6
   m_Name: Loot
   m_TagString: Loot
@@ -163,37 +162,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4674145358176723063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181414071359833202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4f52792d830234bb8ee9adbf081f98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_anchorObject: {fileID: 2019106842575681331}
-  m_myRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
-  m_usingRopePrefab: {fileID: 0}
-  m_next: []
-  m_prev: {fileID: 0}
---- !u!114 &4584792919673794714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181414071359833202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d629f928eef5841a21f15f66d9f82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_links: []
-  m_length: 15
 --- !u!114 &3323771633237118107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +235,24 @@ MonoBehaviour:
   m_collectedColor: {r: 0.39186543, g: 0.527974, b: 0.6981132, a: 1}
   m_shrinkSpeed: 1.25
   m_lifeTime: 120
+--- !u!114 &7608748412327736384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181414071359833202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff17c247fc0dae4428d6a1d2cb4ef69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_connectedTo: []
+  m_receivedFrom: []
+  m_ropeLinks: []
+  m_ropeLength: 20
+  m_isConnectedToPlayer: 0
+  m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
 --- !u!1 &7863211346851193274
 GameObject:
   m_ObjectHideFlags: 0

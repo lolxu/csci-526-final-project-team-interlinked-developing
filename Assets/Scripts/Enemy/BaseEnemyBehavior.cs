@@ -20,8 +20,6 @@ public class BaseEnemyBehavior : MonoBehaviour
     
     [Header("Visual Settings")] 
     [SerializeField] private SpriteRenderer m_spriteRenderer;
-    [SerializeField] protected GameObject m_face;
-    [SerializeField] protected float m_faceMoveFactor = 0.25f;
     
     [Header("Enemy Events")]
     public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
@@ -65,7 +63,7 @@ public class BaseEnemyBehavior : MonoBehaviour
         {
             Vector3 toActualPlayer = (SingletonMaster.Instance.PlayerBase.transform.position - transform.position)
                 .normalized;
-            m_face.transform.localPosition = toActualPlayer * m_faceMoveFactor;
+            
         }
     }
 
