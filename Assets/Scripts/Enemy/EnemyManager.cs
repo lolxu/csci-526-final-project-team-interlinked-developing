@@ -99,7 +99,9 @@ public class EnemyManager : MonoBehaviour
             EnemyScriptable.Enemy newEnemy = SingletonMaster.Instance.EnemySpawnScriptableObject.GetRandomEnemyToSpawn();
             GameObject enemyPrefab = newEnemy.m_prefab;
             GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            spawned.GetComponent<BaseEnemyBehavior>().m_lootDropRate = newEnemy.m_lootSpawnRate;
+            
+            spawned.transform.GetChild(0).GetComponent<BaseEnemyBehavior>().m_lootDropRate = 
+                newEnemy.m_lootSpawnRate;
             m_enemies.Add(spawned);
         }
     }

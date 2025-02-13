@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: LootSpawn_SO
   m_EditorClassIdentifier: 
   m_weightedSpawns:
-  - {fileID: 11400000, guid: 24c66b8e6621ece40b7320fb7d6d0fd2, type: 2}
-  - {fileID: 11400000, guid: 6980c73911471a14f9f52e48f38ae67e, type: 2}
+  - {fileID: 11400000, guid: 59400329ecbd78346ae8ca3972265a88, type: 2}
