@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Utility;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 
@@ -87,11 +88,25 @@ public class BaseEnemyBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Checking colliding force
-        if (!other.gameObject.CompareTag("Rope"))
+        if (!other.gameObject.CompareTag("Rope") && m_canBeTossed)
         {
-            if (other.relativeVelocity.magnitude > m_collisionVelocityThreshold)
+            float relativeVel = other.relativeVelocity.magnitude;
+            if (relativeVel > m_collisionVelocityThreshold)
             {
-                m_healthComponent.DamageEvent.Invoke(m_damage, gameObject);
+                // Remap relative velocity magnitude to health
+                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.35f, 0.0f, m_healthComponent.m_maxHealth);
+                
+                Debug.Log(relativeVel);
+                m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);
+
+                if (other.gameObject.CompareTag("Enemy"))
+                {
+                    HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+                    if (health != null)
+                    {
+                        health.DamageEvent.Invoke(relativeVel, gameObject);
+                    }
+                }
             }
         }
         

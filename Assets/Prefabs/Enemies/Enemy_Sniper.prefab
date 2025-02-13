@@ -414,7 +414,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 194378
+  m_InstanceId: 230140
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -440,7 +440,7 @@ MonoBehaviour:
   - Lmao
   m_healthComponent: {fileID: 1050162382504384340}
   m_damage: 2
-  m_collisionVelocityThreshold: 50
+  m_collisionVelocityThreshold: 15
   m_AI: {fileID: 1026767364169952911}
   m_spriteRenderer: {fileID: 260014259446278752}
 --- !u!114 &1026767364169952911

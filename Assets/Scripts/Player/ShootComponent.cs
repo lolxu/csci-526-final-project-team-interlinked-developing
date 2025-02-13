@@ -36,6 +36,7 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private LineRenderer m_laser;
     [SerializeField] private Light2D m_muzzleFlash;
     [SerializeField] private float m_muzzleFlashIntensity = 5.0f;
+    [SerializeField] private Gradient m_enemySniperTelegraph;
 
     [Header("Durability")] 
     public DurabilityComponent m_durabilityComponent;
@@ -219,9 +220,12 @@ public class ShootComponent : MonoBehaviour
         while (m_isOwnerEnemy)
         {
             yield return new WaitForSeconds(m_fireTimeout);
-            Vector2 myPos = transform.position;
-            Vector2 muzzlePosition = m_muzzle.transform.position;
-            ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
+            if (m_hasTarget)
+            {
+                Vector2 myPos = transform.position;
+                Vector2 muzzlePosition = m_muzzle.transform.position;
+                ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
+            }
         }
     }
 
@@ -232,22 +236,23 @@ public class ShootComponent : MonoBehaviour
             while (m_isOwnerEnemy)
             {
                 yield return new WaitForSeconds(m_fireTimeout);
-                Vector2 myPos = transform.position;
-                Vector2 muzzlePosition = m_muzzle.transform.position;
-                m_canTurnToPlayer = false;
-                Gradient oldGrad = m_laser.colorGradient;
-                yield return new WaitForSeconds(0.15f);
-                m_laser.colorGradient.colorKeys[0].color = Color.white;
-                m_laser.colorGradient.colorKeys[1].color = Color.white;
-                yield return new WaitForSeconds(0.15f);
-                m_laser.colorGradient = oldGrad;
-                yield return new WaitForSeconds(0.15f);
-                m_laser.colorGradient.colorKeys[0].color = Color.white;
-                m_laser.colorGradient.colorKeys[1].color = Color.white;
-                yield return new WaitForSeconds(0.15f);
-                m_laser.colorGradient = oldGrad;
-                ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
-                m_canTurnToPlayer = true;
+                if (m_hasTarget)
+                {
+                    Vector2 myPos = transform.position;
+                    Vector2 muzzlePosition = m_muzzle.transform.position;
+                    m_canTurnToPlayer = false;
+                    Gradient oldGrad = m_laser.colorGradient;
+                    yield return new WaitForSeconds(0.15f);
+                    m_laser.colorGradient = m_enemySniperTelegraph;
+                    yield return new WaitForSeconds(0.15f);
+                    m_laser.colorGradient = oldGrad;
+                    yield return new WaitForSeconds(0.15f);
+                    m_laser.colorGradient = m_enemySniperTelegraph;
+                    yield return new WaitForSeconds(0.15f);
+                    m_laser.colorGradient = oldGrad;
+                    ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
+                    m_canTurnToPlayer = true;
+                }
             }
         }
     }

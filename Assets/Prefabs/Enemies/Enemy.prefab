@@ -290,7 +290,7 @@ MonoBehaviour:
   - Lmao
   m_healthComponent: {fileID: 4571795903784949891}
   m_damage: 2
-  m_collisionVelocityThreshold: 10
+  m_collisionVelocityThreshold: 15
   m_AI: {fileID: 2022712343863421665}
   m_spriteRenderer: {fileID: 7122005983552883497}
 --- !u!114 &2022712343863421665

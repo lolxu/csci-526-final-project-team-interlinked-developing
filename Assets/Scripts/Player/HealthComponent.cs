@@ -108,7 +108,7 @@ public class HealthComponent : MonoBehaviour
                     {
                         StopAllCoroutines();
                         RopeComponent rc = GetComponent<RopeComponent>();
-                        if (rc != null)
+                        if (rc != null && SingletonMaster.Instance.PlayerBase != null)
                         {
                             rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
                         }
