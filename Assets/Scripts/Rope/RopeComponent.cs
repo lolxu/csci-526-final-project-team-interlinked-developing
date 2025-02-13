@@ -262,6 +262,7 @@ public class RopeComponent : MonoBehaviour
         m_ropeLinksEnemy.Clear();
         
         transform.SetParent(null, true);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.Invoke(gameObject, enemy);
         
         for (int i = m_receivedFrom.Count - 1; i >= 0; --i)
         {
