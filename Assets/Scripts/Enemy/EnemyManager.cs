@@ -153,7 +153,6 @@ public class EnemyManager : MonoBehaviour
         for (int i = rc.m_connectedTo.Count - 1; i >= 0; --i)
         {
             var connectedObj = rc.m_connectedTo[i];
-            connectedObj.transform.SetParent(null, true);
             connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
         }
         

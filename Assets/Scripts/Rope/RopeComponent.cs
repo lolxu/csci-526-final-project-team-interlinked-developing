@@ -261,6 +261,8 @@ public class RopeComponent : MonoBehaviour
         }
         m_ropeLinksEnemy.Clear();
         
+        transform.SetParent(null, true);
+        
         for (int i = m_receivedFrom.Count - 1; i >= 0; --i)
         {
             if (m_receivedFrom[i] == enemy)
@@ -270,7 +272,8 @@ public class RopeComponent : MonoBehaviour
                 m_receivedFrom.RemoveAt(i);
             }
         }
-        
+
+        m_isConnectedToEnemy = false;
         Destroy(m_enemyJoint);
     }
 }

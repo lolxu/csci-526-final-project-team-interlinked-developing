@@ -358,13 +358,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154110914e6242f48b0de3a112941e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bulletTargetTag: 
   m_bulletType: 1
   m_damage: 6
   m_speed: 6000
   m_lifeTime: 2.5
   m_direction: {x: 0, y: 0}
   m_penetrateNum: 2
-  m_knockback: 100
+  m_knockback: 10
   m_fireRate: 100
   m_recoil: 150
   m_trail: {fileID: 1736920103961092626}

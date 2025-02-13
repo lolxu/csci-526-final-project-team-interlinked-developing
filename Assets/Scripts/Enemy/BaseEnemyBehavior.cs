@@ -56,17 +56,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     {
         EnemyDamagedEvent.RemoveListener(OnDamaged);
     }
-
-    private void FixedUpdate()
-    {
-        if (SingletonMaster.Instance.PlayerBase != null)
-        {
-            Vector3 toActualPlayer = (SingletonMaster.Instance.PlayerBase.transform.position - transform.position)
-                .normalized;
-            
-        }
-    }
-
+    
     private void Update()
     {
         OnUpdate();
@@ -110,6 +100,12 @@ public class BaseEnemyBehavior : MonoBehaviour
         m_health -= amount;
         if (m_health < 0.0f)
         {
+            RopeComponent rc = GetComponent<RopeComponent>();
+            if (rc != null)
+            {
+                rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+            }
+            
             SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
         }
         

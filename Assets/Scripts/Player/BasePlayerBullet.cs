@@ -87,16 +87,28 @@ public class BasePlayerBullet : MonoBehaviour
             
             if (other.CompareTag(m_bulletTargetTag))
             {
-                BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
-                if (enemy)
+                if (m_bulletTargetTag == "Enemy")
                 {
-                    enemy.EnemyDamagedEvent.Invoke(m_damage);
-                    other.GetComponent<Rigidbody2D>().AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
+                    BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
+                    if (enemy)
+                    {
+                        enemy.EnemyDamagedEvent.Invoke(m_damage);
+                        other.GetComponent<Rigidbody2D>().AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
+                    }
+                }
+
+                if (m_bulletTargetTag == "Player")
+                {
+                    HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+                    if (health)
+                    {
+                        health.DamageEvent.Invoke(m_damage, m_owner);
+                    }
                 }
             }
             
             m_penetrateNum--;
-            if (m_penetrateNum == 0)
+            if (m_penetrateNum == 0 && other.CompareTag(m_bulletTargetTag))
             {
                 m_trail.transform.SetParent(null, true);
                 Destroy(gameObject);

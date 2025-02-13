@@ -365,7 +365,7 @@ MonoBehaviour:
   m_lifeTime: 2.5
   m_direction: {x: 0, y: 0}
   m_penetrateNum: 1
-  m_knockback: 50
+  m_knockback: 5
   m_fireRate: 200
   m_recoil: 10
   m_trail: {fileID: 2289457050212447339}

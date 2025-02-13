@@ -188,8 +188,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 5
+  m_Mass: 5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -264,7 +264,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 99240
+  m_InstanceId: 36932
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -506,10 +506,6 @@ PrefabInstance:
       propertyPath: m_prev
       value: 
       objectReference: {fileID: 3226217970767368422}
-    - target: {fileID: 8266512757109852032, guid: df551c70e4b25a54b9359f426d704b19, type: 3}
-      propertyPath: m_ammoCount
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 9075601628434340090, guid: df551c70e4b25a54b9359f426d704b19, type: 3}
       propertyPath: m_Name
       value: Pistol Link

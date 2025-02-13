@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4684526548e3f924ba9cc97e48067477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playerBulletPrefab: {fileID: 0}
-  m_enemyBulletPrefab: {fileID: 0}
+  m_playerBulletPrefab: {fileID: 6801614998805923817, guid: ef906323d43884047b518d7fac6754eb, type: 3}
+  m_enemyBulletPrefab: {fileID: 6801614998805923817, guid: 3d1c2c68a8aceb649b9c342abf9258ec, type: 3}
   m_ammoCount: 50
   m_fireRateChange: 0
   m_recoilChange: 0
