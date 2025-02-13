@@ -290,7 +290,9 @@ MonoBehaviour:
   - Enemy_1
   - LOL
   - Lmao
+  m_healthComponent: {fileID: -6405796710895356872}
   m_damage: 0
+  m_collisionVelocityThreshold: 50
   m_AI: {fileID: 2022712343863421665}
   m_spriteRenderer: {fileID: 6936977421228449923}
 --- !u!114 &2022712343863421665

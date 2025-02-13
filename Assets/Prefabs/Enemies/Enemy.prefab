@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 7336159394674500823}
   - component: {fileID: 2022712343863421665}
   - component: {fileID: 4571795903784949891}
+  - component: {fileID: 8296921757888496194}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -287,7 +288,9 @@ MonoBehaviour:
   - Enemy_1
   - LOL
   - Lmao
+  m_healthComponent: {fileID: 4571795903784949891}
   m_damage: 2
+  m_collisionVelocityThreshold: 10
   m_AI: {fileID: 2022712343863421665}
   m_spriteRenderer: {fileID: 7122005983552883497}
 --- !u!114 &2022712343863421665
@@ -334,6 +337,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_isLinked: 0
+--- !u!114 &8296921757888496194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3226217970767368422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff17c247fc0dae4428d6a1d2cb4ef69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_connectedTo: []
+  m_receivedFrom: []
+  m_ropeLinksEnemy: []
+  m_ropeLinksPlayer: []
+  m_ropeLength: 20
+  m_isConnectedToPlayer: 0
+  m_isConnectedToEnemy: 0
+  m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
 --- !u!1 &7145515124838183232
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,9 @@ public class BaseEnemyBehavior : MonoBehaviour
 {
     [Header("Basic Settings")] 
     public List<string> m_names = new List<string>();
+    public HealthComponent m_healthComponent;
     public float m_damage = 2.0f;
+    public float m_collisionVelocityThreshold = 10.0f;
     
     [Header("AI Settings")]
     public BaseEnemyAI m_AI;
@@ -21,7 +23,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     public float m_lootDropRate { get; set; } = 0.0f;
-    
+
+    private bool m_canBeTossed = false;
     private Color m_orgColor;
     private Vector3 m_orgScale;
     
@@ -43,12 +46,32 @@ public class BaseEnemyBehavior : MonoBehaviour
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        
         OnStart();
     }
-
+    
     private void OnDisable()
     {
-        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+    }
+
+    private void OnUnlinked(GameObject obj, GameObject instigator)
+    {
+        if (obj == gameObject && instigator.CompareTag("Player"))
+        {
+            m_canBeTossed = false;
+        }
+    }
+
+    private void OnLinked(GameObject obj, GameObject instigator)
+    {
+        if (obj == gameObject && instigator.CompareTag("Player"))
+        {
+            m_canBeTossed = true;
+        }
     }
     
     private void Update()
@@ -58,6 +81,19 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     protected virtual void OnDamaged(float amount)
     {
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        // Checking colliding force
+        if (!other.gameObject.CompareTag("Rope"))
+        {
+            if (other.relativeVelocity.magnitude > m_collisionVelocityThreshold)
+            {
+                m_healthComponent.DamageEvent.Invoke(m_damage, gameObject);
+            }
+        }
         
     }
 

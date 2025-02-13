@@ -71,7 +71,6 @@ public class BasePlayerBullet : MonoBehaviour
                         
                         hitCount--;
                     }
-                    
                 }
                 else
                 {
