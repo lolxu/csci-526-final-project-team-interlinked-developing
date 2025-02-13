@@ -337,8 +337,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 1
+  m_Mass: 2
+  m_LinearDrag: 1.2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -413,7 +413,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -129066
+  m_InstanceId: 72900
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -454,8 +454,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277a0e4fb299be744a15aa5d6c3abff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acceleration: 20
-  m_maxSpeed: 8
+  m_acceleration: 10
+  m_maxSpeed: 6
   m_numDirections: 12
   m_raycastDistance: 5
   m_pathfindIgnoreMasks:

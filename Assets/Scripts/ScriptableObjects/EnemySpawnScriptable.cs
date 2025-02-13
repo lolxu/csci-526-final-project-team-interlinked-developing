@@ -5,10 +5,12 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "EnemySpawn_SO", menuName = "ScriptableObjects/EnemySpawn")]
+[CreateAssetMenu(fileName = "Wave_0", menuName = "ScriptableObjects/EnemySpawnWave")]
 public class EnemySpawnScriptable : ScriptableObject
 {
     public List<EnemyScriptable> m_weightedSpawns = new List<EnemyScriptable>();
+    public float m_waveTime = 60.0f;
+    public int m_maxEnemyCount = 20;
     
     public EnemyScriptable.Enemy GetRandomEnemyToSpawn()
     {

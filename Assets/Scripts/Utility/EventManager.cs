@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent StartFireEvent = new UnityEvent();
     public UnityEvent StopFireEvent = new UnityEvent();
     public UnityEvent<float> CooldownStarted = new UnityEvent<float>();
+    public UnityEvent WinEvent = new UnityEvent();
     
     [Header("Connection Events")]
     public UnityEvent<GameObject, GameObject> LinkEvent = new UnityEvent<GameObject, GameObject>();

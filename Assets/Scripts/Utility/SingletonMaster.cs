@@ -12,7 +12,6 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Game Things")] 
     public PlayerBase PlayerBase;
-    public EnemyManager EnemyManager;
     public LootManager LootManager;
     public UI UI;
 
@@ -21,7 +20,6 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
-    public EnemySpawnScriptable EnemySpawnScriptableObject;
     public LootSpawnScriptable LootSpawnScriptableObject;
     public PlayerAbilityListScriptable PlayerAbilities;
 

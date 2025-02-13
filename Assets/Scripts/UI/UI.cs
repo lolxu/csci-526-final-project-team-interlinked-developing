@@ -24,6 +24,7 @@ public class UI : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
         SingletonMaster.Instance.EventManager.CooldownStarted.AddListener(ShowCooldown);
+        SingletonMaster.Instance.EventManager.WinEvent.AddListener(OnPlayerWin);
         
         if (SingletonMaster.Instance.PlayerBase != null)
         {
@@ -36,6 +37,7 @@ public class UI : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
         SingletonMaster.Instance.EventManager.CooldownStarted.RemoveListener(ShowCooldown);
+        SingletonMaster.Instance.EventManager.WinEvent.RemoveListener(OnPlayerWin);
     }
 
     private void Update()
@@ -100,5 +102,11 @@ public class UI : MonoBehaviour
         // BaseEnemyBehavior enemy = killer.GetComponent<BaseEnemyBehavior>();
         // string name = enemy.m_names[Random.Range(0, enemy.m_names.Count)];
         // m_scoreText.text = "Killed by " + name;
+    }
+
+    private void OnPlayerWin()
+    {
+        m_scoreText.enabled = true; 
+        m_scoreText.text = "YOU WIN!!";
     }
 }

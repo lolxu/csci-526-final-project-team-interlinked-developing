@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fa0d8f4b52830241858851fd370a50c, type: 3}
-  m_Name: EnemySpawn_SO
+  m_Name: Wave_3
   m_EditorClassIdentifier: 
   m_weightedSpawns:
   - {fileID: 11400000, guid: 839c87b460772a64bada72f7a73a2130, type: 2}
   - {fileID: 11400000, guid: d7088d91f72cea6419b811078ad21bcb, type: 2}
   - {fileID: 11400000, guid: 0b2f1139a5490c14dbefda49cc18635b, type: 2}
   - {fileID: 11400000, guid: 176f15dfca936d747b95de958982311d, type: 2}
+  m_waveTime: 60
+  m_maxEnemyCount: 50
