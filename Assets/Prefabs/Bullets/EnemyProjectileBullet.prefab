@@ -369,7 +369,7 @@ MonoBehaviour:
   m_direction: {x: 0, y: 0}
   m_penetrateNum: 1
   m_knockback: 50
-  m_fireRate: 70
+  m_fireRate: 30
   m_recoil: 10
   m_trail: {fileID: 2289457050212447339}
   m_owner: {fileID: 0}

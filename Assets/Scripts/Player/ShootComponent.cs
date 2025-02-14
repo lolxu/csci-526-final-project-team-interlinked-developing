@@ -37,6 +37,9 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] private Light2D m_muzzleFlash;
     [SerializeField] private float m_muzzleFlashIntensity = 5.0f;
     [SerializeField] private Gradient m_enemySniperTelegraph;
+    [SerializeField] private Gradient m_playerSniperLaser;
+    [SerializeField] private Gradient m_enemySniperLaser;
+    [SerializeField] private int m_enemySniperTelegraphTimes = 3;
 
     [Header("Durability")] 
     public DurabilityComponent m_durabilityComponent;
@@ -95,8 +98,20 @@ public class ShootComponent : MonoBehaviour
                     else if (m_type == GunType.Sniper)
                     {
                         m_canTurnToPlayer = true;
-                        m_laser.colorGradient = m_orgLaserGrad;
+                        
+                        if (m_laser != null)
+                        {
+                            m_laser.colorGradient = m_enemySniperLaser;
+                        }
+                        
                         m_enemyFireRoutine = StartCoroutine(EnemySniperShoot());
+                    }
+                }
+                else
+                {
+                    if (m_laser != null)
+                    {
+                        m_laser.colorGradient = m_orgLaserGrad;
                     }
                 }
             }
@@ -108,6 +123,7 @@ public class ShootComponent : MonoBehaviour
                 if (m_enemyFireRoutine != null)
                 {
                     StopCoroutine(m_enemyFireRoutine);
+                    
                     if (m_laser != null)
                     {
                         m_laser.colorGradient = m_orgLaserGrad;
@@ -141,6 +157,12 @@ public class ShootComponent : MonoBehaviour
                     m_canTurnToPlayer = false;
                     m_fireTimeout = 0.0f;
                 }
+
+                if (m_laser != null)
+                {
+                    m_laser.colorGradient = m_playerSniperLaser;
+                }
+                
             }
             else if (m_isOwnerEnemy && m_enemyFireRoutine == null)
             {
@@ -152,6 +174,12 @@ public class ShootComponent : MonoBehaviour
                 else if (m_type == GunType.Sniper)
                 {
                     m_canTurnToPlayer = true;
+                    
+                    if (m_laser != null)
+                    {
+                        m_laser.colorGradient = m_enemySniperLaser;
+                    }
+                    
                     m_enemyFireRoutine = StartCoroutine(EnemySniperShoot());
                 }
             }
@@ -170,6 +198,18 @@ public class ShootComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
+        
+        Vector2 myPos = transform.position;
+        Vector2 muzzlePosition = m_muzzle.transform.position;
+        
+        // AIMING !!!!
         if (m_canShoot)
         {
             Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
@@ -195,15 +235,7 @@ public class ShootComponent : MonoBehaviour
                 m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
             }
         }
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
         
-        Vector2 myPos = transform.position;
-        Vector2 muzzlePosition = m_muzzle.transform.position;
         
         if (m_canShoot)
         {
@@ -258,14 +290,13 @@ public class ShootComponent : MonoBehaviour
                     Vector2 myPos = transform.position;
                     Vector2 muzzlePosition = m_muzzle.transform.position;
                     m_canTurnToPlayer = false;
-                    yield return new WaitForSeconds(0.15f);
-                    m_laser.colorGradient = m_enemySniperTelegraph;
-                    yield return new WaitForSeconds(0.15f);
-                    m_laser.colorGradient = m_orgLaserGrad;
-                    yield return new WaitForSeconds(0.15f);
-                    m_laser.colorGradient = m_enemySniperTelegraph;
-                    yield return new WaitForSeconds(0.15f);
-                    m_laser.colorGradient = m_orgLaserGrad;
+                    for (int i = 0; i < m_enemySniperTelegraphTimes; i++)
+                    {
+                        yield return new WaitForSeconds(0.15f);
+                        m_laser.colorGradient = m_enemySniperTelegraph;
+                        yield return new WaitForSeconds(0.15f);
+                        m_laser.colorGradient = m_enemySniperLaser;
+                    }
                     ShootBullet(muzzlePosition, myPos, m_enemyBulletPrefab);
                     m_canTurnToPlayer = true;
                 }
