@@ -62,7 +62,7 @@ public class HealthPickup : MonoBehaviour
 
     private void Update()
     {
-        if (shrinkCoroutine == null)
+        if (shrinkCoroutine == null && SingletonMaster.Instance.PlayerBase != null)
         {
             if (m_isHealing)
             {
