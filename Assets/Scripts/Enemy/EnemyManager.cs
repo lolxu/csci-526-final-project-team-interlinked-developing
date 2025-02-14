@@ -15,6 +15,9 @@ public class EnemyManager : MonoBehaviour
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
 
+    [Header("Visual Settings")] 
+    public ParticleSystem m_enemyDeathParticles;
+
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
     private int m_maxEnemyCount = 20;
@@ -47,11 +50,10 @@ public class EnemyManager : MonoBehaviour
     private IEnumerator StartCooldown()
     {
         m_canSpawn = false;
-        SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
-        yield return new WaitForSeconds(m_waveCoolDown);
-        
-        if (m_waveCount < m_waves.Count)
+        if (m_waveCount < m_waves.Count - 1)
         {
+            SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
+            yield return new WaitForSeconds(m_waveCoolDown);
             m_waveCount++;
             m_currentWave = m_waves[m_waveCount];
             m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
@@ -61,6 +63,7 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
+            yield return null;
             SingletonMaster.Instance.EventManager.WinEvent.Invoke();
         }
     }
@@ -70,17 +73,24 @@ public class EnemyManager : MonoBehaviour
         if (m_canSpawn)
         {
             m_waveTime -= Time.deltaTime;
-            
-            int enemyCount = m_enemies.Count;
-            if (enemyCount < m_maxEnemyCount)
-            {
-                SpawnEnemies(m_maxEnemyCount - enemyCount);
-            }
-            
             if (m_waveTime <= 0.0f)
             {
-                ClearAllEnemies();
-                StartCoroutine(StartCooldown());
+                m_waveTime = 0.0f;
+                if (m_enemies.Count == 0)
+                {
+                    StartCoroutine(StartCooldown());
+                }
+                // ClearAllEnemies();
+            }
+            else
+            {
+                // Spawn enemies
+                int enemyCount = m_enemies.Count;
+                if (enemyCount < m_maxEnemyCount)
+                {
+                    SpawnEnemies(m_maxEnemyCount - enemyCount);
+                }
+
             }
         }
     }
@@ -89,7 +99,7 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = m_enemies.Count - 1; i >= 0; --i)
         {
-            Destroy(m_enemies[i]);
+            Destroy(m_enemies[i].transform.parent.gameObject);
         }
         m_enemies.Clear();
     }
@@ -100,13 +110,21 @@ public class EnemyManager : MonoBehaviour
         {
             Vector2 spawnPos = Camera.main.transform.position;
             spawnPos += GetRandomSpawnPosition();
-            EnemyScriptable.Enemy newEnemy = m_currentWave.GetRandomEnemyToSpawn();
-            GameObject enemyPrefab = newEnemy.m_prefab;
-            GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             
-            spawned.transform.GetChild(0).GetComponent<BaseEnemyBehavior>().m_lootDropRate = 
-                newEnemy.m_lootSpawnRate;
-            m_enemies.Add(spawned);
+            // Checking spawn security
+            RaycastHit2D[] hits = new RaycastHit2D[10];
+            int hitNum = Physics2D.CircleCastNonAlloc(spawnPos, 10.0f, Vector2.zero, hits, 0.0f,
+                LayerMask.GetMask("Dangerous"));
+            if (hitNum == 0)
+            {
+                EnemyScriptable.Enemy newEnemy = m_currentWave.GetRandomEnemyToSpawn();
+                GameObject enemyPrefab = newEnemy.m_prefab;
+                GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            
+                spawned.transform.GetChild(0).GetComponent<BaseEnemyBehavior>().m_lootDropRate = 
+                    newEnemy.m_lootSpawnRate;
+                m_enemies.Add(spawned);
+            }
         }
     }
 
@@ -152,6 +170,7 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
+        Instantiate(m_enemyDeathParticles, enemy.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
         m_enemies.Remove(enemy.transform.parent.gameObject);
         
         // Checking for any connected stuff to this enemy

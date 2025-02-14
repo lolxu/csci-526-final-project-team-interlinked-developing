@@ -361,7 +361,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 179952
+  m_InstanceId: 154278
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -420,7 +420,26 @@ MonoBehaviour:
   UsedDurabilityEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_lifeTime: 20
   m_shrinkSpeed: 0.25
+  m_spriteRends:
+  - {fileID: 102004276771326100}
+  - {fileID: 452163943412978893}
+  - {fileID: 4638992777034323949}
+  - {fileID: 4787455276458443078}
+  - {fileID: 6678299255327196457}
+  m_playerConnectedTint:
+  - {r: 0.35933605, g: 0.5389406, b: 0.8018868, a: 1}
+  - {r: 0.36078432, g: 0.5372549, b: 0.8, a: 1}
+  - {r: 0.36078432, g: 0.5372549, b: 0.8, a: 1}
+  - {r: 0.36078432, g: 0.5372549, b: 0.8, a: 1}
+  - {r: 0.36078432, g: 0.5372549, b: 0.8, a: 1}
+  m_enemyConnectedTint:
+  - {r: 0.735849, g: 0.4130473, b: 0.4130473, a: 1}
+  - {r: 0.7372549, g: 0.41568628, b: 0.41568628, a: 1}
+  - {r: 0.7372549, g: 0.41568628, b: 0.41568628, a: 1}
+  - {r: 0.7372549, g: 0.41568628, b: 0.41568628, a: 1}
+  - {r: 0.7372549, g: 0.41568628, b: 0.41568628, a: 1}
 --- !u!1 &4843092081184736760
 GameObject:
   m_ObjectHideFlags: 0

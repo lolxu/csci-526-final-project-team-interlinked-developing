@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_weightedSpawns:
   - {fileID: 11400000, guid: 839c87b460772a64bada72f7a73a2130, type: 2}
-  m_waveTime: 60
+  m_waveTime: 30
   m_maxEnemyCount: 10

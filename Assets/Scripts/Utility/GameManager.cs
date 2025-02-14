@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             SingletonMasterObject.GetComponent<SingletonMaster>().PlayerAbilities.ResetAbilities();
             SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
-            SceneManager.LoadScene("Prototype - Hub");
+            SceneManager.LoadScene("Prototype - Battlefield");
         }
     }
 }

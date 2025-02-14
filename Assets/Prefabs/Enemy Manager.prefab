@@ -50,7 +50,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89b0b93efde044b469213aa1a20e14ad, type: 2}
   - {fileID: 11400000, guid: 05893a831c8b42c4896a7cc021dcfe38, type: 2}
   - {fileID: 11400000, guid: dbb2b4668b8d119409691c763c930c49, type: 2}
-  m_waveCoolDown: 30
+  m_waveCoolDown: 10
   m_spawnPadding: 5
   m_canSpawn: 1
+  m_enemyDeathParticles: {fileID: 8752919254668196929, guid: 524e343b03c7aec4bac75a80c1713cca, type: 3}
   m_enemies: []
