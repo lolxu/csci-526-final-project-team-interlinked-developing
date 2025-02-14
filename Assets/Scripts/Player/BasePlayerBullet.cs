@@ -44,8 +44,8 @@ public class BasePlayerBullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_RB.velocity = m_direction * m_speed * Time.fixedDeltaTime;
-        m_lifeTime -= Time.fixedDeltaTime;
+        m_RB.velocity = m_direction * m_speed * Time.deltaTime;
+        m_lifeTime -= Time.deltaTime;
         if (m_lifeTime < 0.0f)
         {
             Destroy(gameObject);
