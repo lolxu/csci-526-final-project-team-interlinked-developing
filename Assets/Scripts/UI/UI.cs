@@ -66,7 +66,7 @@ public class UI : MonoBehaviour
         {
             m_waveTime = 0.0f;
         }
-        Debug.Log("wave time: " + m_waveTime.ToString("F2") + "        " + "wave count: " + m_waveCount);
+        // Debug.Log("wave time: " + m_waveTime.ToString("F2") + "        " + "wave count: " + m_waveCount);
         m_waveText.text = "wave time: " + m_waveTime.ToString("F2") + "        " + "wave count: " + m_waveCount;
     }
 
