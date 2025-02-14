@@ -12,7 +12,9 @@ public class BasePlayerBullet : MonoBehaviour
     }
     
     // Needs to be object pooled perhaps
+    public string m_bulletTargetTag;
     public BulletType m_bulletType;
+    public LayerMask m_scanHitLayerMask;
     public float m_damage = 4.0f;
     public float m_speed;
     public float m_lifeTime = 5.0f;
@@ -24,6 +26,7 @@ public class BasePlayerBullet : MonoBehaviour
     public float m_recoil = 10.0f;
 
     public GameObject m_trail;
+    public GameObject m_owner;
     
     private Rigidbody2D m_RB;
     private bool m_hasRaycasted = false;
@@ -51,23 +54,23 @@ public class BasePlayerBullet : MonoBehaviour
         if (m_bulletType == BulletType.Scanhit && !m_hasRaycasted)
         {
             m_hasRaycasted = true;
-            RaycastHit2D[] hitTargets = Physics2D.RaycastAll(transform.position, m_direction, 100.0f, LayerMask.GetMask("Enemy"));
+            RaycastHit2D[] hitTargets = Physics2D.RaycastAll(transform.position, m_direction, 100.0f, m_scanHitLayerMask);
 
             int hitCount = m_penetrateNum;
             foreach (var hit in hitTargets)
             {
                 if (hitCount > 0)
                 {
-                    if (hit.collider.CompareTag("Enemy"))
+                    if (hit.collider.CompareTag(m_bulletTargetTag))
                     {
-                        BaseEnemyBehavior enemy = hit.collider.gameObject.GetComponent<BaseEnemyBehavior>();
-                        if (enemy)
+                        HealthComponent health = hit.collider.gameObject.GetComponent<HealthComponent>();
+                        if (health)
                         {
-                            enemy.EnemyDamagedEvent.Invoke(m_damage);
-                            hit.rigidbody.AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
+                            health.DamageEvent.Invoke(m_damage, m_owner);
                         }
+                        
+                        hitCount--;
                     }
-                    hitCount--;
                 }
                 else
                 {
@@ -79,22 +82,21 @@ public class BasePlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (m_bulletType == BulletType.Projectile)
+        if (m_bulletType == BulletType.Projectile && other.gameObject != m_owner)
         {
             Debug.Log("Hit " + other.gameObject);
             
-            if (other.CompareTag("Enemy"))
+            if (other.CompareTag(m_bulletTargetTag))
             {
-                BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
-                if (enemy)
+                HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+                if (health)
                 {
-                    enemy.EnemyDamagedEvent.Invoke(m_damage);
-                    other.GetComponent<Rigidbody2D>().AddForce(m_direction * m_knockback, ForceMode2D.Impulse);
+                    health.DamageEvent.Invoke(m_damage, m_owner);
                 }
             }
             
             m_penetrateNum--;
-            if (m_penetrateNum == 0)
+            if (m_penetrateNum == 0 && other.CompareTag(m_bulletTargetTag))
             {
                 m_trail.transform.SetParent(null, true);
                 Destroy(gameObject);

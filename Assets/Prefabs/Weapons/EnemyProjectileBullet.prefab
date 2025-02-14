@@ -105,7 +105,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.76862746, b: 0.23137255, a: 1}
+      key0: {r: 1, g: 0.26666668, b: 0.23137255, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -130,7 +130,7 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 1409282923306360434}
   - component: {fileID: 143014244953293109}
   m_Layer: 2
-  m_Name: PlayerProjectileBullet
+  m_Name: EnemyProjectileBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +224,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.7683471, b: 0.23113209, a: 1}
+  m_Color: {r: 1, g: 0.26517278, b: 0.23137254, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -326,7 +326,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2436
+    m_Bits: 2820
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -358,15 +358,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154110914e6242f48b0de3a112941e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_bulletTargetTag: Enemy
+  m_bulletTargetTag: Player
   m_bulletType: 0
+  m_scanHitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   m_damage: 4
-  m_speed: 2500
+  m_speed: 1000
   m_lifeTime: 2.5
   m_direction: {x: 0, y: 0}
   m_penetrateNum: 1
-  m_knockback: 5
-  m_fireRate: 200
+  m_knockback: 50
+  m_fireRate: 70
   m_recoil: 10
   m_trail: {fileID: 2289457050212447339}
   m_owner: {fileID: 0}

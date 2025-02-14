@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Utility;
 using Random = UnityEngine.Random;
 using Vector2 = UnityEngine.Vector2;
 
@@ -12,22 +13,19 @@ public class BaseEnemyBehavior : MonoBehaviour
 {
     [Header("Basic Settings")] 
     public List<string> m_names = new List<string>();
-    public float m_health = 10.0f;
+    public HealthComponent m_healthComponent;
     public float m_damage = 2.0f;
+    public float m_collisionVelocityThreshold = 10.0f;
     
     [Header("AI Settings")]
     public BaseEnemyAI m_AI;
     
     [Header("Visual Settings")] 
-    [SerializeField] protected GameObject m_face;
-    [SerializeField] private float m_faceMoveFactor = 0.25f;
-    
-    [Header("Enemy Events")]
-    public UnityEvent<float> EnemyDamagedEvent = new UnityEvent<float>();
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     public float m_lootDropRate { get; set; } = 0.0f;
-    
-    private SpriteRenderer m_spriteRenderer;
+
+    private bool m_canBeTossed = false;
     private Color m_orgColor;
     private Vector3 m_orgScale;
     
@@ -46,31 +44,37 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     private void Start()
     {
-        OnStart();
-        
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
-
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
-        EnemyDamagedEvent.AddListener(OnDamaged);
+        SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        
+        OnStart();
     }
-
+    
     private void OnDisable()
     {
-        EnemyDamagedEvent.RemoveListener(OnDamaged);
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
 
-    private void FixedUpdate()
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
-        if (SingletonMaster.Instance.PlayerBase != null)
+        if (obj == gameObject && instigator.CompareTag("Player"))
         {
-            Vector3 toActualPlayer = (SingletonMaster.Instance.PlayerBase.transform.position - transform.position)
-                .normalized;
-            m_face.transform.localPosition = toActualPlayer * m_faceMoveFactor;
+            m_canBeTossed = false;
         }
     }
 
+    private void OnLinked(GameObject obj, GameObject instigator)
+    {
+        if (obj == gameObject && instigator.CompareTag("Player"))
+        {
+            m_canBeTossed = true;
+        }
+    }
+    
     private void Update()
     {
         OnUpdate();
@@ -78,80 +82,55 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     protected virtual void OnDamaged(float amount)
     {
-        // Kills tween if still playing
-        // if (m_damageTween != null)
-        // {
-        //     m_damageTween.Kill(true);
-        // }
         
-        // Juice Tweens
-        // m_damageTween = DOTween.Sequence();
-        // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f).SetLoops(1, LoopType.Yoyo)
-        //     .SetEase(Ease.InOutFlash).OnComplete(() =>
-        //     {
-        //         m_spriteRenderer.color = m_orgColor;
-        //     }));
-        // m_damageTween.Insert(0, transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
-        // {
-        //     transform.localScale = m_orgScale;
-        // }));
-        // m_damageTween.OnComplete(() =>
-        // {
-        //     m_health -= amount;
-        //     if (m_health < 0.0f)
-        //     {
-        //         SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
-        //     }
-        // });
-        if (m_damageSequence != null)
-        {
-            StopCoroutine(m_damageSequence);
-            m_spriteRenderer.color = m_orgColor;
-            transform.localScale = m_orgScale;
-        }
-        m_damageSequence = StartCoroutine(EnemyHurtSequence());
-        
-        m_health -= amount;
-        if (m_health < 0.0f)
-        {
-            SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
-        }
-        
-        Debug.Log(gameObject + " enemy damaged");
     }
 
-    private IEnumerator EnemyHurtSequence()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        transform.localScale = m_orgScale * 0.85f;
-        m_spriteRenderer.color = Color.white;
-        yield return new WaitForSecondsRealtime(0.15f);
-        m_spriteRenderer.color = m_orgColor;
-        transform.localScale = m_orgScale;
+        // Checking colliding force
+        if (!other.gameObject.CompareTag("Rope") && m_canBeTossed)
+        {
+            float relativeVel = other.relativeVelocity.magnitude;
+            if (relativeVel > m_collisionVelocityThreshold)
+            {
+                // Remap relative velocity magnitude to health
+                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.35f, 0.0f, m_healthComponent.m_maxHealth);
+                
+                Debug.Log(relativeVel);
+                m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);
+
+                if (other.gameObject.CompareTag("Enemy"))
+                {
+                    HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+                    if (health != null)
+                    {
+                        health.DamageEvent.Invoke(relativeVel, gameObject);
+                    }
+                }
+            }
+        }
+        
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.collider.CompareTag("Player"))
         {
-            PlayerBase player = other.gameObject.GetComponent<PlayerBase>();
-            if (player != null)
-            {
-                player.m_healthComponent.DamageEvent.Invoke(m_damage, gameObject);
-            }
-        }
-
-        if (other.collider.CompareTag("Loot"))
-        {
-            SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(other.gameObject);
-        }
-
-        if (other.collider.CompareTag("Linkable"))
-        {
             HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
             if (health != null)
             {
                 health.DamageEvent.Invoke(m_damage, gameObject);
             }
+        }
+
+        // if (other.collider.CompareTag("Loot"))
+        // {
+        //     SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(other.gameObject);
+        // }
+
+        if (other.collider.CompareTag("Linkable"))
+        {
+            
         }
     }
 }

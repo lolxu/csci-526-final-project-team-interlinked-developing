@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -16,7 +17,13 @@ public class LootManager : MonoBehaviour
     private void Start()
     {
         SingletonMaster.Instance.EventManager.LootCollected.AddListener(AddLoot);
-        GameObject.FindWithTag("Shop").GetComponent<ShopManager>().EnableShopItems();
+
+        SceneManager.sceneLoaded += CheckLootOnSceneLoad;
+    }
+
+    private void CheckLootOnSceneLoad(Scene arg0, LoadSceneMode arg1)
+    {
+        CheckLoot();
     }
 
     private void OnDisable()

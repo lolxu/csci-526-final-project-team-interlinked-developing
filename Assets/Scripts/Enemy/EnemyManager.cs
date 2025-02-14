@@ -147,6 +147,15 @@ public class EnemyManager : MonoBehaviour
     private void RemoveEnemy(GameObject enemy)
     {
         m_enemies.Remove(enemy);
+        
+        // Checking for any connected stuff to this enemy
+        RopeComponent rc = enemy.GetComponent<RopeComponent>();
+        for (int i = rc.m_connectedTo.Count - 1; i >= 0; --i)
+        {
+            var connectedObj = rc.m_connectedTo[i];
+            connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
+        }
+        
         Destroy(enemy);
     }
 }

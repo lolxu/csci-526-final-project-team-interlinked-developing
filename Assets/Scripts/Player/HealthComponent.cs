@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class HealthComponent : MonoBehaviour
 {
     [Header("Health Settings")] 
+    public bool m_canDamage = true;
     public float m_health = 10.0f;
     public float m_maxHealth = 10.0f;
     public float m_invincibleTime = 1.0f;
@@ -20,6 +21,7 @@ public class HealthComponent : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
     private GameObject m_healthBar = null;
+    private Vector3 m_orgScale;
     
 
     private void Start()
@@ -27,6 +29,7 @@ public class HealthComponent : MonoBehaviour
         m_RB = GetComponent<Rigidbody2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_orgColor = m_spriteRenderer.color;
+        m_orgScale = transform.localScale;
         
         DamageEvent.AddListener(OnDamage);
         DeathEvent.AddListener(OnDeath);
@@ -38,7 +41,7 @@ public class HealthComponent : MonoBehaviour
         m_healthBar = SingletonMaster.Instance.UI.AddHealthBar(this);
     }
 
-    private void OnUnlinked(GameObject obj)
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -46,7 +49,7 @@ public class HealthComponent : MonoBehaviour
         }
     }
 
-    private void OnLinked(GameObject obj)
+    private void OnLinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -67,74 +70,66 @@ public class HealthComponent : MonoBehaviour
     
     private void OnDamage(float damage, GameObject instigator)
     {
-        if (!m_isInvincible && m_health > 0.0f)
+        if (m_canDamage)
         {
-            // Do some juice stuff here
-            // if (m_damageTween != null)
-            // {
-            //     m_damageTween.Kill(true);
-            // }
-            
-            if (m_damageSequence != null)
+            if (!m_isInvincible && m_health > 0.0f)
             {
-                // StopCoroutine(m_damageSequence);
-                // m_spriteRenderer.color = m_orgColor;
-                // transform.localScale = m_orgScale;
-            }
-
-            Vector2 dir = -(instigator.transform.position - transform.position).normalized;
-            m_damageSequence = StartCoroutine(HurtSequence(dir));
-
-            StartCoroutine(InvincibleSequence());
-            
-            // Juice Stuff
-            // SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 2.5f);
-
-            // Only do screen shake on damage when linked to player
-            if (m_isLinked)
-            {
+                // Only do screen shake on damage to player
                 if (gameObject.CompareTag("Player"))
                 {
-                    StartCoroutine(HitStop());
+                    Vector2 dir = -(instigator.transform.position - transform.position).normalized;
+                    m_damageSequence = StartCoroutine(PlayerHurtSequence(dir));
+                    StartCoroutine(PlayerInvincibleSequence());
+                    StartCoroutine(PlayerHitStop());
+                    SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
+                    
+                    m_health -= damage;
+                    if (m_health <= 0.0f)
+                    {
+                        Time.timeScale = 1.0f;
+                        StopAllCoroutines();
+
+                        DeathEvent.Invoke(instigator);
+                    }
                 }
-                SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
-            }
+                else if (gameObject.CompareTag("Enemy"))
+                {
+                    if (m_damageSequence != null)
+                    {
+                        StopCoroutine(m_damageSequence);
+                        m_spriteRenderer.color = m_orgColor;
+                        transform.localScale = m_orgScale;
+                    }
+                    
+                    m_damageSequence = StartCoroutine(EnemyHurtSequence());
+                    
+                    m_health -= damage;
+                    if (m_health <= 0.0f)
+                    {
+                        StopAllCoroutines();
+                        RopeComponent rc = GetComponent<RopeComponent>();
+                        if (rc != null && SingletonMaster.Instance.PlayerBase != null)
+                        {
+                            rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+                        }
             
-            m_health -= damage;
-            if (m_health <= 0.0f)
-            {
-                Time.timeScale = 1.0f;
-                StopAllCoroutines();
-                // m_damageTween.Kill();
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops(1, LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f));
-                // m_damageTween.OnComplete(() =>
-                // {
-                //     SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(instigator);
-                // });
-                
-                DeathEvent.Invoke(instigator);
-            }
-            else
-            {
-                // m_damageTween = DOTween.Sequence();
-                // m_damageTween.Insert(0, m_spriteRenderer.DOColor(Color.white, 0.1f)
-                //     .SetLoops((int)(m_invincibleTime / 0.1f), LoopType.Yoyo)
-                //     .SetEase(Ease.InOutFlash).OnComplete(() => { m_spriteRenderer.color = m_orgColor; }));
-                // m_damageTween.Insert(0,
-                //     transform.DOPunchScale(transform.localScale * 0.5f, 0.1f).OnComplete(() =>
-                //     {
-                //         transform.localScale = m_orgScale;
-                //     }));
+                        SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+                    }
+                }
             }
         }
     }
     
-    private IEnumerator HurtSequence(Vector2 dir)
+    private IEnumerator EnemyHurtSequence()
+    {
+        transform.localScale = m_orgScale * 0.85f;
+        m_spriteRenderer.color = Color.white;
+        yield return new WaitForSecondsRealtime(0.15f);
+        m_spriteRenderer.color = m_orgColor;
+        transform.localScale = m_orgScale;
+    }
+    
+    private IEnumerator PlayerHurtSequence(Vector2 dir)
     {
         float flashDuration = 0.0f;
         m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
@@ -157,8 +152,11 @@ public class HealthComponent : MonoBehaviour
         {
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(killer);
         }
-
-        if (gameObject.CompareTag("Linkable"))
+        else if (gameObject.CompareTag("Enemy"))
+        {
+            SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+        }
+        else
         {
             SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(gameObject);
         }
@@ -166,14 +164,14 @@ public class HealthComponent : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private IEnumerator InvincibleSequence()
+    private IEnumerator PlayerInvincibleSequence()
     {
         m_isInvincible = true;
         yield return new WaitForSecondsRealtime(m_invincibleTime);
         m_isInvincible = false;
     }
 
-    private IEnumerator HitStop()
+    private IEnumerator PlayerHitStop()
     {
         float orgTimeScale = Time.timeScale;
         Time.timeScale = 0.0f;

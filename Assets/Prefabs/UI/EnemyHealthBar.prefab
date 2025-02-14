@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3647059, g: 0.57254905, b: 0.9960785, a: 1}
+  m_Color: {r: 1, g: 0.2784314, b: 0.2784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -87,8 +87,9 @@ GameObject:
   - component: {fileID: 1265194407915871265}
   - component: {fileID: 7336607847667685542}
   - component: {fileID: -801196442076984013}
+  - component: {fileID: 1432105625908810412}
   m_Layer: 5
-  m_Name: Mini Health Bar
+  m_Name: EnemyHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,5 +167,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_healthFill: {fileID: 7008325801711443180}
   m_healthComp: {fileID: 0}
+  m_isWorldSpace: 1
   m_showTime: 1
   m_offset: {x: 0, y: -0.75, z: 0}
+--- !u!114 &1432105625908810412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424962578393945063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1

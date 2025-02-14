@@ -79,4 +79,5 @@ public class Loot : MonoBehaviour
         yield return null;
         Destroy(gameObject);
     }
+    
 }

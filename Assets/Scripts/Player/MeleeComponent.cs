@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class MeleeComponent : MonoBehaviour
 {
-    [Header("Damage Settings")]
+    [Header("Damage Settings")] 
+    [SerializeField] private float m_playerDamage = 3.0f;
     [SerializeField] private float m_damage = 10.0f;
     [SerializeField] private float m_velocityThreshold = 2.0f;
     [SerializeField] private float m_knockBackStrength = 100.0f;
@@ -14,10 +15,13 @@ public class MeleeComponent : MonoBehaviour
     [Header("Visual Settings")] 
     [SerializeField] private TrailRenderer m_trail;
 
+    [Header("Durability")] 
+    public DurabilityComponent m_durabilityComponent;
+
     private Rigidbody2D m_RB;
     private bool m_canDamage = false;
-    private bool m_canFlick = false;
     private bool m_isMouseDown = false;
+    private bool m_isOwnerEnemy = false;
     
     private void Start()
     {
@@ -39,19 +43,25 @@ public class MeleeComponent : MonoBehaviour
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
 
-    private void OnUnlinked(GameObject obj)
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
-            m_canFlick = false;
+            if (instigator.CompareTag("Enemy"))
+            {
+                m_isOwnerEnemy = false;
+            }
         }
     }
 
-    private void OnLinked(GameObject obj)
+    private void OnLinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
-            m_canFlick = true;
+            if (!m_isOwnerEnemy && instigator.CompareTag("Enemy"))
+            {
+                m_isOwnerEnemy = true;
+            }
         }
     }
 
@@ -91,17 +101,23 @@ public class MeleeComponent : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Enemy") && m_canDamage)
+        if (other.collider.CompareTag("Enemy") && !m_isOwnerEnemy && m_canDamage)
         {
-            BaseEnemyBehavior enemy = other.gameObject.GetComponent<BaseEnemyBehavior>();
-            if (enemy != null)
+            other.rigidbody.AddForce(m_RB.velocity.normalized * m_knockBackStrength, ForceMode2D.Impulse);
+            m_durabilityComponent.UseDurability();
+            
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health)
             {
-                Rigidbody2D enemyRB = enemy.gameObject.GetComponent<Rigidbody2D>();
-                if (enemyRB != null)
-                {
-                    enemyRB.AddForce(m_RB.velocity.normalized * m_knockBackStrength, ForceMode2D.Impulse);
-                }
-                enemy.EnemyDamagedEvent.Invoke(m_damage);
+                health.DamageEvent.Invoke(m_damage, gameObject);
+            }
+        }
+        else if (other.collider.CompareTag("Player") && m_isOwnerEnemy)
+        {
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health)
+            {
+                health.DamageEvent.Invoke(m_playerDamage, gameObject);
             }
         }
     }

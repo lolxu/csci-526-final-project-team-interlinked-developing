@@ -19,7 +19,7 @@ public class AbilityComponent : MonoBehaviour
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
     
-    private void OnUnlinked(GameObject obj)
+    private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
@@ -31,7 +31,7 @@ public class AbilityComponent : MonoBehaviour
         }
     }
 
-    private void OnLinked(GameObject obj)
+    private void OnLinked(GameObject obj, GameObject instigator)
     {
         if (obj == gameObject)
         {
