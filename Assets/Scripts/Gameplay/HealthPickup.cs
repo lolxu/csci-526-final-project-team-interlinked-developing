@@ -107,6 +107,7 @@ public class HealthPickup : MonoBehaviour
 
     private IEnumerator ShrinkSequence()
     {
+        gameObject.layer = 0;
         while (transform.localScale.x >= 0.0f)
         {
             transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
