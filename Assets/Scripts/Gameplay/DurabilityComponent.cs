@@ -156,6 +156,7 @@ public class DurabilityComponent : MonoBehaviour
 
     private IEnumerator DespawnSequence()
     {
+        gameObject.layer = 0;
         while (transform.localScale.x >= 0.0f)
         {
             transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;

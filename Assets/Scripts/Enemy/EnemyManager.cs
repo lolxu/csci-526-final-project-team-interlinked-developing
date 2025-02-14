@@ -23,22 +23,23 @@ public class EnemyManager : MonoBehaviour
     private int m_maxEnemyCount = 20;
     public List<GameObject> m_enemies = new List<GameObject>();
 
-    private void Start()
+    private IEnumerator Start()
     {
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
         if (m_waves.Count > 0)
         {
             m_currentWave = m_waves[0];
             m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
             m_waveTime = m_currentWave.m_waveTime;
+            yield return null;
+            SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
         }
         else
         {
             m_canSpawn = false;
             Debug.LogError("No Waves Setup!!");
         }
-
-        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
-        SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
     }
 
     private void OnDisable()
@@ -60,6 +61,8 @@ public class EnemyManager : MonoBehaviour
             m_waveTime = m_currentWave.m_waveTime;
             
             m_canSpawn = true;
+            
+            SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
         }
         else
         {
@@ -80,6 +83,10 @@ public class EnemyManager : MonoBehaviour
                 {
                     StartCoroutine(StartCooldown());
                 }
+                else
+                {
+                    SingletonMaster.Instance.EventManager.NeedClearEvent.Invoke();
+                }
                 // ClearAllEnemies();
             }
             else
@@ -90,7 +97,6 @@ public class EnemyManager : MonoBehaviour
                 {
                     SpawnEnemies(m_maxEnemyCount - enemyCount);
                 }
-
             }
         }
     }
