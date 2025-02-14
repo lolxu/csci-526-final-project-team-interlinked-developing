@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa0d8f4b52830241858851fd370a50c, type: 3}
-  m_Name: EnemySpawn_SO
+  m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
+  m_Name: Enemy_Sniper
   m_EditorClassIdentifier: 
-  m_weightedSpawns:
-  - {fileID: 11400000, guid: 839c87b460772a64bada72f7a73a2130, type: 2}
+  enemy:
+    m_enemy:
+      m_prefab: {fileID: 4182519058032308907, guid: c8144f6774c24ea459c91ee8e8a71a97, type: 3}
+      m_enemyType: 0
+      m_lootSpawnRate: 1
+    m_weightedValue: 0.064

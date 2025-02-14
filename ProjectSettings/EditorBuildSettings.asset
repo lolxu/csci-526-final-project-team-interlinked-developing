@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototype - Hub.unity
-    guid: 911a7c166bf83ec4faa0fa275a1f1933
-  - enabled: 1
     path: Assets/Scenes/Prototype - Battlefield.unity
     guid: b4fdc69f5575972419402d3f7b4099eb
   m_configObjects:

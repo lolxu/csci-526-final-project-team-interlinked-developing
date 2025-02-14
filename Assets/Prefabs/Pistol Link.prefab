@@ -274,6 +274,36 @@ MonoBehaviour:
   m_laser: {fileID: 0}
   m_muzzleFlash: {fileID: 3653092808152997679}
   m_muzzleFlashIntensity: 5
+  m_enemySniperTelegraph:
+    serializedVersion: 2
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   m_durabilityComponent: {fileID: 8098651125329348806}
 --- !u!114 &2100424916176755081
 MonoBehaviour:
@@ -312,7 +342,20 @@ MonoBehaviour:
   UsedDurabilityEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_shrinkSpeed: 0.25
+  m_lifeTime: 20
+  m_shrinkSpeed: 0.5
+  m_spriteRends:
+  - {fileID: 824659269218865248}
+  - {fileID: 6628725341120993161}
+  - {fileID: 7475662079109271393}
+  m_playerConnectedTint:
+  - {r: 0.31185475, g: 0.58623606, b: 0.9056604, a: 1}
+  - {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  - {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  m_enemyConnectedTint:
+  - {r: 0.8490566, g: 0.29236382, b: 0.29236382, a: 1}
+  - {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+  - {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
 --- !u!1001 &7810157226798264904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -418,5 +461,10 @@ Transform:
 --- !u!1 &7201080177151140710 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1120306530155090222, guid: a125b468d8068904db03537955ad5dc7, type: 3}
+  m_PrefabInstance: {fileID: 7810157226798264904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7475662079109271393 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 855019359136398633, guid: a125b468d8068904db03537955ad5dc7, type: 3}
   m_PrefabInstance: {fileID: 7810157226798264904}
   m_PrefabAsset: {fileID: 0}

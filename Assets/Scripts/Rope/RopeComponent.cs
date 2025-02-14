@@ -114,6 +114,11 @@ public class RopeComponent : MonoBehaviour
             SingletonMaster.Instance.EventManager.StealSuccessEvent.Invoke(gameObject, m_enemyObject);
             SingletonMaster.Instance.EventManager.StealEndedEvent.Invoke(gameObject, m_enemyObject);
         }
+        else // We tossing enemies (not sure if we want this yet...)
+        {
+            var rc = brokenJoint.gameObject.GetComponent<RopeComponent>();
+            rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+        }
     }
 
     public void ReceiveRope(Rigidbody2D ropeEnd, GameObject instigator)
@@ -130,6 +135,13 @@ public class RopeComponent : MonoBehaviour
         joint.connectedBody = ropeEnd;
         joint.anchor = Vector2.zero;
         joint.connectedAnchor = Vector2.zero;
+        
+        // Make weak joints for enemies
+        // if (gameObject.CompareTag("Enemy"))
+        // {
+        //     joint.breakForce = 700.0f;
+        //     joint.breakTorque = 500.0f;
+        // }
 
         if (instigator.CompareTag("Enemy"))
         {

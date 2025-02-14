@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     public UnityEvent StartFireEvent = new UnityEvent();
     public UnityEvent StopFireEvent = new UnityEvent();
     public UnityEvent<float> CooldownStarted = new UnityEvent<float>();
+    public UnityEvent WinEvent = new UnityEvent();
     
     [Header("Connection Events")]
     public UnityEvent<GameObject, GameObject> LinkEvent = new UnityEvent<GameObject, GameObject>();
@@ -19,8 +20,9 @@ public class EventManager : MonoBehaviour
     public UnityEvent<GameObject, GameObject> StealStartedEvent = new UnityEvent<GameObject, GameObject>();
     public UnityEvent<GameObject, GameObject> StealEndedEvent = new UnityEvent<GameObject, GameObject>();
     public UnityEvent<GameObject, GameObject> StealSuccessEvent = new UnityEvent<GameObject, GameObject>();
-    
-    [Header("Common Enemy Events")]
-    // Pass in enemy
+
+    [Header("Common Enemy Events")] 
+    public UnityEvent<EnemySpawnScriptable> NextWaveEvent = new UnityEvent<EnemySpawnScriptable>();
+    public UnityEvent NeedClearEvent = new UnityEvent();
     public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>(); 
 }

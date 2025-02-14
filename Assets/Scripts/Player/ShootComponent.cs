@@ -211,13 +211,18 @@ public class ShootComponent : MonoBehaviour
             if (m_isMouseDown && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
             {
                 // Here's the shooty controls
-                m_fireTimeout -= Time.deltaTime;
                 if (m_fireTimeout <= 0.0f)
                 {
                     ShootBullet(muzzlePosition, myPos, m_playerBulletPrefab);
                     m_durabilityComponent.UseDurability();
                 }
             }
+        }
+        
+        m_fireTimeout -= Time.deltaTime;
+        if (m_fireTimeout <= 0.0f)
+        {
+            m_fireTimeout = 0.0f;
         }
         
         m_muzzleFlash.intensity -= 50.0f * Time.deltaTime;
@@ -311,7 +316,10 @@ public class ShootComponent : MonoBehaviour
         //TODO: Make sure things don't go negative...
         // Modding stats for bullets
         bulletScript.m_penetrateNum += m_penetrationChange;
+        
+        // Restoring fire rate
         m_fireTimeout = 60.0f / (bulletScript.m_fireRate + m_fireRateChange);
+        
         // bulletScript.m_direction = (mouseWorldPos - myPos).normalized;
         bulletScript.m_direction = (muzzlePosition - myPos).normalized;
 

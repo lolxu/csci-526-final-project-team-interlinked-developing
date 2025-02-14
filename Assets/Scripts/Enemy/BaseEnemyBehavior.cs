@@ -122,15 +122,5 @@ public class BaseEnemyBehavior : MonoBehaviour
                 health.DamageEvent.Invoke(m_damage, gameObject);
             }
         }
-
-        // if (other.collider.CompareTag("Loot"))
-        // {
-        //     SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(other.gameObject);
-        // }
-
-        if (other.collider.CompareTag("Linkable"))
-        {
-            
-        }
     }
 }

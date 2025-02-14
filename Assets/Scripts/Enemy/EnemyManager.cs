@@ -9,57 +9,65 @@ using Random = UnityEngine.Random;
 public class EnemyManager : MonoBehaviour
 {
     [Header("Spawning Settings")] 
-    public float m_waveTime = 60.0f;
-    public float m_waveCoolDown = 30.0f;
-    public int m_maxEnemyCount = 20;
+    public int m_waveCount = 0;
+    public List<EnemySpawnScriptable> m_waves = new List<EnemySpawnScriptable>();
+    public float m_waveCoolDown = 10.0f;
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
-    
-    private List<GameObject> m_enemies = new List<GameObject>();
-    private float m_timer = 0.0f;
 
-    private void Start()
+    [Header("Visual Settings")] 
+    public ParticleSystem m_enemyDeathParticles;
+
+    private EnemySpawnScriptable m_currentWave;
+    private float m_waveTime = 0.0f;
+    private int m_maxEnemyCount = 20;
+    public List<GameObject> m_enemies = new List<GameObject>();
+
+    private IEnumerator Start()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        if (m_waves.Count > 0)
+        {
+            m_currentWave = m_waves[0];
+            m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
+            m_waveTime = m_currentWave.m_waveTime;
+            yield return null;
+            SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+        }
+        else
+        {
+            m_canSpawn = false;
+            Debug.LogError("No Waves Setup!!");
+        }
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
-        
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
-        {
-            StartCoroutine(StartSpawnTimeout());
-        }
-        else
-        {
-            m_enemies.Clear();
-            m_canSpawn = false;
-        }
-    }
-
-    private IEnumerator StartSpawnTimeout()
-    {
-        yield return new WaitForSeconds(1.25f);
-        m_canSpawn = true;
-        m_timer = m_waveTime;
     }
 
     private IEnumerator StartCooldown()
     {
-        yield return new WaitForSeconds(m_waveCoolDown);
-        if (SceneManager.GetActiveScene().name != SingletonMaster.Instance.HubName)
+        m_canSpawn = false;
+        if (m_waveCount < m_waves.Count - 1)
         {
+            SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
+            yield return new WaitForSeconds(m_waveCoolDown);
+            m_waveCount++;
+            m_currentWave = m_waves[m_waveCount];
+            m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
+            m_waveTime = m_currentWave.m_waveTime;
+            
             m_canSpawn = true;
+            
+            SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+        }
+        else
+        {
+            yield return null;
+            SingletonMaster.Instance.EventManager.WinEvent.Invoke();
         }
     }
 
@@ -67,27 +75,39 @@ public class EnemyManager : MonoBehaviour
     {
         if (m_canSpawn)
         {
-            int enemyCount = m_enemies.Count;
-            if (enemyCount < m_maxEnemyCount)
+            m_waveTime -= Time.deltaTime;
+            if (m_waveTime <= 0.0f)
             {
-                SpawnEnemies(m_maxEnemyCount - enemyCount);
-            }
-
-            if (m_timer <= 0.0f)
-            {
-                m_waveTime += Random.Range(10.0f, 30.0f);
-                m_timer = m_waveTime;
-                m_maxEnemyCount += Random.Range(1, 5);
-                m_canSpawn = false;
-                SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
-                StartCoroutine(StartCooldown());
-                Debug.Log("Starting wave cool down. You have " + m_waveCoolDown + " seconds.");
+                m_waveTime = 0.0f;
+                if (m_enemies.Count == 0)
+                {
+                    StartCoroutine(StartCooldown());
+                }
+                else
+                {
+                    SingletonMaster.Instance.EventManager.NeedClearEvent.Invoke();
+                }
+                // ClearAllEnemies();
             }
             else
             {
-                m_timer -= Time.deltaTime;
+                // Spawn enemies
+                int enemyCount = m_enemies.Count;
+                if (enemyCount < m_maxEnemyCount)
+                {
+                    SpawnEnemies(m_maxEnemyCount - enemyCount);
+                }
             }
         }
+    }
+
+    private void ClearAllEnemies()
+    {
+        for (int i = m_enemies.Count - 1; i >= 0; --i)
+        {
+            Destroy(m_enemies[i].transform.parent.gameObject);
+        }
+        m_enemies.Clear();
     }
 
     private void SpawnEnemies(int num)
@@ -96,11 +116,21 @@ public class EnemyManager : MonoBehaviour
         {
             Vector2 spawnPos = Camera.main.transform.position;
             spawnPos += GetRandomSpawnPosition();
-            EnemyScriptable.Enemy newEnemy = SingletonMaster.Instance.EnemySpawnScriptableObject.GetRandomEnemyToSpawn();
-            GameObject enemyPrefab = newEnemy.m_prefab;
-            GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            spawned.GetComponent<BaseEnemyBehavior>().m_lootDropRate = newEnemy.m_lootSpawnRate;
-            m_enemies.Add(spawned);
+            
+            // Checking spawn security
+            RaycastHit2D[] hits = new RaycastHit2D[10];
+            int hitNum = Physics2D.CircleCastNonAlloc(spawnPos, 10.0f, Vector2.zero, hits, 0.0f,
+                LayerMask.GetMask("Dangerous"));
+            if (hitNum == 0)
+            {
+                EnemyScriptable.Enemy newEnemy = m_currentWave.GetRandomEnemyToSpawn();
+                GameObject enemyPrefab = newEnemy.m_prefab;
+                GameObject spawned = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            
+                spawned.transform.GetChild(0).GetComponent<BaseEnemyBehavior>().m_lootDropRate = 
+                    newEnemy.m_lootSpawnRate;
+                m_enemies.Add(spawned);
+            }
         }
     }
 
@@ -146,7 +176,8 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
-        m_enemies.Remove(enemy);
+        Instantiate(m_enemyDeathParticles, enemy.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+        m_enemies.Remove(enemy.transform.parent.gameObject);
         
         // Checking for any connected stuff to this enemy
         RopeComponent rc = enemy.GetComponent<RopeComponent>();
@@ -156,6 +187,6 @@ public class EnemyManager : MonoBehaviour
             connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
         }
         
-        Destroy(enemy);
+        Destroy(enemy.transform.parent.gameObject);
     }
 }

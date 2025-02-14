@@ -415,7 +415,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 229984
+  m_InstanceId: 184442
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -456,10 +456,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277a0e4fb299be744a15aa5d6c3abff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_acceleration: 20
-  m_maxSpeed: 8
+  m_acceleration: 30
+  m_maxSpeed: 7
   m_numDirections: 12
-  m_raycastDistance: 5
+  m_raycastDistance: 10
   m_pathfindIgnoreMasks:
     serializedVersion: 2
     m_Bits: 964
@@ -500,8 +500,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_canDamage: 1
-  m_health: 10
-  m_maxHealth: 10
+  m_health: 15
+  m_maxHealth: 15
   m_invincibleTime: 1
   DamageEvent:
     m_PersistentCalls:

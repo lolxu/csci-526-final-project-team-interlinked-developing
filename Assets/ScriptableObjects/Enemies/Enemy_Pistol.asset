@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f73a5de0afdb4544093e2a1b4ef00121, type: 3}
-  m_Name: Loot_Basic
+  m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
+  m_Name: Enemy_Pistol
   m_EditorClassIdentifier: 
-  loot:
-    m_loot:
-      m_prefab: {fileID: 1181414071359833202, guid: 19c66eab27a3d144da9dc23d46b9ec75, type: 3}
-      m_lootType: 0
-    m_weightedValue: 0.859
+  enemy:
+    m_enemy:
+      m_prefab: {fileID: 4182519058032308907, guid: 0c8fc8ef92df2f540a0581a901dc7122, type: 3}
+      m_enemyType: 0
+      m_lootSpawnRate: 0.844
+    m_weightedValue: 0.221
