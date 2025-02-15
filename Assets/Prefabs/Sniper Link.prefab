@@ -409,7 +409,7 @@ MonoBehaviour:
   m_muzzle: {fileID: 4213876860666769798}
   m_laser: {fileID: 2259785278668416577}
   m_muzzleFlash: {fileID: 7721340629984923087}
-  m_muzzleFlashIntensity: 5
+  m_muzzleFlashIntensity: 1.12
   m_enemySniperTelegraph:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
