@@ -96,7 +96,7 @@ public class BaseEnemyBehavior : MonoBehaviour
                 // Remap relative velocity magnitude to health
                 relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.35f, 0.0f, m_healthComponent.m_maxHealth);
                 
-                Debug.Log(relativeVel);
+                // Debug.Log(relativeVel);
                 m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);
 
                 if (other.gameObject.CompareTag("Enemy"))
