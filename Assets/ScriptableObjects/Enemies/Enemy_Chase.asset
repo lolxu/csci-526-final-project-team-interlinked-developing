@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
-  m_Name: Enemy_A
+  m_Name: Enemy_Chase
   m_EditorClassIdentifier: 
   enemy:
     m_enemy:
-      m_prefab: {fileID: 4391433643842635490, guid: f2fab844b60054fe0b4ee96f5ae5584d, type: 3}
+      m_prefab: {fileID: 3226217970767368422, guid: bf8d1c24d468145289d2e413ee2765ef, type: 3}
       m_enemyType: 0
-      m_lootSpawnRate: 0.302
-    m_weightedValue: 1
+      m_lootSpawnRate: 1
+    m_weightedValue: 0.3
