@@ -24,5 +24,8 @@ public class EventManager : MonoBehaviour
     [Header("Common Enemy Events")] 
     public UnityEvent<EnemySpawnScriptable> NextWaveEvent = new UnityEvent<EnemySpawnScriptable>();
     public UnityEvent NeedClearEvent = new UnityEvent();
-    public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>(); 
+    public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>();
+
+    public UnityEvent WaveTimeoutEvent = new UnityEvent();
+
 }
