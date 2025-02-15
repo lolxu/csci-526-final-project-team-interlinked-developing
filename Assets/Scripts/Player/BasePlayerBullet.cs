@@ -42,14 +42,19 @@ public class BasePlayerBullet : MonoBehaviour
         }
     }
 
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
+
     private void FixedUpdate()
     {
         m_RB.velocity = m_direction * m_speed * Time.deltaTime;
-        m_lifeTime -= Time.deltaTime;
-        if (m_lifeTime < 0.0f)
-        {
-            Destroy(gameObject);
-        }
+        // m_lifeTime -= Time.deltaTime;
+        // if (m_lifeTime < 0.0f)
+        // {
+        //     Destroy(gameObject);
+        // }
         
         if (m_bulletType == BulletType.Scanhit && !m_hasRaycasted)
         {
@@ -98,7 +103,7 @@ public class BasePlayerBullet : MonoBehaviour
             m_penetrateNum--;
             if (m_penetrateNum == 0 && other.CompareTag(m_bulletTargetTag))
             {
-                m_trail.transform.SetParent(null, true);
+                // m_trail.transform.SetParent(null, true);
                 Destroy(gameObject);
             }
         }
