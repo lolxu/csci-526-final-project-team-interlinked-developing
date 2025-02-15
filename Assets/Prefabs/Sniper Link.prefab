@@ -502,6 +502,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 3
   m_enemySniperTelegraphTimes: 3
   m_durabilityComponent: {fileID: -3779267154878166289}
+  m_damage: 0.5
+  m_velocityThreshold: 10
 --- !u!114 &-6350561838180574981
 MonoBehaviour:
   m_ObjectHideFlags: 0

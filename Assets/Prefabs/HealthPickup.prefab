@@ -205,6 +205,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_healValue: 10
   m_maxValue: 10
+  m_healRate: 1
+  m_ropeComponent: {fileID: -5117696569558385193}
+  m_lifeTime: 20
   m_scaleFactor: 1.25
   m_curve:
     serializedVersion: 2
@@ -233,9 +236,8 @@ MonoBehaviour:
   m_uncollectedColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
   m_collectedColor: {r: 0.39186543, g: 0.527974, b: 0.6981132, a: 1}
   m_shrinkSpeed: 1.25
-  m_lifeTime: 20
-  m_healRate: 1
-  m_ropeComponent: {fileID: -5117696569558385193}
+  m_damage: 0.25
+  m_velocityThreshold: 10
 --- !u!114 &-5117696569558385193
 MonoBehaviour:
   m_ObjectHideFlags: 0

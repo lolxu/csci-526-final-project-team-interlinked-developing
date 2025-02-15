@@ -9,16 +9,24 @@ using Random = UnityEngine.Random;
 
 public class HealthPickup : MonoBehaviour
 {
+    
+    [Header("Health pickup settings")]
     public float m_healValue = 5.0f;
     public float m_maxValue = 10.0f;
+    [SerializeField] private float m_healRate = 1.0f;
+    [SerializeField] private RopeComponent m_ropeComponent;
+    [SerializeField] private float m_lifeTime = 20.0f;
+    
+    [Header("Visual Settings")]
     [SerializeField] private float m_scaleFactor = 1.5f;
     [SerializeField] private AnimationCurve m_curve;
     [SerializeField] private Color m_uncollectedColor;
     [SerializeField] private Color m_collectedColor;
     [SerializeField] private float m_shrinkSpeed = 1.25f;
-    [SerializeField] private float m_lifeTime = 20.0f;
-    [SerializeField] private float m_healRate = 1.0f;
-    [SerializeField] private RopeComponent m_ropeComponent;
+    
+    [Header("Damage Settings")]
+    [SerializeField] private float m_damage = 1.5f;
+    [SerializeField] private float m_velocityThreshold = 10.0f;
     
     private Coroutine shrinkCoroutine = null;
     private float m_despawnTimer = 0.0f;
@@ -117,5 +125,20 @@ public class HealthPickup : MonoBehaviour
         yield return null;
         Destroy(gameObject);
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.relativeVelocity.magnitude > m_velocityThreshold)
+        {
+            if (other.collider.CompareTag("Enemy"))
+            {
+                var health = other.gameObject.GetComponent<HealthComponent>();
+                if (health != null)
+                {
+                    health.DamageEvent.Invoke(m_damage, gameObject);
+                }
+            }
+        }
+        
+    }
 }
