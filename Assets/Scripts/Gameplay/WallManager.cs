@@ -44,7 +44,7 @@ public class WallManager : MonoBehaviour
             shrinking = true;
             if (uiManager != null)
             {
-                uiManager.EnqueueAnnouncement("The walls are shrinking!", 2.0f);
+                uiManager.EnqueueAnnouncement("The walls are shrinking!", false, 2.0f);
             }
             StartCoroutine(ShrinkWallsRoutine());
         }
@@ -70,7 +70,7 @@ public class WallManager : MonoBehaviour
                 shrinking = false;
                 if (uiManager != null)
                 {
-                    uiManager.EnqueueAnnouncement("Walls stopped shrinking!", 2.0f);
+                    uiManager.EnqueueAnnouncement("Walls stopped shrinking!", false, 2.0f);
                 }
                 yield break; // Stop coroutine
             }
