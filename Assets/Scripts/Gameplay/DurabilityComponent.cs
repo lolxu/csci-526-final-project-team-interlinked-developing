@@ -144,7 +144,7 @@ public class DurabilityComponent : MonoBehaviour
             if (m_currentDurability == 0)
             {
                 RopeComponent rc = GetComponent<RopeComponent>();
-                if (rc != null && !m_isDespawning)
+                if (rc != null && !m_isDespawning && SingletonMaster.Instance.PlayerBase.gameObject != null)
                 {
                     m_isDespawning = true;
                     rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
