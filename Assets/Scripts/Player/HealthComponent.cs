@@ -77,8 +77,10 @@ public class HealthComponent : MonoBehaviour
         {
             if (!m_isInvincible && m_health > 0.0f)
             {
-                // First stop the sequence
+                // First stop the sequence & resetting stuff
                 m_hurtSequence.Kill();
+                m_spriteRenderer.color = m_orgColor;
+                transform.localScale = m_orgScale;
                 
                 // For player hurting
                 if (gameObject.CompareTag("Player"))

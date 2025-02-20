@@ -89,12 +89,11 @@ public class BaseEnemyAI : MonoBehaviour
             }
             else
             {
-                // Debug.Log("Tug of war");
+                // Moving against player movement - TUG OF WAR mechanic
                 Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
                 m_moveDirection = -playerDir;
                 faceDir = m_moveDirection;
                 
-                // Moving using the best direction
                 m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
             }
             
@@ -127,9 +126,6 @@ public class BaseEnemyAI : MonoBehaviour
         Vector2 bestDirection = Vector2.zero;
         foreach (var direction in m_pathfindDirections)
         {
-            Debug.DrawLine(transform.position,
-                transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
-
             float dotVal = Vector2.Dot(direction, toPlayer);
 
             // Raycast to check for obstacles
@@ -138,6 +134,12 @@ public class BaseEnemyAI : MonoBehaviour
             if (hit)
             {
                 dotVal = -1.0f;
+                m_moveDirection += -direction;
+            }
+            else
+            {
+                Debug.DrawLine(transform.position,
+                    transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
             }
 
             // Checking dot values
@@ -147,15 +149,19 @@ public class BaseEnemyAI : MonoBehaviour
                 bestDirection = direction;
             }
         }
+        
+        m_moveDirection += bestDirection;
 
-        if (bestDotVal > 0.15f)
-        {
-            m_moveDirection = bestDirection;
-        }
-        else
-        {
-            m_moveDirection = Vector2.zero;
-        }
+        m_moveDirection = m_moveDirection.normalized;
+
+        // if (bestDotVal > 0.3f)
+        // {
+        //     m_moveDirection = bestDirection;
+        // }
+        // else
+        // {
+        //     m_moveDirection = Vector2.zero;
+        // }
 
         Debug.DrawLine(transform.position,
             transform.position + new Vector3(bestDirection.x, bestDirection.y, 0.0f) * m_raycastDistance,

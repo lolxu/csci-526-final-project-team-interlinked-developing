@@ -414,7 +414,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 97166
+  m_InstanceId: 94884
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_acceleration: 25
   m_maxSpeed: 10
   m_numDirections: 12
-  m_raycastDistance: 10
+  m_raycastDistance: 5
   m_pathfindIgnoreMasks:
     serializedVersion: 2
     m_Bits: 964
@@ -518,7 +518,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129217800401549174, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_InstanceId
-      value: -342904
+      value: -199210
       objectReference: {fileID: 0}
     - target: {fileID: 3366563785461408539, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_Name
