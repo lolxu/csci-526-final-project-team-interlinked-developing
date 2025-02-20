@@ -106,7 +106,7 @@ public class HealthComponent : MonoBehaviour
                     });
                     
                     // Do a camera shake
-                    SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
+                    SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 1.0f);
                     
                     // Damage to health
                     m_health -= damage;
@@ -137,14 +137,15 @@ public class HealthComponent : MonoBehaviour
                     m_health -= damage;
                     if (m_health <= 0.0f)
                     {
-                        StopAllCoroutines();
+                        // Force kill the sequence
+                        m_hurtSequence.Kill();
+                        
                         RopeComponent rc = GetComponent<RopeComponent>();
                         if (rc != null && SingletonMaster.Instance.PlayerBase != null)
                         {
                             rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
                         }
-            
-                        SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+                        DeathEvent.Invoke(gameObject);
                     }
                 }
             }
@@ -153,11 +154,12 @@ public class HealthComponent : MonoBehaviour
 
     private void OnDeath(GameObject killer)
     {
-        m_isInvincible = false;
-
         if (gameObject.CompareTag("Player"))
         {
+            m_isInvincible = false;
+            SingletonMaster.Instance.FeelManager.m_playerDeath.PlayFeedbacks(transform.position);
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(killer);
+            Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy"))
         {
@@ -167,8 +169,6 @@ public class HealthComponent : MonoBehaviour
         {
             SingletonMaster.Instance.PlayerBase.RemoveLinkedObject(gameObject);
         }
-        
-        Destroy(gameObject);
     }
     
     private IEnumerator PlayerHitStop()

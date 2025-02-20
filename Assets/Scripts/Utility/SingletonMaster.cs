@@ -24,7 +24,6 @@ public class SingletonMaster : MonoBehaviour
     public PlayerAbilityListScriptable PlayerAbilities;
 
     [Header("Juice Settings")] 
-    public CameraShake CameraShakeManager;
     public FeelManager FeelManager;
     
     [Header("Constants")]

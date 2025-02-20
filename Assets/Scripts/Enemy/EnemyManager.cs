@@ -15,9 +15,6 @@ public class EnemyManager : MonoBehaviour
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
 
-    [Header("Visual Settings")] 
-    public ParticleSystem m_enemyDeathParticles;
-
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
     private int m_maxEnemyCount = 20;
@@ -176,7 +173,9 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
-        Instantiate(m_enemyDeathParticles, enemy.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+        // Play Enemy Death
+        SingletonMaster.Instance.FeelManager.m_enemyDeath.PlayFeedbacks(enemy.transform.position);
+        
         m_enemies.Remove(enemy.transform.parent.gameObject);
         
         // Checking for any connected stuff to this enemy

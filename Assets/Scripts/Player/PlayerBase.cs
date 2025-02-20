@@ -148,9 +148,10 @@ public class PlayerBase : MonoBehaviour
         Vector3 faceDir = new Vector3(hori, vert, 0.0f) * m_faceMoveFactor;
         m_face.transform.localPosition = faceDir;
         
-        if (m_RB.velocity.magnitude < m_maxSpeed)
+        m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
+        if (m_RB.velocity.magnitude > m_maxSpeed)
         {
-            m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
+            m_RB.velocity = m_moveDirection * m_maxSpeed;
         }
     }
 
