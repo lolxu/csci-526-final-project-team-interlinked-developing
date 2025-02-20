@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseEnemyAttack : BaseEnemyBehavior
+public class AttackEnemyBehavior : BaseEnemyBehavior
 {
     [Header("Chase Settings")]
     public float moveSpeed = 3.0f;

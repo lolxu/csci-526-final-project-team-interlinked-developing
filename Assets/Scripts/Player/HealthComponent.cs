@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,14 +16,15 @@ public class HealthComponent : MonoBehaviour
     public bool m_isLinked = false;
     
     // private Sequence m_damageTween = null;
-    private Coroutine m_damageSequence = null;
+    // private Coroutine m_damageSequence = null;
     private bool m_isInvincible = false;
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
     private GameObject m_healthBar = null;
     private Vector3 m_orgScale;
-    
+
+    private Sequence m_hurtSequence = null;
 
     private void Start()
     {
@@ -68,41 +70,70 @@ public class HealthComponent : MonoBehaviour
         DeathEvent.RemoveListener(OnDeath);
     }
     
+    // TODO: Change magic numbers...
     private void OnDamage(float damage, GameObject instigator)
     {
         if (m_canDamage)
         {
             if (!m_isInvincible && m_health > 0.0f)
             {
-                // Only do screen shake on damage to player
+                // First stop the sequence
+                m_hurtSequence.Kill();
+                
+                // For player hurting
                 if (gameObject.CompareTag("Player"))
                 {
                     Vector2 dir = -(instigator.transform.position - transform.position).normalized;
-                    m_damageSequence = StartCoroutine(PlayerHurtSequence(dir));
-                    StartCoroutine(PlayerInvincibleSequence());
+                    
+                    // Add a small force
+                    m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
+                    
+                    // Player Hurt Sequence
+                    m_isInvincible = true;
+                    m_hurtSequence = DOTween.Sequence();
                     StartCoroutine(PlayerHitStop());
+                    m_hurtSequence.Insert(0,
+                        m_spriteRenderer.DOColor(Color.white, m_invincibleTime / 6)
+                        .SetLoops(6, LoopType.Yoyo)
+                        .SetEase(Ease.InOutBounce));
+                    m_hurtSequence.Insert(0,
+                        transform.DOPunchScale(m_orgScale * 0.85f, 0.15f));
+                    m_hurtSequence.OnComplete(() =>
+                    {
+                        m_isInvincible = false;
+                        m_spriteRenderer.color = m_orgColor;
+                        transform.localScale = m_orgScale;
+                    });
+                    
+                    // Do a camera shake
                     SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
                     
+                    // Damage to health
                     m_health -= damage;
                     if (m_health <= 0.0f)
                     {
                         Time.timeScale = 1.0f;
                         StopAllCoroutines();
-
                         DeathEvent.Invoke(instigator);
                     }
                 }
                 else if (gameObject.CompareTag("Enemy"))
                 {
-                    if (m_damageSequence != null)
+                    // Enemy Hurt Sequence
+                    m_hurtSequence = DOTween.Sequence();
+                    m_hurtSequence.Insert(0,
+                        m_spriteRenderer.DOColor(Color.white, 0.15f)
+                            .SetLoops(2, LoopType.Yoyo)
+                            .SetEase(Ease.InOutBounce));
+                    m_hurtSequence.Insert(0,
+                        transform.DOPunchScale(m_orgScale * 0.85f, 0.15f));
+                    m_hurtSequence.OnComplete(() =>
                     {
-                        StopCoroutine(m_damageSequence);
                         m_spriteRenderer.color = m_orgColor;
                         transform.localScale = m_orgScale;
-                    }
+                    });
                     
-                    m_damageSequence = StartCoroutine(EnemyHurtSequence());
-                    
+                    // Damage to health
                     m_health -= damage;
                     if (m_health <= 0.0f)
                     {
@@ -118,30 +149,6 @@ public class HealthComponent : MonoBehaviour
                 }
             }
         }
-    }
-    
-    private IEnumerator EnemyHurtSequence()
-    {
-        transform.localScale = m_orgScale * 0.85f;
-        m_spriteRenderer.color = Color.white;
-        yield return new WaitForSecondsRealtime(0.15f);
-        m_spriteRenderer.color = m_orgColor;
-        transform.localScale = m_orgScale;
-    }
-    
-    private IEnumerator PlayerHurtSequence(Vector2 dir)
-    {
-        float flashDuration = 0.0f;
-        m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
-        while (flashDuration <= m_invincibleTime)
-        {
-            m_spriteRenderer.color = Color.white;
-            yield return new WaitForSecondsRealtime(0.1f);
-            m_spriteRenderer.color = m_orgColor;
-            yield return new WaitForSecondsRealtime(0.1f);
-            flashDuration += 0.2f;
-        }
-        m_spriteRenderer.color = m_orgColor;
     }
 
     private void OnDeath(GameObject killer)
@@ -163,14 +170,7 @@ public class HealthComponent : MonoBehaviour
         
         Destroy(gameObject);
     }
-
-    private IEnumerator PlayerInvincibleSequence()
-    {
-        m_isInvincible = true;
-        yield return new WaitForSecondsRealtime(m_invincibleTime);
-        m_isInvincible = false;
-    }
-
+    
     private IEnumerator PlayerHitStop()
     {
         float orgTimeScale = Time.timeScale;
