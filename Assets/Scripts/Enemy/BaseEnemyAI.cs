@@ -163,8 +163,9 @@ public class BaseEnemyAI : MonoBehaviour
         //     m_moveDirection = Vector2.zero;
         // }
 
+        // The actual move direction
         Debug.DrawLine(transform.position,
-            transform.position + new Vector3(bestDirection.x, bestDirection.y, 0.0f) * m_raycastDistance,
+            transform.position + new Vector3(m_moveDirection.x, m_moveDirection.y, 0.0f) * 5.0f,
             Color.magenta);
 
         // Moving using the best direction
