@@ -180,7 +180,10 @@ public class EnemyManager : MonoBehaviour
         for (int i = rc.m_connectedTo.Count - 1; i >= 0; --i)
         {
             var connectedObj = rc.m_connectedTo[i];
-            connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
+            if (connectedObj)
+            {
+                connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
+            }
         }
         
         Destroy(enemy.transform.parent.gameObject);

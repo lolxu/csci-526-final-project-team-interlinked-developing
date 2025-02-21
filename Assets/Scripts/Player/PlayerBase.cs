@@ -234,7 +234,7 @@ public class PlayerBase : MonoBehaviour
                     }
                 }
 
-                if (num > 0)
+                if (num > 0 && bestTarget != default)
                 {
                     RequestRopeConnect(bestTarget.rigidbody);
                 }
@@ -269,7 +269,7 @@ public class PlayerBase : MonoBehaviour
                     }
                 }
                 
-                if (num > 0)
+                if (num > 0 && bestTarget != default)
                 {
                     RemoveLinkedObject(bestTarget.rigidbody.gameObject);
                 }
