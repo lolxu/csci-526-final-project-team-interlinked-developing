@@ -173,9 +173,6 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
-        // Play Enemy Death
-        SingletonMaster.Instance.FeelManager.m_enemyDeath.PlayFeedbacks(enemy.transform.position);
-        
         m_enemies.Remove(enemy.transform.parent.gameObject);
         
         // Checking for any connected stuff to this enemy
