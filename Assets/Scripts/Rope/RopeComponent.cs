@@ -28,7 +28,10 @@ public class RopeComponent : MonoBehaviour
     
     private Rigidbody2D m_anchorObject;
     private GameObject m_rope;
-    
+
+    [Header("Experimental")]
+    [SerializeField] private Color m_orgPlayerRopeColor;
+    private float m_ropeStressTimer = 0.0f;
 
     private IEnumerator Start()
     { 
@@ -117,7 +120,10 @@ public class RopeComponent : MonoBehaviour
         else // We tossing enemies (not sure if we want this yet...)
         {
             var rc = brokenJoint.gameObject.GetComponent<RopeComponent>();
-            rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+            if (rc != null)
+            {
+                rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+            }
         }
     }
 
@@ -137,11 +143,10 @@ public class RopeComponent : MonoBehaviour
         joint.connectedAnchor = Vector2.zero;
         
         // Make weak joints for enemies
-        // if (gameObject.CompareTag("Enemy"))
-        // {
-        //     joint.breakForce = 700.0f;
-        //     joint.breakTorque = 500.0f;
-        // }
+        if (gameObject.CompareTag("Enemy"))
+        {
+            // joint.breakForce = 800.0f;
+        }
 
         if (instigator.CompareTag("Enemy"))
         {
@@ -288,5 +293,60 @@ public class RopeComponent : MonoBehaviour
 
         m_isConnectedToEnemy = false;
         Destroy(m_enemyJoint);
+    }
+
+    private void FixedUpdate()
+    {
+        if (gameObject.CompareTag("Enemy"))
+        {
+            var joint = GetComponent<HingeJoint2D>();
+            if (joint != null && m_isConnectedToPlayer)
+            {
+                // Debug.Log(joint.GetReactionForce(Time.fixedDeltaTime).magnitude);
+                float stress = joint.GetReactionForce(Time.fixedDeltaTime).magnitude;
+                if (stress > 500.0f)
+                {
+                    Debug.Log("Adding stress");
+                    m_ropeStressTimer += Time.fixedDeltaTime;
+
+                    foreach (var rope in m_ropeLinksPlayer)
+                    {
+                        var sp = rope.GetComponent<SpriteRenderer>();
+                        if (sp != null)
+                        {
+                            Color tmp = sp.color;
+                            tmp.r += 0.75f * Time.fixedDeltaTime;
+                            tmp.r = Mathf.Clamp01(tmp.r);
+                            sp.color = tmp;
+                        }
+                    }
+
+                    if (m_ropeStressTimer > 1.0f)
+                    {
+                        Debug.Log("BROKEN");
+                        joint.breakForce = 10.0f;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Resetting stress");
+                    m_ropeStressTimer = 0.0f;
+                    
+                    foreach (var rope in m_ropeLinksPlayer)
+                    {
+                        var sp = rope.GetComponent<SpriteRenderer>();
+                        if (sp != null)
+                        {
+                            sp.color = m_orgPlayerRopeColor;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.Log("Resetting stress");
+                m_ropeStressTimer = 0.0f;
+            }
+        }
     }
 }

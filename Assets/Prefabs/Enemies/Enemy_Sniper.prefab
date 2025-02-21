@@ -414,7 +414,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48310
+  m_InstanceId: 86218
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -485,6 +485,7 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 53eb2b1c72877f04f9c206bab1cc2f2a, type: 3}
+  m_orgPlayerRopeColor: {r: 0.48235294, g: 0.37254903, b: 0.30980393, a: 1}
 --- !u!114 &1050162382504384340
 MonoBehaviour:
   m_ObjectHideFlags: 0
