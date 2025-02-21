@@ -55,7 +55,16 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Rope operations"",
+                    ""name"": ""Rope Connect"",
+                    ""type"": ""Button"",
+                    ""id"": ""129af516-edba-4f8e-926d-a85c5d2f387b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rope Disconnect"",
                     ""type"": ""Button"",
                     ""id"": ""7b97125d-2d18-4efc-af37-93e7bdc164a2"",
                     ""expectedControlType"": """",
@@ -522,7 +531,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Rope operations"",
+                    ""action"": ""Rope Disconnect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -533,7 +542,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Rope operations"",
+                    ""action"": ""Rope Disconnect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a82e4dbf-aaa6-44aa-bc03-7e9993db1877"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Rope Connect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1124,7 +1144,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
-        m_Player_Ropeoperations = m_Player.FindAction("Rope operations", throwIfNotFound: true);
+        m_Player_RopeConnect = m_Player.FindAction("Rope Connect", throwIfNotFound: true);
+        m_Player_RopeDisconnect = m_Player.FindAction("Rope Disconnect", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
@@ -1213,7 +1234,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
-    private readonly InputAction m_Player_Ropeoperations;
+    private readonly InputAction m_Player_RopeConnect;
+    private readonly InputAction m_Player_RopeDisconnect;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Jump;
@@ -1227,7 +1249,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
-        public InputAction @Ropeoperations => m_Wrapper.m_Player_Ropeoperations;
+        public InputAction @RopeConnect => m_Wrapper.m_Player_RopeConnect;
+        public InputAction @RopeDisconnect => m_Wrapper.m_Player_RopeDisconnect;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
@@ -1252,9 +1275,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
-            @Ropeoperations.started += instance.OnRopeoperations;
-            @Ropeoperations.performed += instance.OnRopeoperations;
-            @Ropeoperations.canceled += instance.OnRopeoperations;
+            @RopeConnect.started += instance.OnRopeConnect;
+            @RopeConnect.performed += instance.OnRopeConnect;
+            @RopeConnect.canceled += instance.OnRopeConnect;
+            @RopeDisconnect.started += instance.OnRopeDisconnect;
+            @RopeDisconnect.performed += instance.OnRopeDisconnect;
+            @RopeDisconnect.canceled += instance.OnRopeDisconnect;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -1286,9 +1312,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
-            @Ropeoperations.started -= instance.OnRopeoperations;
-            @Ropeoperations.performed -= instance.OnRopeoperations;
-            @Ropeoperations.canceled -= instance.OnRopeoperations;
+            @RopeConnect.started -= instance.OnRopeConnect;
+            @RopeConnect.performed -= instance.OnRopeConnect;
+            @RopeConnect.canceled -= instance.OnRopeConnect;
+            @RopeDisconnect.started -= instance.OnRopeDisconnect;
+            @RopeDisconnect.performed -= instance.OnRopeDisconnect;
+            @RopeDisconnect.canceled -= instance.OnRopeDisconnect;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -1492,7 +1521,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
-        void OnRopeoperations(InputAction.CallbackContext context);
+        void OnRopeConnect(InputAction.CallbackContext context);
+        void OnRopeDisconnect(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);

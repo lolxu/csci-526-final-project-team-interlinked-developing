@@ -208,7 +208,7 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
+        m_canAutoAim = m_canShoot;
         
         Vector2 myPos = transform.position;
         Vector2 muzzlePosition = m_muzzle.transform.position;
@@ -243,9 +243,11 @@ public class ShootComponent : MonoBehaviour
         
         if (m_canShoot)
         {
+            // Debug.Log("Player is shooting");
             // SHOOTING!!
-            if (m_isMouseDown && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
+            if (m_hasTarget && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
             {
+                // Debug.Log("Player has target");
                 // Here's the shooty controls
                 if (m_fireTimeout <= 0.0f)
                 {

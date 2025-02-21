@@ -27,6 +27,7 @@ public class PlayerBase : MonoBehaviour
     public float m_clickRadius = 1.0f;
     public float m_connectRadius = 10.0f;
     public GameObject m_linkObjectsParent;
+    public LayerMask m_connectableLayers;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
     private List<Vector3> m_linkedDisplacements = new List<Vector3>();
     private List<Vector3> m_ropeDisplacements = new List<Vector3>();
@@ -198,42 +199,79 @@ public class PlayerBase : MonoBehaviour
     {
         if (context.performed)
         {
-            SingletonMaster.Instance.EventManager.StartFireEvent.Invoke();
+            //SingletonMaster.Instance.EventManager.StartFireEvent.Invoke();
         }
         else
         {
-            SingletonMaster.Instance.EventManager.StopFireEvent.Invoke();
+           //SingletonMaster.Instance.EventManager.StopFireEvent.Invoke();
         }
     }
 
-    public void RopeOperations(InputAction.CallbackContext context)
+    public void RopeConnect(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
 
             // Checking if mouse hits the unconnected hit boxes
-            RaycastHit2D pickupHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Connectable"));
-            if (pickupHit)
             {
-                Rigidbody2D hitBody = pickupHit.rigidbody;
-                // Double checking in case weird shit adds this thing twice
-                if (!m_linkedObjects.Contains(hitBody.gameObject))
+                RaycastHit2D[] results = new RaycastHit2D[20];
+                int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                    results, 0.0f, m_connectableLayers);
+
+                float minDist = float.MaxValue;
+                RaycastHit2D bestTarget = default;
+                for (int i = 0; i < num; i++)
                 {
-                    RequestRopeConnect(hitBody);
-                    return;
+                    if (!m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                    {
+                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            bestTarget = results[i];
+                        }
+                    }
+                }
+
+                if (num > 0)
+                {
+                    RequestRopeConnect(bestTarget.rigidbody);
                 }
             }
+        }
+    }
 
+    public void RopeDisconnect(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+            
             // Checking if mouse hits connected items
-            RaycastHit2D removeHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Connectable"));
-            if (removeHit && removeHit.rigidbody != m_RB)
             {
-                if (m_linkedObjects.Contains(removeHit.rigidbody.gameObject))
+                RaycastHit2D[] results = new RaycastHit2D[20];
+                int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                    results, 0.0f, m_connectableLayers);
+
+                float minDist = float.MaxValue;
+                RaycastHit2D bestTarget = default;
+                for (int i = 0; i < num; i++)
                 {
-                    RemoveLinkedObject(removeHit.rigidbody.gameObject);
+                    if (m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                    {
+                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            bestTarget = results[i];
+                        }
+                    }
+                }
+                
+                if (num > 0)
+                {
+                    RemoveLinkedObject(bestTarget.rigidbody.gameObject);
                 }
             }
         }

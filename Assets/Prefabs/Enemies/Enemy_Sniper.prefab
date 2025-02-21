@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8922955261994098860}
   - component: {fileID: 3590832995566620899}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 464319822147493083}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6556734065264871561}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3871043980240471893}
   - component: {fileID: 4661942871611306391}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1026767364169952911}
   - component: {fileID: 1971232735070427222}
   - component: {fileID: 1050162382504384340}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 86218
+  m_InstanceId: 48594
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -519,9 +519,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6556734065264871561}
     m_Modifications:
+    - target: {fileID: 4067960495941410657, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213876860666769798, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711660686023529325, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849256518674163454, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483300548563121757, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8530877139266957305, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
       propertyPath: m_Name
       value: Sniper Link
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530877139266957305, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8726275858825625928, guid: d19a54d0a653ead43989e47af7af6e8f, type: 3}
       propertyPath: m_LocalPosition.x

@@ -362,7 +362,7 @@ MonoBehaviour:
   m_bulletType: 1
   m_scanHitLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 512
   m_damage: 6
   m_speed: 6000
   m_lifeTime: 2.5

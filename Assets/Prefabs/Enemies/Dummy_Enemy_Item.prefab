@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853478915627564432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Dummy_Enemy_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 413389558717989755}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8394438384676537944}
   - component: {fileID: 3640491624209454240}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3839050864589682595}
   - component: {fileID: 9204848088068059466}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 5981943359898612371}
   - component: {fileID: 6942400378454032155}
   - component: {fileID: 7796390014458754966}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 85678
+  m_InstanceId: 48144
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 4624133545086957021}
   - component: {fileID: 8655245445872847451}
   - component: {fileID: 314114649961297431}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,11 +693,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129217800401549174, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_InstanceId
-      value: -243700
+      value: -95024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538797734825165177, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683200428572565542, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3366563785461408539, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_Name
       value: Spike Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 3366563785461408539, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4843092081184736760, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857506836603924691, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5878822636670200123, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -738,6 +758,10 @@ PrefabInstance:
     - target: {fileID: 5878822636670200123, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6754839535443280286, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

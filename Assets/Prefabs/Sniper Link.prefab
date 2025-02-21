@@ -402,7 +402,7 @@ MonoBehaviour:
   m_recoilChange: 0
   m_penetrationChange: 0
   m_canShoot: 0
-  m_canAutoAim: 0
+  m_canAutoAim: 1
   m_autoAimAbility: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
   m_autoAimRadius: 20
   m_gun: {fileID: 7483300548563121757}
@@ -524,6 +524,7 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_orgPlayerRopeColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &-3779267154878166289
 MonoBehaviour:
   m_ObjectHideFlags: 0

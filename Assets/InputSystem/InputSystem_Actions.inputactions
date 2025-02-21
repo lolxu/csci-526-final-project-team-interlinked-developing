@@ -33,7 +33,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rope operations",
+                    "name": "Rope Connect",
+                    "type": "Button",
+                    "id": "129af516-edba-4f8e-926d-a85c5d2f387b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rope Disconnect",
                     "type": "Button",
                     "id": "7b97125d-2d18-4efc-af37-93e7bdc164a2",
                     "expectedControlType": "",
@@ -500,7 +509,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Rope operations",
+                    "action": "Rope Disconnect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -511,7 +520,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Rope operations",
+                    "action": "Rope Disconnect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a82e4dbf-aaa6-44aa-bc03-7e9993db1877",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Rope Connect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

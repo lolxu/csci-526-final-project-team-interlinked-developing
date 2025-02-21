@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3157610657483143233}
   - component: {fileID: 7144786213334835602}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9037125959800333647}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6839203773940049152}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Basic_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5846800623351368567}
   - component: {fileID: 3151538174666712921}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 8587106508212932223}
   - component: {fileID: 9111909743220841265}
   - component: {fileID: 5019046634677394287}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
