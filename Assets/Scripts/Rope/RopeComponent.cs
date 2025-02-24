@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 public class RopeComponent : MonoBehaviour
 {
+    [Header("Core Settings")]
     public List<GameObject> m_connectedTo = new List<GameObject>();
     public List<GameObject> m_receivedFrom = new List<GameObject>();
     public List<GameObject> m_ropeLinksEnemy = new List<GameObject>();
@@ -15,7 +16,7 @@ public class RopeComponent : MonoBehaviour
     public bool m_isConnectedToPlayer = false;
     public bool m_isConnectedToEnemy = false;
     // public bool m_isStrongConnection = false;
-    
+
     [Tooltip("The rope asset that is using to connect to other objects")]
     public GameObject m_usingRopePrefab;
 
@@ -26,7 +27,11 @@ public class RopeComponent : MonoBehaviour
     private GameObject m_enemyObject;
     private Rigidbody2D m_anchorObject;
     private GameObject m_rope;
-    
+
+    [Header("Rope Physics Settings")] 
+    [SerializeField] private float m_maxTension = 500.0f;
+    [SerializeField] private float m_tensionDuration = 1.0f;
+
     [Header("Enemy Rope Settings")]
     [SerializeField] private Color m_orgEnemyRopeColor;
     private float m_ropeStressTimer = 0.0f;
@@ -304,7 +309,7 @@ public class RopeComponent : MonoBehaviour
             {
                 // Debug.Log(joint.GetReactionForce(Time.fixedDeltaTime).magnitude);
                 float stress = m_enemyJoint.GetReactionForce(Time.fixedDeltaTime).magnitude;
-                if (stress > 500.0f)
+                if (stress > m_maxTension)
                 {
                     Debug.Log("Adding stress");
                     m_ropeStressTimer += Time.fixedDeltaTime;
@@ -321,7 +326,7 @@ public class RopeComponent : MonoBehaviour
                         }
                     }
 
-                    if (m_ropeStressTimer > 1.0f)
+                    if (m_ropeStressTimer > m_tensionDuration)
                     {
                         Debug.Log("SET BROKEN");
                         m_enemyJoint.breakForce = 10.0f;
