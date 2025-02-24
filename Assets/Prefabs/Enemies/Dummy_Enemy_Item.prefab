@@ -415,7 +415,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48144
+  m_InstanceId: 33378
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -486,7 +486,7 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 53eb2b1c72877f04f9c206bab1cc2f2a, type: 3}
-  m_orgPlayerRopeColor: {r: 0.48235294, g: 0.37254903, b: 0.30980393, a: 1}
+  m_orgRopeColor: {r: 0.48235294, g: 0.30980393, b: 0.3254902, a: 1}
 --- !u!114 &7796390014458754966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129217800401549174, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_InstanceId
-      value: -95024
+      value: -13584
       objectReference: {fileID: 0}
     - target: {fileID: 1538797734825165177, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_Layer

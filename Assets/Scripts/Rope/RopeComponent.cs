@@ -23,15 +23,14 @@ public class RopeComponent : MonoBehaviour
     private HingeJoint2D m_playerJoint;
     private RelativeJoint2D m_enemyStrongJoint;
     private RelativeJoint2D m_playerStrongJoint;
-
     private GameObject m_enemyObject;
-    
     private Rigidbody2D m_anchorObject;
     private GameObject m_rope;
-
-    [Header("Experimental")]
-    [SerializeField] private Color m_orgPlayerRopeColor;
+    
+    [Header("Enemy Rope Settings")]
+    [SerializeField] private Color m_orgEnemyRopeColor;
     private float m_ropeStressTimer = 0.0f;
+    private bool m_isStealing = false;
 
     private IEnumerator Start()
     { 
@@ -114,6 +113,7 @@ public class RopeComponent : MonoBehaviour
         if (brokenJoint == m_enemyJoint)
         {
             m_isConnectedToEnemy = false;
+            m_isStealing = false;
             SingletonMaster.Instance.EventManager.StealSuccessEvent.Invoke(gameObject, m_enemyObject);
             SingletonMaster.Instance.EventManager.StealEndedEvent.Invoke(gameObject, m_enemyObject);
         }
@@ -164,7 +164,7 @@ public class RopeComponent : MonoBehaviour
         if (m_isConnectedToEnemy && m_isConnectedToPlayer)
         {
             SingletonMaster.Instance.EventManager.StealStartedEvent.Invoke(gameObject, m_enemyObject);
-            m_enemyJoint.breakForce = 1500.0f;
+            m_isStealing = true;
         }
     }
 
@@ -264,9 +264,9 @@ public class RopeComponent : MonoBehaviour
             }
             
             m_isConnectedToPlayer = false;
+            m_isStealing = false;
             
             Destroy(m_playerJoint);
-            // Destroy(m_playerStrongJoint);
         }
     }
 
@@ -297,19 +297,19 @@ public class RopeComponent : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (gameObject.CompareTag("Enemy"))
+        // if (gameObject.CompareTag("Enemy"))
         {
-            var joint = GetComponent<HingeJoint2D>();
-            if (joint != null && m_isConnectedToPlayer)
+            // var joint = GetComponent<HingeJoint2D>();
+            if (m_enemyJoint != null && m_isStealing)
             {
                 // Debug.Log(joint.GetReactionForce(Time.fixedDeltaTime).magnitude);
-                float stress = joint.GetReactionForce(Time.fixedDeltaTime).magnitude;
+                float stress = m_enemyJoint.GetReactionForce(Time.fixedDeltaTime).magnitude;
                 if (stress > 500.0f)
                 {
                     Debug.Log("Adding stress");
                     m_ropeStressTimer += Time.fixedDeltaTime;
 
-                    foreach (var rope in m_ropeLinksPlayer)
+                    foreach (var rope in m_ropeLinksEnemy)
                     {
                         var sp = rope.GetComponent<SpriteRenderer>();
                         if (sp != null)
@@ -323,8 +323,8 @@ public class RopeComponent : MonoBehaviour
 
                     if (m_ropeStressTimer > 1.0f)
                     {
-                        Debug.Log("BROKEN");
-                        joint.breakForce = 10.0f;
+                        Debug.Log("SET BROKEN");
+                        m_enemyJoint.breakForce = 10.0f;
                     }
                 }
                 else
@@ -332,19 +332,19 @@ public class RopeComponent : MonoBehaviour
                     Debug.Log("Resetting stress");
                     m_ropeStressTimer = 0.0f;
                     
-                    foreach (var rope in m_ropeLinksPlayer)
+                    foreach (var rope in m_ropeLinksEnemy)
                     {
                         var sp = rope.GetComponent<SpriteRenderer>();
                         if (sp != null)
                         {
-                            sp.color = m_orgPlayerRopeColor;
+                            sp.color = m_orgEnemyRopeColor;
                         }
                     }
                 }
             }
             else
             {
-                Debug.Log("Resetting stress");
+                // Debug.Log("Resetting stress");
                 m_ropeStressTimer = 0.0f;
             }
         }
