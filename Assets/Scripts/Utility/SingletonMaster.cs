@@ -18,6 +18,9 @@ public class SingletonMaster : MonoBehaviour
     [Header("Event Manager")] 
     public EventManager EventManager;
 
+    [Header("Ability Manager")] 
+    public AbilityManager AbilityManager;
+
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
     public LootSpawnScriptable LootSpawnScriptableObject;

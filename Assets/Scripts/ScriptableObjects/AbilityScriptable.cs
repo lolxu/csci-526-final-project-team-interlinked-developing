@@ -8,12 +8,11 @@ public class AbilityScriptable : ScriptableObject
 {
     public string m_name;
     public bool m_enabled = false;
-    // THIS IS TEMPORARY!!!!
-    public int m_count = 0;
+    public float m_activeDuration = 0.25f;
+    public float m_coolDown = 1.0f;
 
     private void OnEnable()
     {
         m_enabled = false;
-        m_count = 0;
     }
 }

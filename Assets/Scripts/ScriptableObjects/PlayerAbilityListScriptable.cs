@@ -13,11 +13,22 @@ public class PlayerAbilityListScriptable : ScriptableObject
         return ability.m_enabled;
     }
 
+    public void SetAbility(AbilityScriptable ability, bool status)
+    {
+        foreach (var ab in m_abilities)
+        {
+            if (ab == ability)
+            {
+                ability.m_enabled = status;
+                break;
+            }
+        }
+    }
+
     public void ResetAbilities()
     {
         foreach (var ability in m_abilities)
         {
-            ability.m_count = 0;
             ability.m_enabled = false;
         }
     }

@@ -38,6 +38,9 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private GameObject m_face;
     [SerializeField] private float m_faceMoveFactor = 0.25f;
 
+    [Header("Ability")] 
+    public bool m_isDashing = false;
+
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
@@ -148,11 +151,14 @@ public class PlayerBase : MonoBehaviour
         
         Vector3 faceDir = new Vector3(hori, vert, 0.0f) * m_faceMoveFactor;
         m_face.transform.localPosition = faceDir;
-        
-        m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
-        if (m_RB.velocity.magnitude > m_maxSpeed)
+
+        if (!m_isDashing)
         {
-            m_RB.velocity = m_moveDirection * m_maxSpeed;
+            m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
+            if (m_RB.velocity.magnitude > m_maxSpeed)
+            {
+                m_RB.velocity = m_moveDirection * m_maxSpeed;
+            }
         }
     }
 
@@ -300,6 +306,16 @@ public class PlayerBase : MonoBehaviour
         if (targetRope != null)
         {
             targetRope.DetachRope(gameObject);
+        }
+    }
+    
+    // Ability Stuff
+    public void ActivateAbility(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Dash");
+            SingletonMaster.Instance.AbilityManager.ActivateAbility.Invoke(AbilityManager.AbilityTypes.Dash);
         }
     }
     
