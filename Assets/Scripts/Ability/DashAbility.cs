@@ -10,7 +10,7 @@ public class DashAbility : MonoBehaviour
     [SerializeField] private AbilityScriptable m_ability;
     [SerializeField] private LayerMask m_dashMasks;
     [SerializeField] private AbilityManager.AbilityTypes m_abilityType;
-    [SerializeField] private float m_dashForceMult = 1000.0f;
+    [SerializeField] private float m_dashMult = 100.0f;
 
     private bool m_canActivate = true;
     
@@ -32,21 +32,38 @@ public class DashAbility : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        GameObject player = SingletonMaster.Instance.PlayerBase.gameObject;
-        Vector2 dashDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
+        PlayerBase pb = SingletonMaster.Instance.PlayerBase;
+        GameObject player = pb.gameObject;
+        Vector2 dashDir = pb.m_moveDirection;
         
         player.GetComponent<Collider2D>().excludeLayers = m_dashMasks;
-        Debug.Log(dashDir * m_dashForceMult);
         SingletonMaster.Instance.PlayerBase.m_isDashing = true;
         Color orgColor = player.GetComponent<SpriteRenderer>().color;
         Color newColor = orgColor;
         newColor.a = 0.25f;
         player.GetComponent<SpriteRenderer>().color = newColor;
-        player.GetComponent<Rigidbody2D>().AddForce(dashDir * m_dashForceMult, ForceMode2D.Impulse);
-
-        yield return new WaitForSeconds(m_ability.m_activeDuration);
         
-        player.GetComponent<Rigidbody2D>().totalForce = Vector2.zero;
+        // Also disabling collision on all connected stuff
+        // TODO: Toggle this for testing
+        if (false)
+        {
+            int numLinks = pb.m_rope.transform.childCount;
+            for (int i = 0; i < numLinks; i++)
+            {
+                GameObject curLink = pb.m_rope.transform.GetChild(i).gameObject;
+                curLink.GetComponent<Collider2D>().excludeLayers = m_dashMasks;
+            }
+        }
+
+        float time = 0.0f;
+        while (time < m_ability.m_activeDuration)
+        {
+            player.GetComponent<Rigidbody2D>().velocity = dashDir * m_dashMult;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         SingletonMaster.Instance.PlayerBase.m_isDashing = false;
         player.GetComponent<Collider2D>().excludeLayers = default;
         player.GetComponent<SpriteRenderer>().color = orgColor;

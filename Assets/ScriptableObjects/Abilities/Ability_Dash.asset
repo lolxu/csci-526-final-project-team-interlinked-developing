@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Ability_Dash
   m_EditorClassIdentifier: 
   m_name: Dash
-  m_enabled: 0
-  m_count: 0
+  m_enabled: 1
+  m_activeDuration: 0.25
+  m_coolDown: 1
