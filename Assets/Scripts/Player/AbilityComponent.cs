@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class AbilityComponent : MonoBehaviour
 {
+    [Header("Ability Settings")]
     public AbilityScriptable m_ability;
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     [SerializeField] private AbilityManager.AbilityTypes m_type;
     [SerializeField] private Color m_coolDownColor;
+    
+    [Header("Damage Settings")]
+    [SerializeField] private float m_damage = 1.5f;
+    [SerializeField] private float m_velocityThreshold = 10.0f;
 
     private bool m_canActivate = true;
     private Color m_orgColor;
@@ -84,5 +89,21 @@ public class AbilityComponent : MonoBehaviour
 
         m_spriteRenderer.color = m_orgColor;
         m_canActivate = true;
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.relativeVelocity.magnitude > m_velocityThreshold)
+        {
+            if (other.collider.CompareTag("Enemy"))
+            {
+                var health = other.gameObject.GetComponent<HealthComponent>();
+                if (health != null)
+                {
+                    health.DamageEvent.Invoke(m_damage, gameObject);
+                }
+            }
+        }
+        
     }
 }
