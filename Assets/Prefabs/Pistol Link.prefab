@@ -388,6 +388,8 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_maxTension: 300
+  m_tensionDuration: 0.75
   m_orgEnemyRopeColor: {r: 0.48235294, g: 0.30980393, b: 0.3254902, a: 1}
 --- !u!114 &8098651125329348806
 MonoBehaviour:
