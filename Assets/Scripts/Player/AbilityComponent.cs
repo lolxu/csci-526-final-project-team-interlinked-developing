@@ -81,7 +81,7 @@ public class AbilityComponent : MonoBehaviour
                 newColor.a = 1.0f;
             }
             
-            Debug.Log(newColor.a);
+            // Debug.Log(newColor.a);
             
             m_spriteRenderer.color = newColor;
             yield return null;
