@@ -12,6 +12,7 @@ public class BaseEnemyAI : MonoBehaviour
     public int m_numDirections = 12;
     public float m_raycastDistance = 5.0f;
     public LayerMask m_pathfindIgnoreMasks;
+    public Vector2 m_moveDirection { private set; get; }= Vector2.zero;
     
     [Header("Visual Settings")]
     [SerializeField] protected GameObject m_face;
@@ -20,7 +21,6 @@ public class BaseEnemyAI : MonoBehaviour
     private List<Vector2> m_pathfindDirections = new List<Vector2>();
     private Rigidbody2D m_RB;
     private Vector2 m_randomDestinationDisp;
-    private Vector2 m_moveDirection = Vector2.zero;
     private bool m_overrideMovement = false;
 
     private void Start()

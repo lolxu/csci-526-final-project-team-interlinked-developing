@@ -41,6 +41,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     /// Overwrite this for custom update behavior
     /// </summary>
     protected virtual void OnUpdate() { }
+    
+    protected virtual void OnBeingDisabled() { }
 
     private void Start()
     {
@@ -57,6 +59,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        
+        OnBeingDisabled();
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)

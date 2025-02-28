@@ -6,12 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Rope
-  - Loot
   - Background
   - Linkable
   - Garbage
-  - Shop
   - DamageZone
+  - EnemyProjectile
   layers:
   - Default
   - TransparentFX
