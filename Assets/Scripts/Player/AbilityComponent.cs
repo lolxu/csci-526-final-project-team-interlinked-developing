@@ -10,6 +10,7 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     [SerializeField] private AbilityManager.AbilityTypes m_type;
     [SerializeField] private Color m_coolDownColor;
+    [SerializeField] private GameObject m_text;
     
     [Header("Damage Settings")]
     [SerializeField] private float m_damage = 1.5f;
@@ -51,6 +52,7 @@ public class AbilityComponent : MonoBehaviour
         if (obj == gameObject)
         {
             m_ability.m_enabled = false;
+            m_text.SetActive(true);
         }
     }
 
@@ -59,6 +61,7 @@ public class AbilityComponent : MonoBehaviour
         if (obj == gameObject)
         {
             m_ability.m_enabled = true;
+            m_text.SetActive(false);
         }
     }
 

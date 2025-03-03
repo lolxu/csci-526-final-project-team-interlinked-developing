@@ -539,12 +539,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932e7e6317e190249bfa362e386867b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxDurability: 10
-  m_currentDurability: 10
+  m_maxDurability: 35
+  m_currentDurability: 35
   UsedDurabilityEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_lifeTime: 20
+  m_lifeTime: 10
   m_shrinkSpeed: 0.5
   m_spriteRends:
   - {fileID: 92772770172916128}

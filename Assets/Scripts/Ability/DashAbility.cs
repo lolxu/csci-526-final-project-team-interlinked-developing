@@ -12,11 +12,16 @@ public class DashAbility : MonoBehaviour
     [SerializeField] private AbilityManager.AbilityTypes m_abilityType;
     [SerializeField] private float m_dashMult = 100.0f;
 
+    private Color m_orgColor;
+
     private bool m_canActivate = true;
     
     private void Start()
     {
         SingletonMaster.Instance.AbilityManager.ActivateAbility.AddListener(OnAbilityActivated);
+        
+        // Get player color
+        m_orgColor = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<SpriteRenderer>().color;
     }
 
     private void OnAbilityActivated(AbilityManager.AbilityTypes type)
@@ -40,8 +45,7 @@ public class DashAbility : MonoBehaviour
 
             player.GetComponent<Collider2D>().excludeLayers = m_dashMasks;
             SingletonMaster.Instance.PlayerBase.m_isDashing = true;
-            Color orgColor = player.GetComponent<SpriteRenderer>().color;
-            Color newColor = orgColor;
+            Color newColor = m_orgColor;
             newColor.a = 0.25f;
             player.GetComponent<SpriteRenderer>().color = newColor;
 
@@ -77,7 +81,7 @@ public class DashAbility : MonoBehaviour
                 player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 SingletonMaster.Instance.PlayerBase.m_isDashing = false;
                 player.GetComponent<Collider2D>().excludeLayers = default;
-                player.GetComponent<SpriteRenderer>().color = orgColor;
+                player.GetComponent<SpriteRenderer>().color = m_orgColor;
             }
         }
     }

@@ -413,7 +413,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 32728
+  m_InstanceId: 83880
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -486,7 +486,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_isLinked: 0
-  m_playerDeath: {fileID: 0}
+  m_playerDeath: {fileID: 4255317271503354296, guid: 3b976430dd662b1469bcbd73f00d53f1, type: 3}
   m_enemyDeath: {fileID: 4255317271503354296, guid: 524e343b03c7aec4bac75a80c1713cca, type: 3}
 --- !u!114 &5019046634677394287
 MonoBehaviour:
@@ -508,4 +508,6 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 53eb2b1c72877f04f9c206bab1cc2f2a, type: 3}
-  m_orgRopeColor: {r: 0.48235297, g: 0.30980393, b: 0.3254902, a: 1}
+  m_maxTension: 500
+  m_tensionDuration: 1
+  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}

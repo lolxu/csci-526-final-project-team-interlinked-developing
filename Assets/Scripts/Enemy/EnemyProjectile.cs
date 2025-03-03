@@ -6,17 +6,26 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
     [Header("Projectile Settings")] 
+    public float m_lifeTime = 5.0f;
     public float m_acceleration = 30.0f;
     public float m_maxSpeed = 50.0f;
     public float m_damage = 4.0f;
     public Vector2 m_moveDirection;
     [SerializeField] private LayerMask m_affectedLayer;
+
+    [Header("Visual Settings")] 
+    [SerializeField] private float m_shrinkTime = 0.15f;
+    [SerializeField] private GameObject m_hitParticles;
     
     private Rigidbody2D m_RB;
     private Collider2D m_collider;
     private RopeComponent m_rope;
     private bool m_canMove = true;
     private bool m_isDoneSpawning = false;
+    private bool m_canLink = false;
+    private bool m_isDespawning = false;
+
+    private float m_timer = 0.0f;
     
     private void Start()
     {
@@ -64,6 +73,18 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!m_isDespawning)
+        {
+            m_timer += Time.deltaTime;
+            if (m_timer > m_lifeTime)
+            {
+                StartCoroutine(DisappearSequence());
+            }
+        }
+    }
+
     private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         
@@ -79,18 +100,44 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Player") || other.collider.CompareTag("Enemy"))
+        if (!m_isDespawning)
         {
-            HealthComponent hc = other.gameObject.GetComponent<HealthComponent>();
-            if (hc != null)
+            if (other.collider.CompareTag("Player") || other.collider.CompareTag("Enemy"))
             {
-                hc.DamageEvent.Invoke(m_damage, gameObject);
+                HealthComponent hc = other.gameObject.GetComponent<HealthComponent>();
+                if (hc != null)
+                {
+                    hc.DamageEvent.Invoke(m_damage, gameObject);
+                }
+            }
+
+            if (!other.collider.CompareTag("EnemyProjectile") && m_isDoneSpawning)
+            {
+                // Particle Effect here
+                Instantiate(m_hitParticles, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+
+                Destroy(gameObject);
             }
         }
+    }
 
-        if (!other.collider.CompareTag("EnemyProjectile") && m_isDoneSpawning)
+    private IEnumerator DisappearSequence()
+    {
+        gameObject.layer = 0;
+
+        m_isDespawning = true;
+        m_canMove = false;
+
+        float timer = 0.0f;
+        float rate = transform.localScale.x / m_shrinkTime;
+        while (timer < m_shrinkTime)
         {
-            Destroy(gameObject);
+            yield return null;
+            transform.localScale -= Vector3.one * rate * Time.deltaTime;
+            timer += Time.deltaTime;
         }
+        transform.localScale = Vector3.zero;
+        yield return null;
+        Destroy(gameObject);
     }
 }
