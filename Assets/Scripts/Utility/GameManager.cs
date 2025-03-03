@@ -27,8 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        SingletonMasterObject.GetComponent<SingletonMaster>().PlayerAbilities.ResetAbilities();
         SingletonMasterObject = GameObject.Find("Singleton Master");
+        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
         
         // Attaching Singleton Master to itself to be not destroyed
         // if (transform.childCount == 0)
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         // FOR DEBUG ONLY
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SingletonMasterObject.GetComponent<SingletonMaster>().PlayerAbilities.ResetAbilities();
+            SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
             SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
