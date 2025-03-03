@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SingletonMasterObject.GetComponent<SingletonMaster>().PlayerAbilities.ResetAbilities();
         SingletonMasterObject = GameObject.Find("Singleton Master");
         
         // Attaching Singleton Master to itself to be not destroyed
