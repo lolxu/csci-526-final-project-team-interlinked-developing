@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 5045196581505246787}
   m_Layer: 6
   m_Name: Spike Ball
-  m_TagString: Untagged
+  m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -275,7 +275,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3.5
+  m_Mass: 4
   m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
@@ -361,7 +361,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 143728
+  m_InstanceId: 175120
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -418,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932e7e6317e190249bfa362e386867b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxDurability: 35
-  m_currentDurability: 35
+  m_maxDurability: 15
+  m_currentDurability: 15
   UsedDurabilityEvent:
     m_PersistentCalls:
       m_Calls: []

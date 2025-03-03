@@ -92,7 +92,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Checking colliding force
-        if (!other.gameObject.CompareTag("Rope") && other.gameObject.CompareTag("Enemy"))
+        // TODO: Change how we code this later...
+        if (!other.gameObject.CompareTag("Rope") && !other.gameObject.CompareTag("Linkable") && !other.gameObject.CompareTag("Player"))
         {
             float relativeVel = other.relativeVelocity.magnitude;
             if (relativeVel > m_collisionVelocityThreshold)

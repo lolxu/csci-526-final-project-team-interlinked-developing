@@ -26,11 +26,14 @@ public class PlayerBase : MonoBehaviour
     public GameObject m_rope;
     public float m_clickRadius = 1.0f;
     public float m_connectRadius = 10.0f;
+    public int m_maxRopeConnections = 5;
+    public int m_curRopeConnections = 0;
     public GameObject m_linkObjectsParent;
     public LayerMask m_connectableLayers;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
     private List<Vector3> m_linkedDisplacements = new List<Vector3>();
     private List<Vector3> m_ropeDisplacements = new List<Vector3>();
+    
 
     [Header("Visual Settings")] 
     [SerializeField] private CinemachineVirtualCamera m_cinemachine;
@@ -292,7 +295,7 @@ public class PlayerBase : MonoBehaviour
         
         // Do a distance check - For Player
         float dist = (hitBody.transform.position - transform.position).magnitude;
-        if (dist <= m_connectRadius)
+        if (dist <= m_connectRadius && m_linkedObjects.Count <= m_maxRopeConnections)
         {
             Debug.Log("Connected " + hitObject + " to player"); 
             m_ropeComponent.GenerateRope(hitObject);

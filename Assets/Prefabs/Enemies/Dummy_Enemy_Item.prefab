@@ -339,7 +339,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 2
   m_LinearDrag: 0.25
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -415,7 +415,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 120310
+  m_InstanceId: 133366
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -441,7 +441,7 @@ MonoBehaviour:
   - Lmao
   m_healthComponent: {fileID: 7796390014458754966}
   m_damage: 0
-  m_collisionVelocityThreshold: 15
+  m_collisionVelocityThreshold: 20
   m_AI: {fileID: 5981943359898612371}
   m_spriteRenderer: {fileID: 7042170540264289223}
 --- !u!114 &5981943359898612371
@@ -695,7 +695,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129217800401549174, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_InstanceId
-      value: -301292
+      value: -354834
       objectReference: {fileID: 0}
     - target: {fileID: 1538797734825165177, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_Layer

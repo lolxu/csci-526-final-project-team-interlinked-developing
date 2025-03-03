@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI m_finalMessageText;
     public TextMeshProUGUI m_waveText;
     public TextMeshProUGUI m_announcementText;
+    public TextMeshProUGUI m_ropeCountText;
     public GameObject m_playerHealthBar;
     public GameObject m_enemyHealthBarPrefab;
     public GameObject m_durabilityBarPrefab;
@@ -21,9 +22,11 @@ public class UI : MonoBehaviour
     private int m_waveCount = 0;
     private bool waveActive = false; // Tracks if a wave is active
 
-    private Queue<string> m_announcementQueue = new Queue<string>(); // 🔥 Queue to handle multiple announcements
-    private bool m_announcementActive = false; // 🔥 Prevents messages from overlapping
+    private Queue<string> m_announcementQueue = new Queue<string>(); // Queue to handle multiple announcements
+    private bool m_announcementActive = false; // Prevents messages from overlapping
     private Coroutine m_announcement;
+
+    private int m_maxConnections = 0;
 
     private void Start()
     {
@@ -37,6 +40,8 @@ public class UI : MonoBehaviour
         {
             HealthBar healthBarComp = m_playerHealthBar.GetComponent<HealthBar>();
             healthBarComp.m_healthComp = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<HealthComponent>();
+
+            m_maxConnections = SingletonMaster.Instance.PlayerBase.m_maxRopeConnections;
         }
 
         Debug.Log("[UI] Waiting for first wave...");
@@ -70,13 +75,23 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        m_waveTime -= Time.deltaTime;
-        if (m_waveTime < 0.0f)
+        if (SingletonMaster.Instance.PlayerBase != null)
         {
-            m_waveTime = 0.0f; // Prevent negative values
+            m_waveTime -= Time.deltaTime;
+            if (m_waveTime < 0.0f)
+            {
+                m_waveTime = 0.0f; // Prevent negative values
+            }
+            
+            m_waveText.text = $"Wave Time: {m_waveTime:F2}  Wave Count: {m_waveCount}";
+            m_ropeCountText.text = "Rope: " + (SingletonMaster.Instance.PlayerBase.m_linkedObjects.Count - 1) + "/" +
+                                   m_maxConnections;
         }
-
-        m_waveText.text = $"Wave Time: {m_waveTime:F2}  Wave Count: {m_waveCount}";
+        else
+        {
+            m_waveText.text = $"Wave Time: You Died...  Wave Count: {m_waveCount}";
+            m_ropeCountText.text = "Rope: DEAD/" + m_maxConnections;
+        }
 
         // if (waveActive && m_waveTime == 0.0f && !shrinkingTriggered)
         // {

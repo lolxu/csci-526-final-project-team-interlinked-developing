@@ -364,12 +364,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   m_damage: 4
-  m_speed: 2500
+  m_speed: 2000
   m_lifeTime: 2.5
   m_direction: {x: 0, y: 0}
   m_penetrateNum: 1
   m_knockback: 5
-  m_fireRate: 200
+  m_fireRate: 125
   m_recoil: 10
   m_trail: {fileID: 2289457050212447339}
   m_owner: {fileID: 0}

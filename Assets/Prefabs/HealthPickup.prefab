@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5117696569558385193}
   m_Layer: 6
   m_Name: HealthPickup
-  m_TagString: Loot
+  m_TagString: Linkable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,3 +258,6 @@ MonoBehaviour:
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_maxTension: 500
+  m_tensionDuration: 1
+  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
