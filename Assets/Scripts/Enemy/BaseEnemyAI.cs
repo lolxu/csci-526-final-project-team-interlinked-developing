@@ -6,6 +6,15 @@ using Random = UnityEngine.Random;
 
 public class BaseEnemyAI : MonoBehaviour
 {
+    // A simple state machine...
+    public enum EnemyAIState
+    {
+        Moving,
+        TugOfWar,
+        Idle
+    }
+    public EnemyAIState m_state = EnemyAIState.Idle;
+    
     [Header("Movement Settings")] 
     public float m_acceleration = 10.0f;
     public float m_maxSpeed = 50.0f;
@@ -17,11 +26,12 @@ public class BaseEnemyAI : MonoBehaviour
     [Header("Visual Settings")]
     [SerializeField] protected GameObject m_face;
     [SerializeField] protected float m_faceMoveFactor = 0.25f;
+    
+    protected bool m_overrideMovement = false;
 
     private List<Vector2> m_pathfindDirections = new List<Vector2>();
     private Rigidbody2D m_RB;
     private Vector2 m_randomDestinationDisp;
-    private bool m_overrideMovement = false;
 
     private void Start()
     {
@@ -43,8 +53,13 @@ public class BaseEnemyAI : MonoBehaviour
         
         m_randomDestinationDisp = Random.insideUnitCircle.normalized * 5.0f;
         
+        // Setting state
+        m_state = EnemyAIState.Moving;
+        
         SingletonMaster.Instance.EventManager.StealStartedEvent.AddListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.AddListener(OnStealEnded);
+        
+        OnStart();
     }
 
     private void OnDisable()
@@ -52,12 +67,23 @@ public class BaseEnemyAI : MonoBehaviour
         SingletonMaster.Instance.EventManager.StealStartedEvent.RemoveListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.RemoveListener(OnStealEnded);
     }
+    
+    /// <summary>
+    /// Override for custom start behavior
+    /// </summary>
+    protected void OnStart() { }
+    
+    /// <summary>
+    /// Override for custom fixed update behavior
+    /// </summary>
+    protected void OnFixedUpdate() { }
+    
 
     private void OnStealEnded(GameObject item, GameObject enemy)
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = false;
+            m_state = EnemyAIState.Moving;
         }
     }
 
@@ -65,7 +91,7 @@ public class BaseEnemyAI : MonoBehaviour
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = true;
+            m_state = EnemyAIState.TugOfWar;
         }
     }
 
@@ -80,23 +106,38 @@ public class BaseEnemyAI : MonoBehaviour
         if (SingletonMaster.Instance.PlayerBase != null)
         {
             Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
-
             Vector3 faceDir = Vector3.zero;
+
             if (!m_overrideMovement)
             {
-                MoveToPlayer();
-                faceDir = (playerPos - transform.position).normalized;
-            }
-            else
-            {
-                // Moving against player movement - TUG OF WAR mechanic
-                Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
-                m_moveDirection = -playerDir;
-                faceDir = m_moveDirection;
-                
-                m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+                switch (m_state)
+                {
+                    case EnemyAIState.Moving:
+                    {
+                        MoveToPlayer();
+                        faceDir = (playerPos - transform.position).normalized;
+                        break;
+                    }
+                    case EnemyAIState.TugOfWar:
+                    {
+                        // Moving against player movement - TUG OF WAR mechanic
+                        Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
+                        m_moveDirection = -playerDir;
+                        faceDir = m_moveDirection;
+
+                        m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+                        break;
+                    }
+                    case EnemyAIState.Idle:
+                    {
+                        break;
+                    }
+                }
             }
             
+            OnFixedUpdate();
+
+            // moving face
             m_face.transform.localPosition = faceDir * m_faceMoveFactor;
         }
     }
@@ -151,17 +192,7 @@ public class BaseEnemyAI : MonoBehaviour
         }
         
         m_moveDirection += bestDirection;
-
         m_moveDirection = m_moveDirection.normalized;
-
-        // if (bestDotVal > 0.3f)
-        // {
-        //     m_moveDirection = bestDirection;
-        // }
-        // else
-        // {
-        //     m_moveDirection = Vector2.zero;
-        // }
 
         // The actual move direction
         Debug.DrawLine(transform.position,

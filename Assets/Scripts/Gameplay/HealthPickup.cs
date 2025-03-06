@@ -20,14 +20,14 @@ public class HealthPickup : MonoBehaviour
     [Header("Visual Settings")]
     [SerializeField] private float m_scaleFactor = 1.5f;
     [SerializeField] private AnimationCurve m_curve;
-    [SerializeField] private Color m_uncollectedColor;
     [SerializeField] private Color m_collectedColor;
     [SerializeField] private float m_shrinkSpeed = 1.25f;
     
     [Header("Damage Settings")]
     [SerializeField] private float m_damage = 1.5f;
     [SerializeField] private float m_velocityThreshold = 10.0f;
-    
+
+    private Color m_uncollectedColor;
     private Coroutine shrinkCoroutine = null;
     private float m_despawnTimer = 0.0f;
     private SpriteRenderer m_spriteRend;
@@ -39,7 +39,8 @@ public class HealthPickup : MonoBehaviour
         m_healValue = Random.Range(1, m_maxValue);
         float scale = m_curve.Evaluate((float)m_healValue / m_maxValue) * m_scaleFactor;
         transform.localScale = Vector3.one * scale;
-
+        m_uncollectedColor = m_spriteRend.color;
+        
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
     }

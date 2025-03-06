@@ -37,12 +37,23 @@ public class RopeComponent : MonoBehaviour
     private float m_ropeStressTimer = 0.0f;
     private bool m_isStealing = false;
 
+    [Header("Visual Settings")] 
+    [SerializeField] private GameObject m_highlight;
+    [SerializeField] private Color m_connectColor = Color.white;
+    [SerializeField] private Color m_disconnectColor = Color.cyan;
+
     private IEnumerator Start()
-    { 
+    {
+        if (m_highlight != null)
+        {
+            m_highlight.SetActive(false);
+        }
+        
         m_rope = GameObject.FindGameObjectWithTag("Rope");
         m_anchorObject = GetComponent<Rigidbody2D>();
         
         SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
 
         yield return null;
         
@@ -59,6 +70,15 @@ public class RopeComponent : MonoBehaviour
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+    }
+    
+    private void OnPlayerDeath(GameObject obj)
+    {
+        if (m_highlight != null)
+        {
+            HideHighlight();
+        }
     }
 
     private void OnStealSuccess(GameObject obj, GameObject enemy)
@@ -353,5 +373,17 @@ public class RopeComponent : MonoBehaviour
                 m_ropeStressTimer = 0.0f;
             }
         }
+    }
+
+    
+    public void ShowHighlight(bool isConnection)
+    {
+        m_highlight.GetComponent<SpriteRenderer>().color = isConnection ? m_connectColor : m_disconnectColor;
+        m_highlight.SetActive(true);
+    }
+    
+    public void HideHighlight()
+    {
+        m_highlight.SetActive(false);
     }
 }

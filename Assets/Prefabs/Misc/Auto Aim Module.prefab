@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5235849, g: 0.85744464, b: 1, a: 1}
+  m_Color: {r: 0.5254902, g: 0.85527843, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -196,6 +196,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ability: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
+  m_spriteRenderer: {fileID: 0}
+  m_type: 0
+  m_coolDownColor: {r: 0, g: 0, b: 0, a: 0}
+  m_text: {fileID: 0}
+  m_damage: 1.5
+  m_velocityThreshold: 10
 --- !u!114 &-3312218313773432131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +225,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_isLinked: 0
+  m_playerDeath: {fileID: 0}
+  m_enemyDeath: {fileID: 0}
 --- !u!114 &-7885990815543432287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,10 +241,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_connectedTo: []
   m_receivedFrom: []
-  m_ropeLinks: []
+  m_ropeLinksEnemy: []
+  m_ropeLinksPlayer: []
   m_ropeLength: 20
   m_isConnectedToPlayer: 0
+  m_isConnectedToEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
+  m_maxTension: 500
+  m_tensionDuration: 1
+  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
+  m_highlight: {fileID: 0}
+  m_connectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_disconnectColor: {r: 0, g: 200, b: 200, a: 1}
 --- !u!1 &1949022936373688667
 GameObject:
   m_ObjectHideFlags: 0

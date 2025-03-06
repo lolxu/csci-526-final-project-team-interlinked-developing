@@ -214,18 +214,18 @@ public class ShootComponent : MonoBehaviour
         Vector2 muzzlePosition = m_muzzle.transform.position;
         
         // AIMING !!!!
-        if (m_canShoot)
+        // TODO: Change this lol (so terrible)
+        if (m_canShoot && m_canAutoAim)
         {
-            Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-
-            if (m_canAutoAim)
-            {
-                selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
-            }
+            Vector3 selfToTarget = Vector3.zero;
+            selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
             
             // Rotating the gun
-            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
-            m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            if (m_hasTarget)
+            {
+                float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
+                m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            }
         }
         else if (m_isOwnerEnemy)
         {
