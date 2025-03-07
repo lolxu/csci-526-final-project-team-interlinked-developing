@@ -11,6 +11,7 @@ public class BaseEnemyAI : MonoBehaviour
     {
         Moving,
         TugOfWar,
+        Attack,
         Idle
     }
     public EnemyAIState m_state = EnemyAIState.Idle;
@@ -29,9 +30,9 @@ public class BaseEnemyAI : MonoBehaviour
     
     protected bool m_overrideMovement = false;
 
-    private List<Vector2> m_pathfindDirections = new List<Vector2>();
-    private Rigidbody2D m_RB;
-    private Vector2 m_randomDestinationDisp;
+    protected List<Vector2> m_pathfindDirections = new List<Vector2>();
+    protected Rigidbody2D m_RB;
+    protected Vector2 m_randomDestinationDisp;
 
     private void Start()
     {
@@ -114,22 +115,25 @@ public class BaseEnemyAI : MonoBehaviour
                 {
                     case EnemyAIState.Moving:
                     {
-                        MoveToPlayer();
+                        MoveBehavior();
                         faceDir = (playerPos - transform.position).normalized;
                         break;
                     }
                     case EnemyAIState.TugOfWar:
                     {
                         // Moving against player movement - TUG OF WAR mechanic
-                        Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
-                        m_moveDirection = -playerDir;
+                        TugOfWarBehavior();
                         faceDir = m_moveDirection;
-
-                        m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+                        break;
+                    }
+                    case EnemyAIState.Attack:
+                    {
+                        AttackBehavior();
                         break;
                     }
                     case EnemyAIState.Idle:
                     {
+                        IdleBehavior();
                         break;
                     }
                 }
@@ -142,7 +146,24 @@ public class BaseEnemyAI : MonoBehaviour
         }
     }
 
-    private void MoveToPlayer()
+    protected virtual void IdleBehavior()
+    {
+        
+    }
+
+    protected virtual void AttackBehavior()
+    {
+        
+    }
+    
+    protected virtual void TugOfWarBehavior()
+    {
+        Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
+        m_moveDirection = -playerDir;
+        m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+    }
+
+    protected virtual void MoveBehavior()
     {
         Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
         Vector3 targetPos = Vector2.zero;
