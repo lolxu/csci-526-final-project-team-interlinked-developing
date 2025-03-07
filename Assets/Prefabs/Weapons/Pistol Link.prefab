@@ -479,6 +479,7 @@ MonoBehaviour:
   m_highlight: {fileID: 965292059551159961}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
   m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
+  m_colorAlpha: 0.5
 --- !u!114 &8098651125329348806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,11 +521,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 938082696829591144, guid: a125b468d8068904db03537955ad5dc7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.93
       objectReference: {fileID: 0}
     - target: {fileID: 938082696829591144, guid: a125b468d8068904db03537955ad5dc7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 1.53
       objectReference: {fileID: 0}
     - target: {fileID: 938082696829591144, guid: a125b468d8068904db03537955ad5dc7, type: 3}
       propertyPath: m_LocalScale.z
@@ -585,6 +586,10 @@ PrefabInstance:
     - target: {fileID: 7267166746446923350, guid: a125b468d8068904db03537955ad5dc7, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065864678888629641, guid: a125b468d8068904db03537955ad5dc7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.364
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

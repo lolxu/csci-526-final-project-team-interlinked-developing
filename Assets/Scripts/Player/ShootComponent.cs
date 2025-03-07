@@ -346,7 +346,7 @@ public class ShootComponent : MonoBehaviour
     {
         m_muzzleFlash.intensity = m_muzzleFlashIntensity;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, m_muzzle.transform.position, Quaternion.identity);
         BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
         bulletScript.m_owner = gameObject;
         

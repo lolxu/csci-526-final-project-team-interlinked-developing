@@ -44,18 +44,25 @@ public class BasePlayerBullet : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        if (m_bulletType == BulletType.Projectile)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
     {
         m_RB.velocity = m_direction * m_speed * Time.deltaTime;
-        // m_lifeTime -= Time.deltaTime;
-        // if (m_lifeTime < 0.0f)
-        // {
-        //     Destroy(gameObject);
-        // }
-        
+
+        if (m_bulletType == BulletType.Scanhit)
+        {
+            m_lifeTime -= Time.deltaTime;
+            if (m_lifeTime < 0.0f)
+            {
+                Destroy(gameObject);
+            }
+        }
+
         if (m_bulletType == BulletType.Scanhit && !m_hasRaycasted)
         {
             m_hasRaycasted = true;
@@ -98,13 +105,13 @@ public class BasePlayerBullet : MonoBehaviour
                 {
                     health.DamageEvent.Invoke(m_damage, m_owner);
                 }
-            }
-            
-            m_penetrateNum--;
-            if (m_penetrateNum == 0 && other.CompareTag(m_bulletTargetTag))
-            {
-                // m_trail.transform.SetParent(null, true);
-                Destroy(gameObject);
+                
+                m_penetrateNum--;
+                if (m_penetrateNum == 0)
+                {
+                    m_trail.transform.SetParent(null, true);
+                    Destroy(gameObject);
+                }
             }
         }
     }

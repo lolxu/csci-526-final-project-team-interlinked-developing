@@ -41,12 +41,15 @@ public class RopeComponent : MonoBehaviour
     [SerializeField] private GameObject m_highlight;
     [SerializeField] private Color m_connectColor = Color.white;
     [SerializeField] private Color m_disconnectColor = Color.cyan;
+    [SerializeField] private float m_colorAlpha = 0.5f;
 
     private IEnumerator Start()
     {
         if (m_highlight != null)
         {
             m_highlight.SetActive(false);
+            m_connectColor.a = m_colorAlpha;
+            m_disconnectColor.a = m_colorAlpha;
         }
         
         m_rope = GameObject.FindGameObjectWithTag("Rope");
