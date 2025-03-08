@@ -12,4 +12,5 @@ public class AbilityManager : MonoBehaviour
     }
     
     public UnityEvent<AbilityTypes> ActivateAbility = new UnityEvent<AbilityTypes>();
+    public UnityEvent<AbilityTypes> AbilityFinished = new UnityEvent<AbilityTypes>();
 }

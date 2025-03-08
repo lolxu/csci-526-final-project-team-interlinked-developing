@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f73a5de0afdb4544093e2a1b4ef00121, type: 3}
-  m_Name: HealthPickup
+  m_Name: DashPickup
   m_EditorClassIdentifier: 
   loot:
     m_loot:
-      m_prefab: {fileID: 1181414071359833202, guid: 6aaa44ba98ceb7d4f9bbb345c24faf93, type: 3}
+      m_prefab: {fileID: 7574045754775299820, guid: c4beca56fd037154bba0da95d5e7aa3f, type: 3}
       m_lootType: 0
-    m_weightedValue: 1
+    m_weightedValue: 0.696

@@ -26,7 +26,7 @@ public class DashAbility : MonoBehaviour
 
     private void OnAbilityActivated(AbilityManager.AbilityTypes type)
     {
-        if (type == m_abilityType && m_canActivate && m_ability.m_enabled)
+        if (type == m_abilityType && m_canActivate && m_ability.CheckAbilityEnabled())
         {
             Debug.Log("Ability Activated");
             m_canActivate = false;
@@ -83,6 +83,8 @@ public class DashAbility : MonoBehaviour
                 player.GetComponent<Collider2D>().excludeLayers = default;
                 player.GetComponent<SpriteRenderer>().color = m_orgColor;
             }
+            
+            SingletonMaster.Instance.AbilityManager.AbilityFinished.Invoke(m_abilityType);
         }
     }
 

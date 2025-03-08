@@ -202,8 +202,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.3256, y: -3.2692, z: 0}
-  m_LocalScale: {x: 1.062074, y: 3.187143, z: 1.7045}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 2.25, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7910100440042327124}
   - {fileID: 2362693614081629192}
@@ -349,6 +349,7 @@ MonoBehaviour:
   m_highlight: {fileID: 8184096133689514253}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
   m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
+  m_colorAlpha: 0.5
 --- !u!114 &6362423424263417654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,12 +363,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ability: {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
+  m_maxUse: 5
   m_spriteRenderer: {fileID: 5669294375791699597}
   m_type: 0
   m_coolDownColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
+  m_ropeComponent: {fileID: 8617432189424281335}
   m_text: {fileID: 1197087234813313872}
+  m_showText: 0
+  m_lifeTime: 10
   m_damage: 0.25
   m_velocityThreshold: 10
+  m_shrinkSpeed: 0.25
 --- !u!1 &8184096133689514253
 GameObject:
   m_ObjectHideFlags: 0

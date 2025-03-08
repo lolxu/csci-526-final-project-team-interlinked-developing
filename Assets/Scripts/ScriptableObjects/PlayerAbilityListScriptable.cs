@@ -10,26 +10,26 @@ public class PlayerAbilityListScriptable : ScriptableObject
 
     public bool CheckAbilityEnabled(AbilityScriptable ability)
     {
-        return ability.m_enabled;
+        return ability.CheckAbilityEnabled();
     }
 
-    public void SetAbility(AbilityScriptable ability, bool status)
-    {
-        foreach (var ab in m_abilities)
-        {
-            if (ab == ability)
-            {
-                ability.m_enabled = status;
-                break;
-            }
-        }
-    }
+    // public void SetAbility(AbilityScriptable ability, bool status)
+    // {
+    //     foreach (var ab in m_abilities)
+    //     {
+    //         if (ab == ability)
+    //         {
+    //             ability.m_enabled = status;
+    //             break;
+    //         }
+    //     }
+    // }
 
     public void ResetAbilities()
     {
         foreach (var ability in m_abilities)
         {
-            ability.m_enabled = false;
+            ability.ResetAbility();
         }
     }
 }

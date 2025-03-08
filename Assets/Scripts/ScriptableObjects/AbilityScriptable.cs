@@ -7,12 +7,33 @@ using UnityEngine;
 public class AbilityScriptable : ScriptableObject
 {
     public string m_name;
-    public bool m_enabled = false;
     public float m_activeDuration = 0.25f;
     public float m_coolDown = 1.0f;
 
+    public int m_count = 0;
+
+    public void AddLink()
+    {
+        m_count++;
+    }
+
+    public void RemoveLink()
+    {
+        m_count--;
+    }
+
     private void OnEnable()
     {
-        m_enabled = false;
+        m_count = 0;
+    }
+
+    public void ResetAbility()
+    {
+        m_count = 0;
+    }
+
+    public bool CheckAbilityEnabled()
+    {
+        return m_count > 0;
     }
 }
