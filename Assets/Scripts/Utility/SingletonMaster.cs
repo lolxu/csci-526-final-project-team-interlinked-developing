@@ -18,14 +18,17 @@ public class SingletonMaster : MonoBehaviour
     [Header("Event Manager")] 
     public EventManager EventManager;
 
+    [Header("Ability Manager")] 
+    public AbilityManager AbilityManager;
+
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
     public LootSpawnScriptable LootSpawnScriptableObject;
     public PlayerAbilityListScriptable PlayerAbilities;
 
     [Header("Juice Settings")] 
-    public CameraShake CameraShakeManager;
     public FeelManager FeelManager;
+    public CameraShake CameraShakeManager;
     
     [Header("Constants")]
     public int UNCONNECTED_LAYER = 6;

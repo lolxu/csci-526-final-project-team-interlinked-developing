@@ -27,12 +27,15 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SingletonMasterObject = GameObject.Find("Singleton Master");
+        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
+        
         // Attaching Singleton Master to itself to be not destroyed
-        if (transform.childCount == 0)
-        {
-            SingletonMasterObject = GameObject.Find("Singleton Master");
-            SingletonMasterObject.transform.SetParent(transform, true);
-        }
+        // if (transform.childCount == 0)
+        // {
+        //     SingletonMasterObject = GameObject.Find("Singleton Master");
+        //     SingletonMasterObject.transform.SetParent(transform, true);
+        // }
     }
 
     private void Start()
@@ -46,9 +49,9 @@ public class GameManager : MonoBehaviour
         // FOR DEBUG ONLY
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SingletonMasterObject.GetComponent<SingletonMaster>().PlayerAbilities.ResetAbilities();
+            SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
             SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
-            SceneManager.LoadScene("Prototype - Battlefield");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

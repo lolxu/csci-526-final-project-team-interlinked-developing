@@ -15,9 +15,6 @@ public class EnemyManager : MonoBehaviour
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
 
-    [Header("Visual Settings")] 
-    public ParticleSystem m_enemyDeathParticles;
-
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
     private int m_maxEnemyCount = 20;
@@ -176,7 +173,6 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
-        Instantiate(m_enemyDeathParticles, enemy.transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
         m_enemies.Remove(enemy.transform.parent.gameObject);
         
         // Checking for any connected stuff to this enemy
@@ -184,7 +180,10 @@ public class EnemyManager : MonoBehaviour
         for (int i = rc.m_connectedTo.Count - 1; i >= 0; --i)
         {
             var connectedObj = rc.m_connectedTo[i];
-            connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
+            if (connectedObj)
+            {
+                connectedObj.GetComponent<RopeComponent>().DetachEnemy(enemy);
+            }
         }
         
         Destroy(enemy.transform.parent.gameObject);

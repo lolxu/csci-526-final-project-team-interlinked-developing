@@ -208,24 +208,24 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
+        m_canAutoAim = m_canShoot;
         
         Vector2 myPos = transform.position;
         Vector2 muzzlePosition = m_muzzle.transform.position;
         
         // AIMING !!!!
-        if (m_canShoot)
+        // TODO: Change this lol (so terrible)
+        if (m_canShoot && m_canAutoAim)
         {
-            Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-
-            if (m_canAutoAim)
-            {
-                selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
-            }
+            Vector3 selfToTarget = Vector3.zero;
+            selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
             
             // Rotating the gun
-            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
-            m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            if (m_hasTarget)
+            {
+                float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
+                m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            }
         }
         else if (m_isOwnerEnemy)
         {
@@ -243,9 +243,11 @@ public class ShootComponent : MonoBehaviour
         
         if (m_canShoot)
         {
+            // Debug.Log("Player is shooting");
             // SHOOTING!!
-            if (m_isMouseDown && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
+            if (m_hasTarget && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
             {
+                // Debug.Log("Player has target");
                 // Here's the shooty controls
                 if (m_fireTimeout <= 0.0f)
                 {
@@ -344,7 +346,7 @@ public class ShootComponent : MonoBehaviour
     {
         m_muzzleFlash.intensity = m_muzzleFlashIntensity;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, m_muzzle.transform.position, Quaternion.identity);
         BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
         bulletScript.m_owner = gameObject;
         

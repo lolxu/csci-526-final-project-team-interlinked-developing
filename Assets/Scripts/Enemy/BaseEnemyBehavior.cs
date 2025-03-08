@@ -41,6 +41,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     /// Overwrite this for custom update behavior
     /// </summary>
     protected virtual void OnUpdate() { }
+    
+    protected virtual void OnBeingDisabled() { }
 
     private void Start()
     {
@@ -57,6 +59,8 @@ public class BaseEnemyBehavior : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        
+        OnBeingDisabled();
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -88,15 +92,17 @@ public class BaseEnemyBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Checking colliding force
-        if (!other.gameObject.CompareTag("Rope") && m_canBeTossed)
+        // TODO: Change how we code this later...
+        if (!other.gameObject.CompareTag("Rope") && !other.gameObject.CompareTag("Linkable") && !other.gameObject.CompareTag("Player"))
         {
             float relativeVel = other.relativeVelocity.magnitude;
             if (relativeVel > m_collisionVelocityThreshold)
             {
                 // Remap relative velocity magnitude to health
-                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.35f, 0.0f, m_healthComponent.m_maxHealth * 0.3f);
+                relativeVel = Mathf.Clamp(relativeVel, 0.0f, m_collisionVelocityThreshold * 1.5f);
+                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.5f, 0.0f, m_healthComponent.m_maxHealth * 0.3f);
                 
-                // Debug.Log(relativeVel);
+                Debug.Log("Damage: " + relativeVel);
                 m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);
 
                 if (other.gameObject.CompareTag("Enemy"))

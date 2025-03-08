@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7638e296263b06d4a93a1cc77c1d5c4b, type: 3}
-  m_Name: Ability_AutoAim
+  m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
+  m_Name: Enemy_Mage
   m_EditorClassIdentifier: 
-  m_name: AutoAim
-  m_enabled: 0
-  m_count: 0
+  enemy:
+    m_enemy:
+      m_prefab: {fileID: 4391433643842635490, guid: a62f47fb0ef6db149a5386a878fd3915, type: 3}
+      m_enemyType: 3
+      m_lootSpawnRate: 0.25
+    m_weightedValue: 0.125

@@ -6,22 +6,33 @@ using Random = UnityEngine.Random;
 
 public class BaseEnemyAI : MonoBehaviour
 {
+    // A simple state machine...
+    public enum EnemyAIState
+    {
+        Moving,
+        TugOfWar,
+        Attack,
+        Idle
+    }
+    public EnemyAIState m_state = EnemyAIState.Idle;
+    
     [Header("Movement Settings")] 
     public float m_acceleration = 10.0f;
     public float m_maxSpeed = 50.0f;
     public int m_numDirections = 12;
     public float m_raycastDistance = 5.0f;
     public LayerMask m_pathfindIgnoreMasks;
+    public Vector2 m_moveDirection { private set; get; }= Vector2.zero;
     
     [Header("Visual Settings")]
     [SerializeField] protected GameObject m_face;
     [SerializeField] protected float m_faceMoveFactor = 0.25f;
+    
+    protected bool m_overrideMovement = false;
 
-    private List<Vector2> m_pathfindDirections = new List<Vector2>();
-    private Rigidbody2D m_RB;
-    private Vector2 m_randomDestinationDisp;
-    private Vector2 m_moveDirection = Vector2.zero;
-    private bool m_overrideMovement = false;
+    protected List<Vector2> m_pathfindDirections = new List<Vector2>();
+    protected Rigidbody2D m_RB;
+    protected Vector2 m_randomDestinationDisp;
 
     private void Start()
     {
@@ -43,8 +54,13 @@ public class BaseEnemyAI : MonoBehaviour
         
         m_randomDestinationDisp = Random.insideUnitCircle.normalized * 5.0f;
         
+        // Setting state
+        m_state = EnemyAIState.Moving;
+        
         SingletonMaster.Instance.EventManager.StealStartedEvent.AddListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.AddListener(OnStealEnded);
+        
+        OnStart();
     }
 
     private void OnDisable()
@@ -52,12 +68,23 @@ public class BaseEnemyAI : MonoBehaviour
         SingletonMaster.Instance.EventManager.StealStartedEvent.RemoveListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.RemoveListener(OnStealEnded);
     }
+    
+    /// <summary>
+    /// Override for custom start behavior
+    /// </summary>
+    protected void OnStart() { }
+    
+    /// <summary>
+    /// Override for custom fixed update behavior
+    /// </summary>
+    protected void OnFixedUpdate() { }
+    
 
     private void OnStealEnded(GameObject item, GameObject enemy)
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = false;
+            m_state = EnemyAIState.Moving;
         }
     }
 
@@ -65,7 +92,7 @@ public class BaseEnemyAI : MonoBehaviour
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = true;
+            m_state = EnemyAIState.TugOfWar;
         }
     }
 
@@ -80,29 +107,63 @@ public class BaseEnemyAI : MonoBehaviour
         if (SingletonMaster.Instance.PlayerBase != null)
         {
             Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
-
             Vector3 faceDir = Vector3.zero;
+
             if (!m_overrideMovement)
             {
-                MoveToPlayer();
-                faceDir = (playerPos - transform.position).normalized;
-            }
-            else
-            {
-                // Debug.Log("Tug of war");
-                Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
-                m_moveDirection = -playerDir;
-                faceDir = m_moveDirection;
-                
-                // Moving using the best direction
-                m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+                switch (m_state)
+                {
+                    case EnemyAIState.Moving:
+                    {
+                        MoveBehavior();
+                        faceDir = (playerPos - transform.position).normalized;
+                        break;
+                    }
+                    case EnemyAIState.TugOfWar:
+                    {
+                        // Moving against player movement - TUG OF WAR mechanic
+                        TugOfWarBehavior();
+                        faceDir = m_moveDirection;
+                        break;
+                    }
+                    case EnemyAIState.Attack:
+                    {
+                        AttackBehavior();
+                        break;
+                    }
+                    case EnemyAIState.Idle:
+                    {
+                        IdleBehavior();
+                        break;
+                    }
+                }
             }
             
+            OnFixedUpdate();
+
+            // moving face
             m_face.transform.localPosition = faceDir * m_faceMoveFactor;
         }
     }
 
-    private void MoveToPlayer()
+    protected virtual void IdleBehavior()
+    {
+        
+    }
+
+    protected virtual void AttackBehavior()
+    {
+        
+    }
+    
+    protected virtual void TugOfWarBehavior()
+    {
+        Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
+        m_moveDirection = -playerDir;
+        m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+    }
+
+    protected virtual void MoveBehavior()
     {
         Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
         Vector3 targetPos = Vector2.zero;
@@ -127,9 +188,6 @@ public class BaseEnemyAI : MonoBehaviour
         Vector2 bestDirection = Vector2.zero;
         foreach (var direction in m_pathfindDirections)
         {
-            Debug.DrawLine(transform.position,
-                transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
-
             float dotVal = Vector2.Dot(direction, toPlayer);
 
             // Raycast to check for obstacles
@@ -138,6 +196,12 @@ public class BaseEnemyAI : MonoBehaviour
             if (hit)
             {
                 dotVal = -1.0f;
+                m_moveDirection += -direction;
+            }
+            else
+            {
+                Debug.DrawLine(transform.position,
+                    transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
             }
 
             // Checking dot values
@@ -147,18 +211,13 @@ public class BaseEnemyAI : MonoBehaviour
                 bestDirection = direction;
             }
         }
+        
+        m_moveDirection += bestDirection;
+        m_moveDirection = m_moveDirection.normalized;
 
-        if (bestDotVal > 0.15f)
-        {
-            m_moveDirection = bestDirection;
-        }
-        else
-        {
-            m_moveDirection = Vector2.zero;
-        }
-
+        // The actual move direction
         Debug.DrawLine(transform.position,
-            transform.position + new Vector3(bestDirection.x, bestDirection.y, 0.0f) * m_raycastDistance,
+            transform.position + new Vector3(m_moveDirection.x, m_moveDirection.y, 0.0f) * 5.0f,
             Color.magenta);
 
         // Moving using the best direction
