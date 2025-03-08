@@ -21,6 +21,7 @@ public class PlayerBase : MonoBehaviour
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
     public Vector2 m_moveDirection;
+    public Vector2 m_lastMoveDirection { private set; get; }
     
     [Header("Rope Settings")]
     public GameObject m_rope;
@@ -306,6 +307,11 @@ public class PlayerBase : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDirection = context.ReadValue<Vector2>();
+
+        if (m_moveDirection.magnitude > 0.0f)
+        {
+            m_lastMoveDirection = m_moveDirection;
+        }
     }
     
     public void Fire(InputAction.CallbackContext context)

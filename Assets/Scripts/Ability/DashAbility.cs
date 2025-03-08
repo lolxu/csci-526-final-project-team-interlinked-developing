@@ -43,6 +43,11 @@ public class DashAbility : MonoBehaviour
             GameObject player = pb.gameObject;
             Vector2 dashDir = pb.m_moveDirection;
 
+            if (dashDir.magnitude < 0.01f)
+            {
+                dashDir = pb.m_lastMoveDirection;
+            }
+
             player.GetComponent<Collider2D>().excludeLayers = m_dashMasks;
             SingletonMaster.Instance.PlayerBase.m_isDashing = true;
             Color newColor = m_orgColor;
