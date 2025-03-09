@@ -81,7 +81,7 @@ public class HealthComponent : MonoBehaviour
             if (!m_isInvincible && m_health > 0.0f)
             {
                 // First stop the sequence & resetting stuff
-                // m_hurtSequence.Kill();
+                m_hurtSequence.Kill();
                 m_spriteRenderer.color = m_orgColor;
                 transform.localScale = m_orgScale;
                 
@@ -140,15 +140,6 @@ public class HealthComponent : MonoBehaviour
                         m_spriteRenderer.color = m_orgColor;
                         transform.localScale = m_orgScale;
                     });
-
-                    // if (m_damageSequence != null)
-                    // {
-                    //     StopCoroutine(m_damageSequence);
-                    //     m_spriteRenderer.color = m_orgColor;
-                    //     transform.localScale = m_orgScale;
-                    // }
-                    //
-                    // m_damageSequence = StartCoroutine(EnemyHurtSequence());
                     
                     // Damage to health
                     m_health -= damage;
@@ -199,29 +190,6 @@ public class HealthComponent : MonoBehaviour
         Time.timeScale = orgTimeScale;
     }
     
-    // private IEnumerator EnemyHurtSequence()
-    // {
-    //     transform.localScale = m_orgScale * 0.85f;
-    //     m_spriteRenderer.color = Color.white;
-    //     yield return new WaitForSecondsRealtime(0.15f);
-    //     m_spriteRenderer.color = m_orgColor;
-    //     transform.localScale = m_orgScale;
-    // }
-    //
-    // private IEnumerator PlayerHurtSequence(Vector2 dir)
-    // {
-    //     float flashDuration = 0.0f;
-    //     m_RB.AddForce(dir * 300.0f, ForceMode2D.Impulse);
-    //     while (flashDuration <= m_invincibleTime)
-    //     {
-    //         m_spriteRenderer.color = Color.white;
-    //         yield return new WaitForSecondsRealtime(0.1f);
-    //         m_spriteRenderer.color = m_orgColor;
-    //         yield return new WaitForSecondsRealtime(0.1f);
-    //         flashDuration += 0.2f;
-    //     }
-    //     m_spriteRenderer.color = m_orgColor;
-    // }
     
     private IEnumerator PlayerInvincibleSequence()
     {
