@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6839203773940049152}
   m_Layer: 9
-  m_Name: Enemy_heavy
+  m_Name: Enemy_Heavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1288623042125281327, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_InstanceId
-      value: -152938
+      value: -44944
       objectReference: {fileID: 0}
     - target: {fileID: 1829588942597929290, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_maxSpeed
@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603404083349618112, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6235473816173499586, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_LocalScale.x
