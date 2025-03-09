@@ -93,14 +93,14 @@ public class BaseEnemyBehavior : MonoBehaviour
     {
         // Checking colliding force
         // TODO: Change how we code this later...
-        if (!other.gameObject.CompareTag("Rope") && !other.gameObject.CompareTag("Linkable") && !other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Rope") && !other.gameObject.CompareTag("Loot") && !other.gameObject.CompareTag("Player"))
         {
             float relativeVel = other.relativeVelocity.magnitude;
             if (relativeVel > m_collisionVelocityThreshold)
             {
                 // Remap relative velocity magnitude to health
                 relativeVel = Mathf.Clamp(relativeVel, 0.0f, m_collisionVelocityThreshold * 1.5f);
-                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.5f, 0.0f, m_healthComponent.m_maxHealth * 0.3f);
+                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.5f, 0.0f, m_healthComponent.m_maxHealth * 0.25f);
                 
                 Debug.Log("Damage: " + relativeVel);
                 m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);

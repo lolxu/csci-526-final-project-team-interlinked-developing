@@ -28,10 +28,9 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Juice Settings")] 
     public FeelManager FeelManager;
-    public CameraShake CameraShakeManager;
     
     [Header("Constants")]
-    public int UNCONNECTED_LAYER = 6;
+    public int CONNECTABLE_LAYER = 6;
     public int PLAYER_LAYER = 7;
 
     private bool m_restart = false;

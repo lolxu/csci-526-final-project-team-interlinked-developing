@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -5117696569558385193}
   m_Layer: 6
   m_Name: HealthPickup
-  m_TagString: Linkable
+  m_TagString: Loot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,6 +266,7 @@ MonoBehaviour:
   m_highlight: {fileID: 7460555517007342608}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
   m_disconnectColor: {r: 0, g: 200, b: 200, a: 1}
+  m_colorAlpha: 0.5
 --- !u!1 &2543624386141920150
 GameObject:
   m_ObjectHideFlags: 0

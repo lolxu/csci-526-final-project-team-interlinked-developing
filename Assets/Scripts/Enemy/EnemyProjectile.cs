@@ -15,7 +15,6 @@ public class EnemyProjectile : MonoBehaviour
 
     [Header("Visual Settings")] 
     [SerializeField] private float m_shrinkTime = 0.15f;
-    [SerializeField] private GameObject m_hitParticles;
     
     private Rigidbody2D m_RB;
     private Collider2D m_collider;
@@ -114,7 +113,7 @@ public class EnemyProjectile : MonoBehaviour
             if (!other.collider.CompareTag("EnemyProjectile") && m_isDoneSpawning)
             {
                 // Particle Effect here
-                Instantiate(m_hitParticles, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
+                SingletonMaster.Instance.FeelManager.m_enemyProjectileHit.PlayFeedbacks(transform.position);
 
                 Destroy(gameObject);
             }
