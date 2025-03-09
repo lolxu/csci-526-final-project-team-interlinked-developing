@@ -140,12 +140,15 @@
 #endif
       loadingBar.style.display = "block";
 
+      var myGameInstance = null;
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+                myGameInstance = unityInstance;
+                  
                 loadingBar.style.display = "none";
 #if SHOW_DIAGNOSTICS
                 diagnostics_icon.onclick = () => {
@@ -155,14 +158,19 @@
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
+
               }).catch((message) => {
                 alert(message);
               });
             };
-
-      document.body.appendChild(script);
       
-      var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", {});
+      document.body.appendChild(script);
+
+      // Callback for the Unity OnClose event
+      window.onbeforeunload = function() {
+          myGameInstance.SendMessage("Metrics Manager", "Send");
+      };
+        
     </script>
   </body>
 </html>

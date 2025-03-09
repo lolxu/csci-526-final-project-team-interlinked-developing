@@ -28,8 +28,8 @@ public class MetricsManager : MonoBehaviour
     public class MetricsData
     {
         // For obtaining the number of rope connections & disconnections each level
-        [SerializeField] private List<int> m_ropeConnectionMetrics = new List<int>();
-        [SerializeField] private List<int> m_ropeDisconnectionMetrics = new List<int>();
+        public List<int> m_ropeConnectionMetrics = new List<int>();
+        public List<int> m_ropeDisconnectionMetrics = new List<int>();
 
         public void Init()
         {
@@ -82,6 +82,7 @@ public class MetricsManager : MonoBehaviour
 
     public void Send()
     {
+        Debug.Log("Sending data...");
         StartCoroutine(Post(m_sessionID.ToString()));
     }
 
@@ -89,6 +90,9 @@ public class MetricsManager : MonoBehaviour
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
+        form.AddField("entry.862385992", sessionID);
+        form.AddField("entry.665573761", m_metricsData.m_ropeConnectionMetrics[0]);
+        form.AddField("entry.1224369195", m_metricsData.m_ropeDisconnectionMetrics[0]);
         
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(m_URL, form))
