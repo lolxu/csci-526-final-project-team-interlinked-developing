@@ -157,7 +157,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 20, y: 0, z: 0}
@@ -615,6 +615,7 @@ MonoBehaviour:
   m_highlight: {fileID: 7479246409768848869}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
   m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
+  m_colorAlpha: 0.5
 --- !u!114 &-3779267154878166289
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5366,7 +5366,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 59198
+  m_InstanceId: 80802
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 0.49999988, y: 0.5, z: 0}
@@ -6109,8 +6109,8 @@ MonoBehaviour:
               m_PostInfinity: 2
               m_RotationOrder: 4
             m_AttackTime: 0
-            m_SustainTime: 0.2
-            m_DecayTime: 0.7
+            m_SustainTime: 0.1
+            m_DecayTime: 0.15
             m_ScaleWithImpact: 1
             m_HoldForever: 0
           m_ImpactRadius: 100
@@ -6578,8 +6578,7 @@ MonoBehaviour:
   LootSpawnScriptableObject: {fileID: 11400000, guid: 4eb21cccd984a434283410d846842646, type: 2}
   PlayerAbilities: {fileID: 11400000, guid: 30bb5b95017c5324180b8c75e0f0b7e7, type: 2}
   FeelManager: {fileID: 9077600127211253942}
-  CameraShakeManager: {fileID: 0}
-  UNCONNECTED_LAYER: 6
+  CONNECTABLE_LAYER: 6
   PLAYER_LAYER: 7
 --- !u!1 &3582586625695924295
 GameObject:
