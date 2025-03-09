@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
@@ -79,7 +80,7 @@ public class EnemyProjectile : MonoBehaviour
             m_timer += Time.deltaTime;
             if (m_timer > m_lifeTime)
             {
-                StartCoroutine(DisappearSequence());
+                DisappearSequence();
             }
         }
     }
@@ -120,23 +121,16 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    private IEnumerator DisappearSequence()
+    private void DisappearSequence()
     {
         gameObject.layer = 0;
 
         m_isDespawning = true;
         m_canMove = false;
 
-        float timer = 0.0f;
-        float rate = transform.localScale.x / m_shrinkTime;
-        while (timer < m_shrinkTime)
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
-            yield return null;
-            transform.localScale -= Vector3.one * rate * Time.deltaTime;
-            timer += Time.deltaTime;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 }

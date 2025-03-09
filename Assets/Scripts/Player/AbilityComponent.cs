@@ -172,7 +172,7 @@ public class AbilityComponent : MonoBehaviour
     {
         gameObject.layer = 0;
         
-        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InBounce).OnComplete(() =>
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
             Destroy(gameObject);
         });

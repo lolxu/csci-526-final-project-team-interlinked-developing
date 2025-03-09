@@ -159,7 +159,7 @@ public class DurabilityComponent : MonoBehaviour
         // Change the layer to default to be not considered for linking!!!! --------------------------------- IMPORTANT
         gameObject.layer = 0;
 
-        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InBounce).OnComplete(() =>
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
             Destroy(gameObject);
         });
