@@ -28,15 +28,10 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Juice Settings")] 
     public FeelManager FeelManager;
-    public CameraShake CameraShakeManager;
     
     [Header("Constants")]
-    public int UNCONNECTED_LAYER = 6;
+    public int CONNECTABLE_LAYER = 6;
     public int PLAYER_LAYER = 7;
-
-    [Header("Scene Names")] 
-    public string HubName = "Prototype - Hub";
-    public string BattlefieldName = "Prototype - Battlefield";
 
     private bool m_restart = false;
     

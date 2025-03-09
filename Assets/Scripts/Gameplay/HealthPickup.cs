@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class HealthPickup : MonoBehaviour
     [SerializeField] private float m_scaleFactor = 1.5f;
     [SerializeField] private AnimationCurve m_curve;
     [SerializeField] private Color m_collectedColor;
-    [SerializeField] private float m_shrinkSpeed = 1.25f;
+    [SerializeField] private float m_shrinkTime = 0.15f;
     
     [Header("Damage Settings")]
     [SerializeField] private float m_damage = 1.5f;
@@ -32,6 +33,7 @@ public class HealthPickup : MonoBehaviour
     private float m_despawnTimer = 0.0f;
     private SpriteRenderer m_spriteRend;
     private bool m_isHealing = false;
+    private bool m_isDespawning = false;
 
     private void Start()
     {
@@ -71,7 +73,7 @@ public class HealthPickup : MonoBehaviour
 
     private void Update()
     {
-        if (shrinkCoroutine == null && SingletonMaster.Instance.PlayerBase != null)
+        if (!m_isDespawning && SingletonMaster.Instance.PlayerBase != null)
         {
             if (m_isHealing)
             {
@@ -90,7 +92,8 @@ public class HealthPickup : MonoBehaviour
                         {
                             m_healValue = 0.0f;
                             m_ropeComponent.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
-                            shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                            m_isDespawning = true;
+                            ShrinkSequence();
                         }
                     }
                 }
@@ -100,31 +103,21 @@ public class HealthPickup : MonoBehaviour
                 m_despawnTimer += Time.deltaTime;
                 if (m_despawnTimer >= m_lifeTime)
                 {
-                    shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                    m_isDespawning = true;
+                    ShrinkSequence();
                 }
             }
         }
     }
 
-    public void StartShrinking()
-    {
-        if (shrinkCoroutine == null)
-        {
-            shrinkCoroutine = StartCoroutine(ShrinkSequence());
-        }
-    }
-
-    private IEnumerator ShrinkSequence()
+    private void ShrinkSequence()
     {
         gameObject.layer = 0;
-        while (transform.localScale.x >= 0.0f)
+        
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InBounce).OnComplete(() =>
         {
-            transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
-            yield return null;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 
     private void OnCollisionEnter2D(Collision2D other)

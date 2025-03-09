@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +27,6 @@ public class DurabilityComponent : MonoBehaviour
     private bool m_isConnectedByEnemy = false;
     private bool m_isConnectedByPlayer = false;
     private GameObject m_durabilityBar = null;
-    private Coroutine m_despawnSequence = null;
 
     private void Start()
     {
@@ -125,21 +125,21 @@ public class DurabilityComponent : MonoBehaviour
 
     private void Update()
     {
-        if (m_despawnSequence == null)
+        if (!m_isDespawning)
         {
             if (!m_isConnected)
             {
                 m_timer += Time.deltaTime;
                 if (m_timer >= m_lifeTime)
                 {
-                    m_despawnSequence = StartCoroutine(DespawnSequence());
+                    m_isDespawning = true;
+                    DespawnSequence();
                 }
             }
             else
             {
                 m_timer = 0.0f;
             }
-
 
             if (m_currentDurability == 0)
             {
@@ -148,27 +148,20 @@ public class DurabilityComponent : MonoBehaviour
                 {
                     m_isDespawning = true;
                     rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
-                    m_despawnSequence = StartCoroutine(DespawnSequence());
+                    DespawnSequence();
                 }
             }
         }
     }
 
-    private IEnumerator DespawnSequence()
+    private void DespawnSequence()
     {
         // Change the layer to default to be not considered for linking!!!! --------------------------------- IMPORTANT
         gameObject.layer = 0;
 
-        float timer = 0.0f;
-        float rate = transform.localScale.x / m_shrinkTime;
-        while (timer < m_shrinkTime)
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InBounce).OnComplete(() =>
         {
-            yield return null;
-            transform.localScale -= Vector3.one * rate * Time.deltaTime;
-            timer += Time.deltaTime;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 }

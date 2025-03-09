@@ -11,6 +11,8 @@ TagManager:
   - Garbage
   - DamageZone
   - EnemyProjectile
+  - Shop
+  - Loot
   layers:
   - Default
   - TransparentFX

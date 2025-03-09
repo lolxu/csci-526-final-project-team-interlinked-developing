@@ -363,6 +363,9 @@ public class PlayerBase : MonoBehaviour
 
             if (m_bestRopeConnectTarget != null)
             {
+                // TODO: We need to change this...
+                int level = SceneManager.GetActiveScene().buildIndex;
+                MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, true);
                 RequestRopeConnect(m_bestRopeConnectTarget.GetComponent<Rigidbody2D>());
             }
         }
@@ -405,6 +408,9 @@ public class PlayerBase : MonoBehaviour
 
             if (m_bestRopeDisconnectTarget != null)
             {
+                // TODO: We need to change this...
+                int level = SceneManager.GetActiveScene().buildIndex;
+                MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, false);
                 RemoveLinkedObject(m_bestRopeDisconnectTarget);
             }
         }

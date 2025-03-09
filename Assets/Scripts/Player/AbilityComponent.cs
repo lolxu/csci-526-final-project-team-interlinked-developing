@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class AbilityComponent : MonoBehaviour
@@ -21,10 +22,9 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private float m_velocityThreshold = 10.0f;
     
     [Header("Visual Settings")]
-    [SerializeField] private float m_shrinkSpeed = 0.25f;
+    [SerializeField] private float m_shrinkTime = 0.15f;
 
-    private Coroutine shrinkCoroutine = null;
-
+    private bool m_isDespawning = false;
     private bool m_isConnected = false;
     private bool m_canActivate = true;
     private Color m_orgColor;
@@ -56,7 +56,8 @@ public class AbilityComponent : MonoBehaviour
             if (m_use == m_maxUse)
             {
                 m_ropeComponent.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
-                shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                m_isDespawning = true;
+                ShrinkSequence();
             }
         }
     }
@@ -153,37 +154,27 @@ public class AbilityComponent : MonoBehaviour
 
     private void Update()
     {
-        if (shrinkCoroutine == null && SingletonMaster.Instance.PlayerBase != null)
+        if (!m_isDespawning && SingletonMaster.Instance.PlayerBase != null)
         {
             if (!m_isConnected)
             {
                 m_despawnTimer += Time.deltaTime;
                 if (m_despawnTimer >= m_lifeTime)
                 {
-                    shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                    m_isDespawning = true;
+                    ShrinkSequence();
                 }
             }
         }
     }
-    
-    public void StartShrinking()
-    {
-        if (shrinkCoroutine == null)
-        {
-            shrinkCoroutine = StartCoroutine(ShrinkSequence());
-        }
-    }
 
-    private IEnumerator ShrinkSequence()
+    private void ShrinkSequence()
     {
         gameObject.layer = 0;
-        while (transform.localScale.x >= 0.0f)
+        
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InBounce).OnComplete(() =>
         {
-            transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
-            yield return null;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 }
