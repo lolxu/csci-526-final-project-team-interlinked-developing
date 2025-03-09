@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
-  m_Name: Enemy_faster_stronger
+  m_Name: Enemy_Faster
   m_EditorClassIdentifier: 
   enemy:
     m_enemy:
-      m_prefab: {fileID: 4391433643842635490, guid: 7378daab85a8d6a4f97e4c7474ada784, type: 3}
+      m_prefab: {fileID: 4391433643842635490, guid: 504086bec27ef48fa945e647c2ea3155, type: 3}
       m_enemyType: 0
-      m_lootSpawnRate: 0.15
-    m_weightedValue: 0.24
+      m_lootSpawnRate: 0.404
+    m_weightedValue: 0.609
