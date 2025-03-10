@@ -167,8 +167,11 @@ public class EnemyManager : MonoBehaviour
         float roll = Random.Range(0.0f, 1.0f);
         if (roll <= enemy.GetComponent<BaseEnemyBehavior>().m_lootDropRate)
         {
-            GameObject loot = SingletonMaster.Instance.LootSpawnScriptableObject.GetRandomLootToSpawn().m_prefab;
-            Instantiate(loot, enemy.transform.position, Quaternion.identity);
+            LootScriptable.LootSpawn loot = SingletonMaster.Instance.LootSpawnScriptableObject.GetRandomLootToSpawn();
+            if (loot != null)
+            {
+                Instantiate(loot.m_prefab, enemy.transform.position, Quaternion.identity);
+            }
         }
     }
 

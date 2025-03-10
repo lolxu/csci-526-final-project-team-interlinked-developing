@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+// TODO: Refactor this into a loot class
 public class AbilityComponent : MonoBehaviour
 {
     [Header("Ability Settings")]
     public AbilityScriptable m_ability;
     public int m_maxUse = 5;
+    public bool m_canDespawn = true;
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     [SerializeField] private AbilityManager.AbilityTypes m_type;
     [SerializeField] private Color m_coolDownColor;
@@ -100,6 +102,8 @@ public class AbilityComponent : MonoBehaviour
         {
             m_isConnected = true;
             m_ability.AddLink();
+
+            m_despawnTimer = 0.0f;
             
             if (m_showText)
             {
@@ -156,14 +160,21 @@ public class AbilityComponent : MonoBehaviour
     {
         if (!m_isDespawning && SingletonMaster.Instance.PlayerBase != null)
         {
-            if (!m_isConnected)
+            if (m_canDespawn)
             {
-                m_despawnTimer += Time.deltaTime;
-                if (m_despawnTimer >= m_lifeTime)
+                if (!m_isConnected)
                 {
-                    m_isDespawning = true;
-                    ShrinkSequence();
+                    m_despawnTimer += Time.deltaTime;
+                    if (m_despawnTimer >= m_lifeTime)
+                    {
+                        m_isDespawning = true;
+                        ShrinkSequence();
+                    }
                 }
+            }
+            else
+            {
+                m_despawnTimer = 0.0f;
             }
         }
     }

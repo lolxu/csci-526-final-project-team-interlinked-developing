@@ -42,17 +42,21 @@ public class LootSpawner : MonoBehaviour
     private void SpawnLoot()
     {
         LootScriptable.LootSpawn spawn = m_lootTable.GetRandomLootToSpawn();
-        Vector2 position = GetRandomSpawnPosition();
-        GameObject spawnedObj = Instantiate(spawn.m_prefab, position, Quaternion.identity);
-        Vector3 scale = spawnedObj.transform.localScale;
-        spawnedObj.transform.localScale = Vector3.zero;
-        spawnedObj.layer = 0;
-        
-        spawnedObj.transform.DOScale(scale, 0.15f).SetEase(Ease.InOutSine).OnComplete(() =>
+        if (spawn != null)
         {
-            spawnedObj.layer = SingletonMaster.Instance.CONNECTABLE_LAYER;
-            m_spawnedLoot.Add(spawnedObj);
-        });
+            Vector2 position = GetRandomSpawnPosition();
+            GameObject spawnedObj = Instantiate(spawn.m_prefab, position, Quaternion.identity);
+            Vector3 scale = spawnedObj.transform.localScale;
+            spawnedObj.transform.localScale = Vector3.zero;
+            spawnedObj.layer = 0;
+            
+            ChangeDespawnable(spawnedObj, false);
+
+            spawnedObj.transform.DOScale(scale, 0.15f).SetEase(Ease.InOutSine).OnComplete(() =>
+            {
+                spawnedObj.layer = SingletonMaster.Instance.CONNECTABLE_LAYER;
+            });
+        }
     }
 
     private Vector2 GetRandomSpawnPosition()
@@ -64,12 +68,43 @@ public class LootSpawner : MonoBehaviour
         return randomPos;
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Loot"))
+        {
+            m_spawnedLoot.Add(other.gameObject);
+            
+            ChangeDespawnable(other.gameObject, false);
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
-        GameObject target = other.gameObject;
-        if (m_spawnedLoot.Contains(target))
+        if (other.CompareTag("Loot"))
         {
-            m_spawnedLoot.Remove(target);
+            GameObject target = other.gameObject;
+            if (m_spawnedLoot.Contains(target))
+            {
+                m_spawnedLoot.Remove(target);
+            }
+
+            ChangeDespawnable(target, true);
+        }
+    }
+
+    private void ChangeDespawnable(GameObject obj, bool status)
+    {
+        HealthPickup hp = obj.GetComponent<HealthPickup>();
+        AbilityComponent ac = obj.GetComponent<AbilityComponent>();
+
+        if (hp != null)
+        {
+            hp.m_canDespawn = status;
+        }
+
+        if (ac != null)
+        {
+            ac.m_canDespawn = status;
         }
     }
 }

@@ -36,7 +36,7 @@ public class LootSpawnScriptable : ScriptableObject
 
         if (output == null)
         {
-            Debug.LogError("Something bad happened with random picker");
+            Debug.Log("Whoops, no loot spawn this time lol");
         }
 
         return output;

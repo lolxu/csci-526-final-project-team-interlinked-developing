@@ -16,5 +16,5 @@ MonoBehaviour:
     m_enemy:
       m_prefab: {fileID: 4182519058032308907, guid: c8144f6774c24ea459c91ee8e8a71a97, type: 3}
       m_enemyType: 0
-      m_lootSpawnRate: 0.5
+      m_lootSpawnRate: 0.3
     m_weightedValue: 0.075

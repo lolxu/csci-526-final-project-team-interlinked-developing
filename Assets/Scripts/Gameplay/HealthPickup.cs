@@ -8,12 +8,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
+// TODO: Refactor this into a loot class
 public class HealthPickup : MonoBehaviour
 {
     
     [Header("Health pickup settings")]
     public float m_healValue = 5.0f;
     public float m_maxValue = 10.0f;
+    public bool m_canDespawn = true;
     [SerializeField] private float m_healRate = 1.0f;
     [SerializeField] private RopeComponent m_ropeComponent;
     [SerializeField] private float m_lifeTime = 20.0f;
@@ -71,6 +73,8 @@ public class HealthPickup : MonoBehaviour
         {
             m_isHealing = true;
             m_spriteRend.color = m_collectedColor;
+            
+            m_despawnTimer = 0.0f;
         }
     }
 
@@ -103,11 +107,18 @@ public class HealthPickup : MonoBehaviour
             }
             else
             {
-                m_despawnTimer += Time.deltaTime;
-                if (m_despawnTimer >= m_lifeTime)
+                if (m_canDespawn)
                 {
-                    m_isDespawning = true;
-                    ShrinkSequence();
+                    m_despawnTimer += Time.deltaTime;
+                    if (m_despawnTimer >= m_lifeTime)
+                    {
+                        m_isDespawning = true;
+                        ShrinkSequence();
+                    }
+                }
+                else
+                {
+                    m_despawnTimer = 0.0f;
                 }
             }
         }

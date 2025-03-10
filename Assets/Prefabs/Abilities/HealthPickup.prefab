@@ -105,8 +105,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 5
-  m_AngularDrag: 0.05
+  m_LinearDrag: 3
+  m_AngularDrag: 1.25
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -208,6 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_healValue: 10
   m_maxValue: 10
+  m_canDespawn: 1
   m_healRate: 1
   m_ropeComponent: {fileID: -5117696569558385193}
   m_lifeTime: 20
@@ -237,7 +238,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_collectedColor: {r: 0.25640798, g: 0.6916337, b: 0.8113208, a: 1}
-  m_shrinkSpeed: 1.25
+  m_shrinkTime: 0.15
   m_damage: 0.25
   m_velocityThreshold: 10
 --- !u!114 &-5117696569558385193
