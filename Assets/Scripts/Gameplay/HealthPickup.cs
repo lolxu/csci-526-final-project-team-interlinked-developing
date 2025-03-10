@@ -35,14 +35,17 @@ public class HealthPickup : MonoBehaviour
     private bool m_isHealing = false;
     private bool m_isDespawning = false;
 
-    private void Start()
+    private void Awake()
     {
         m_spriteRend = GetComponent<SpriteRenderer>();
         m_healValue = Random.Range(1, m_maxValue);
         float scale = m_curve.Evaluate((float)m_healValue / m_maxValue) * m_scaleFactor;
         transform.localScale = Vector3.one * scale;
         m_uncollectedColor = m_spriteRend.color;
-        
+    }
+
+    private void Start()
+    {
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
     }
