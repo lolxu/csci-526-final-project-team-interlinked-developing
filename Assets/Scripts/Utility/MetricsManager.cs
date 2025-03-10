@@ -90,9 +90,11 @@ public class MetricsManager : MonoBehaviour
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
-        form.AddField("entry.862385992", sessionID);
-        form.AddField("entry.665573761", m_metricsData.m_ropeConnectionMetrics[0]);
-        form.AddField("entry.1224369195", m_metricsData.m_ropeDisconnectionMetrics[0]);
+        form.AddField("entry.593653925", sessionID);
+        form.AddField("entry.1567891549", m_metricsData.m_ropeConnectionMetrics[0]);
+        form.AddField("entry.566185792", m_metricsData.m_ropeDisconnectionMetrics[0]);
+        form.AddField("entry.323290341", m_metricsData.m_ropeConnectionMetrics[1]);
+        form.AddField("entry.888263648", m_metricsData.m_ropeDisconnectionMetrics[1]);
         
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(m_URL, form))
