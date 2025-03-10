@@ -103,8 +103,8 @@ public class HealthComponent : MonoBehaviour
                         m_spriteRenderer.DOColor(Color.white, m_invincibleTime / 6)
                         .SetLoops(6, LoopType.Yoyo)
                         .SetEase(Ease.InOutBounce));
-                    m_hurtSequence.Insert(0,
-                        transform.DOPunchScale(m_orgScale * 0.85f, 0.15f));
+                    // m_hurtSequence.Insert(0,
+                    //     transform.DOPunchScale(m_orgScale * 0.85f, 0.15f));
                     m_hurtSequence.OnComplete(() =>
                     {
                         m_isInvincible = false;
