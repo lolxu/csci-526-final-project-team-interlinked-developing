@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3054509321795945052}
   - component: {fileID: 2947012213298270748}
   - component: {fileID: 5868755694799309519}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Loot Spawn Volume
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
