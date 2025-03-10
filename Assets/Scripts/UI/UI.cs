@@ -49,9 +49,12 @@ public class UI : MonoBehaviour
 
     private void OnNeedClear()
     {
-        // Using the old version for now
-        m_announcementText.enabled = true;
-        m_announcementText.text = "Kill all leftover enemies";
+        if (SingletonMaster.Instance.PlayerBase != null)
+        {
+            // Using the old version for now
+            m_announcementText.enabled = true;
+            m_announcementText.text = "Kill all leftover enemies";
+        }
         // EnqueueAnnouncement("Kill all leftover enemies", true, 3.0f);
     }
 
