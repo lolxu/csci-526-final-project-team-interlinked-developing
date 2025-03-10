@@ -14,6 +14,7 @@ public class EnemyManager : MonoBehaviour
     public float m_waveCoolDown = 10.0f;
     public float m_spawnPadding = 1.0f;
     public bool m_canSpawn = false;
+    public LayerMask m_maskCheck;
 
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
@@ -117,7 +118,7 @@ public class EnemyManager : MonoBehaviour
             // Checking spawn security
             RaycastHit2D[] hits = new RaycastHit2D[10];
             int hitNum = Physics2D.CircleCastNonAlloc(spawnPos, 10.0f, Vector2.zero, hits, 0.0f,
-                LayerMask.GetMask("Dangerous"));
+                m_maskCheck);
             if (hitNum == 0)
             {
                 EnemyScriptable.Enemy newEnemy = m_currentWave.GetRandomEnemyToSpawn();
