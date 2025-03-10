@@ -8,16 +8,27 @@ public class DamageComponent : MonoBehaviour
     public float m_damage = 2.5f;
     public float m_timeOffset = 10.0f;
     public bool m_canMove = false;
-
+   
+    public bool m_oneTimeDamage = false;
+    private bool m_canDamage = true;
+    
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.collider.CompareTag("Enemy") || other.collider.CompareTag("Player"))
+        if (m_canDamage)
         {
-            var health = other.gameObject.GetComponent<HealthComponent>();
-            if (health != null)
+            if (other.collider.CompareTag("Enemy") || other.collider.CompareTag("Player"))
             {
-                health.DamageEvent.Invoke(m_damage, gameObject);
+                var health = other.gameObject.GetComponent<HealthComponent>();
+                if (health != null)
+                {
+                    health.DamageEvent.Invoke(m_damage, gameObject);
+                }
             }
+        }
+
+        if (m_oneTimeDamage)
+        {
+            m_canDamage = false;
         }
     }
 
@@ -31,13 +42,21 @@ public class DamageComponent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (m_canDamage)
         {
-            var health = other.gameObject.GetComponent<HealthComponent>();
-            if (health != null)
+            if (other.CompareTag("Player"))
             {
-                health.DamageEvent.Invoke(m_damage, gameObject);
+                var health = other.gameObject.GetComponent<HealthComponent>();
+                if (health != null)
+                {
+                    health.DamageEvent.Invoke(m_damage, gameObject);
+                }
             }
+        }
+
+        if (m_oneTimeDamage)
+        {
+            m_canDamage = false;
         }
     }
 }

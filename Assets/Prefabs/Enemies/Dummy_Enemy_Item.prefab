@@ -500,7 +500,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 110414
+  m_InstanceId: 92366
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -525,7 +525,7 @@ MonoBehaviour:
   - LOL
   - Lmao
   m_healthComponent: {fileID: 7796390014458754966}
-  m_damage: 0
+  m_damage: 0.5
   m_collisionVelocityThreshold: 20
   m_AI: {fileID: 5981943359898612371}
   m_spriteRenderer: {fileID: 7042170540264289223}
@@ -541,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277a0e4fb299be744a15aa5d6c3abff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_state: 3
   m_acceleration: 20
   m_maxSpeed: 8
   m_numDirections: 12
@@ -577,6 +578,7 @@ MonoBehaviour:
   m_highlight: {fileID: 2171191199530265972}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
   m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
+  m_colorAlpha: 0.5
 --- !u!114 &7796390014458754966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,7 +785,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 129217800401549174, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_InstanceId
-      value: -311964
+      value: -96728
       objectReference: {fileID: 0}
     - target: {fileID: 1538797734825165177, guid: 219358c2bd6c70b43b8350bd9cfd8d2f, type: 3}
       propertyPath: m_Layer
