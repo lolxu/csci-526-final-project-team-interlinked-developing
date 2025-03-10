@@ -114,7 +114,7 @@ public class HealthComponent : MonoBehaviour
                     
                     // Do a camera shake
                     // SingletonMaster.Instance.CameraShakeManager.Shake(10.0f, 0.25f);
-                    SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(Vector3.zero, 1.0f);
+                    SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(transform.position, 1.0f);
                     
                     // Damage to health
                     m_health -= damage;
