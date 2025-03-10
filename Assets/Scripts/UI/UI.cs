@@ -187,12 +187,16 @@ public class UI : MonoBehaviour
     private void OnPlayerDeath(GameObject killer)
     {
         m_finalMessageText.enabled = true;
-        m_finalMessageText.text = "YOU DIED!! Press R to restart";
+        m_finalMessageText.text = "DEAD";
+        m_announcementText.enabled = true;
+        m_announcementText.text = "Press R to Restart";
     }
 
     private void OnPlayerWin()
     {
         m_finalMessageText.enabled = true; 
-        m_finalMessageText.text = "YOU WIN!! Press R to restart";
+        m_finalMessageText.text = "SURVIVED";
+        m_announcementText.enabled = true;
+        m_announcementText.text = "Press Space to Continue";
     }
 }
