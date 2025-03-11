@@ -50,6 +50,7 @@ public class LootSpawner : MonoBehaviour
             spawnedObj.transform.localScale = Vector3.zero;
             spawnedObj.layer = 0;
             
+            m_spawnedLoot.Add(spawnedObj);
             ChangeDespawnable(spawnedObj, false);
 
             spawnedObj.transform.DOScale(scale, 0.15f).SetEase(Ease.InOutSine).OnComplete(() =>
@@ -66,16 +67,6 @@ public class LootSpawner : MonoBehaviour
         float randY = Random.Range(-m_collider.size.y / 2.0f, m_collider.size.y / 2.0f);
         Vector2 randomPos = pos + new Vector2(randX, randY);
         return randomPos;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Loot"))
-        {
-            m_spawnedLoot.Add(other.gameObject);
-            
-            ChangeDespawnable(other.gameObject, false);
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
