@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
+
+    public LevelDataScriptable m_levelData;
+    
     private GameObject SingletonMasterObject;
+
+    private bool m_playerWon = false;
+    private int m_curLevel = 1;
     
     private void Awake()
     {
@@ -27,21 +34,22 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        m_playerWon = false;
         SingletonMasterObject = GameObject.Find("Singleton Master");
         SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-        
-        // Attaching Singleton Master to itself to be not destroyed
-        // if (transform.childCount == 0)
-        // {
-        //     SingletonMasterObject = GameObject.Find("Singleton Master");
-        //     SingletonMasterObject.transform.SetParent(transform, true);
-        // }
+        // SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
+        // TODO: This is bad...
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        
-        
+        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
+    }
+
+    private void OnPlayerWin()
+    {
+        m_playerWon = true;
     }
 
     private void Update()
@@ -52,6 +60,22 @@ public class GameManager : MonoBehaviour
             SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
             SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if (m_playerWon)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                m_curLevel++;
+                if (m_curLevel < m_levelData.m_levelNames.Count)
+                {
+                    SceneManager.LoadScene(m_levelData.m_levelNames[m_curLevel]);
+                }
+                else
+                {
+                    SingletonMaster.Instance.EventManager.PlayerWinEvent.Invoke();
+                }
+            }
         }
     }
 }

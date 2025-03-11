@@ -33,8 +33,9 @@ public class UI : MonoBehaviour
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
         SingletonMaster.Instance.EventManager.CooldownStarted.AddListener(ShowCooldown);
         SingletonMaster.Instance.EventManager.NextWaveEvent.AddListener(OnUpdateWave);
-        SingletonMaster.Instance.EventManager.WinEvent.AddListener(OnPlayerWin);
-        SingletonMaster.Instance.EventManager.NeedClearEvent.AddListener(OnNeedClear);
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnLevelClear);
+        SingletonMaster.Instance.EventManager.NeedWaveClearEvent.AddListener(OnNeedClear);
+        SingletonMaster.Instance.EventManager.PlayerWinEvent.AddListener(OnWin);
 
         if (SingletonMaster.Instance.PlayerBase != null)
         {
@@ -72,8 +73,9 @@ public class UI : MonoBehaviour
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
         SingletonMaster.Instance.EventManager.CooldownStarted.RemoveListener(ShowCooldown);
         SingletonMaster.Instance.EventManager.NextWaveEvent.RemoveListener(OnUpdateWave);
-        SingletonMaster.Instance.EventManager.WinEvent.RemoveListener(OnPlayerWin);
-        SingletonMaster.Instance.EventManager.NeedClearEvent.RemoveListener(OnNeedClear);
+        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnLevelClear);
+        SingletonMaster.Instance.EventManager.NeedWaveClearEvent.RemoveListener(OnNeedClear);
+        SingletonMaster.Instance.EventManager.PlayerWinEvent.RemoveListener(OnWin);
     }
 
     private void Update()
@@ -195,11 +197,19 @@ public class UI : MonoBehaviour
         m_announcementText.text = "Press R to Restart";
     }
 
-    private void OnPlayerWin()
+    private void OnLevelClear()
     {
         m_finalMessageText.enabled = true; 
         m_finalMessageText.text = "SURVIVED";
         m_announcementText.enabled = true;
         m_announcementText.text = "Press Space to Continue";
+    }
+    
+    private void OnWin()
+    {
+        m_finalMessageText.enabled = true; 
+        m_finalMessageText.text = "YOU WIN";
+        m_announcementText.enabled = true;
+        m_announcementText.text = "End of Alpha!";
     }
 }

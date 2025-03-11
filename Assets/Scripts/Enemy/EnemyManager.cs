@@ -65,7 +65,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             yield return null;
-            SingletonMaster.Instance.EventManager.WinEvent.Invoke();
+            SingletonMaster.Instance.EventManager.LevelClearEvent.Invoke();
         }
     }
 
@@ -83,7 +83,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 else
                 {
-                    SingletonMaster.Instance.EventManager.NeedClearEvent.Invoke();
+                    SingletonMaster.Instance.EventManager.NeedWaveClearEvent.Invoke();
                 }
                 // ClearAllEnemies();
             }
