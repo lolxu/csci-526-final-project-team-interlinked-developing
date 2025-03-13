@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageComponent : MonoBehaviour
+public class DangerComponent : MonoBehaviour
 {
     public float m_damage = 2.5f;
     public float m_timeOffset = 10.0f;

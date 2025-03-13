@@ -11,6 +11,8 @@ public class MetricsManager : MonoBehaviour
 {
     private static MetricsManager _instance;
     public static MetricsManager Instance { get { return _instance; } }
+
+    public bool m_canRecord = true;
     
     [Header("Google Sheet Settings")]
     [SerializeField] private string m_URL;
@@ -43,17 +45,20 @@ public class MetricsManager : MonoBehaviour
         
         public void RecordRopeOperations(int level, bool isConnection)
         {
-            if (isConnection)
+            if (Instance.m_canRecord)
             {
-                m_ropeConnectionMetrics[level] += 1;
-            }
-            else
-            {
-                m_ropeDisconnectionMetrics[level] += 1;
-            }
+                if (isConnection)
+                {
+                    m_ropeConnectionMetrics[level] += 1;
+                }
+                else
+                {
+                    m_ropeDisconnectionMetrics[level] += 1;
+                }
 
-            Debug.Log("Connection: " + m_ropeConnectionMetrics[level]);
-            Debug.Log("Disconnection: " + m_ropeDisconnectionMetrics[level]);
+                Debug.Log("Connection: " + m_ropeConnectionMetrics[level]);
+                Debug.Log("Disconnection: " + m_ropeDisconnectionMetrics[level]);
+            }
         }
     }
 
