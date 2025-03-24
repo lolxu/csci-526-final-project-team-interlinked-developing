@@ -29,6 +29,10 @@ public class PlayerBase : MonoBehaviour
     public float m_connectRadius = 10.0f;
     public int m_maxRopeConnections = 5;
     public int m_curRopeConnections = 0;
+    public float m_throwStrength = 50.0f;
+    public float m_throwAutoTargetRadius = 10.0f;
+    public float m_throwAutoTargetRange = 10.0f;
+    public LayerMask m_throwTargetMask;
     public GameObject m_linkObjectsParent;
     public LayerMask m_connectableLayers;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
@@ -313,54 +317,11 @@ public class PlayerBase : MonoBehaviour
             m_lastMoveDirection = m_moveDirection;
         }
     }
-    
-    public void Fire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            //SingletonMaster.Instance.EventManager.StartFireEvent.Invoke();
-        }
-        else
-        {
-           //SingletonMaster.Instance.EventManager.StopFireEvent.Invoke();
-        }
-    }
 
     public void RopeConnect(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            /*
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-
-            // Checking if mouse hits the unconnected hit boxes
-            {
-                RaycastHit2D[] results = new RaycastHit2D[20];
-                int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
-                    results, 0.0f, m_connectableLayers);
-
-                float minDist = float.MaxValue;
-                RaycastHit2D bestTarget = default;
-                for (int i = 0; i < num; i++)
-                {
-                    if (!m_linkedObjects.Contains(results[i].rigidbody.gameObject))
-                    {
-                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
-                        if (dist < minDist)
-                        {
-                            minDist = dist;
-                            bestTarget = results[i];
-                        }
-                    }
-                }
-
-                if (num > 0 && bestTarget != default)
-                {
-                    RequestRopeConnect(bestTarget.rigidbody);
-                }
-            }
-            */
-
             if (m_bestRopeConnectTarget != null)
             {
                 // TODO: We need to change this...
@@ -375,42 +336,13 @@ public class PlayerBase : MonoBehaviour
     {
         if (context.started)
         {
-            /*
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-            
-            // Checking if mouse hits connected items
-            {
-                RaycastHit2D[] results = new RaycastHit2D[20];
-                int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
-                    results, 0.0f, m_connectableLayers);
-
-                float minDist = float.MaxValue;
-                RaycastHit2D bestTarget = default;
-                for (int i = 0; i < num; i++)
-                {
-                    if (m_linkedObjects.Contains(results[i].rigidbody.gameObject))
-                    {
-                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
-                        if (dist < minDist)
-                        {
-                            minDist = dist;
-                            bestTarget = results[i];
-                        }
-                    }
-                }
-                
-                if (num > 0 && bestTarget != default)
-                {
-                    RemoveLinkedObject(bestTarget.rigidbody.gameObject);
-                }
-            }
-            */
-
             if (m_bestRopeDisconnectTarget != null)
             {
                 // TODO: We need to change this...
                 int level = SceneManager.GetActiveScene().buildIndex;
                 MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, false);
+                
+                // Honing in to the nearest enemy / dangerous object
                 RemoveLinkedObject(m_bestRopeDisconnectTarget);
             }
         }
@@ -442,7 +374,44 @@ public class PlayerBase : MonoBehaviour
         {
             targetRope.DetachRope(gameObject);
             targetRope.HideHighlight();
+            
+            AutomaticThrowToNearestTarget(obj);
             m_bestRopeDisconnectTarget = null;
+        }
+    }
+
+    private void AutomaticThrowToNearestTarget(GameObject obj)
+    {
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        RaycastHit2D[] results = new RaycastHit2D[20];
+        Vector2 ptVel = (obj.transform.position - transform.position).normalized;
+        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, ptVel.normalized, results, m_throwAutoTargetRange, m_throwTargetMask);
+        
+        float minDist = float.MaxValue;
+        GameObject curBestTarget = null;
+        for (int i = 0; i < hits; i++)
+        {
+            if (results[i].collider.gameObject != obj)
+            {
+                float dist = Vector3.Distance(results[i].transform.position, rb.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    curBestTarget = results[i].collider.gameObject;
+                }
+            }
+        }
+
+        if (curBestTarget != null)
+        {
+            Vector2 dir = (curBestTarget.transform.position - obj.transform.position).normalized;
+            rb.AddForce(dir.normalized * m_throwStrength, ForceMode2D.Impulse);
+            Vector3 drawDir = dir.normalized;
+            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 1.0f);
+        }
+        else
+        {
+            Debug.Log("No Target Found...");
         }
     }
     

@@ -5152,6 +5152,12 @@ MonoBehaviour:
   m_connectRadius: 5
   m_maxRopeConnections: 5
   m_curRopeConnections: 0
+  m_throwStrength: 50
+  m_throwAutoTargetRadius: 10
+  m_throwAutoTargetRange: 10
+  m_throwTargetMask:
+    serializedVersion: 2
+    m_Bits: 2560
   m_linkObjectsParent: {fileID: 2758825225473693082}
   m_connectableLayers:
     serializedVersion: 2
@@ -7520,7 +7526,10 @@ MonoBehaviour:
   CooldownStarted:
     m_PersistentCalls:
       m_Calls: []
-  WinEvent:
+  LevelClearEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  PlayerWinEvent:
     m_PersistentCalls:
       m_Calls: []
   LinkEvent:
@@ -7541,7 +7550,7 @@ MonoBehaviour:
   NextWaveEvent:
     m_PersistentCalls:
       m_Calls: []
-  NeedClearEvent:
+  NeedWaveClearEvent:
     m_PersistentCalls:
       m_Calls: []
   EnemyDeathEvent:
