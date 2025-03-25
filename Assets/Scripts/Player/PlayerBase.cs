@@ -45,6 +45,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private float m_cameraZoomFactor = 0.025f;
     [SerializeField] private GameObject m_face;
     [SerializeField] private float m_faceMoveFactor = 0.25f;
+    public bool m_isFollowCam = true;
 
     [Header("Ability")] 
     public bool m_isDashing = false;
@@ -75,6 +76,15 @@ public class PlayerBase : MonoBehaviour
         m_orgScale = transform.localScale;
 
         m_healthComponent.m_isLinked = true;
+
+        if (m_isFollowCam)
+        {
+            m_cinemachine.m_Follow = transform;
+        }
+        else
+        {
+            m_cinemachine.m_Lens.OrthographicSize = 20.0f;
+        }
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinkedItem);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinkedItem);
@@ -290,22 +300,26 @@ public class PlayerBase : MonoBehaviour
 
     private void CameraZoomControl()
     {
-        // This can have some real issue with floats
-        Vector2 minCorner = new Vector2(float.MaxValue, float.MaxValue);
-        Vector2 maxCorner = new Vector2(float.MinValue, float.MinValue);
-
-        foreach (var link in m_linkedObjects)
+        if (m_isFollowCam)
         {
-            if (link != null)
-            {
-                Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
+            // This can have some real issue with floats
+            Vector2 minCorner = new Vector2(float.MaxValue, float.MaxValue);
+            Vector2 maxCorner = new Vector2(float.MinValue, float.MinValue);
 
-                maxCorner = Vector2.Max(maxCorner, pos);
-                minCorner = Vector2.Min(minCorner, pos);
+            foreach (var link in m_linkedObjects)
+            {
+                if (link != null)
+                {
+                    Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
+
+                    maxCorner = Vector2.Max(maxCorner, pos);
+                    minCorner = Vector2.Min(minCorner, pos);
+                }
             }
+
+            m_cinemachine.m_Lens.OrthographicSize =
+                Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
         }
-        
-        m_cinemachine.m_Lens.OrthographicSize = Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
     }
     
     public void Move(InputAction.CallbackContext context)
@@ -384,8 +398,9 @@ public class PlayerBase : MonoBehaviour
     {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
         RaycastHit2D[] results = new RaycastHit2D[20];
-        Vector2 ptVel = (obj.transform.position - transform.position).normalized;
-        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, ptVel.normalized, results, m_throwAutoTargetRange, m_throwTargetMask);
+        Vector2 velDir = rb.velocity;
+        Debug.Log(velDir);
+        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, velDir, results, m_throwAutoTargetRange, m_throwTargetMask);
         
         float minDist = float.MaxValue;
         GameObject curBestTarget = null;
@@ -393,8 +408,10 @@ public class PlayerBase : MonoBehaviour
         {
             if (results[i].collider.gameObject != obj)
             {
+                Vector2 toTarget = results[i].transform.position - transform.position;
                 float dist = Vector3.Distance(results[i].transform.position, rb.position);
-                if (dist < minDist)
+                
+                if (dist < minDist && Vector2.Dot(velDir, toTarget) > 0.6f)
                 {
                     minDist = dist;
                     curBestTarget = results[i].collider.gameObject;
@@ -407,7 +424,7 @@ public class PlayerBase : MonoBehaviour
             Vector2 dir = (curBestTarget.transform.position - obj.transform.position).normalized;
             rb.AddForce(dir.normalized * m_throwStrength, ForceMode2D.Impulse);
             Vector3 drawDir = dir.normalized;
-            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 1.0f);
+            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
         }
         else
         {

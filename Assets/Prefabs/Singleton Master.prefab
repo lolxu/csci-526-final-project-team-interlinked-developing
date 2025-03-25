@@ -5167,6 +5167,7 @@ MonoBehaviour:
   m_cameraZoomFactor: 0.01
   m_face: {fileID: 4378801888161150219}
   m_faceMoveFactor: 0.25
+  m_isFollowCam: 1
   m_isDashing: 0
 --- !u!114 &3487075262399259084
 MonoBehaviour:
@@ -6872,7 +6873,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 8250570900266109240}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 34
     OrthographicSize: 15

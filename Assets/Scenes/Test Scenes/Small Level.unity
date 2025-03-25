@@ -1577,7 +1577,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2740430668430973717, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
       propertyPath: orthographic size
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2960153014035836695, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
       propertyPath: m_Name
@@ -1630,14 +1630,6 @@ PrefabInstance:
     - target: {fileID: 4543988809004957497, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
       propertyPath: m_InstanceId
       value: -1926
-      objectReference: {fileID: 0}
-    - target: {fileID: 4646235892991863752, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4646235892991863752, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7434285285918455133, guid: 82cf675cfd6b2af46917cb97c1aaa0eb, type: 3}
       propertyPath: m_IsActive
