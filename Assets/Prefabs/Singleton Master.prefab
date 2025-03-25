@@ -5145,7 +5145,7 @@ MonoBehaviour:
   m_ropeComponent: {fileID: 7998378566146844336}
   m_input: {fileID: 3487075262399259084}
   m_acceleration: 250
-  m_maxSpeed: 12
+  m_maxSpeed: 15
   m_moveDirection: {x: 0, y: 0}
   m_rope: {fileID: 3582586625695924295}
   m_clickRadius: 5
