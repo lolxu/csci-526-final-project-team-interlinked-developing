@@ -23,6 +23,7 @@ public class BaseEnemyAI : MonoBehaviour
     public float m_raycastDistance = 5.0f;
     public LayerMask m_pathfindIgnoreMasks;
     public Vector2 m_moveDirection { private set; get; }= Vector2.zero;
+    [SerializeField] protected float m_invisibleThreshold = 5.0f;
     
     [Header("Visual Settings")]
     [SerializeField] protected GameObject m_face;
@@ -33,6 +34,9 @@ public class BaseEnemyAI : MonoBehaviour
     protected List<Vector2> m_pathfindDirections = new List<Vector2>();
     protected Rigidbody2D m_RB;
     protected Vector2 m_randomDestinationDisp;
+
+    protected float m_invisibleTimer = 0.0f;
+    protected bool m_isVisible = false;
 
     private void Start()
     {
@@ -78,7 +82,6 @@ public class BaseEnemyAI : MonoBehaviour
     /// Override for custom fixed update behavior
     /// </summary>
     protected void OnFixedUpdate() { }
-    
 
     private void OnStealEnded(GameObject item, GameObject enemy)
     {
@@ -93,6 +96,31 @@ public class BaseEnemyAI : MonoBehaviour
         if (enemy == gameObject)
         {
             m_state = EnemyAIState.TugOfWar;
+        }
+    }
+
+    private void OnBecameInvisible()
+    {
+        m_isVisible = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        m_isVisible = true;
+        m_invisibleTimer = 0.0f;
+    }
+
+    private void Update()
+    {
+        if (!m_isVisible)
+        {
+            m_invisibleTimer += Time.deltaTime;
+
+            if (m_invisibleTimer >= m_invisibleThreshold)
+            {
+                m_invisibleTimer = 0.0f;
+                SingletonMaster.Instance.EventManager.EnemyRequireRespawn.Invoke(gameObject);
+            }
         }
     }
 

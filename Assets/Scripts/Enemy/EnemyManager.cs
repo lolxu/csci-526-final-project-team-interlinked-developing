@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
+        SingletonMaster.Instance.EventManager.EnemyRequireRespawn.AddListener(RespawnEnemy);
         if (m_waves.Count > 0)
         {
             m_currentWave = m_waves[0];
@@ -44,6 +45,7 @@ public class EnemyManager : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
+        SingletonMaster.Instance.EventManager.EnemyRequireRespawn.RemoveListener(RespawnEnemy);
     }
 
     private IEnumerator StartCooldown()
@@ -131,6 +133,8 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+    
+    // TODO: We can try to spawn enemies inside with some indications too
 
     private Vector2 GetRandomSpawnPosition()
     {
@@ -191,5 +195,12 @@ public class EnemyManager : MonoBehaviour
         }
         
         Destroy(enemy.transform.parent.gameObject);
+    }
+    
+    private void RespawnEnemy(GameObject targetEnemy)
+    {
+        targetEnemy.GetComponent<Rigidbody2D>().isKinematic = true;
+        targetEnemy.transform.position = GetRandomSpawnPosition();
+        targetEnemy.GetComponent<Rigidbody2D>().isKinematic = false;
     }
 }

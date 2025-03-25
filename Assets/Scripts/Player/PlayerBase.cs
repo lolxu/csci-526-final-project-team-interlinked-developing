@@ -29,6 +29,7 @@ public class PlayerBase : MonoBehaviour
     public float m_connectRadius = 10.0f;
     public int m_maxRopeConnections = 5;
     public int m_curRopeConnections = 0;
+    public bool m_canPowerThrow = true;
     public float m_throwStrength = 10.0f;
     public float m_throwAutoTargetRadius = 10.0f;
     public float m_throwAutoTargetRange = 10.0f;
@@ -388,19 +389,30 @@ public class PlayerBase : MonoBehaviour
         {
             targetRope.DetachRope(gameObject);
             targetRope.HideHighlight();
-            
-            // AutomaticThrowToNearestTarget(obj);
+
+            if (m_canPowerThrow)
+            {
+                StartCoroutine(AutomaticThrowToNearestTarget(obj));
+            }
+
             m_bestRopeDisconnectTarget = null;
         }
     }
 
-    private void AutomaticThrowToNearestTarget(GameObject obj)
+    private IEnumerator AutomaticThrowToNearestTarget(GameObject obj)
     {
+        // TODO: Tweak This
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
         RaycastHit2D[] results = new RaycastHit2D[20];
-        Vector2 fromPlayer = (obj.transform.position - transform.position).normalized;
-        fromPlayer = (fromPlayer + m_moveDirection).normalized;
-        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, fromPlayer, results, m_throwAutoTargetRange, m_throwTargetMask);
+        Vector2 oldPos = obj.transform.position;
+
+        yield return null;
+
+        Vector2 newPos = obj.transform.position;
+        
+        Vector2 moveDir = (newPos - oldPos).normalized;
+        Debug.Log(moveDir);
+        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, moveDir, results, m_throwAutoTargetRange, m_throwTargetMask);
         
         float minDist = float.MaxValue;
         GameObject curBestTarget = null;
@@ -408,20 +420,28 @@ public class PlayerBase : MonoBehaviour
         {
             if (results[i].collider.gameObject != obj)
             {
-                Vector2 toTarget = results[i].transform.position - transform.position;
+                Vector2 toTarget = results[i].transform.position - obj.transform.position;
                 float dist = Vector3.Distance(results[i].transform.position, rb.position);
-                
-                if (dist < minDist && Vector2.Dot(fromPlayer, toTarget) > 0.45f)
+
+                if (Vector2.Dot(moveDir, toTarget) > 0.5f)
                 {
-                    minDist = dist;
-                    curBestTarget = results[i].collider.gameObject;
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        curBestTarget = results[i].collider.gameObject;
+                    }
                 }
             }
         }
 
         if (curBestTarget != null)
         {
-            StartCoroutine(ThrowToTarget(rb, curBestTarget));
+            // StartCoroutine(ThrowToTarget(rb, curBestTarget));
+            Vector2 throwDir = (curBestTarget.transform.position - obj.transform.position).normalized;
+
+            Vector3 drawDir = throwDir;
+            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
+            rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
         }
         else
         {
@@ -429,14 +449,14 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
+    // Even more homing missile like....
     IEnumerator ThrowToTarget(Rigidbody2D throwObj, GameObject target)
     {
         float dist = Vector3.Distance(throwObj.position, target.transform.position);
         while (dist > 2.0f)
         {
             Vector3 dir = (target.transform.position - throwObj.transform.position).normalized;
-            throwObj.velocity = Vector2.zero;
-            throwObj.MovePosition(throwObj.transform.position + dir * Time.fixedDeltaTime * m_throwStrength);
+            throwObj.AddForce(dir * m_throwStrength * Time.fixedDeltaTime, ForceMode2D.Impulse);
             yield return null;
             if (target == null || throwObj == null)
             {

@@ -21,12 +21,14 @@ public class DangerComponent : MonoBehaviour
     private bool m_canDamage = true;
     private Sequence m_moveSequence;
     
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (m_canDamage)
         {
             if (other.collider.CompareTag("Enemy") || other.collider.CompareTag("Player"))
             {
+                other.rigidbody.AddExplosionForce(100.0f, transform.position, 10.0f);
+                
                 var health = other.gameObject.GetComponent<HealthComponent>();
                 if (health != null)
                 {
@@ -40,6 +42,7 @@ public class DangerComponent : MonoBehaviour
             m_canDamage = false;
         }
     }
+
 
     private void Start()
     {
@@ -84,16 +87,20 @@ public class DangerComponent : MonoBehaviour
             }));
     }
 
+    // Use trigger for moving danger
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (m_canDamage)
         {
-            if (other.CompareTag("Player"))
+            if (m_canDamage)
             {
-                var health = other.gameObject.GetComponent<HealthComponent>();
-                if (health != null)
+                if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("Player"))
                 {
-                    health.DamageEvent.Invoke(m_damage, gameObject);
+                    var health = other.gameObject.GetComponent<HealthComponent>();
+                    if (health != null)
+                    {
+                        health.DamageEvent.Invoke(m_damage, gameObject);
+                    }
                 }
             }
         }

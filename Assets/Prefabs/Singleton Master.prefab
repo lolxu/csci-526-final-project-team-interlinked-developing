@@ -5152,7 +5152,8 @@ MonoBehaviour:
   m_connectRadius: 5
   m_maxRopeConnections: 5
   m_curRopeConnections: 0
-  m_throwStrength: 20
+  m_canPowerThrow: 1
+  m_throwStrength: 50
   m_throwAutoTargetRadius: 10
   m_throwAutoTargetRange: 10
   m_throwTargetMask:
@@ -5390,8 +5391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_canDamage: 1
-  m_health: 10
-  m_maxHealth: 10
+  m_health: 20
+  m_maxHealth: 20
   m_invincibleTime: 1
   DamageEvent:
     m_PersistentCalls:
@@ -7555,6 +7556,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   EnemyDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  EnemyRequireRespawn:
     m_PersistentCalls:
       m_Calls: []
   WaveTimeoutEvent:
