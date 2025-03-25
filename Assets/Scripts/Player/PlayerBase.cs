@@ -29,7 +29,7 @@ public class PlayerBase : MonoBehaviour
     public float m_connectRadius = 10.0f;
     public int m_maxRopeConnections = 5;
     public int m_curRopeConnections = 0;
-    public float m_throwStrength = 50.0f;
+    public float m_throwStrength = 10.0f;
     public float m_throwAutoTargetRadius = 10.0f;
     public float m_throwAutoTargetRange = 10.0f;
     public LayerMask m_throwTargetMask;
@@ -389,7 +389,7 @@ public class PlayerBase : MonoBehaviour
             targetRope.DetachRope(gameObject);
             targetRope.HideHighlight();
             
-            AutomaticThrowToNearestTarget(obj);
+            // AutomaticThrowToNearestTarget(obj);
             m_bestRopeDisconnectTarget = null;
         }
     }
@@ -398,9 +398,9 @@ public class PlayerBase : MonoBehaviour
     {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
         RaycastHit2D[] results = new RaycastHit2D[20];
-        Vector2 velDir = rb.velocity;
-        Debug.Log(velDir);
-        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, velDir, results, m_throwAutoTargetRange, m_throwTargetMask);
+        Vector2 fromPlayer = (obj.transform.position - transform.position).normalized;
+        fromPlayer = (fromPlayer + m_moveDirection).normalized;
+        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, fromPlayer, results, m_throwAutoTargetRange, m_throwTargetMask);
         
         float minDist = float.MaxValue;
         GameObject curBestTarget = null;
@@ -411,7 +411,7 @@ public class PlayerBase : MonoBehaviour
                 Vector2 toTarget = results[i].transform.position - transform.position;
                 float dist = Vector3.Distance(results[i].transform.position, rb.position);
                 
-                if (dist < minDist && Vector2.Dot(velDir, toTarget) > 0.6f)
+                if (dist < minDist && Vector2.Dot(fromPlayer, toTarget) > 0.45f)
                 {
                     minDist = dist;
                     curBestTarget = results[i].collider.gameObject;
@@ -421,14 +421,28 @@ public class PlayerBase : MonoBehaviour
 
         if (curBestTarget != null)
         {
-            Vector2 dir = (curBestTarget.transform.position - obj.transform.position).normalized;
-            rb.AddForce(dir.normalized * m_throwStrength, ForceMode2D.Impulse);
-            Vector3 drawDir = dir.normalized;
-            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
+            StartCoroutine(ThrowToTarget(rb, curBestTarget));
         }
         else
         {
             Debug.Log("No Target Found...");
+        }
+    }
+
+    IEnumerator ThrowToTarget(Rigidbody2D throwObj, GameObject target)
+    {
+        float dist = Vector3.Distance(throwObj.position, target.transform.position);
+        while (dist > 2.0f)
+        {
+            Vector3 dir = (target.transform.position - throwObj.transform.position).normalized;
+            throwObj.velocity = Vector2.zero;
+            throwObj.MovePosition(throwObj.transform.position + dir * Time.fixedDeltaTime * m_throwStrength);
+            yield return null;
+            if (target == null || throwObj == null)
+            {
+                break;
+            }
+            dist = Vector3.Distance(throwObj.position, target.transform.position);
         }
     }
     
