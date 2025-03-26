@@ -143,6 +143,8 @@ public class HealthComponent : MonoBehaviour
                     
                     // Damage to health
                     m_health -= damage;
+                    SingletonMaster.Instance.EventManager.EnemyDamagedEvent.Invoke(gameObject);
+                    
                     if (m_health <= 0.0f)
                     {
                         // Force kill the sequence

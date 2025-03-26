@@ -31,36 +31,20 @@ public class BaseEnemyBehavior : MonoBehaviour
     
     // private Sequence m_damageTween = null;
     private Coroutine m_damageSequence = null;
-    
-    /// <summary>
-    /// Overwrite this for custom start behavior
-    /// </summary>
-    protected virtual void OnStart() { }
-    
-    /// <summary>
-    /// Overwrite this for custom update behavior
-    /// </summary>
-    protected virtual void OnUpdate() { }
-    
-    protected virtual void OnBeingDisabled() { }
 
-    private void Start()
+    protected virtual void Start()
     {
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
-        
-        OnStart();
     }
     
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
-        
-        OnBeingDisabled();
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -79,9 +63,9 @@ public class BaseEnemyBehavior : MonoBehaviour
         }
     }
     
-    private void Update()
+    protected virtual void Update()
     {
-        OnUpdate();
+        
     }
 
     protected virtual void OnDamaged(float amount)

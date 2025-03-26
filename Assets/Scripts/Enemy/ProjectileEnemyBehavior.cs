@@ -16,16 +16,16 @@ public class ProjectileEnemyBehavior : BaseEnemyBehavior
     private bool m_spawned = true;
     private float m_shootTimer = 0.0f;
     
-    protected override void OnStart()
+    protected override void Start()
     {
-        base.OnStart();
+        base.Start();
 
         m_shootTimer = m_fireCooldown;
     }
 
-    protected override void OnBeingDisabled()
+    protected override void OnDisable()
     {
-        base.OnBeingDisabled();
+        base.OnDisable();
 
         if (m_spawnCoroutine != null)
         {
@@ -37,9 +37,9 @@ public class ProjectileEnemyBehavior : BaseEnemyBehavior
         }
     }
 
-    protected override void OnUpdate()
+    protected override void Update()
     {
-        base.OnUpdate();
+        base.Update();
 
         if (m_spawned)
         {

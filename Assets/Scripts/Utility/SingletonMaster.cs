@@ -18,6 +18,9 @@ public class SingletonMaster : MonoBehaviour
     [Header("Event Manager")] 
     public EventManager EventManager;
 
+    [Header("Enemy Manager")] 
+    public EnemyManager EnemyManager;
+
     [Header("Ability Manager")] 
     public AbilityManager AbilityManager;
 

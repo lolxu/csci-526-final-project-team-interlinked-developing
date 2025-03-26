@@ -138,6 +138,7 @@ public class RopeComponent : MonoBehaviour
 
     private void OnJointBreak2D(Joint2D brokenJoint)
     {
+        Debug.Log("ROPE BROKE!!");
         if (brokenJoint == m_enemyJoint)
         {
             m_isConnectedToEnemy = false;
@@ -160,7 +161,12 @@ public class RopeComponent : MonoBehaviour
         RopeComponent rc = GetComponent<RopeComponent>();
         if (rc != null)
         {
+            Debug.Log("Received Connection From: " + instigator);
             rc.m_receivedFrom.Add(instigator);
+        }
+        else
+        {
+            Debug.LogError("Receiver doesn't have RopeComponent!!!");
         }
         
         Vector3 oldpos = transform.position;
@@ -169,12 +175,6 @@ public class RopeComponent : MonoBehaviour
         joint.connectedBody = ropeEnd;
         joint.anchor = Vector2.zero;
         joint.connectedAnchor = Vector2.zero;
-        
-        // Make weak joints for enemies
-        if (gameObject.CompareTag("Enemy"))
-        {
-            // joint.breakForce = 800.0f;
-        }
 
         if (instigator.CompareTag("Enemy"))
         {
@@ -256,7 +256,7 @@ public class RopeComponent : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Connecting component does NOT have Rope Receiver");
+            Debug.LogError("Connecting to myself or receiver doesn't have RopeComponent");
         }
         
     }
@@ -270,7 +270,6 @@ public class RopeComponent : MonoBehaviour
             {
                 Destroy(m_ropeLinksPlayer[i]);
             }
-
             m_ropeLinksPlayer.Clear();
             
             for (int i = m_receivedFrom.Count - 1; i >= 0; --i)
@@ -279,9 +278,9 @@ public class RopeComponent : MonoBehaviour
                 {
                     RopeComponent rc = m_receivedFrom[i].GetComponent<RopeComponent>();
                     rc.m_connectedTo.Remove(gameObject);
+                    m_receivedFrom.RemoveAt(i);
                 }
             }
-            m_receivedFrom.Clear();
             
             // Firing Unlink Event ------------------------------------------------
             SingletonMaster.Instance.EventManager.UnlinkEvent.Invoke(gameObject, instigator);
@@ -298,15 +297,25 @@ public class RopeComponent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Call this on receivers of rope!!
+    /// </summary>
+    /// <param name="enemy">Connected enemy</param>
     public void DetachEnemy(GameObject enemy)
     {
+        Debug.Log("Detaching Enemy: " + enemy);
+
         for (int i = m_ropeLinksEnemy.Count - 1; i >= 0; --i)
         {
             Destroy(m_ropeLinksEnemy[i]);
         }
         m_ropeLinksEnemy.Clear();
+
+        if (!gameObject.CompareTag("Enemy"))
+        {
+            transform.SetParent(null, true);
+        }
         
-        transform.SetParent(null, true);
         SingletonMaster.Instance.EventManager.UnlinkEvent.Invoke(gameObject, enemy);
         
         for (int i = m_receivedFrom.Count - 1; i >= 0; --i)
@@ -334,7 +343,7 @@ public class RopeComponent : MonoBehaviour
                 float stress = m_enemyJoint.GetReactionForce(Time.fixedDeltaTime).magnitude;
                 if (stress > m_maxTension)
                 {
-                    Debug.Log("Adding stress");
+                    // Debug.Log("Adding stress");
                     m_ropeStressTimer += Time.fixedDeltaTime;
 
                     foreach (var rope in m_ropeLinksEnemy)
@@ -351,13 +360,13 @@ public class RopeComponent : MonoBehaviour
 
                     if (m_ropeStressTimer > m_tensionDuration)
                     {
-                        Debug.Log("SET BROKEN");
+                        // Debug.Log("SET BROKEN");
                         m_enemyJoint.breakForce = 10.0f;
                     }
                 }
                 else
                 {
-                    Debug.Log("Resetting stress");
+                    // Debug.Log("Resetting stress");
                     m_ropeStressTimer = 0.0f;
                     
                     foreach (var rope in m_ropeLinksEnemy)

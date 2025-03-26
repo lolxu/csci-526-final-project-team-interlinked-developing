@@ -489,7 +489,7 @@ MonoBehaviour:
   m_timeOffset: 10
   m_oneTimeDamage: 0
   m_canMove: 1
-  m_moveTime: 2
+  m_moveTime: 1
   m_moveStype: 4
   m_end: {fileID: 4211710210488227570}
   m_lineRenderer: {fileID: 4562444515967455948}

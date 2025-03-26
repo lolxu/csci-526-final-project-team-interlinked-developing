@@ -19,13 +19,18 @@ public class EnemyManager : MonoBehaviour
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
     private int m_maxEnemyCount = 20;
+    
     public List<GameObject> m_enemies = new List<GameObject>();
+    public List<GameObject> m_damagedEnemies = new List<GameObject>();
 
     private IEnumerator Start()
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
-        SingletonMaster.Instance.EventManager.EnemyRequireRespawn.AddListener(RespawnEnemy);
+        SingletonMaster.Instance.EventManager.EnemyRequireRespawnEvent.AddListener(RespawnEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDamagedEvent.AddListener(OnEnemyDamaged);
+        SingletonMaster.Instance.EventManager.EnemyHealedFullEvent.AddListener(OnEnemyHealed);
+        
         if (m_waves.Count > 0)
         {
             m_currentWave = m_waves[0];
@@ -45,7 +50,8 @@ public class EnemyManager : MonoBehaviour
     {
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
-        SingletonMaster.Instance.EventManager.EnemyRequireRespawn.RemoveListener(RespawnEnemy);
+        SingletonMaster.Instance.EventManager.EnemyRequireRespawnEvent.RemoveListener(RespawnEnemy);
+        SingletonMaster.Instance.EventManager.EnemyDamagedEvent.RemoveListener(OnEnemyDamaged);
     }
 
     private IEnumerator StartCooldown()
@@ -181,7 +187,14 @@ public class EnemyManager : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemy)
     {
+        // Remove it from enemies
         m_enemies.Remove(enemy.transform.parent.gameObject);
+
+        // Also removes it from the damaged enemies list
+        if (m_damagedEnemies.Contains(enemy))
+        {
+            m_damagedEnemies.Remove(enemy);
+        }
         
         // Checking for any connected stuff to this enemy
         RopeComponent rc = enemy.GetComponent<RopeComponent>();
@@ -194,6 +207,16 @@ public class EnemyManager : MonoBehaviour
             }
         }
         
+        // Checking for any received connections
+        for (int i = rc.m_receivedFrom.Count - 1; i >= 0; --i)
+        {
+            var connectedObj = rc.m_receivedFrom[i];
+            if (connectedObj.CompareTag("Enemy"))
+            { 
+                rc.DetachEnemy(connectedObj);
+            }
+        }
+        
         Destroy(enemy.transform.parent.gameObject);
     }
     
@@ -202,5 +225,21 @@ public class EnemyManager : MonoBehaviour
         targetEnemy.GetComponent<Rigidbody2D>().isKinematic = true;
         targetEnemy.transform.position = GetRandomSpawnPosition();
         targetEnemy.GetComponent<Rigidbody2D>().isKinematic = false;
+    }
+    
+    private void OnEnemyDamaged(GameObject enemy)
+    {
+        if (!m_damagedEnemies.Contains(enemy))
+        {
+            m_damagedEnemies.Add(enemy);
+        }
+    }
+    
+    private void OnEnemyHealed(GameObject enemy)
+    {
+        if (m_damagedEnemies.Contains(enemy))
+        {
+            m_damagedEnemies.Remove(enemy);
+        }
     }
 }

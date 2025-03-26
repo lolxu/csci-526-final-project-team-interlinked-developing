@@ -10,16 +10,20 @@ public class AttackEnemyBehavior : BaseEnemyBehavior
     
     private Transform playerTransform;
 
-    protected override void OnStart()
+    protected override void Start()
     {
+        base.Start();
+        
         if (SingletonMaster.Instance.PlayerBase != null)
         {
             playerTransform = SingletonMaster.Instance.PlayerBase.transform;
         }
     }
 
-    protected override void OnUpdate()
+    protected override void Update()
     {
+        base.Update();
+        
         if (playerTransform == null) return;
 
         // Move towards the player
