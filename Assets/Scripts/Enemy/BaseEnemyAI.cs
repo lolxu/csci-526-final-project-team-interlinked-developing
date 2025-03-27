@@ -37,9 +37,6 @@ public class BaseEnemyAI : MonoBehaviour
     protected Rigidbody2D m_RB;
     protected Vector2 m_randomDestinationDisp;
 
-    protected float m_invisibleTimer = 0.0f;
-    protected bool m_isVisible = false;
-
     protected virtual void Start()
     {
         m_RB = GetComponent<Rigidbody2D>();
@@ -62,7 +59,10 @@ public class BaseEnemyAI : MonoBehaviour
         
         // Setting state
         m_state = EnemyAIState.Moving;
-        m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+        if (SingletonMaster.Instance.PlayerBase != null)
+        {
+            m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+        }
         
         SingletonMaster.Instance.EventManager.StealStartedEvent.AddListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.AddListener(OnStealEnded);
@@ -87,31 +87,6 @@ public class BaseEnemyAI : MonoBehaviour
         if (enemy == gameObject)
         {
             m_state = EnemyAIState.TugOfWar;
-        }
-    }
-
-    private void OnBecameInvisible()
-    {
-        m_isVisible = false;
-    }
-
-    private void OnBecameVisible()
-    {
-        m_isVisible = true;
-        m_invisibleTimer = 0.0f;
-    }
-
-    protected virtual void Update()
-    {
-        if (!m_isVisible)
-        {
-            m_invisibleTimer += Time.deltaTime;
-
-            if (m_invisibleTimer >= m_invisibleThreshold)
-            {
-                m_invisibleTimer = 0.0f;
-                SingletonMaster.Instance.EventManager.EnemyRequireRespawnEvent.Invoke(gameObject);
-            }
         }
     }
 
@@ -193,7 +168,35 @@ public class BaseEnemyAI : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + new Vector3(toTarget.x, toTarget.y, 0.0f) * 10.0f,
             Color.red);
         
-        m_moveDirection += CalculateBestMoveDirection(toTarget);
+        // Calculating direction values
+        float bestDotVal = -2.0f;
+        Vector2 bestDirection = Vector2.zero;
+        foreach (var direction in m_pathfindDirections)
+        {
+            float dotVal = Vector2.Dot(direction, toTarget);
+
+            // Raycast to check for obstacles
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, m_raycastDistance, ~m_pathfindIgnoreMasks);
+            if (hit)
+            {
+                dotVal = -1.0f;
+                m_moveDirection -= direction;
+            }
+            else
+            {
+                Debug.DrawLine(transform.position,
+                    transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
+            }
+
+            // Checking dot values
+            if (dotVal > bestDotVal)
+            {
+                bestDotVal = dotVal;
+                bestDirection = direction;
+            }
+        }
+        
+        m_moveDirection += bestDirection;
         m_moveDirection = m_moveDirection.normalized;
 
         // The actual move direction
@@ -222,39 +225,5 @@ public class BaseEnemyAI : MonoBehaviour
         }
 
         return targetPos;
-    }
-
-    protected Vector2 CalculateBestMoveDirection(Vector2 toTarget)
-    {
-        // Calculating direction values
-        float bestDotVal = -2.0f;
-        Vector2 bestDirection = Vector2.zero;
-        foreach (var direction in m_pathfindDirections)
-        {
-            float dotVal = Vector2.Dot(direction, toTarget);
-
-            // Raycast to check for obstacles
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, m_raycastDistance,
-                ~m_pathfindIgnoreMasks);
-            if (hit)
-            {
-                dotVal = -1.0f;
-                m_moveDirection += -direction;
-            }
-            else
-            {
-                Debug.DrawLine(transform.position,
-                    transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
-            }
-
-            // Checking dot values
-            if (dotVal > bestDotVal)
-            {
-                bestDotVal = dotVal;
-                bestDirection = direction;
-            }
-        }
-
-        return bestDirection;
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     public Image m_healthFill;
+    public Image m_background;
     public HealthComponent m_healthComp;
     public bool m_isWorldSpace = false;
     public float m_showTime = 1.0f;
@@ -24,7 +25,8 @@ public class HealthBar : MonoBehaviour
     private void OnDamage(float amount, GameObject instigator)
     {
         m_timer = 0.0f;
-        m_healthFill.transform.parent.gameObject.SetActive(true);
+        m_healthFill.enabled = true;
+        m_background.enabled = true;
     }
 
     private void Update()
@@ -34,11 +36,20 @@ public class HealthBar : MonoBehaviour
             transform.position = Camera.main.WorldToScreenPoint(m_healthComp.transform.position + m_offset);
             m_healthFill.fillAmount = m_healthComp.m_health / m_healthComp.m_maxHealth;
 
-            m_timer += Time.deltaTime;
-            if (m_timer >= m_showTime)
+            if (!m_healthComp.m_isHealing)
             {
-                m_timer = m_showTime;
-                m_healthFill.transform.parent.gameObject.SetActive(false);
+                m_timer += Time.deltaTime;
+                if (m_timer >= m_showTime)
+                {
+                    m_timer = m_showTime;
+                    m_healthFill.enabled = false;
+                    m_background.enabled = false;
+                }
+            }
+            else
+            {
+                m_healthFill.enabled = true;
+                m_background.enabled = true;
             }
         }
         else

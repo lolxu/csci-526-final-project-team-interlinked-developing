@@ -26,7 +26,6 @@ public class HealerEnemyAI : BaseEnemyAI
     {
         base.Start();
         
-        SingletonMaster.Instance.EventManager.EnemyHealedFullEvent.AddListener(OnEnemyHealed);
         SingletonMaster.Instance.EventManager.EnemyDamagedEvent.AddListener(OnEnemyDamaged);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(OnEnemyDeath);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -47,15 +46,22 @@ public class HealerEnemyAI : BaseEnemyAI
             StopCoroutine(m_healTimeoutCoroutine);
         }
 
-        SingletonMaster.Instance.EventManager.EnemyHealedFullEvent.RemoveListener(OnEnemyHealed);
         SingletonMaster.Instance.EventManager.EnemyDamagedEvent.RemoveListener(OnEnemyDamaged);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(OnEnemyDeath);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
     }
     
     private void OnUnlinked(GameObject obj, GameObject instigator)
     {
         if (m_moveTarget == obj && gameObject == instigator)
         {
+            HealthComponent hc = m_moveTarget.GetComponent<HealthComponent>();
+            if (hc != null)
+            {
+                hc.m_healer = null;
+                hc.m_isHealing = false;
+            }
+            
             m_healerState = HealerState.MovingToPlayer;
             m_moveTarget = null;
             m_healTimeoutCoroutine = StartCoroutine(HealTimeout());
@@ -78,19 +84,6 @@ public class HealerEnemyAI : BaseEnemyAI
             }
         }
     }
-
-    private void OnEnemyHealed(GameObject enemy)
-    {
-        if (enemy != gameObject)
-        {
-            if (m_healerState == HealerState.Healing && enemy == m_moveTarget)
-            {
-                m_moveTarget.GetComponent<RopeComponent>().DetachEnemy(m_moveTarget);
-                m_moveTarget = null;
-                FindingHealTarget();
-            }
-        }
-    }
     
     private void OnEnemyDeath(GameObject enemy)
     {
@@ -101,6 +94,18 @@ public class HealerEnemyAI : BaseEnemyAI
                 m_healerState = HealerState.MovingToPlayer;
                 m_moveTarget = null;
                 FindingHealTarget();
+            }
+        }
+        else
+        {
+            if (m_moveTarget != null)
+            {
+                HealthComponent hc = m_moveTarget.GetComponent<HealthComponent>();
+                if (hc != null)
+                {
+                    hc.m_healer = null;
+                    hc.m_isHealing = false;
+                }
             }
         }
     }
@@ -130,6 +135,7 @@ public class HealerEnemyAI : BaseEnemyAI
                 case HealerState.MovingToPlayer:
                 {
                     MoveBehavior();
+                    FindingHealTarget();
                     break;
                 }
                 case HealerState.Idle:
@@ -158,10 +164,9 @@ public class HealerEnemyAI : BaseEnemyAI
 
             if (!m_moveTarget.CompareTag("Player"))
             {
-                float dist = Vector3.Distance(transform.position, m_moveTarget.transform.position);
-
                 if (m_healerState != HealerState.Healing)
                 {
+                    float dist = Vector3.Distance(transform.position, m_moveTarget.transform.position);
                     if (dist < m_surroundDistance)
                     {
                         Debug.Log("Healing: " + m_moveTarget.transform.parent.gameObject);
@@ -192,29 +197,42 @@ public class HealerEnemyAI : BaseEnemyAI
 
     private void FindingHealTarget()
     {
-        // Getting list of damaged enemies & finding the closest one
-        float minDist = float.MaxValue;
-        GameObject newTarget = null;
-        foreach (var enemy in SingletonMaster.Instance.EnemyManager.m_damagedEnemies)
+        if (m_moveTarget == null || m_moveTarget.CompareTag("Player"))
         {
-            float dist = Vector3.Distance(transform.position, enemy.transform.position);
-            if (enemy != gameObject && dist < minDist)
+            // Getting list of damaged enemies & finding the closest one
+            float minDist = float.MaxValue;
+            GameObject newTarget = null;
+            foreach (var enemy in SingletonMaster.Instance.EnemyManager.m_enemies)
             {
-                minDist = dist;
-                newTarget = enemy;
-            }
-        }
+                GameObject enemyObj = enemy.transform.GetChild(0).gameObject;
+                if (enemyObj != gameObject)
+                {
+                    HealthComponent hc = enemyObj.GetComponent<HealthComponent>();
 
-        if (newTarget != null)
-        {
-            m_moveTarget = newTarget;
-            m_overrideMovement = true;
-        }
-        else
-        {
-            m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
-            m_overrideMovement = false;
-            m_healerState = HealerState.MovingToPlayer;
+                    // Making sure only one healer connects to one enemy
+                    if (hc != null && hc.m_healer == null && hc.m_health < hc.m_maxHealth)
+                    {
+                        float dist = Vector3.Distance(transform.position, enemyObj.transform.position);
+                        if (dist < minDist)
+                        {
+                            hc.m_healer = gameObject;
+                            minDist = dist;
+                            newTarget = enemyObj;
+                        }
+                    }
+                }
+            }
+
+            if (newTarget != null)
+            {
+                m_moveTarget = newTarget;
+                m_healerState = HealerState.MovingToHeal;
+            }
+            else
+            {
+                m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+                m_healerState = HealerState.MovingToPlayer;
+            }
         }
     }
 
@@ -228,11 +246,17 @@ public class HealerEnemyAI : BaseEnemyAI
                 if (hc.m_health < hc.m_maxHealth)
                 {
                     hc.m_health += m_healRate * Time.deltaTime;
+                    hc.m_isHealing = true;
                 }
                 else
                 {
+                    hc.m_isHealing = false;
                     hc.m_health = hc.m_maxHealth;
-                    SingletonMaster.Instance.EventManager.EnemyHealedFullEvent.Invoke(m_moveTarget);
+                    hc.m_healer = null;
+                    
+                    // Disconnect
+                    m_moveTarget.GetComponent<RopeComponent>().DetachEnemy(gameObject);
+                    m_moveTarget = null;
                 }
             }
         }

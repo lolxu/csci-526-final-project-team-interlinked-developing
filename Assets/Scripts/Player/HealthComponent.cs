@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class HealthComponent : MonoBehaviour
     public UnityEvent<float, GameObject> DamageEvent = new UnityEvent<float, GameObject>();
     public UnityEvent<GameObject> DeathEvent = new UnityEvent<GameObject>();
     public bool m_isLinked = false;
+
+    [Header("Heal Settings")] 
+    public bool m_isHealing = false;
+    public GameObject m_healer = null;
 
     [Header("Visual Settings")] 
     [SerializeField] private GameObject m_playerDeath;
@@ -168,14 +173,12 @@ public class HealthComponent : MonoBehaviour
         {
             m_isInvincible = false;
             SingletonMaster.Instance.FeelManager.m_playerDeath.PlayFeedbacks(transform.position);
-            // Instantiate(m_playerDeath, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(killer);
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy"))
         {
             SingletonMaster.Instance.FeelManager.m_enemyDeath.PlayFeedbacks(transform.position);
-            // Instantiate(m_enemyDeath, transform.position, Quaternion.Euler(90.0f, 0.0f, 0.0f));
             SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
         }
         else
