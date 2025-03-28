@@ -45,6 +45,9 @@ public class AbilityComponent : MonoBehaviour
         SingletonMaster.Instance.AbilityManager.AbilityFinished.AddListener(OnAbilityFinished);
 
         m_orgScale = transform.localScale;
+        
+        // Start spawn as trigger
+        GetComponent<Collider2D>().isTrigger = true;
 
         if (!m_showText)
         {
@@ -185,5 +188,13 @@ public class AbilityComponent : MonoBehaviour
         {
             Destroy(gameObject);
         });
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Background"))
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+        }
     }
 }

@@ -36,6 +36,9 @@ public class BaseEnemyBehavior : MonoBehaviour
     {
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
+
+        // Start spawn as trigger
+        GetComponent<Collider2D>().isTrigger = true;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -99,7 +102,18 @@ public class BaseEnemyBehavior : MonoBehaviour
                 }
             }
         }
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Background"))
+        {
+            GetComponent<Collider2D>().isTrigger = false;
+            if (SingletonMaster.Instance.FeelManager.m_wallParticles != null)
+            {
+                SingletonMaster.Instance.FeelManager.m_wallParticles.PlayFeedbacks(transform.position);
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
