@@ -55,7 +55,7 @@ public class BaseEnemyAI : MonoBehaviour
             m_pathfindDirections.Add(newDir);
         }
         
-        m_randomDestinationDisp = Random.insideUnitCircle.normalized * 5.0f;
+        m_randomDestinationDisp = Random.insideUnitCircle.normalized * m_surroundDistance;
         
         // Setting state
         m_state = EnemyAIState.Moving;

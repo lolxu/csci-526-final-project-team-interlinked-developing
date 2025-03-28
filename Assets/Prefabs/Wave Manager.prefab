@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2040493749053417823}
   - component: {fileID: 6518961302890800453}
   m_Layer: 0
-  m_Name: Enemy Manager
+  m_Name: Wave Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

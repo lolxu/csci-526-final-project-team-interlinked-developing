@@ -5374,7 +5374,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 42306
+  m_InstanceId: 36884
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 0.49999988, y: 0.5, z: 0}
@@ -5401,6 +5401,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_isLinked: 0
+  m_isHealing: 0
+  m_healer: {fileID: 0}
   m_playerDeath: {fileID: 4255317271503354296, guid: 3b976430dd662b1469bcbd73f00d53f1, type: 3}
   m_enemyDeath: {fileID: 4255317271503354296, guid: 524e343b03c7aec4bac75a80c1713cca, type: 3}
 --- !u!114 &7998378566146844336
@@ -6582,7 +6584,7 @@ MonoBehaviour:
   LootManager: {fileID: 0}
   UI: {fileID: 6773832771378679821}
   EventManager: {fileID: 3902737660301123325}
-  EnemyManager: {fileID: 8643918305086149540}
+  waveManager: {fileID: 8643918305086149540}
   AbilityManager: {fileID: 4445060140482832194}
   WeightedRandomItems: {fileID: 11400000, guid: 6fbd8e8c1b0421446abcb48b658de6c9, type: 2}
   LootSpawnScriptableObject: {fileID: 11400000, guid: 4eb21cccd984a434283410d846842646, type: 2}
@@ -7577,13 +7579,7 @@ MonoBehaviour:
   EnemyDeathEvent:
     m_PersistentCalls:
       m_Calls: []
-  EnemyRequireRespawnEvent:
-    m_PersistentCalls:
-      m_Calls: []
   EnemyDamagedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  EnemyHealedFullEvent:
     m_PersistentCalls:
       m_Calls: []
   WaveTimeoutEvent:
@@ -13061,7 +13057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6288930633101109759, guid: 1555934843abd6843af6ae7433f53975, type: 3}
       propertyPath: m_Name
-      value: Enemy Manager
+      value: Wave Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

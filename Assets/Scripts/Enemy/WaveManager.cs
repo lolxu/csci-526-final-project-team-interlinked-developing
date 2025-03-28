@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
-public class EnemyManager : MonoBehaviour
+public class WaveManager : MonoBehaviour
 {
     [Header("Spawning Settings")] 
     public int m_waveCount = 0;

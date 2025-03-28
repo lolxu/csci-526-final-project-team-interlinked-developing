@@ -25,40 +25,79 @@ public class MetricsManager : MonoBehaviour
     private static extern void Initialize();
     
     private long m_sessionID;
+
+    [Serializable]
+    public class SerializableVector2
+    {
+        public float x;
+        public float y;
+    }
+    
+    [Serializable]
+    public class LevelMetrics
+    {
+        public string m_levelName;
+        
+        // For obtaining the number of rope connections & disconnections each level
+        public List<int> m_ropeConnectionMetrics = new List<int>();
+        public List<int> m_ropeDisconnectionMetrics = new List<int>();
+        
+        // For death heat map
+        public List<SerializableVector2> m_deathLocations = new List<SerializableVector2>();
+    }
     
     [Serializable]
     public class MetricsData
     {
-        // For obtaining the number of rope connections & disconnections each level
-        public List<int> m_ropeConnectionMetrics = new List<int>();
-        public List<int> m_ropeDisconnectionMetrics = new List<int>();
+        public List<LevelMetrics> m_levelMetricsData = new List<LevelMetrics>();
 
         public void Init()
         {
             // Initializing arrays to match with level
             for (int i = 0; i < Instance.m_levelData.m_levelNames.Count; i++)
             {
-                m_ropeConnectionMetrics.Add(0);
-                m_ropeDisconnectionMetrics.Add(0);
+                LevelMetrics level = new LevelMetrics
+                {
+                    m_levelName = Instance.m_levelData.m_levelNames[i],
+                };
+
+                for (int j = 0; j < Instance.m_levelData.m_waveCount[i]; j++)
+                {
+                    level.m_ropeConnectionMetrics.Add(0);
+                    level.m_ropeDisconnectionMetrics.Add(0);
+                }
+                
+                m_levelMetricsData.Add(level);
             }
         }
         
-        public void RecordRopeOperations(int level, bool isConnection)
+        public void RecordRopeOperations(int level, int wave, bool isConnection)
         {
             if (Instance.m_canRecord)
             {
                 if (isConnection)
                 {
-                    m_ropeConnectionMetrics[level] += 1;
+                    m_levelMetricsData[level].m_ropeConnectionMetrics[wave] += 1;
                 }
                 else
                 {
-                    m_ropeDisconnectionMetrics[level] += 1;
+                    m_levelMetricsData[level].m_ropeDisconnectionMetrics[wave] += 1;
                 }
 
-                Debug.Log("Connection: " + m_ropeConnectionMetrics[level]);
-                Debug.Log("Disconnection: " + m_ropeDisconnectionMetrics[level]);
+                Debug.Log("Connection: " + m_levelMetricsData[level].m_ropeConnectionMetrics[wave]);
+                Debug.Log("Disconnection: " + m_levelMetricsData[level].m_ropeDisconnectionMetrics[wave]);
             }
+        }
+
+        public void RecordDeath(int level, Vector2 position)
+        {
+            SerializableVector2 deathPos = new SerializableVector2();
+            deathPos.x = position.x;
+            deathPos.y = position.y;
+            
+            m_levelMetricsData[level].m_deathLocations.Add(deathPos);
+            
+            Debug.Log("Death Position: " + position);
         }
     }
 
@@ -75,6 +114,7 @@ public class MetricsManager : MonoBehaviour
             
             // Initializing metrics
             m_metricsData.Init();
+            Send();
         }
     }
 
@@ -93,6 +133,10 @@ public class MetricsManager : MonoBehaviour
 
     private IEnumerator Post(string sessionID)
     {
+        string serializedData = JsonUtility.ToJson(m_metricsData);
+        Debug.Log(serializedData);
+        yield return null;
+        /*
         // Create the form and enter responses
         WWWForm form = new WWWForm();
         form.AddField("entry.593653925", sessionID);
@@ -102,7 +146,7 @@ public class MetricsManager : MonoBehaviour
         form.AddField("entry.888263648", m_metricsData.m_ropeDisconnectionMetrics[1]);
         form.AddField("entry.2136525870", m_metricsData.m_ropeConnectionMetrics[2]);
         form.AddField("entry.1012187919", m_metricsData.m_ropeDisconnectionMetrics[2]);
-        
+
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(m_URL, form))
         {
@@ -110,12 +154,13 @@ public class MetricsManager : MonoBehaviour
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log(www.error);
+                Debug.LogError("Failed to upload: " + www.error);
             }
             else
             {
                 Debug.Log("Google Form upload complete!");
             }
         }
+        */
     }
 }
