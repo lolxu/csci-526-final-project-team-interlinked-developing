@@ -25,6 +25,7 @@ public class WaveManager : MonoBehaviour
     [Header("Obstacle Settings")] 
     [Tooltip("Make sure you have the same number of entries as waves")]
     public List<WaveObstacles> m_waveObstacles = new List<WaveObstacles>();
+    public List<GameObject> m_allObstacles = new List<GameObject>();
 
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
@@ -47,6 +48,12 @@ public class WaveManager : MonoBehaviour
             yield return null;
             
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+            
+            // TODO: This code is shit lol
+            foreach (var obstacle in m_allObstacles)
+            {
+                obstacle.SetActive(false);
+            }
             foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
             {
                 obstacle.SetActive(true);
@@ -70,6 +77,11 @@ public class WaveManager : MonoBehaviour
         m_canSpawn = false;
         if (m_waveCount < m_waves.Count - 1)
         {
+            foreach (var obstacle in m_allObstacles)
+            {
+                obstacle.SetActive(false);
+            }
+            
             SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
             yield return new WaitForSeconds(m_waveCoolDown);
             m_waveCount++;
@@ -81,6 +93,7 @@ public class WaveManager : MonoBehaviour
             
             // New Wave
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+            
             foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
             {
                 obstacle.SetActive(true);

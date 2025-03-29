@@ -322,11 +322,14 @@ public class ShootComponent : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             RaycastHit2D enemy = results[i];
-            float dist = Vector2.Distance(enemy.transform.position, transform.position);
-            if (dist < minDist)
+            if (!enemy.collider.isTrigger)
             {
-                minDist = dist;
-                bestTarget = enemy.collider.gameObject;
+                float dist = Vector2.Distance(enemy.transform.position, transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    bestTarget = enemy.collider.gameObject;
+                }
             }
         }
             
