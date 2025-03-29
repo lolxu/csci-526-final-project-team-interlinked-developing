@@ -39,6 +39,8 @@ public class BaseEnemyBehavior : MonoBehaviour
 
         // Start spawn as trigger
         GetComponent<Collider2D>().isTrigger = true;
+
+        GetComponent<Rigidbody2D>();
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);

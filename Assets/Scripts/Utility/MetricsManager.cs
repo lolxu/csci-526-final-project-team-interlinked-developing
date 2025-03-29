@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Proyecto26;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class MetricsManager : MonoBehaviour
@@ -20,9 +22,6 @@ public class MetricsManager : MonoBehaviour
 
     [Header("Level Data")] 
     public LevelDataScriptable m_levelData;
-    
-    [DllImport("__Internal")]
-    private static extern void Initialize();
     
     private long m_sessionID;
 
@@ -49,6 +48,7 @@ public class MetricsManager : MonoBehaviour
     [Serializable]
     public class MetricsData
     {
+        public string m_sessionID;
         public List<LevelMetrics> m_levelMetricsData = new List<LevelMetrics>();
 
         public void Init()
@@ -91,13 +91,17 @@ public class MetricsManager : MonoBehaviour
 
         public void RecordDeath(int level, Vector2 position)
         {
-            SerializableVector2 deathPos = new SerializableVector2();
-            deathPos.x = position.x;
-            deathPos.y = position.y;
-            
-            m_levelMetricsData[level].m_deathLocations.Add(deathPos);
-            
-            Debug.Log("Death Position: " + position);
+            if (Instance.m_canRecord)
+            {
+                SerializableVector2 deathPos = new SerializableVector2();
+                deathPos.x = position.x;
+                deathPos.y = position.y;
+
+                m_levelMetricsData[level].m_deathLocations.Add(deathPos);
+
+
+                Debug.Log("Death Position: " + position);
+            }
         }
     }
 
@@ -113,30 +117,49 @@ public class MetricsManager : MonoBehaviour
             m_sessionID = DateTime.Now.Ticks;
             
             // Initializing metrics
-            m_metricsData.Init();
-            Send();
+            if (m_canRecord)
+            {
+                m_metricsData.Init();
+            }
         }
     }
 
     private void Start()
     {
-#if !UNITY_EDITOR && UNITY_WEBGL
-        Initialize();
-#endif
+        
+    }
+
+    private void OnApplicationQuit()
+    {
+        Send();
     }
 
     public void Send()
     {
-        Debug.Log("Sending data...");
-        StartCoroutine(Post(m_sessionID.ToString()));
+        Post(m_sessionID.ToString());
     }
 
-    private IEnumerator Post(string sessionID)
+    private void Post(string sessionID)
     {
-        string serializedData = JsonUtility.ToJson(m_metricsData);
-        Debug.Log(serializedData);
-        yield return null;
+        if (m_canRecord)
+        {
+            Debug.Log("Sending data...");
+            m_metricsData.m_sessionID = sessionID;
+
+            string serializedData = JsonUtility.ToJson(m_metricsData);
+            Debug.Log(serializedData);
+
+            RequestHelper helper = new RequestHelper
+            {
+                Uri = "https://interlink-metrics-default-rtdb.firebaseio.com/.json",
+                Body = m_metricsData
+            };
+
+            RestClient.Post(helper);
+        }
         /*
+        // This is GOOGLE SHEETS --------------------------------------------------
+
         // Create the form and enter responses
         WWWForm form = new WWWForm();
         form.AddField("entry.593653925", sessionID);

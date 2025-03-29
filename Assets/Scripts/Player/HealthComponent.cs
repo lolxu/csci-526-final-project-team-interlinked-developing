@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class HealthComponent : MonoBehaviour
@@ -174,6 +175,13 @@ public class HealthComponent : MonoBehaviour
             m_isInvincible = false;
             SingletonMaster.Instance.FeelManager.m_playerDeath.PlayFeedbacks(transform.position);
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.Invoke(killer);
+            
+            // Metrics
+            int level = SceneManager.GetActiveScene().buildIndex;
+            
+            Vector2 deathPos = transform.position;
+            MetricsManager.Instance.m_metricsData.RecordDeath(level, deathPos);
+            
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy"))
