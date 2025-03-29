@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class TrapSpawner : MonoBehaviour
+public class ObstacleSpawner : MonoBehaviour
 {
     public List<GameObject> m_traps;
     public float m_maxTimeout = 20.0f;
@@ -26,17 +26,23 @@ public class TrapSpawner : MonoBehaviour
             m_timer = 0.0f;
             m_timeout = Random.Range(0.0f, m_maxTimeout);
             
-            SpawnTrapRandomly();
+            SpawnObstacleRandomly();
         }
 
         m_timer += Time.deltaTime;
     }
 
-    private void SpawnTrapRandomly()
+    private void SpawnObstacleRandomly()
     {
         float randX = Random.Range(-m_collider.size.x / 2.0f + transform.position.x, m_collider.size.x / 2.0f + transform.position.x);
         Vector3 spawnPos = new Vector3(randX, transform.position.y, 0.0f);
 
-        Instantiate(m_traps[Random.Range(0, m_traps.Count)], spawnPos, Quaternion.identity);
+        Instantiate(m_traps[Random.Range(0, m_traps.Count)], spawnPos, transform.rotation);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + transform.up * 5.0f);
     }
 }

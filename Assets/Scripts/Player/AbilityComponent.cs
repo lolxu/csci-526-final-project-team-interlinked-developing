@@ -190,9 +190,9 @@ public class AbilityComponent : MonoBehaviour
         });
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Background"))
+        if (other.CompareTag("Background") && GetComponent<Collider2D>().isTrigger)
         {
             GetComponent<Collider2D>().isTrigger = false;
         }

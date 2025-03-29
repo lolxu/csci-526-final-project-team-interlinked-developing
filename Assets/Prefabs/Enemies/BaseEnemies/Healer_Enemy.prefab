@@ -700,7 +700,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 76338
+  m_InstanceId: 42596
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -726,7 +726,9 @@ MonoBehaviour:
   DeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  m_isLinked: 0
   m_isHealing: 0
+  m_healer: {fileID: 0}
   m_playerDeath: {fileID: 4255317271503354296, guid: 3b976430dd662b1469bcbd73f00d53f1, type: 3}
   m_enemyDeath: {fileID: 4255317271503354296, guid: 524e343b03c7aec4bac75a80c1713cca, type: 3}
 --- !u!114 &6899114663690077761

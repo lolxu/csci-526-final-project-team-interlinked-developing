@@ -16,10 +16,21 @@ public class WaveManager : MonoBehaviour
     public bool m_canSpawn = false;
     public LayerMask m_maskCheck;
 
+    [Serializable]
+    public class WaveObstacles
+    {
+        public List<GameObject> m_obstacles;
+    }
+    
+    [Header("Obstacle Settings")] 
+    [Tooltip("Make sure you have the same number of entries as waves")]
+    public List<WaveObstacles> m_waveObstacles = new List<WaveObstacles>();
+
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
     private int m_maxEnemyCount = 20;
     
+    [Header("Enemy Tracking")]
     public List<GameObject> m_enemies = new List<GameObject>();
 
     private IEnumerator Start()
@@ -32,8 +43,14 @@ public class WaveManager : MonoBehaviour
             m_currentWave = m_waves[0];
             m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
             m_waveTime = m_currentWave.m_waveTime;
+            
             yield return null;
+            
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+            foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
+            {
+                obstacle.SetActive(true);
+            }
         }
         else
         {
@@ -62,7 +79,12 @@ public class WaveManager : MonoBehaviour
             
             m_canSpawn = true;
             
+            // New Wave
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
+            foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
+            {
+                obstacle.SetActive(true);
+            }
         }
         else
         {
