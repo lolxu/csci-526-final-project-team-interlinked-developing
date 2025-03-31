@@ -10,11 +10,12 @@ public class GameColorsScriptableObject : ScriptableObject
     public Color m_playerRopeColor;
     public Color m_connectionHighlight;
     public Color m_disconnectionHighlight;
-    
+
     [Header("Enemy Stuff")]
     public Color m_enemyColor;
     public Color m_enemyRopeColor;
 
-    [Header("Ability Stuff")] 
+    [Header("Ability Stuff")]
     public Color m_abilityBaseColor;
+    //sjdahsaj
 }
