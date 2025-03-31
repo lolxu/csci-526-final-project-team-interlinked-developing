@@ -18,8 +18,8 @@ public class SingletonMaster : MonoBehaviour
     [Header("Event Manager")] 
     public EventManager EventManager;
 
-    [Header("Enemy Wave Manager")] 
-    public WaveManager waveManager;
+    [FormerlySerializedAs("waveManager")] [Header("Enemy Wave Manager")] 
+    public WaveManager WaveManager;
 
     [Header("Ability Manager")] 
     public AbilityManager AbilityManager;

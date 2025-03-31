@@ -32,22 +32,6 @@ public class WallManager : MonoBehaviour
         originalPosD = boundaryD.position;
         originalPosL = boundaryL.position;
         originalPosR = boundaryR.position;
-
-        SingletonMaster.Instance.EventManager.WaveTimeoutEvent.AddListener(ShrinkWalls);
-        SingletonMaster.Instance.EventManager.NextWaveEvent.AddListener(ResetWalls); // Fixed method signature
-    }
-
-    private void ShrinkWalls()
-    {
-        if (!shrinking)
-        {
-            shrinking = true;
-            if (uiManager != null)
-            {
-                uiManager.EnqueueAnnouncement("The walls are shrinking!", false, 2.0f);
-            }
-            StartCoroutine(ShrinkWallsRoutine());
-        }
     }
 
     private IEnumerator ShrinkWallsRoutine()
@@ -70,7 +54,6 @@ public class WallManager : MonoBehaviour
                 shrinking = false;
                 if (uiManager != null)
                 {
-                    uiManager.EnqueueAnnouncement("Walls stopped shrinking!", false, 2.0f);
                 }
                 yield break; // Stop coroutine
             }
@@ -85,19 +68,4 @@ public class WallManager : MonoBehaviour
         }
     }
 
-    private void ResetWalls(EnemySpawnScriptable wave)
-    {
-        Debug.Log("[WallManager] Resetting Walls to Original Position...");
-        boundaryU.position = originalPosU;
-        boundaryD.position = originalPosD;
-        boundaryL.position = originalPosL;
-        boundaryR.position = originalPosR;
-        shrinking = false;
-    }
-
-    private void OnDestroy()
-    {
-        SingletonMaster.Instance.EventManager.WaveTimeoutEvent.RemoveListener(ShrinkWalls);
-        SingletonMaster.Instance.EventManager.NextWaveEvent.RemoveListener(ResetWalls);
-    }
 }
