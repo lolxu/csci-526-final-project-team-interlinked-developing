@@ -1937,7 +1937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3971054784900921053, guid: e1ba1786ec55be447be3680d5209abde, type: 3}
       propertyPath: m_isTutorialDone
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4480457064116769141, guid: e1ba1786ec55be447be3680d5209abde, type: 3}
       propertyPath: m_canRecord

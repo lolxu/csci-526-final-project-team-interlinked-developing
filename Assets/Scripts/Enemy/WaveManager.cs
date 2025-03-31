@@ -13,8 +13,9 @@ public class WaveManager : MonoBehaviour
     public List<EnemySpawnScriptable> m_waves = new List<EnemySpawnScriptable>();
     public float m_waveCoolDown = 10.0f;
     public float m_spawnPadding = 1.0f;
-    public bool m_canSpawn = false;
     public LayerMask m_maskCheck;
+    
+    private bool m_canSpawn = false;
 
     [Serializable]
     public class WaveObstacles
@@ -50,6 +51,7 @@ public class WaveManager : MonoBehaviour
     {
         if (m_waves.Count > 0)
         {
+            m_canSpawn = true;
             m_currentWave = m_waves[0];
             m_maxEnemyCount = m_currentWave.m_maxEnemyCount;
             m_waveTime = m_currentWave.m_waveTime;
