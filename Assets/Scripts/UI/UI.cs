@@ -91,13 +91,13 @@ public class UI : MonoBehaviour
             }
             
             m_waveText.text = $"Wave Time: {m_waveTime:F2}  Wave Count: {m_waveCount}";
-            m_ropeCountText.text = (SingletonMaster.Instance.PlayerBase.m_linkedObjects.Count - 1) + "/" +
+            m_ropeCountText.text = "ROPE: " + (SingletonMaster.Instance.PlayerBase.m_linkedObjects.Count - 1) + "/" +
                                    m_maxConnections;
         }
         else
         {
             m_waveText.text = $"Wave Time: You Died...  Wave Count: {m_waveCount}";
-            m_ropeCountText.text = "DEAD/" + m_maxConnections;
+            m_ropeCountText.text = "ROPE: DEAD/" + m_maxConnections;
         }
     }
 
@@ -166,7 +166,7 @@ public class UI : MonoBehaviour
         m_finalMessageText.enabled = true; 
         m_finalMessageText.text = "YOU WIN";
         m_announcementText.enabled = true;
-        m_announcementText.text = "End of Alpha!";
+        m_announcementText.text = "End of Demo (for now...)";
     }
 
     public void ShowBigText(string words, float duration)

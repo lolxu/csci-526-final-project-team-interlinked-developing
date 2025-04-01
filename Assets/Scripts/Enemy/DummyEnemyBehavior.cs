@@ -20,11 +20,9 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
     }
-    
-    protected override void OnDisable()
+
+    private void OnDestroy()
     {
-        base.OnDisable();
-        
         SingletonMaster.Instance.EventManager.TutorialPlayerKilledEnemy.Invoke();
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);

@@ -20,7 +20,9 @@ public class TutorialSequence : MonoBehaviour
     [Header("Tutorial Sequence Settings")]
     public List<GameObject> m_controlPrompts = new List<GameObject>();
     public GameObject m_dummyEnemy;
+    public Transform m_dummySpawn;
     public List<GameObject> m_combatEnemies;
+    public List<Transform> m_combatSpawns;
     public GameObject m_abilityObj;
 
     [Header("Walls - Dope Visuals")]
@@ -109,10 +111,10 @@ public class TutorialSequence : MonoBehaviour
         m_controlPrompts[1].SetActive(true);
         
         // Spawning dummy enemy
-        m_dummyEnemy.SetActive(true);
-        Vector3 orgScale = m_dummyEnemy.transform.localScale;
-        m_dummyEnemy.transform.localScale = Vector3.zero;
-        m_dummyEnemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
+        GameObject enemy = Instantiate(m_dummyEnemy, m_dummySpawn.position, Quaternion.identity);
+        Vector3 orgScale = enemy.transform.localScale;
+        enemy.transform.localScale = Vector3.zero;
+        enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
     }
     
     private IEnumerator TransitionToAbility()
@@ -130,9 +132,9 @@ public class TutorialSequence : MonoBehaviour
         m_controlPrompts[2].SetActive(false);
         m_controlPrompts[3].SetActive(true);
         
-        foreach (var enemy in m_combatEnemies)
+        for (int i = 0; i < m_combatEnemies.Count; i++)
         {
-            enemy.SetActive(true);
+            GameObject enemy = Instantiate(m_combatEnemies[i], m_combatSpawns[i].position, Quaternion.identity);
             Vector3 orgScale = enemy.transform.localScale;
             enemy.transform.localScale = Vector3.zero;
             enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
@@ -163,6 +165,8 @@ public class TutorialSequence : MonoBehaviour
             m_rightWall.SetActive(false);
             
             SingletonMaster.Instance.WaveManager.StartWaves();
+            
+            gameObject.SetActive(false);
         });
 
     }
