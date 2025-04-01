@@ -201,7 +201,7 @@ public class HealerEnemyAI : BaseEnemyAI
             // Getting list of damaged enemies & finding the closest one
             float minDist = float.MaxValue;
             GameObject newTarget = null;
-            foreach (var enemy in SingletonMaster.Instance.waveManager.m_enemies)
+            foreach (var enemy in SingletonMaster.Instance.WaveManager.m_enemies)
             {
                 GameObject enemyObj = enemy.transform.GetChild(0).gameObject;
                 if (enemyObj != gameObject)

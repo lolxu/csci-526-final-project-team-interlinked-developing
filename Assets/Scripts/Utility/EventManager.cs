@@ -28,7 +28,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent NeedWaveClearEvent = new UnityEvent();
     public UnityEvent<GameObject> EnemyDeathEvent = new UnityEvent<GameObject>();
     public UnityEvent<GameObject> EnemyDamagedEvent = new UnityEvent<GameObject>();
-
     public UnityEvent WaveTimeoutEvent = new UnityEvent();
 
+    [Header("Tutorial Events")] 
+    public UnityEvent PlayerMoved = new UnityEvent();
 }

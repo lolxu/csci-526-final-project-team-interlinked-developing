@@ -331,6 +331,8 @@ public class PlayerBase : MonoBehaviour
         {
             m_lastMoveDirection = m_moveDirection;
         }
+        
+        SingletonMaster.Instance.EventManager.PlayerMoved.Invoke();
     }
 
     public void RopeConnect(InputAction.CallbackContext context)
@@ -341,7 +343,7 @@ public class PlayerBase : MonoBehaviour
             {
                 // TODO: We need to change this...
                 int level = SceneManager.GetActiveScene().buildIndex;
-                int wave = SingletonMaster.Instance.waveManager.m_waveCount;
+                int wave = SingletonMaster.Instance.WaveManager.m_waveCount;
                 MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, wave, true);
                 RequestRopeConnect(m_bestRopeConnectTarget.GetComponent<Rigidbody2D>());
             }
@@ -356,7 +358,7 @@ public class PlayerBase : MonoBehaviour
             {
                 // TODO: We need to change this...
                 int level = SceneManager.GetActiveScene().buildIndex;
-                int wave = SingletonMaster.Instance.waveManager.m_waveCount;
+                int wave = SingletonMaster.Instance.WaveManager.m_waveCount;
                 MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, wave, false);
                 
                 // Honing in to the nearest enemy / dangerous object
