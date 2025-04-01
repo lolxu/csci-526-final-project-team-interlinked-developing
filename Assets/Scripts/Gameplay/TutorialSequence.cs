@@ -112,9 +112,9 @@ public class TutorialSequence : MonoBehaviour
         
         // Spawning dummy enemy
         GameObject enemy = Instantiate(m_dummyEnemy, m_dummySpawn.position, Quaternion.identity);
-        Vector3 orgScale = enemy.transform.localScale;
-        enemy.transform.localScale = Vector3.zero;
-        enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
+        // Vector3 orgScale = enemy.transform.localScale;
+        // enemy.transform.localScale = Vector3.zero;
+        // enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
     }
     
     private IEnumerator TransitionToAbility()
@@ -135,9 +135,6 @@ public class TutorialSequence : MonoBehaviour
         for (int i = 0; i < m_combatEnemies.Count; i++)
         {
             GameObject enemy = Instantiate(m_combatEnemies[i], m_combatSpawns[i].position, Quaternion.identity);
-            Vector3 orgScale = enemy.transform.localScale;
-            enemy.transform.localScale = Vector3.zero;
-            enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
         }
     }
 

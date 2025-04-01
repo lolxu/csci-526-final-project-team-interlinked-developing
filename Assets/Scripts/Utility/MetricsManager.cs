@@ -38,6 +38,7 @@ public class MetricsManager : MonoBehaviour
         public string m_levelName;
         
         // For obtaining the number of rope connections & disconnections each level
+        // TODO: Not a good metrics change this!!!!
         public List<int> m_ropeConnectionMetrics = new List<int>();
         public List<int> m_ropeDisconnectionMetrics = new List<int>();
         

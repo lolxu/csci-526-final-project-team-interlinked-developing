@@ -15,8 +15,6 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private AbilityManager.AbilityTypes m_type;
     [SerializeField] private Color m_coolDownColor;
     [SerializeField] private RopeComponent m_ropeComponent;
-    [SerializeField] private GameObject m_text;
-    [SerializeField] private bool m_showText = false;
     [SerializeField] private float m_lifeTime = 10.0f;
     
     [Header("Damage Settings")]
@@ -27,6 +25,9 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private float m_shrinkTime = 0.15f;
     [SerializeField] private List<Color> m_collectedColor = new List<Color>();
     [SerializeField] private List<SpriteRenderer> m_spriteRenderers = new List<SpriteRenderer>();
+    [SerializeField] private GameObject m_connectPrompt;
+    [SerializeField] private GameObject m_disconnectPrompt;
+    [SerializeField] private bool m_showPrompt = false;
 
     private List<Color> m_uncollectedColor = new List<Color>();
     private bool m_isDespawning = false;
@@ -49,9 +50,10 @@ public class AbilityComponent : MonoBehaviour
         // Start spawn as trigger
         GetComponent<Collider2D>().isTrigger = true;
 
-        if (!m_showText)
+        if (!m_showPrompt)
         {
-            m_text.SetActive(false);
+            m_connectPrompt.SetActive(false);
+            m_disconnectPrompt.SetActive(false);
         }
         
         foreach (var sp in m_spriteRenderers)
@@ -119,11 +121,6 @@ public class AbilityComponent : MonoBehaviour
             {
                 m_spriteRenderers[i].color = m_uncollectedColor[i];
             }
-
-            if (m_showText)
-            {
-                m_text.SetActive(true);
-            }
         }
     }
 
@@ -141,9 +138,10 @@ public class AbilityComponent : MonoBehaviour
 
             m_despawnTimer = 0.0f;
             
-            if (m_showText)
+            if (m_showPrompt)
             {
-                m_text.SetActive(false);
+                m_connectPrompt.SetActive(false);
+                m_showPrompt = false;
             }
         }
     }
