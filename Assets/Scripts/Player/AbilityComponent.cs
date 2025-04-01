@@ -93,6 +93,12 @@ public class AbilityComponent : MonoBehaviour
                 m_spriteRenderer.color = orgColor;
                 m_canActivate = true;
             });
+            
+            // For tutorial
+            if (GameManager.Instance.m_levelData.m_needsTutorial)
+            {
+                SingletonMaster.Instance.EventManager.TutorialPlayerAbility.Invoke();
+            }
         }
     }
 

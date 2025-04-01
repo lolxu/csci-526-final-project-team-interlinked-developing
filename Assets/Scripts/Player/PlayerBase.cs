@@ -332,7 +332,14 @@ public class PlayerBase : MonoBehaviour
             m_lastMoveDirection = m_moveDirection;
         }
         
-        SingletonMaster.Instance.EventManager.PlayerMoved.Invoke();
+        // For tutorial
+        if (context.started)
+        {
+            if (GameManager.Instance.m_levelData.m_needsTutorial)
+            {
+                SingletonMaster.Instance.EventManager.TutorialPlayerMoved.Invoke();
+            }
+        }
     }
 
     public void RopeConnect(InputAction.CallbackContext context)
@@ -412,61 +419,48 @@ public class PlayerBase : MonoBehaviour
 
         yield return null;
 
-        Vector2 newPos = obj.transform.position;
-        
-        Vector2 moveDir = (newPos - oldPos).normalized;
-        Debug.Log(moveDir);
-        int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, moveDir, results, m_throwAutoTargetRange, m_throwTargetMask);
-        
-        float minDist = float.MaxValue;
-        GameObject curBestTarget = null;
-        for (int i = 0; i < hits; i++)
+        if (obj != null)
         {
-            if (results[i].collider.gameObject != obj)
-            {
-                Vector2 toTarget = results[i].transform.position - obj.transform.position;
-                float dist = Vector3.Distance(results[i].transform.position, rb.position);
+            Vector2 newPos = obj.transform.position;
 
-                if (Vector2.Dot(moveDir, toTarget) > 0.5f)
+            Vector2 moveDir = (newPos - oldPos).normalized;
+            Debug.Log(moveDir);
+            int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, moveDir, results,
+                m_throwAutoTargetRange, m_throwTargetMask);
+
+            float minDist = float.MaxValue;
+            GameObject curBestTarget = null;
+            for (int i = 0; i < hits; i++)
+            {
+                if (results[i].collider.gameObject != obj)
                 {
-                    if (dist < minDist)
+                    Vector2 toTarget = results[i].transform.position - obj.transform.position;
+                    float dist = Vector3.Distance(results[i].transform.position, rb.position);
+
+                    if (Vector2.Dot(moveDir, toTarget) > 0.5f)
                     {
-                        minDist = dist;
-                        curBestTarget = results[i].collider.gameObject;
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            curBestTarget = results[i].collider.gameObject;
+                        }
                     }
                 }
             }
-        }
 
-        if (curBestTarget != null)
-        {
-            // StartCoroutine(ThrowToTarget(rb, curBestTarget));
-            Vector2 throwDir = (curBestTarget.transform.position - obj.transform.position).normalized;
-
-            Vector3 drawDir = throwDir;
-            Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
-            rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
-        }
-        else
-        {
-            Debug.Log("No Target Found...");
-        }
-    }
-
-    // Even more homing missile like....
-    IEnumerator ThrowToTarget(Rigidbody2D throwObj, GameObject target)
-    {
-        float dist = Vector3.Distance(throwObj.position, target.transform.position);
-        while (dist > 2.0f)
-        {
-            Vector3 dir = (target.transform.position - throwObj.transform.position).normalized;
-            throwObj.AddForce(dir * m_throwStrength * Time.fixedDeltaTime, ForceMode2D.Impulse);
-            yield return null;
-            if (target == null || throwObj == null)
+            if (curBestTarget != null)
             {
-                break;
+                // StartCoroutine(ThrowToTarget(rb, curBestTarget));
+                Vector2 throwDir = (curBestTarget.transform.position - obj.transform.position).normalized;
+
+                Vector3 drawDir = throwDir;
+                Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
+                rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
             }
-            dist = Vector3.Distance(throwObj.position, target.transform.position);
+            else
+            {
+                Debug.Log("No Target Found...");
+            }
         }
     }
     

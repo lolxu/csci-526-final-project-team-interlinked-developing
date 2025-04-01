@@ -12,13 +12,12 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Game Things")] 
     public PlayerBase PlayerBase;
-    public LootManager LootManager;
     public UI UI;
 
     [Header("Event Manager")] 
     public EventManager EventManager;
 
-    [FormerlySerializedAs("waveManager")] [Header("Enemy Wave Manager")] 
+    [Header("Enemy Wave Manager")] 
     public WaveManager WaveManager;
 
     [Header("Ability Manager")] 

@@ -58,6 +58,11 @@ public class UI : MonoBehaviour
 
     private void OnUpdateWave(EnemySpawnScriptable wave)
     {
+        if (!m_waveText.enabled)
+        {
+            m_waveText.enabled = true;
+        }
+        
         Debug.Log($"New wave started! Wave Time: {wave.m_waveTime}");
         m_waveTime = wave.m_waveTime; // Set wave duration dynamically from EnemyManager
         m_waveCount++;
@@ -86,13 +91,13 @@ public class UI : MonoBehaviour
             }
             
             m_waveText.text = $"Wave Time: {m_waveTime:F2}  Wave Count: {m_waveCount}";
-            m_ropeCountText.text = "Rope: " + (SingletonMaster.Instance.PlayerBase.m_linkedObjects.Count - 1) + "/" +
+            m_ropeCountText.text = (SingletonMaster.Instance.PlayerBase.m_linkedObjects.Count - 1) + "/" +
                                    m_maxConnections;
         }
         else
         {
             m_waveText.text = $"Wave Time: You Died...  Wave Count: {m_waveCount}";
-            m_ropeCountText.text = "Rope: DEAD/" + m_maxConnections;
+            m_ropeCountText.text = "DEAD/" + m_maxConnections;
         }
     }
 
@@ -162,5 +167,20 @@ public class UI : MonoBehaviour
         m_finalMessageText.text = "YOU WIN";
         m_announcementText.enabled = true;
         m_announcementText.text = "End of Alpha!";
+    }
+
+    public void ShowBigText(string words, float duration)
+    {
+        StartCoroutine(ShowBigTextCoroutine(words, duration));
+    }
+
+    private IEnumerator ShowBigTextCoroutine(string words, float duration)
+    {
+        m_finalMessageText.enabled = true;
+        m_finalMessageText.text = words;
+
+        yield return new WaitForSeconds(duration);
+        
+        m_finalMessageText.enabled = false;
     }
 }

@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
 
     public LevelDataScriptable m_levelData;
-    public bool m_isTutorialDone = false;
     
     private GameObject SingletonMasterObject;
 
@@ -37,15 +36,10 @@ public class GameManager : MonoBehaviour
     {
         m_playerWon = false;
         SingletonMasterObject = GameObject.Find("Singleton Master");
-        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-        // SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
-        // TODO: This is bad...
-        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
 
-        if (m_isTutorialDone)
-        {
-            SingletonMaster.Instance.WaveManager.StartCoroutine(SingletonMaster.Instance.WaveManager.StartWaves());
-        }
+        // TODO: This is bad...
+        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
     }
 
     private void OnDisable()

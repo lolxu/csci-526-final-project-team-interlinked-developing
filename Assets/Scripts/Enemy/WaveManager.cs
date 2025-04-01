@@ -47,7 +47,12 @@ public class WaveManager : MonoBehaviour
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(SpawnLoot);
     }
 
-    public IEnumerator StartWaves()
+    public void StartWaves()
+    {
+        StartCoroutine(StartMyWaves());
+    }
+
+    private IEnumerator StartMyWaves()
     {
         if (m_waves.Count > 0)
         {
