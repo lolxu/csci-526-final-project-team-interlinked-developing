@@ -35,6 +35,8 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         {
             m_connectPrompt.SetActive(false);
             m_disconnectPrompt.SetActive(true);
+
+            SingletonMaster.Instance.EventManager.TutorialLinkedEnemy.Invoke();
         }
     }
     
@@ -44,6 +46,8 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         {
             m_disconnectPrompt.SetActive(false);
             m_isPromptDone = true;
+            
+            SingletonMaster.Instance.EventManager.TutorialUnlinkedEnemy.Invoke();
         }
     }
 

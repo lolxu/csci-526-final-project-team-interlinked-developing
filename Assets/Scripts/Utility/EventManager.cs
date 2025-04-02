@@ -38,7 +38,10 @@ public class EventManager : MonoBehaviour
 
     [Header("Tutorial Events")] 
     public UnityEvent TutorialPlayerMoved = new UnityEvent();
+    public UnityEvent TutorialLinkedEnemy = new UnityEvent();
+    public UnityEvent TutorialUnlinkedEnemy = new UnityEvent();
     public UnityEvent TutorialPlayerKilledEnemy = new UnityEvent();
+    public UnityEvent TutorialPlayerLinkedAbility = new UnityEvent();
     public UnityEvent TutorialPlayerAbility = new UnityEvent();
     public UnityEvent TutorialKillAll = new UnityEvent();
     public UnityEvent TutorialDone = new UnityEvent();

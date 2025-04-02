@@ -40,7 +40,10 @@ public class TutorialSequence : MonoBehaviour
         if (GameManager.Instance.m_levelData.m_needsTutorial)
         {
             SingletonMaster.Instance.EventManager.TutorialPlayerMoved.AddListener(OnPlayerMoved);
+            SingletonMaster.Instance.EventManager.TutorialLinkedEnemy.AddListener(OnDummyLinked);
+            SingletonMaster.Instance.EventManager.TutorialUnlinkedEnemy.AddListener(OnDummyUnlinked);
             SingletonMaster.Instance.EventManager.TutorialPlayerKilledEnemy.AddListener(OnPlayerKilledEnemy);
+            SingletonMaster.Instance.EventManager.TutorialPlayerLinkedAbility.AddListener(OnPlayerLinkedAbility);
             SingletonMaster.Instance.EventManager.TutorialPlayerAbility.AddListener(OnPlayerAbility);
             m_controlPrompts[0].SetActive(true);
         }
@@ -54,7 +57,10 @@ public class TutorialSequence : MonoBehaviour
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.TutorialPlayerMoved.RemoveListener(OnPlayerMoved);
+        SingletonMaster.Instance.EventManager.TutorialLinkedEnemy.RemoveListener(OnDummyLinked);
+        SingletonMaster.Instance.EventManager.TutorialUnlinkedEnemy.RemoveListener(OnDummyUnlinked);
         SingletonMaster.Instance.EventManager.TutorialPlayerKilledEnemy.RemoveListener(OnPlayerKilledEnemy);
+        SingletonMaster.Instance.EventManager.TutorialPlayerLinkedAbility.RemoveListener(OnPlayerLinkedAbility);
         SingletonMaster.Instance.EventManager.TutorialPlayerAbility.RemoveListener(OnPlayerAbility);
     }
 
@@ -69,13 +75,31 @@ public class TutorialSequence : MonoBehaviour
         }
     }
     
+    private void OnDummyLinked()
+    {
+        if (m_currentStep == TutorialProgress.RopeOperations)
+        {
+            m_controlPrompts[1].SetActive(false);
+            m_controlPrompts[2].SetActive(true);
+        }
+    }
+    
+    private void OnDummyUnlinked()
+    {
+        if (m_currentStep == TutorialProgress.RopeOperations)
+        {
+            m_controlPrompts[2].SetActive(false);
+            m_controlPrompts[3].SetActive(true);
+        }
+    }
+    
     private void OnPlayerKilledEnemy()
     {
         if (m_currentStep == TutorialProgress.RopeOperations)
         {
             m_currentStep = TutorialProgress.Ability;
-
-            StartCoroutine(TransitionToAbility());
+            m_controlPrompts[3].SetActive(false);
+            m_abilityObj.SetActive(true);
         }
         else if (m_currentStep == TutorialProgress.Combat)
         {
@@ -86,6 +110,14 @@ public class TutorialSequence : MonoBehaviour
                 
                 TransitionIntoGameplay();
             }
+        }
+    }
+    
+    private void OnPlayerLinkedAbility()
+    {
+        if (m_currentStep == TutorialProgress.Ability)
+        {
+            TransitionToAbility();
         }
     }
     
@@ -117,20 +149,15 @@ public class TutorialSequence : MonoBehaviour
         // enemy.transform.DOScale(orgScale, 0.5f).SetEase(Ease.InOutSine);
     }
     
-    private IEnumerator TransitionToAbility()
+    private void TransitionToAbility()
     {
-        yield return null;
-        
-        m_controlPrompts[1].SetActive(false);
-        m_controlPrompts[2].SetActive(true);
-        
-        m_abilityObj.SetActive(true);
+        m_controlPrompts[4].SetActive(true);
     }
 
     private void TransitionToCombat()
     {
-        m_controlPrompts[2].SetActive(false);
-        m_controlPrompts[3].SetActive(true);
+        m_controlPrompts[4].SetActive(false);
+        m_controlPrompts[5].SetActive(true);
         
         for (int i = 0; i < m_combatEnemies.Count; i++)
         {
@@ -140,7 +167,7 @@ public class TutorialSequence : MonoBehaviour
 
     private void TransitionIntoGameplay()
     {
-        m_controlPrompts[3].SetActive(false);
+        m_controlPrompts[5].SetActive(false);
         
         GameManager.Instance.m_levelData.m_needsTutorial = false;
         

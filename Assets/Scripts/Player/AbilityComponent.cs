@@ -142,6 +142,7 @@ public class AbilityComponent : MonoBehaviour
             {
                 m_connectPrompt.SetActive(false);
                 m_showPrompt = false;
+                SingletonMaster.Instance.EventManager.TutorialPlayerLinkedAbility.Invoke();
             }
         }
     }

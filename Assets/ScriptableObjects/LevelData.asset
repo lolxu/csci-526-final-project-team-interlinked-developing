@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58be473a5f2c4bc7a1fb1e2d83aa7177, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
-  m_needsTutorial: 0
+  m_needsTutorial: 1
   m_levelNames:
   - Main Menu
   - Beta-Cavern

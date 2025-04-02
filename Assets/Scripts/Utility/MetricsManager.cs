@@ -22,7 +22,9 @@ public class MetricsManager : MonoBehaviour
 
     [Header("Level Data")] 
     public LevelDataScriptable m_levelData;
-    
+
+    private List<List<int>> m_ropeConnections = new List<List<int>>();
+    private List<List<int>> m_ropeDisconnections = new List<List<int>>();
     private long m_sessionID;
 
     [Serializable]
@@ -37,12 +39,12 @@ public class MetricsManager : MonoBehaviour
     {
         public string m_levelName;
         
-        // For obtaining the number of rope connections & disconnections each level
-        // TODO: Not a good metrics change this!!!!
+        // For obtaining the number of rope connections & disconnections each level upon completion
         public List<int> m_ropeConnectionMetrics = new List<int>();
         public List<int> m_ropeDisconnectionMetrics = new List<int>();
         
         // For death heat map
+        public int m_deathCount = 0;
         public List<SerializableVector2> m_deathLocations = new List<SerializableVector2>();
     }
     
@@ -61,11 +63,17 @@ public class MetricsManager : MonoBehaviour
                 {
                     m_levelName = Instance.m_levelData.m_levelNames[i],
                 };
+                
+                Instance.m_ropeConnections.Add(new List<int>());
+                Instance.m_ropeDisconnections.Add(new List<int>());
 
                 for (int j = 0; j < Instance.m_levelData.m_waveCount[i]; j++)
                 {
                     level.m_ropeConnectionMetrics.Add(0);
                     level.m_ropeDisconnectionMetrics.Add(0);
+
+                    Instance.m_ropeConnections[i].Add(0);
+                    Instance.m_ropeDisconnections[i].Add(0);
                 }
                 
                 m_levelMetricsData.Add(level);
@@ -78,11 +86,11 @@ public class MetricsManager : MonoBehaviour
             {
                 if (isConnection)
                 {
-                    m_levelMetricsData[level].m_ropeConnectionMetrics[wave] += 1;
+                    Instance.m_ropeConnections[level][wave] += 1;
                 }
                 else
                 {
-                    m_levelMetricsData[level].m_ropeDisconnectionMetrics[wave] += 1;
+                    Instance.m_ropeDisconnections[level][wave] += 1;
                 }
 
                 Debug.Log("Connection: " + m_levelMetricsData[level].m_ropeConnectionMetrics[wave]);
@@ -99,7 +107,7 @@ public class MetricsManager : MonoBehaviour
                 deathPos.y = position.y;
 
                 m_levelMetricsData[level].m_deathLocations.Add(deathPos);
-
+                m_levelMetricsData[level].m_deathCount += 1;
 
                 Debug.Log("Death Position: " + position);
             }
@@ -127,7 +135,25 @@ public class MetricsManager : MonoBehaviour
 
     private void Start()
     {
-        
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(UponLevelCompleted);
+    }
+
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(UponLevelCompleted);
+    }
+
+    private void UponLevelCompleted()
+    {
+        // Recording rope operations to the metrics
+        for (int i = 0; i < m_levelData.m_levelNames.Count; i++)
+        {
+            for (int j = 0; j < m_levelData.m_waveCount[i]; j++)
+            {
+                m_metricsData.m_levelMetricsData[i].m_ropeConnectionMetrics[j] = m_ropeConnections[i][j];
+                m_metricsData.m_levelMetricsData[i].m_ropeDisconnectionMetrics[j] = m_ropeDisconnections[i][j];
+            }
+        }
     }
 
     private void OnApplicationQuit()
@@ -158,6 +184,7 @@ public class MetricsManager : MonoBehaviour
 
             RestClient.Post(helper);
         }
+        
         /*
         // This is GOOGLE SHEETS --------------------------------------------------
 
