@@ -23,6 +23,11 @@ public class DashAbility : MonoBehaviour
         // Get player color
         m_orgColor = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<SpriteRenderer>().color;
     }
+    
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.AbilityManager.ActivateAbility.RemoveListener(OnAbilityActivated);
+    }
 
     private void OnAbilityActivated(AbilityManager.AbilityTypes type)
     {

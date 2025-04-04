@@ -50,7 +50,7 @@ public class TutorialSequence : MonoBehaviour
         else
         {
             m_currentStep = TutorialProgress.Done;
-            TransitionIntoGameplay();
+            StartGameplayImmediately();
         }
     }
 
@@ -192,6 +192,17 @@ public class TutorialSequence : MonoBehaviour
             
             gameObject.SetActive(false);
         });
+    }
 
+    private void StartGameplayImmediately()
+    {
+        m_upWall.SetActive(false);
+        m_downWall.SetActive(false);
+        m_leftWall.SetActive(false);
+        m_rightWall.SetActive(false);
+            
+        SingletonMaster.Instance.WaveManager.StartWaves();
+            
+        gameObject.SetActive(false);
     }
 }

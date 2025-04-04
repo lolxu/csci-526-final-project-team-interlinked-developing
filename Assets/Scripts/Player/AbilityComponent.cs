@@ -88,6 +88,8 @@ public class AbilityComponent : MonoBehaviour
             float ratio = (m_maxUse - m_use) / (float)m_maxUse;
             transform.localScale = m_orgScale * ratio;
             
+            Debug.Log("Ability " + type + " use: " + m_use);
+            
             m_canActivate = false;
             Color orgColor = m_spriteRenderer.color;
             Color newColor = m_coolDownColor;

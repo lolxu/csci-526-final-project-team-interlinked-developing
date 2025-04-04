@@ -8,7 +8,7 @@ public class AbilityManager : MonoBehaviour
     public enum AbilityTypes
     {
         Dash,
-        Invincible
+        Knockback
     }
     
     public UnityEvent<AbilityTypes> ActivateAbility = new UnityEvent<AbilityTypes>();

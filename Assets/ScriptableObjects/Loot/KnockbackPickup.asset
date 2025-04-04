@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5264db06151648a45b015ec071b3859f, type: 3}
-  m_Name: PlayerAbilityList
+  m_Script: {fileID: 11500000, guid: f73a5de0afdb4544093e2a1b4ef00121, type: 3}
+  m_Name: KnockbackPickup
   m_EditorClassIdentifier: 
-  m_abilities:
-  - {fileID: 11400000, guid: 9b0bc4a0f2fbd654fbf3221fd40036dc, type: 2}
-  - {fileID: 11400000, guid: c15d5d9d6f09e514dac0cc02fc03b55a, type: 2}
+  loot:
+    m_loot:
+      m_prefab: {fileID: 7574045754775299820, guid: 3332ffc786193ee45857fff55d3aad37, type: 3}
+      m_lootType: 0
+    m_weightedValue: 0.215
