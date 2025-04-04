@@ -13,6 +13,7 @@ public class EnemyProjectile : MonoBehaviour
     public float m_damage = 4.0f;
     public Vector2 m_moveDirection;
     [SerializeField] private LayerMask m_affectedLayer;
+    [SerializeField] private Color m_spawnedColor;
 
     [Header("Visual Settings")] 
     [SerializeField] private float m_shrinkTime = 0.15f;
@@ -32,6 +33,7 @@ public class EnemyProjectile : MonoBehaviour
         m_RB = GetComponent<Rigidbody2D>();
         m_rope = GetComponent<RopeComponent>();
         m_collider = GetComponent<Collider2D>();
+        m_collider.isTrigger = true;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -50,9 +52,11 @@ public class EnemyProjectile : MonoBehaviour
 
     public void Spawned()
     {
+        m_collider.isTrigger = false;
         gameObject.layer = 6;
         m_isDoneSpawning = true;
         m_collider.includeLayers = m_affectedLayer;
+        GetComponent<SpriteRenderer>().color = m_spawnedColor;
     }
 
     private void FixedUpdate()
