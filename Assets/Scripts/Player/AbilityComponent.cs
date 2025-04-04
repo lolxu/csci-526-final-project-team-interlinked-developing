@@ -36,7 +36,8 @@ public class AbilityComponent : MonoBehaviour
     private int m_use = 0;
     private float m_despawnTimer = 0.0f;
     private Vector3 m_orgScale;
-    
+
+    private bool m_isFirstTime = true;
     private void Start()
     {
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
@@ -60,6 +61,9 @@ public class AbilityComponent : MonoBehaviour
         {
             m_uncollectedColor.Add(sp.color);
         }
+        
+        // Record spawn
+        MetricsManager.Instance.m_metricsData.RecordAblitySpawn(m_ability.m_name);
     }
 
     private void OnAbilityFinished(AbilityManager.AbilityTypes type)
@@ -100,6 +104,13 @@ public class AbilityComponent : MonoBehaviour
             if (GameManager.Instance.m_levelData.m_needsTutorial)
             {
                 SingletonMaster.Instance.EventManager.TutorialPlayerAbility.Invoke();
+            }
+
+            if (m_isFirstTime)
+            {
+                m_isFirstTime = false;
+                // Record Activation
+                MetricsManager.Instance.m_metricsData.RecordAblityActivate(m_ability.m_name);
             }
         }
     }

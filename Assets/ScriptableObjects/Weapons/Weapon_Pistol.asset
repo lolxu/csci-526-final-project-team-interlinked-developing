@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58be473a5f2c4bc7a1fb1e2d83aa7177, type: 3}
-  m_Name: LevelData
+  m_Script: {fileID: 11500000, guid: 6cab0803c13650a4a92fad2772e92645, type: 3}
+  m_Name: Weapon_Pistol
   m_EditorClassIdentifier: 
-  m_needsTutorial: 0
-  m_levelNames:
-  - Main Menu
-  - Beta-Cavern
-  m_waveCount: 0000000004000000
+  m_name: Pistol Turret
+  m_type: 0
+  m_physicalDamage: 1.5
+  m_physicalDamageVelocityThreshold: 10

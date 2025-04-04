@@ -90,8 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb8a1a0c530ccb439a01adb15d8b71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_canRecord: 1
   m_URL: https://docs.google.com/forms/u/1/d/e/1FAIpQLSdrrje6Aa6Y1HArTONi3CktTzi-tmvvo-J0hqwJvgiGbecrlQ/formResponse
   m_metricsData:
-    m_ropeConnectionMetrics: 
-    m_ropeDisconnectionMetrics: 
+    m_sessionID: 
+    m_levelMetricsData: []
+    m_weaponMetricsData: []
+    m_abilityMetricsData: []
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
+  m_weaponList: {fileID: 11400000, guid: b1d94063ec5ac5f4fb2e540359a3d905, type: 2}
+  m_abilityList: {fileID: 11400000, guid: 30bb5b95017c5324180b8c75e0f0b7e7, type: 2}
