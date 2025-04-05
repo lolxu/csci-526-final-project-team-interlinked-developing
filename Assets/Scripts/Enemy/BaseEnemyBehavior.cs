@@ -132,5 +132,9 @@ public class BaseEnemyBehavior : MonoBehaviour
                 health.DamageEvent.Invoke(m_damage, gameObject);
             }
         }
+        else if (other.collider.CompareTag("Border"))
+        {
+            m_healthComponent.DamageEvent.Invoke(0.1f, gameObject);
+        }
     }
 }

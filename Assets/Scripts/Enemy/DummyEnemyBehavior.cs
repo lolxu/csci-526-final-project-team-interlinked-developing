@@ -19,6 +19,11 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+
+        if (m_canShowPrompt)
+        {
+            m_healthComponent.m_canDamage = false;
+        }
     }
 
     private void OnDestroy()
@@ -46,6 +51,8 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         {
             m_disconnectPrompt.SetActive(false);
             m_isPromptDone = true;
+
+            m_healthComponent.m_canDamage = true;
             
             SingletonMaster.Instance.EventManager.TutorialUnlinkedEnemy.Invoke();
         }
