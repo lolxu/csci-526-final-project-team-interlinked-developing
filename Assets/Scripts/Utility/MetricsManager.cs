@@ -137,28 +137,12 @@ public class MetricsManager : MonoBehaviour
                 {
                     level.m_ropeConnectionMetrics.Add(0);
                     level.m_ropeDisconnectionMetrics.Add(0);
-
+                
                     Instance.m_ropeConnections[i].Add(0);
                     Instance.m_ropeDisconnections[i].Add(0);
                 }
                 
                 m_levelMetricsData.Add(level);
-            }
-
-            for (int i = 0; i < Instance.m_weaponList.m_weapons.Count; i++)
-            {
-                WeaponMetrics weapon = new WeaponMetrics();
-                weapon.m_weaponName = Instance.m_weaponList.m_weapons[i].m_name;
-                
-                m_weaponMetricsData.Add(weapon);
-            }
-            
-            for (int i = 0; i < Instance.m_abilityList.m_abilities.Count; i++)
-            {
-                AbilityMetrics ability = new AbilityMetrics();
-                ability.m_abilityName = Instance.m_abilityList.m_abilities[i].m_name;
-                
-                m_abilityMetricsData.Add(ability);
             }
         }
         
@@ -200,14 +184,25 @@ public class MetricsManager : MonoBehaviour
         {
             if (Instance.m_canRecord)
             {
+                bool found = false;
                 foreach (var weaponMetrics in m_weaponMetricsData)
                 {
                     if (weaponMetrics.m_weaponName == weaponName)
                     {
                         weaponMetrics.AddSpawn();
                         weaponMetrics.CalculateRate();
+                        found = true;
                         break;
                     }
+                }
+
+                // If it's a new weapon add to the metrics list
+                if (!found)
+                {
+                    WeaponMetrics weapon = new WeaponMetrics();
+                    weapon.m_weaponName = weaponName;
+                    weapon.AddSpawn();
+                    m_weaponMetricsData.Add(weapon);
                 }
             }
         }
@@ -232,14 +227,25 @@ public class MetricsManager : MonoBehaviour
         {
             if (Instance.m_canRecord)
             {
+                bool found = false;
                 foreach (var abilityMetrics in m_abilityMetricsData)
                 {
                     if (abilityMetrics.m_abilityName == abilityName)
                     {
                         abilityMetrics.AddSpawn();
                         abilityMetrics.CalculateRate();
+                        found = true;
                         break;
                     }
+                }
+                
+                // If it's a new ability add to the metrics list
+                if (!found)
+                {
+                    AbilityMetrics ability = new AbilityMetrics();
+                    ability.m_abilityName = abilityName;
+                    ability.AddSpawn();
+                    m_abilityMetricsData.Add(ability);
                 }
             }
         }
