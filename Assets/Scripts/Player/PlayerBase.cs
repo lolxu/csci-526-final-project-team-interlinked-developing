@@ -95,9 +95,13 @@ public class PlayerBase : MonoBehaviour
 
     private void OnUnlinkedItem(GameObject obj, GameObject instigator)
     {
-        if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+        // TODO: There are some exceptions here
+        if (obj != null && instigator != null)
         {
-            m_linkedObjects.Remove(obj);
+            if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+            {
+                m_linkedObjects.Remove(obj);
+            }
         }
     }
 

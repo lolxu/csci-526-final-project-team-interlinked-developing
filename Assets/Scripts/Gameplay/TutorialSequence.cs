@@ -46,6 +46,11 @@ public class TutorialSequence : MonoBehaviour
             SingletonMaster.Instance.EventManager.TutorialPlayerLinkedAbility.AddListener(OnPlayerLinkedAbility);
             SingletonMaster.Instance.EventManager.TutorialPlayerAbility.AddListener(OnPlayerAbility);
             m_controlPrompts[0].SetActive(true);
+            
+            m_upWall.SetActive(true);
+            m_downWall.SetActive(true);
+            m_leftWall.SetActive(true);
+            m_rightWall.SetActive(true);
         }
         else
         {

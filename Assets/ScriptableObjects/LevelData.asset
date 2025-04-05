@@ -16,4 +16,5 @@ MonoBehaviour:
   m_levelNames:
   - Main Menu
   - Beta-Cavern
-  m_waveCount: 0000000004000000
+  - Beta-Vines
+  m_waveCount: 000000000400000004000000

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Ability_KnockBack
   m_EditorClassIdentifier: 
   m_name: Knock Back
-  m_activeDuration: 0.25
+  m_activeDuration: 0.1
   m_coolDown: 1
   m_count: 0

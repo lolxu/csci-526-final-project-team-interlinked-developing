@@ -29,11 +29,27 @@ public class HealerEnemyAI : BaseEnemyAI
         SingletonMaster.Instance.EventManager.EnemyDamagedEvent.AddListener(OnEnemyDamaged);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(OnEnemyDeath);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
 
         m_healerState = HealerState.MovingToPlayer;
         m_ropeComponent = GetComponent<RopeComponent>();
         
         FindingHealTarget();
+    }
+
+    private void OnStealSuccess(GameObject item, GameObject enemy)
+    {
+        // We are def healing at this point
+        if (item == m_moveTarget && enemy == gameObject)
+        {
+            // Resetting healer
+            HealthComponent hc = m_moveTarget.GetComponent<HealthComponent>();
+            hc.m_isHealing = false;
+            hc.m_healer = null;
+            
+            m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+            m_healerState = HealerState.MovingToPlayer;
+        }
     }
 
     protected override void OnDisable()
@@ -48,6 +64,7 @@ public class HealerEnemyAI : BaseEnemyAI
         SingletonMaster.Instance.EventManager.EnemyDamagedEvent.RemoveListener(OnEnemyDamaged);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.RemoveListener(OnEnemyDeath);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
     }
     
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -229,8 +246,15 @@ public class HealerEnemyAI : BaseEnemyAI
             }
             else
             {
-                m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
-                m_healerState = HealerState.MovingToPlayer;
+                if (SingletonMaster.Instance.PlayerBase != null)
+                {
+                    m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+                    m_healerState = HealerState.MovingToPlayer;
+                }
+                else
+                {
+                    m_healerState = HealerState.Idle;
+                }
             }
         }
     }

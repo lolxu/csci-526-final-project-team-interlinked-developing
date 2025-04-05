@@ -31,22 +31,28 @@ public class KnockBackAbility : MonoBehaviour
         {
             Debug.Log("Ability Activated");
             m_canActivate = false;
-            Knockback();
+            StartCoroutine(Knockback());
             StartCoroutine(CoolDown());
         }
     }
 
-    private void Knockback()
+    private IEnumerator Knockback()
     {
         if (SingletonMaster.Instance.PlayerBase != null)
         {
-            Vector2 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
+            PlayerBase pb = SingletonMaster.Instance.PlayerBase;
+            Vector2 playerPos = pb.transform.position;
 
             RaycastHit2D[] hits = Physics2D.CircleCastAll(playerPos, m_knockBackRadius, Vector2.zero, 0.0f, m_knockBackMask);
             foreach (var hit in hits)
             {
-                hit.rigidbody.AddExplosionForce(m_knockBackStrength, playerPos, m_knockBackRadius);
+                if (!pb.m_linkedObjects.Contains(hit.rigidbody.gameObject))
+                {
+                    hit.rigidbody.AddExplosionForce(m_knockBackStrength, playerPos, m_knockBackRadius);
+                }
             }
+
+            yield return new WaitForSeconds(m_ability.m_activeDuration);
             
             SingletonMaster.Instance.AbilityManager.AbilityFinished.Invoke(m_abilityType);
         }

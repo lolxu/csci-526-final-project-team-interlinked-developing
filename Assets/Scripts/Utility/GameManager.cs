@@ -74,9 +74,9 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                m_curLevel++;
-                if (m_curLevel < m_levelData.m_levelNames.Count)
+                if (SceneManager.GetActiveScene().buildIndex < m_levelData.m_levelNames.Count - 1)
                 {
+                    m_curLevel++;
                     SceneManager.LoadScene(m_levelData.m_levelNames[m_curLevel]);
                 }
                 else

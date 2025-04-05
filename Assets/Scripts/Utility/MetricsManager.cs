@@ -182,52 +182,64 @@ public class MetricsManager : MonoBehaviour
 
         public void RecordWeaponSteal(string weaponName)
         {
-            foreach (var weaponMetrics in m_weaponMetricsData)
+            if (Instance.m_canRecord)
             {
-                if (weaponMetrics.m_weaponName == weaponName)
+                foreach (var weaponMetrics in m_weaponMetricsData)
                 {
-                    weaponMetrics.AddSteal();
-                    weaponMetrics.CalculateRate();
-                    break;
+                    if (weaponMetrics.m_weaponName == weaponName)
+                    {
+                        weaponMetrics.AddSteal();
+                        weaponMetrics.CalculateRate();
+                        break;
+                    }
                 }
             }
         }
 
         public void RecordWeaponSpawn(string weaponName)
         {
-            foreach (var weaponMetrics in m_weaponMetricsData)
+            if (Instance.m_canRecord)
             {
-                if (weaponMetrics.m_weaponName == weaponName)
+                foreach (var weaponMetrics in m_weaponMetricsData)
                 {
-                    weaponMetrics.AddSpawn();
-                    weaponMetrics.CalculateRate();
-                    break;
+                    if (weaponMetrics.m_weaponName == weaponName)
+                    {
+                        weaponMetrics.AddSpawn();
+                        weaponMetrics.CalculateRate();
+                        break;
+                    }
                 }
             }
         }
 
         public void RecordAblityActivate(string abilityName)
         {
-            foreach (var abilityMetrics in m_abilityMetricsData)
+            if (Instance.m_canRecord)
             {
-                if (abilityMetrics.m_abilityName == abilityName)
+                foreach (var abilityMetrics in m_abilityMetricsData)
                 {
-                    abilityMetrics.AddActivation();
-                    abilityMetrics.CalculateRate();
-                    break;
+                    if (abilityMetrics.m_abilityName == abilityName)
+                    {
+                        abilityMetrics.AddActivation();
+                        abilityMetrics.CalculateRate();
+                        break;
+                    }
                 }
             }
         }
         
         public void RecordAblitySpawn(string abilityName)
         {
-            foreach (var abilityMetrics in m_abilityMetricsData)
+            if (Instance.m_canRecord)
             {
-                if (abilityMetrics.m_abilityName == abilityName)
+                foreach (var abilityMetrics in m_abilityMetricsData)
                 {
-                    abilityMetrics.AddSpawn();
-                    abilityMetrics.CalculateRate();
-                    break;
+                    if (abilityMetrics.m_abilityName == abilityName)
+                    {
+                        abilityMetrics.AddSpawn();
+                        abilityMetrics.CalculateRate();
+                        break;
+                    }
                 }
             }
         }
@@ -280,12 +292,15 @@ public class MetricsManager : MonoBehaviour
     private void UponLevelCompleted()
     {
         // Recording rope operations to the metrics
-        for (int i = 0; i < m_levelData.m_levelNames.Count; i++)
+        if (m_canRecord)
         {
-            for (int j = 0; j < m_levelData.m_waveCount[i]; j++)
+            for (int i = 0; i < m_levelData.m_levelNames.Count; i++)
             {
-                m_metricsData.m_levelMetricsData[i].m_ropeConnectionMetrics[j] = m_ropeConnections[i][j];
-                m_metricsData.m_levelMetricsData[i].m_ropeDisconnectionMetrics[j] = m_ropeDisconnections[i][j];
+                for (int j = 0; j < m_levelData.m_waveCount[i]; j++)
+                {
+                    m_metricsData.m_levelMetricsData[i].m_ropeConnectionMetrics[j] = m_ropeConnections[i][j];
+                    m_metricsData.m_levelMetricsData[i].m_ropeDisconnectionMetrics[j] = m_ropeDisconnections[i][j];
+                }
             }
         }
     }

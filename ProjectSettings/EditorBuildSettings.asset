@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beta/Beta-Cavern.unity
     guid: fd8007316d188af4e94c20db640844a7
+  - enabled: 1
+    path: Assets/Scenes/Beta/Beta-Vines.unity
+    guid: 6e6caef3d10228244973c3d52412be86
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 52c428087859c7243af47d09ebd3b9a5, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 09d1b8243eeeac640b5141cfc9166432, type: 3}

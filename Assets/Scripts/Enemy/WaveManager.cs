@@ -14,7 +14,7 @@ public class WaveManager : MonoBehaviour
     public float m_waveCoolDown = 10.0f;
     public float m_spawnPadding = 1.0f;
     public LayerMask m_maskCheck;
-    
+    public bool m_forceNotSpawn = false;
     private bool m_canSpawn = false;
 
     [Serializable]
@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartMyWaves()
     {
-        if (m_waves.Count > 0)
+        if (m_waves.Count > 0 && !m_forceNotSpawn)
         {
             m_canSpawn = true;
             m_currentWave = m_waves[0];
