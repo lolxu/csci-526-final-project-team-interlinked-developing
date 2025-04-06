@@ -484,9 +484,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damage: 2.5
-  m_timeOffset: 10
-  m_canMove: 0
   m_oneTimeDamage: 0
+  m_canMove: 0
+  m_moveTime: 2
+  m_moveStyle: 0
+  m_end: {fileID: 0}
+  m_lineRenderer: {fileID: 0}
 --- !u!1 &1204500286403016784
 GameObject:
   m_ObjectHideFlags: 0
