@@ -141,6 +141,8 @@ public class WaveManager : MonoBehaviour
 
             SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
             yield return new WaitForSeconds(m_waveCoolDown);
+            
+            // New wave
             m_waveCount++;
             m_currentWave = m_waves[m_waveCount];
             m_maxEnemyCount = m_currentWave.m_maxEnemyCount;

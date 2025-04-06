@@ -49,6 +49,7 @@ public class HealerEnemyAI : BaseEnemyAI
             
             m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
             m_healerState = HealerState.MovingToPlayer;
+            m_healTimeoutCoroutine = StartCoroutine(HealTimeout());
         }
     }
 

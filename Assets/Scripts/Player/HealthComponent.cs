@@ -13,6 +13,7 @@ public class HealthComponent : MonoBehaviour
     public float m_health = 10.0f;
     public float m_maxHealth = 10.0f;
     public float m_invincibleTime = 1.0f;
+    public float m_cooldownRecoverRate = 1.0f;
     public UnityEvent<float, GameObject> DamageEvent = new UnityEvent<float, GameObject>();
     public UnityEvent<GameObject> DeathEvent = new UnityEvent<GameObject>();
     public bool m_isLinked = false;
@@ -48,8 +49,26 @@ public class HealthComponent : MonoBehaviour
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
         
+        SingletonMaster.Instance.EventManager.CooldownStarted.AddListener(OnCooldownStarted);
+        
         // Create Health bar
         m_healthBar = SingletonMaster.Instance.UI.AddHealthBar(this);
+    }
+    
+    private void OnDisable()
+    {
+        if (m_healthBar != null)
+        {
+            Destroy(m_healthBar);
+        }
+        
+        DamageEvent.RemoveListener(OnDamage);
+        DeathEvent.RemoveListener(OnDeath);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        
+        SingletonMaster.Instance.EventManager.CooldownStarted.RemoveListener(OnCooldownStarted);
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -67,16 +86,28 @@ public class HealthComponent : MonoBehaviour
             m_isLinked = true;
         }
     }
-
-    private void OnDisable()
+    
+    private void OnCooldownStarted(float duration)
     {
-        if (m_healthBar != null)
+        if (gameObject.CompareTag("Player"))
         {
-            Destroy(m_healthBar);
+            StartCoroutine(CooldownHeal(duration));
         }
-        
-        DamageEvent.RemoveListener(OnDamage);
-        DeathEvent.RemoveListener(OnDeath);
+    }
+
+    private IEnumerator CooldownHeal(float duration)
+    {
+        float timer = 0.0f;
+        while (timer <= duration)
+        {
+            timer += Time.deltaTime;
+            m_health += m_cooldownRecoverRate * Time.deltaTime;
+            if (m_health > m_maxHealth)
+            {
+                m_health = m_maxHealth;
+            }
+            yield return null;
+        }
     }
     
     // TODO: Change magic numbers...
