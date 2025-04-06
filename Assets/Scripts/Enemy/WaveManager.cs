@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class WaveManager : MonoBehaviour
@@ -18,15 +19,23 @@ public class WaveManager : MonoBehaviour
     private bool m_canSpawn = false;
 
     [Serializable]
-    public class WaveObstacles
+    public class WaveDangers
     {
         public List<GameObject> m_obstacles;
     }
+
+    [Serializable]
+    public class WaveEnvironmentalObstacles
+    {
+        public List<MovingEnvironmentals> m_envObstacles;
+    }
+    
     
     [Header("Obstacle Settings")] 
     [Tooltip("Make sure you have the same number of entries as waves")]
-    public List<WaveObstacles> m_waveObstacles = new List<WaveObstacles>();
-    public List<GameObject> m_allObstacles = new List<GameObject>();
+    public List<WaveDangers> m_waveDangers = new List<WaveDangers>();
+    public List<WaveEnvironmentalObstacles> m_waveEnvironmentals = new List<WaveEnvironmentalObstacles>();
+    public List<GameObject> m_allWaveDangers = new List<GameObject>();
 
     private EnemySpawnScriptable m_currentWave;
     private float m_waveTime = 0.0f;
@@ -51,7 +60,7 @@ public class WaveManager : MonoBehaviour
     
     private void OnLevelClear()
     {
-        foreach (var obstacle in m_allObstacles)
+        foreach (var obstacle in m_allWaveDangers)
         {
             obstacle.SetActive(false);
         }
@@ -76,13 +85,27 @@ public class WaveManager : MonoBehaviour
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
             
             // TODO: This code is shit lol
-            foreach (var obstacle in m_allObstacles)
+            foreach (var obstacle in m_allWaveDangers)
             {
                 obstacle.SetActive(false);
             }
-            foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
+
+            if (m_waveCount < m_waveDangers.Count && m_waveCount < m_waveEnvironmentals.Count)
             {
-                obstacle.SetActive(true);
+                foreach (var obstacle in m_waveDangers[m_waveCount].m_obstacles)
+                {
+                    obstacle.SetActive(true);
+                }
+
+                // Start moving environmentals
+                foreach (var obstacle in m_waveEnvironmentals[m_waveCount].m_envObstacles)
+                {
+                    obstacle.StartMoving();
+                }
+            }
+            else
+            {
+                Debug.LogError("The wave dangers or wave environmental obstacles are NOT setup properly according to number of waves");
             }
         }
         else
@@ -97,11 +120,24 @@ public class WaveManager : MonoBehaviour
         m_canSpawn = false;
         if (m_waveCount < m_waves.Count - 1)
         {
-            foreach (var obstacle in m_allObstacles)
+            foreach (var obstacle in m_allWaveDangers)
             {
                 obstacle.SetActive(false);
             }
-            
+
+            if (m_waveCount < m_waveDangers.Count && m_waveCount < m_waveEnvironmentals.Count)
+            {
+                // Moving back environmentals
+                foreach (var obstacle in m_waveEnvironmentals[m_waveCount].m_envObstacles)
+                {
+                    obstacle.MoveBack();
+                }
+            }
+            else
+            {
+                Debug.LogError("The wave environmental obstacles are NOT setup properly according to number of waves");
+            }
+
             SingletonMaster.Instance.EventManager.CooldownStarted.Invoke(m_waveCoolDown);
             yield return new WaitForSeconds(m_waveCoolDown);
             m_waveCount++;
@@ -114,7 +150,7 @@ public class WaveManager : MonoBehaviour
             // New Wave
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
             
-            foreach (var obstacle in m_waveObstacles[m_waveCount].m_obstacles)
+            foreach (var obstacle in m_waveDangers[m_waveCount].m_obstacles)
             {
                 obstacle.SetActive(true);
             }
