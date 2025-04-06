@@ -100,6 +100,7 @@ public class WaveManager : MonoBehaviour
                 // Start moving environmentals
                 foreach (var obstacle in m_waveEnvironmentals[m_waveCount].m_envObstacles)
                 {
+                    Debug.Log("Moving: " + obstacle.gameObject);
                     obstacle.StartMoving();
                 }
             }
@@ -149,10 +150,24 @@ public class WaveManager : MonoBehaviour
             
             // New Wave
             SingletonMaster.Instance.EventManager.NextWaveEvent.Invoke(m_currentWave);
-            
-            foreach (var obstacle in m_waveDangers[m_waveCount].m_obstacles)
+
+            if (m_waveCount < m_waveDangers.Count && m_waveCount < m_waveEnvironmentals.Count)
             {
-                obstacle.SetActive(true);
+                foreach (var obstacle in m_waveDangers[m_waveCount].m_obstacles)
+                {
+                    obstacle.SetActive(true);
+                }
+                
+                // Start moving environmentals
+                foreach (var obstacle in m_waveEnvironmentals[m_waveCount].m_envObstacles)
+                {
+                    Debug.Log("Moving: " + obstacle.gameObject);
+                    obstacle.StartMoving();
+                }
+            }
+            else
+            {
+                Debug.LogError("The wave dangers or wave environmental obstacles are NOT setup properly according to number of waves");
             }
         }
         else
