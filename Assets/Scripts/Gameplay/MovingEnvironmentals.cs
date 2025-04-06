@@ -56,11 +56,7 @@ public class MovingEnvironmentals : MonoBehaviour
     public void MoveBack()
     {
         transform.DOMove(m_start, m_moveDuration)
-            .SetEase(m_ease)
-            .OnComplete(() =>
-            {
-                gameObject.SetActive(false);
-            });
+            .SetEase(m_ease);
     }
 
     private void OnDrawGizmos()
