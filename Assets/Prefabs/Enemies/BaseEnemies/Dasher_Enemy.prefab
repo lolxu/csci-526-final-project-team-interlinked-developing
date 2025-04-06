@@ -266,7 +266,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 117852
+  m_InstanceId: 204156
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_acceleration: 15
   m_maxSpeed: 8
   m_numDirections: 12
-  m_raycastDistance: 5
+  m_raycastDistance: 3
   m_surroundDistance: 3
   m_pathfindIgnoreMasks:
     serializedVersion: 2
@@ -342,6 +342,7 @@ MonoBehaviour:
   m_health: 15
   m_maxHealth: 15
   m_invincibleTime: 1
+  m_cooldownRecoverRate: 1
   DamageEvent:
     m_PersistentCalls:
       m_Calls: []
