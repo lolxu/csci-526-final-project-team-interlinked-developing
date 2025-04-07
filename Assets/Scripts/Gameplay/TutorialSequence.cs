@@ -186,6 +186,9 @@ public class TutorialSequence : MonoBehaviour
         wallSeq.Insert(0, m_leftWall.transform.DOMoveX(-100.0f, 5.0f).SetEase(Ease.InOutSine));
         wallSeq.Insert(0, m_rightWall.transform.DOMoveX(100.0f, 5.0f).SetEase(Ease.InOutSine));
 
+        AbilityComponent ac = m_abilityObj.GetComponent<AbilityComponent>();
+        ac.ForceDropAbility();
+        
         wallSeq.OnComplete(() =>
         {
             m_upWall.SetActive(false);

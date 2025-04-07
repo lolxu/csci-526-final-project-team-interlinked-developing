@@ -79,6 +79,13 @@ public class AbilityComponent : MonoBehaviour
         SingletonMaster.Instance.AbilityManager.AbilityFinished.RemoveListener(OnAbilityFinished);
     }
 
+    public void ForceDropAbility()
+    {
+        m_ropeComponent.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+        m_isDespawning = true;
+        ShrinkSequence();
+    }
+
     private void OnAbilityFinished(AbilityManager.AbilityTypes type)
     {
         if (m_isConnected && m_type == type)
