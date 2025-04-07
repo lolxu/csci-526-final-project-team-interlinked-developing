@@ -15,6 +15,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     public List<string> m_names = new List<string>();
     public HealthComponent m_healthComponent;
     public float m_damage = 2.0f;
+    [SerializeField] private float m_damageReduceFactor = 0.25f;
     public float m_collisionVelocityThreshold = 10.0f;
     
     [Header("AI Settings")]
@@ -24,7 +25,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     public float m_lootDropRate { get; set; } = 0.0f;
-
+    
     private bool m_canBeTossed = false;
     private Color m_orgColor;
     private Vector3 m_orgScale;
@@ -56,6 +57,7 @@ public class BaseEnemyBehavior : MonoBehaviour
         {
             if (obj == gameObject && instigator.CompareTag("Player"))
             {
+                m_damage /= m_damageReduceFactor;
                 m_canBeTossed = false;
             }
         }
@@ -67,6 +69,7 @@ public class BaseEnemyBehavior : MonoBehaviour
         {
             if (obj == gameObject && instigator.CompareTag("Player"))
             {
+                m_damage *= m_damageReduceFactor;
                 m_canBeTossed = true;
             }
         }

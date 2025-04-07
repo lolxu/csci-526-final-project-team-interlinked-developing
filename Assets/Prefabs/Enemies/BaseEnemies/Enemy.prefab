@@ -291,6 +291,7 @@ MonoBehaviour:
   - Lmao
   m_healthComponent: {fileID: 1169677022984367108}
   m_damage: 2
+  m_damageReduceFactor: 0.25
   m_collisionVelocityThreshold: 15
   m_AI: {fileID: 1829588942597929290}
   m_spriteRenderer: {fileID: 394886833122550638}
