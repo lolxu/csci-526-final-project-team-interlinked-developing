@@ -46,6 +46,9 @@ public class DashAbility : MonoBehaviour
         {
             PlayerBase pb = SingletonMaster.Instance.PlayerBase;
             GameObject player = pb.gameObject;
+            
+            pb.PlayDashParticles();
+            
             Vector2 dashDir = pb.m_moveDirection;
 
             if (dashDir.magnitude < 0.01f)

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-public class TutorialSequence : MonoBehaviour
+public class OpeningSequence : MonoBehaviour
 {
     private enum TutorialProgress
     {
@@ -25,11 +25,12 @@ public class TutorialSequence : MonoBehaviour
     public List<Transform> m_combatSpawns;
     public GameObject m_abilityObj;
 
-    [Header("Walls - Dope Visuals")]
+    [Header("Opening Dope Visuals")]
     public GameObject m_upWall;
     public GameObject m_downWall;
     public GameObject m_leftWall;
     public GameObject m_rightWall;
+    public string m_levelName;
     
     private TutorialProgress m_currentStep = TutorialProgress.Moving;
     private int m_abilityCount = 0;
@@ -51,6 +52,16 @@ public class TutorialSequence : MonoBehaviour
             m_downWall.SetActive(true);
             m_leftWall.SetActive(true);
             m_rightWall.SetActive(true);
+        }
+        else if (GameManager.Instance.m_levelData.m_needsLevelName)
+        {
+            m_upWall.SetActive(true);
+            m_downWall.SetActive(true);
+            m_leftWall.SetActive(true);
+            m_rightWall.SetActive(true);
+            
+            m_currentStep = TutorialProgress.Done;
+            ShowLevelName();
         }
         else
         {
@@ -178,7 +189,7 @@ public class TutorialSequence : MonoBehaviour
         
         // Move Walls & Show Title
         SingletonMaster.Instance.EventManager.TutorialDone.Invoke();
-        SingletonMaster.Instance.UI.ShowBigText("INTERLINK", 5.0f);
+        StartCoroutine(TitleDisplay());
         
         Sequence wallSeq = DOTween.Sequence();
         wallSeq.Insert(0, m_upWall.transform.DOMoveY(100.0f, 5.0f).SetEase(Ease.InOutSine));
@@ -200,6 +211,45 @@ public class TutorialSequence : MonoBehaviour
             
             gameObject.SetActive(false);
         });
+    }
+
+    private IEnumerator TitleDisplay()
+    {
+        SingletonMaster.Instance.UI.ShowBigText("INTERLINK", 2.0f);
+        yield return new WaitForSeconds(2.0f);
+        SingletonMaster.Instance.UI.ShowBigText(m_levelName, 3.0f);
+
+        // Don't show level name sequence again for this level
+        GameManager.Instance.m_levelData.m_needsLevelName = false;
+    }
+
+    private void ShowLevelName()
+    {
+        SingletonMaster.Instance.UI.ShowBigText(m_levelName, 3.0f);
+        
+        Sequence wallSeq = DOTween.Sequence();
+        wallSeq.Insert(0, m_upWall.transform.DOMoveY(100.0f, 3.0f).SetEase(Ease.InOutSine));
+        wallSeq.Insert(0, m_downWall.transform.DOMoveY(-100.0f, 3.0f).SetEase(Ease.InOutSine));
+        wallSeq.Insert(0, m_leftWall.transform.DOMoveX(-100.0f, 3.0f).SetEase(Ease.InOutSine));
+        wallSeq.Insert(0, m_rightWall.transform.DOMoveX(100.0f, 3.0f).SetEase(Ease.InOutSine));
+
+        AbilityComponent ac = m_abilityObj.GetComponent<AbilityComponent>();
+        ac.ForceDropAbility();
+        
+        wallSeq.OnComplete(() =>
+        {
+            m_upWall.SetActive(false);
+            m_downWall.SetActive(false);
+            m_leftWall.SetActive(false);
+            m_rightWall.SetActive(false);
+            
+            SingletonMaster.Instance.WaveManager.StartWaves();
+            
+            gameObject.SetActive(false);
+        });
+        
+        // Don't show level name sequence again for this level
+        GameManager.Instance.m_levelData.m_needsLevelName = false;
     }
 
     private void StartGameplayImmediately()

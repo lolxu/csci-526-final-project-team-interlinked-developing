@@ -49,6 +49,11 @@ public class WaveManager : MonoBehaviour
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(RemoveEnemy);
         SingletonMaster.Instance.EventManager.EnemyDeathEvent.AddListener(SpawnLoot);
         SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnLevelClear);
+        
+        foreach (var obstacle in m_allWaveDangers)
+        {
+            obstacle.SetActive(false);
+        }
     }
 
     private void OnDisable()

@@ -42,6 +42,8 @@ public class KnockBackAbility : MonoBehaviour
         {
             PlayerBase pb = SingletonMaster.Instance.PlayerBase;
             Vector2 playerPos = pb.transform.position;
+            
+            pb.PlayKnockbackParticles();
 
             RaycastHit2D[] hits = Physics2D.CircleCastAll(playerPos, m_knockBackRadius, Vector2.zero, 0.0f, m_knockBackMask);
             foreach (var hit in hits)

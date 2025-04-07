@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 327784465}
   - component: {fileID: 327784469}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Vines Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_loadScene: Beta-Vines
   m_showTutorial: 0
+  m_showLevelName: 1
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
 --- !u!1 &554498121
 GameObject:
@@ -926,6 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_loadScene: Beta-Cavern
   m_showTutorial: 1
+  m_showLevelName: 0
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
 --- !u!1 &710561436
 GameObject:
@@ -1536,6 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_loadScene: Beta-Cavern
   m_showTutorial: 0
+  m_showLevelName: 1
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
 --- !u!114 &1014430194
 MonoBehaviour:
@@ -2291,6 +2294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_loadScene: Beta-Cavern
   m_showTutorial: 0
+  m_showLevelName: 1
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
 --- !u!1 &1654144516
 GameObject:
@@ -2454,6 +2458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_loadScene: Beta-Cavern
   m_showTutorial: 0
+  m_showLevelName: 0
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
 --- !u!114 &1685099367
 MonoBehaviour:

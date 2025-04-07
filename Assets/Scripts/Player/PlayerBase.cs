@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -45,6 +46,8 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private float m_cameraZoomFactor = 0.025f;
     [SerializeField] private GameObject m_face;
     [SerializeField] private float m_faceMoveFactor = 0.25f;
+    [SerializeField] private MMF_Player m_dashParticles;
+    [SerializeField] private MMF_Player m_knockBackParticles;
     public bool m_isFollowCam = true;
 
     [Header("Ability")] 
@@ -476,6 +479,16 @@ public class PlayerBase : MonoBehaviour
             SingletonMaster.Instance.AbilityManager.ActivateAbility.Invoke(AbilityManager.AbilityTypes.Dash);
             SingletonMaster.Instance.AbilityManager.ActivateAbility.Invoke(AbilityManager.AbilityTypes.Knockback);
         }
+    }
+
+    public void PlayDashParticles()
+    {
+        m_dashParticles.PlayFeedbacks();
+    }
+
+    public void PlayKnockbackParticles()
+    {
+        m_knockBackParticles.PlayFeedbacks();
     }
     
 }

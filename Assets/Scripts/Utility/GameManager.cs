@@ -76,6 +76,9 @@ public class GameManager : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().buildIndex < m_levelData.m_levelNames.Count - 1)
                 {
+                    // Show level name for new level
+                    m_levelData.m_needsLevelName = true;
+                    
                     m_curLevel++;
                     SceneManager.LoadScene(m_levelData.m_levelNames[m_curLevel]);
                 }
