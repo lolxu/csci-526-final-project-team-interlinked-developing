@@ -132,7 +132,7 @@ public class UI : MonoBehaviour
     {
         while (time > 0.0f)
         {
-            m_announcementText.text = "Cool down: " + time.ToString("F2");
+            m_announcementText.text = "Cool Down, Healing: " + time.ToString("F2");
             yield return null;
             time -= Time.deltaTime;
         }
