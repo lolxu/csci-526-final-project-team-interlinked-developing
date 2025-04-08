@@ -602,7 +602,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.27987415, b: 0.27987415, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.2509804, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 203754
+  m_InstanceId: 74256
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -775,6 +775,7 @@ MonoBehaviour:
   m_names: []
   m_healthComponent: {fileID: 9111909743220841265}
   m_damage: 2
+  m_damageReduceFactor: 0.25
   m_collisionVelocityThreshold: 10
   m_AI: {fileID: 6899114663690077761}
   m_spriteRenderer: {fileID: 7725201509369877595}

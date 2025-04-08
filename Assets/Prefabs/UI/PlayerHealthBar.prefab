@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3647059, g: 0.57254905, b: 0.9960785, a: 1}
+  m_Color: {r: 0, g: 0.5647059, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_healthFill: {fileID: 7008325801711443180}
+  m_background: {fileID: 0}
   m_healthComp: {fileID: 0}
   m_isWorldSpace: 0
   m_showTime: 1

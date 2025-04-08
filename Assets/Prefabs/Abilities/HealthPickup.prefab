@@ -239,7 +239,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_shrinkTime: 0.15
   m_collectedColor:
-  - {r: 0.3647059, g: 0.5764706, b: 1, a: 1}
+  - {r: 0, g: 0.5647059, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   m_spriteRenderers:
@@ -267,9 +267,10 @@ MonoBehaviour:
   m_ropeLength: 20
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
+  m_isEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
-  m_maxTension: 500
-  m_tensionDuration: 1
+  m_enemyJoint: {fileID: 0}
+  m_playerJoint: {fileID: 0}
   m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_highlight: {fileID: 7460555517007342608}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}
