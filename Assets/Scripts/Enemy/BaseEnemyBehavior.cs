@@ -15,6 +15,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     public List<string> m_names = new List<string>();
     public HealthComponent m_healthComponent;
     public float m_damage = 2.0f;
+    [SerializeField] private float m_damageReduceFactor = 0.25f;
     public float m_collisionVelocityThreshold = 10.0f;
     
     [Header("AI Settings")]
@@ -24,7 +25,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     public float m_lootDropRate { get; set; } = 0.0f;
-
+    
     private bool m_canBeTossed = false;
     private Color m_orgColor;
     private Vector3 m_orgScale;
@@ -39,8 +40,6 @@ public class BaseEnemyBehavior : MonoBehaviour
 
         // Start spawn as trigger
         GetComponent<Collider2D>().isTrigger = true;
-
-        GetComponent<Rigidbody2D>();
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -54,17 +53,25 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
     {
-        if (obj == gameObject && instigator.CompareTag("Player"))
+        if (instigator != null)
         {
-            m_canBeTossed = false;
+            if (obj == gameObject && instigator.CompareTag("Player"))
+            {
+                m_damage /= m_damageReduceFactor;
+                m_canBeTossed = false;
+            }
         }
     }
 
     private void OnLinked(GameObject obj, GameObject instigator)
     {
-        if (obj == gameObject && instigator.CompareTag("Player"))
+        if (instigator != null)
         {
-            m_canBeTossed = true;
+            if (obj == gameObject && instigator.CompareTag("Player"))
+            {
+                m_damage *= m_damageReduceFactor;
+                m_canBeTossed = true;
+            }
         }
     }
     
@@ -127,6 +134,10 @@ public class BaseEnemyBehavior : MonoBehaviour
             {
                 health.DamageEvent.Invoke(m_damage, gameObject);
             }
+        }
+        else if (other.collider.CompareTag("Border"))
+        {
+            m_healthComponent.DamageEvent.Invoke(0.1f, gameObject);
         }
     }
 }

@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
 
     public LevelDataScriptable m_levelData;
-    public bool m_isTutorialDone = false;
     
     private GameObject SingletonMasterObject;
 
     private bool m_playerWon = false;
     private int m_curLevel = 1;
+    private bool m_canRestart = false;
     
     private void Awake()
     {
@@ -37,44 +37,49 @@ public class GameManager : MonoBehaviour
     {
         m_playerWon = false;
         SingletonMasterObject = GameObject.Find("Singleton Master");
-        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-        // SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
-        // TODO: This is bad...
-        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
 
-        if (m_isTutorialDone)
-        {
-            SingletonMaster.Instance.WaveManager.StartCoroutine(SingletonMaster.Instance.WaveManager.StartWaves());
-        }
+        // TODO: This is bad...
+        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
     }
 
     private void OnDisable()
     {
         SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
     private void OnPlayerWin()
     {
         m_playerWon = true;
     }
+    
+    private void OnPlayerDeath(GameObject arg0)
+    {
+        m_canRestart = true;
+    }
 
     private void Update()
     {
         // FOR DEBUG ONLY
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && m_canRestart)
         {
             SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-            SingletonMasterObject.transform.SetParent(GameObject.FindWithTag("Garbage").transform, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            m_canRestart = false;
         }
 
         if (m_playerWon)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                m_curLevel++;
-                if (m_curLevel < m_levelData.m_levelNames.Count)
+                if (SceneManager.GetActiveScene().buildIndex < m_levelData.m_levelNames.Count - 1)
                 {
+                    // Show level name for new level
+                    m_levelData.m_needsLevelName = true;
+                    
+                    m_curLevel++;
                     SceneManager.LoadScene(m_levelData.m_levelNames[m_curLevel]);
                 }
                 else

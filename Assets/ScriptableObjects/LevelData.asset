@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58be473a5f2c4bc7a1fb1e2d83aa7177, type: 3}
   m_Name: LevelData
   m_EditorClassIdentifier: 
+  m_needsTutorial: 0
   m_levelNames:
-  - Prototype - Tutorial
-  - Small Level
-  - Prototype - Battlefield
-  - Prototype - Battlefield
-  m_waveCount: 01000000040000000500000005000000
+  - Main Menu
+  - Beta-Cavern
+  - Beta-Vines
+  m_waveCount: 000000000400000005000000

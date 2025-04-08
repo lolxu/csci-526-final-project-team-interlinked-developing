@@ -163,7 +163,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 50
   m_Sprite: {fileID: 7482667652216324306, guid: c82c9f847f98830478ba7511b2fe6f0d, type: 3}
-  m_Color: {r: 0.9056604, g: 0.26238114, b: 0.20932718, a: 1}
+  m_Color: {r: 0.3584906, g: 0.3584906, b: 0.3584906, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -215,7 +215,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -254,9 +254,9 @@ MonoBehaviour:
   m_moveDirection: {x: 0, y: 0}
   m_affectedLayer:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 896
+  m_spawnedColor: {r: 0.90588236, g: 0.2627451, b: 0.20784314, a: 1}
   m_shrinkTime: 0.15
-  m_hitParticles: {fileID: 4255317271503354296, guid: 00d80cf8d7f1598408948a988eddd120, type: 3}
 --- !u!114 &3542329899856833994
 MonoBehaviour:
   m_ObjectHideFlags: 0

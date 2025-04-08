@@ -23,6 +23,11 @@ public class DashAbility : MonoBehaviour
         // Get player color
         m_orgColor = SingletonMaster.Instance.PlayerBase.gameObject.GetComponent<SpriteRenderer>().color;
     }
+    
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.AbilityManager.ActivateAbility.RemoveListener(OnAbilityActivated);
+    }
 
     private void OnAbilityActivated(AbilityManager.AbilityTypes type)
     {
@@ -41,6 +46,9 @@ public class DashAbility : MonoBehaviour
         {
             PlayerBase pb = SingletonMaster.Instance.PlayerBase;
             GameObject player = pb.gameObject;
+            
+            pb.PlayDashParticles();
+            
             Vector2 dashDir = pb.m_moveDirection;
 
             if (dashDir.magnitude < 0.01f)

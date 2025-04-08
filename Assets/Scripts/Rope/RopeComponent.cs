@@ -15,22 +15,21 @@ public class RopeComponent : MonoBehaviour
     public int m_ropeLength = 20;
     public bool m_isConnectedToPlayer = false;
     public bool m_isConnectedToEnemy = false;
+    public bool m_isEnemy;
     // public bool m_isStrongConnection = false;
 
     [Tooltip("The rope asset that is using to connect to other objects")]
     public GameObject m_usingRopePrefab;
 
-    private HingeJoint2D m_enemyJoint;
-    private HingeJoint2D m_playerJoint;
-    private RelativeJoint2D m_enemyStrongJoint;
-    private RelativeJoint2D m_playerStrongJoint;
+    [SerializeField] private HingeJoint2D m_enemyJoint;
+    [SerializeField] private HingeJoint2D m_playerJoint;
     private GameObject m_enemyObject;
     private Rigidbody2D m_anchorObject;
     private GameObject m_rope;
 
     [Header("Rope Physics Settings")] 
-    [SerializeField] private float m_maxTension = 500.0f;
-    [SerializeField] private float m_tensionDuration = 1.0f;
+    private float m_maxTension = 100.0f;
+    private float m_tensionDuration = 0.75f;
 
     [Header("Enemy Rope Settings")]
     [SerializeField] private Color m_orgEnemyRopeColor;
@@ -59,6 +58,11 @@ public class RopeComponent : MonoBehaviour
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
 
         yield return null;
+        
+        if (gameObject.CompareTag("Enemy"))
+        {
+            m_isEnemy = true;
+        }
         
         if (m_connectedTo.Count > 0)
         {
@@ -99,35 +103,13 @@ public class RopeComponent : MonoBehaviour
 
         if (rc != null)
         {
-            // No strong connection just yet... 
-            //
-            // Making strong connection if the connectTo demands it
-            // RelativeJoint2D strongJoint = null;
-            // if (rc.m_isStrongConnection)
-            // {
-            //     strongJoint = connectTo.AddComponent<RelativeJoint2D>();
-            //     strongJoint.enabled = true;
-            //     strongJoint.connectedBody = m_anchorObject;
-            //     strongJoint.autoConfigureOffset = true;
-            //     strongJoint.maxForce = 5000.0f;
-            //     strongJoint.maxTorque = 2500.0f;
-            // }
-            
             // Checking if I am player or not
             if (gameObject.CompareTag("Player"))
             {
-                // if (strongJoint != null)
-                // {
-                //     rc.m_playerStrongJoint = strongJoint;
-                // }
                 rc.m_isConnectedToPlayer = true;
             }
             else if (gameObject.CompareTag("Enemy"))
             {
-                // if (strongJoint != null)
-                // {
-                //     rc.m_enemyStrongJoint = strongJoint;
-                // }
                 rc.m_isConnectedToEnemy = true;
                 rc.m_enemyObject = gameObject;
             }
@@ -139,12 +121,38 @@ public class RopeComponent : MonoBehaviour
     private void OnJointBreak2D(Joint2D brokenJoint)
     {
         Debug.Log("ROPE BROKE!!");
-        if (brokenJoint == m_enemyJoint)
+        if (brokenJoint == m_enemyJoint && !m_isEnemy)
         {
             m_isConnectedToEnemy = false;
             m_isStealing = false;
             SingletonMaster.Instance.EventManager.StealSuccessEvent.Invoke(gameObject, m_enemyObject);
             SingletonMaster.Instance.EventManager.StealEndedEvent.Invoke(gameObject, m_enemyObject);
+        }
+        else if (brokenJoint == m_enemyJoint && m_isEnemy)
+        {
+            // Call detach enemy on all connected items
+            for (int i = m_connectedTo.Count - 1; i >= 0; --i)
+            {
+                GameObject connected = m_connectedTo[i];
+                RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
+                if (connectedRC != null)
+                {
+                    SingletonMaster.Instance.EventManager.StealSuccessEvent.Invoke(connected, gameObject);
+                }
+            }
+
+            if (m_receivedFrom.Count > 0)
+            {
+                m_isConnectedToEnemy = false;
+                m_isStealing = false;
+                SingletonMaster.Instance.EventManager.StealSuccessEvent.Invoke(gameObject, m_enemyObject);
+                SingletonMaster.Instance.EventManager.StealEndedEvent.Invoke(gameObject, m_enemyObject);
+            }
+
+            if (m_enemyJoint != null)
+            {
+                Destroy(m_enemyJoint);
+            }
         }
         else // We tossing enemies (not sure if we want this yet...)
         {
@@ -199,6 +207,7 @@ public class RopeComponent : MonoBehaviour
     private void CreatePhysicalRope(GameObject connectTo)
     {
         Rigidbody2D prevRB = m_anchorObject;
+        
         RopeComponent receiver = connectTo.GetComponent<RopeComponent>();
         if (receiver != null && connectTo != gameObject)
         {
@@ -233,6 +242,17 @@ public class RopeComponent : MonoBehaviour
                 {
                     joint.autoConfigureConnectedAnchor = false;
                     joint.connectedAnchor = Vector2.zero;
+                    
+                    HingeJoint2D myJoint = gameObject.AddComponent<HingeJoint2D>();
+                    myJoint.connectedBody = link.GetComponent<Rigidbody2D>();
+                    
+                    // If I am enemy, this is my enemy joint
+                    if (m_isEnemy)
+                    {
+                        m_enemyJoint = myJoint;
+                    }
+                    
+                    prevRB = link.GetComponent<Rigidbody2D>();
                 }
                 else if (i == length - 1) // Last one
                 {
@@ -336,11 +356,13 @@ public class RopeComponent : MonoBehaviour
     {
         // if (gameObject.CompareTag("Enemy"))
         {
-            // var joint = GetComponent<HingeJoint2D>();
-            if (m_enemyJoint != null && m_isStealing)
+            // Do the stress mechanic when player is stealing
+            // OR
+            // when player is connected to enemy that has something
+            if ((m_enemyJoint != null && m_isStealing) || (m_enemyJoint != null && m_isConnectedToPlayer))
             {
-                // Debug.Log(joint.GetReactionForce(Time.fixedDeltaTime).magnitude);
                 float stress = m_enemyJoint.GetReactionForce(Time.fixedDeltaTime).magnitude;
+                Debug.Log(stress);
                 if (stress > m_maxTension)
                 {
                     // Debug.Log("Adding stress");
@@ -355,6 +377,23 @@ public class RopeComponent : MonoBehaviour
                             tmp.r += 0.75f * Time.fixedDeltaTime;
                             tmp.r = Mathf.Clamp01(tmp.r);
                             sp.color = tmp;
+                        }
+                    }
+                    
+                    // Also go through all enemy connected items
+                    foreach (var connected in m_connectedTo)
+                    {
+                        RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
+                        foreach (var connectedRope in connectedRC.m_ropeLinksEnemy)
+                        {
+                            var sp = connectedRope.GetComponent<SpriteRenderer>();
+                            if (sp != null)
+                            {
+                                Color tmp = sp.color;
+                                tmp.r += 0.75f * Time.fixedDeltaTime;
+                                tmp.r = Mathf.Clamp01(tmp.r);
+                                sp.color = tmp;
+                            }
                         }
                     }
 
@@ -375,6 +414,20 @@ public class RopeComponent : MonoBehaviour
                         if (sp != null)
                         {
                             sp.color = m_orgEnemyRopeColor;
+                        }
+                    }
+                    
+                    // Also go through all enemy connected items
+                    foreach (var connected in m_connectedTo)
+                    {
+                        RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
+                        foreach (var connectedRope in connectedRC.m_ropeLinksEnemy)
+                        {
+                            var sp = connectedRope.GetComponent<SpriteRenderer>();
+                            if (sp != null)
+                            {
+                                sp.color = m_orgEnemyRopeColor;
+                            }
                         }
                     }
                 }

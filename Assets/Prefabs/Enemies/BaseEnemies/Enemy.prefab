@@ -265,7 +265,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 42346
+  m_InstanceId: 117146
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -291,6 +291,7 @@ MonoBehaviour:
   - Lmao
   m_healthComponent: {fileID: 1169677022984367108}
   m_damage: 2
+  m_damageReduceFactor: 0.25
   m_collisionVelocityThreshold: 15
   m_AI: {fileID: 1829588942597929290}
   m_spriteRenderer: {fileID: 394886833122550638}
@@ -310,11 +311,11 @@ MonoBehaviour:
   m_acceleration: 10
   m_maxSpeed: 6
   m_numDirections: 12
-  m_raycastDistance: 2.5
+  m_raycastDistance: 2
   m_surroundDistance: 6
   m_pathfindIgnoreMasks:
     serializedVersion: 2
-    m_Bits: 964
+    m_Bits: 9156
   m_invisibleThreshold: 5
   m_moveTarget: {fileID: 0}
   m_face: {fileID: 5474189197380259039}
@@ -335,6 +336,7 @@ MonoBehaviour:
   m_health: 10
   m_maxHealth: 10
   m_invincibleTime: 1
+  m_cooldownRecoverRate: 1
   DamageEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -365,9 +367,10 @@ MonoBehaviour:
   m_ropeLength: 20
   m_isConnectedToPlayer: 0
   m_isConnectedToEnemy: 0
+  m_isEnemy: 0
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 53eb2b1c72877f04f9c206bab1cc2f2a, type: 3}
-  m_maxTension: 500
-  m_tensionDuration: 1
+  m_enemyJoint: {fileID: 0}
+  m_playerJoint: {fileID: 0}
   m_orgEnemyRopeColor: {r: 0.48235294, g: 0.30980393, b: 0.3254902, a: 1}
   m_highlight: {fileID: 7315378239255767664}
   m_connectColor: {r: 1, g: 1, b: 1, a: 1}

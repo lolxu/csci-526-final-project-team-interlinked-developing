@@ -3,18 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DangerComponent : MonoBehaviour
 {
     [Header("Core Settings")]
     public float m_damage = 2.5f;
-    public float m_timeOffset = 10.0f;
     public bool m_oneTimeDamage = false;
     
     [Header("Movement Related")]
     public bool m_canMove = false;
     public float m_moveTime = 2.0f;
-    [SerializeField] private Ease m_moveStype;
+    [SerializeField] private Ease m_moveStyle;
     [SerializeField] private GameObject m_end;
     [SerializeField] private LineRenderer m_lineRenderer;
     
@@ -80,7 +80,7 @@ public class DangerComponent : MonoBehaviour
             }));
         m_moveSequence.Append(transform
             .DOMove(m_end.transform.position, m_moveTime)
-            .SetEase(m_moveStype)
+            .SetEase(m_moveStyle)
             .OnComplete(() =>
             {
                 Destroy(gameObject);

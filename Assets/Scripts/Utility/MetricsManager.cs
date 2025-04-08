@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Proyecto26;
 using ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,13 @@ public class MetricsManager : MonoBehaviour
 
     [Header("Level Data")] 
     public LevelDataScriptable m_levelData;
-    
+
+    [Header("Weapon Settings")] 
+    public WeaponListScriptable m_weaponList;
+
+    [Header("Ability Settings")] 
+    public PlayerAbilityListScriptable m_abilityList;
+
     private long m_sessionID;
 
     [Serializable]
@@ -37,12 +44,63 @@ public class MetricsManager : MonoBehaviour
     {
         public string m_levelName;
         
-        // For obtaining the number of rope connections & disconnections each level
-        public List<int> m_ropeConnectionMetrics = new List<int>();
-        public List<int> m_ropeDisconnectionMetrics = new List<int>();
+        // For obtaining the number of rope connections & disconnections each level upon completion
+        public List<float> m_ropeConnectionMetrics = new List<float>();
+        public List<float> m_ropeDisconnectionMetrics = new List<float>();
         
         // For death heat map
+        public int m_deathCount = 0;
         public List<SerializableVector2> m_deathLocations = new List<SerializableVector2>();
+    }
+
+    [Serializable]
+    public class WeaponMetrics
+    {
+        public string m_weaponName;
+        public float m_stealRate;
+
+        public void AddSteal()
+        {
+            m_stealCount++;
+        }
+
+        public void AddSpawn()
+        {
+            m_spawnCount++;
+        }
+
+        public void CalculateRate()
+        {
+            m_stealRate = (float)m_stealCount / m_spawnCount;
+        }
+
+        private int m_spawnCount;
+        private int m_stealCount;
+    }
+
+    [Serializable]
+    public class AbilityMetrics
+    {
+        public string m_abilityName;
+        public float m_activationRate;
+        
+        public void AddActivation()
+        {
+            m_activateCount++;
+        }
+
+        public void AddSpawn()
+        {
+            m_spawnCount++;
+        }
+
+        public void CalculateRate()
+        {
+            m_activationRate = (float)m_activateCount / m_spawnCount;
+        }
+        
+        private int m_spawnCount;
+        private int m_activateCount;
     }
     
     [Serializable]
@@ -50,7 +108,16 @@ public class MetricsManager : MonoBehaviour
     {
         public string m_sessionID;
         public List<LevelMetrics> m_levelMetricsData = new List<LevelMetrics>();
+        
+        // Weapon Steal Rate
+        public List<WeaponMetrics> m_weaponMetricsData = new List<WeaponMetrics>();
+        
+        // Ability Activation Rate
+        public List<AbilityMetrics> m_abilityMetricsData = new List<AbilityMetrics>();
+        
+        // Death By Enemy
 
+        
         public void Init()
         {
             // Initializing arrays to match with level
@@ -89,6 +156,92 @@ public class MetricsManager : MonoBehaviour
             }
         }
 
+        public void RecordWeaponSteal(string weaponName)
+        {
+            if (Instance.m_canRecord)
+            {
+                foreach (var weaponMetrics in m_weaponMetricsData)
+                {
+                    if (weaponMetrics.m_weaponName == weaponName)
+                    {
+                        weaponMetrics.AddSteal();
+                        weaponMetrics.CalculateRate();
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void RecordWeaponSpawn(string weaponName)
+        {
+            if (Instance.m_canRecord)
+            {
+                bool found = false;
+                foreach (var weaponMetrics in m_weaponMetricsData)
+                {
+                    if (weaponMetrics.m_weaponName == weaponName)
+                    {
+                        weaponMetrics.AddSpawn();
+                        weaponMetrics.CalculateRate();
+                        found = true;
+                        break;
+                    }
+                }
+
+                // If it's a new weapon add to the metrics list
+                if (!found)
+                {
+                    WeaponMetrics weapon = new WeaponMetrics();
+                    weapon.m_weaponName = weaponName;
+                    weapon.AddSpawn();
+                    m_weaponMetricsData.Add(weapon);
+                }
+            }
+        }
+
+        public void RecordAblityActivate(string abilityName)
+        {
+            if (Instance.m_canRecord)
+            {
+                foreach (var abilityMetrics in m_abilityMetricsData)
+                {
+                    if (abilityMetrics.m_abilityName == abilityName)
+                    {
+                        abilityMetrics.AddActivation();
+                        abilityMetrics.CalculateRate();
+                        break;
+                    }
+                }
+            }
+        }
+        
+        public void RecordAblitySpawn(string abilityName)
+        {
+            if (Instance.m_canRecord)
+            {
+                bool found = false;
+                foreach (var abilityMetrics in m_abilityMetricsData)
+                {
+                    if (abilityMetrics.m_abilityName == abilityName)
+                    {
+                        abilityMetrics.AddSpawn();
+                        abilityMetrics.CalculateRate();
+                        found = true;
+                        break;
+                    }
+                }
+                
+                // If it's a new ability add to the metrics list
+                if (!found)
+                {
+                    AbilityMetrics ability = new AbilityMetrics();
+                    ability.m_abilityName = abilityName;
+                    ability.AddSpawn();
+                    m_abilityMetricsData.Add(ability);
+                }
+            }
+        }
+
         public void RecordDeath(int level, Vector2 position)
         {
             if (Instance.m_canRecord)
@@ -98,9 +251,16 @@ public class MetricsManager : MonoBehaviour
                 deathPos.y = position.y;
 
                 m_levelMetricsData[level].m_deathLocations.Add(deathPos);
-
+                m_levelMetricsData[level].m_deathCount += 1;
 
                 Debug.Log("Death Position: " + position);
+                
+                // Also dividing the rope operations
+                for (int i = 0; i < m_levelMetricsData[level].m_ropeConnectionMetrics.Count; i++)
+                {
+                    m_levelMetricsData[level].m_ropeConnectionMetrics[i] /= m_levelMetricsData[level].m_deathCount;
+                    m_levelMetricsData[level].m_ropeDisconnectionMetrics[i] /= m_levelMetricsData[level].m_deathCount;
+                }
             }
         }
     }
@@ -126,8 +286,19 @@ public class MetricsManager : MonoBehaviour
 
     private void Start()
     {
+        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(UponLevelCompleted);
+    }
+
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(UponLevelCompleted);
+    }
+
+    private void UponLevelCompleted()
+    {
         
     }
+
 
     private void OnApplicationQuit()
     {
@@ -157,6 +328,7 @@ public class MetricsManager : MonoBehaviour
 
             RestClient.Post(helper);
         }
+        
         /*
         // This is GOOGLE SHEETS --------------------------------------------------
 
