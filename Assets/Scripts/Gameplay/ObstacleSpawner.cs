@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class ObstacleSpawner : MonoBehaviour
 {
     public List<GameObject> m_traps;
+    public float m_minTimeout = 5.0f;
     public float m_maxTimeout = 20.0f;
 
     private float m_timeout = 0.0f;
@@ -16,7 +17,7 @@ public class ObstacleSpawner : MonoBehaviour
     private void Start()
     {
         m_collider = GetComponent<BoxCollider2D>();
-        m_timeout = Random.Range(0.0f, m_maxTimeout);
+        m_timeout = Random.Range(m_minTimeout, m_maxTimeout);
     }
 
     private void Update()
@@ -24,7 +25,7 @@ public class ObstacleSpawner : MonoBehaviour
         if (m_timer >= m_timeout)
         {
             m_timer = 0.0f;
-            m_timeout = Random.Range(0.0f, m_maxTimeout);
+            m_timeout = Random.Range(m_minTimeout, m_maxTimeout);
             
             SpawnObstacleRandomly();
         }
