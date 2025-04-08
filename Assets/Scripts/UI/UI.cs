@@ -29,6 +29,7 @@ public class UI : MonoBehaviour
     private Coroutine m_announcement;
 
     private int m_maxConnections = 0;
+    private bool m_isPlayerDead = false;
 
     private void Start()
     {
@@ -127,7 +128,10 @@ public class UI : MonoBehaviour
 
     private void ShowCooldown(float time)
     {
-        StartCoroutine(CooldownSequence(time));
+        if (!m_isPlayerDead)
+        {
+            StartCoroutine(CooldownSequence(time));
+        }
     }
 
     private IEnumerator CooldownSequence(float time)
@@ -153,6 +157,8 @@ public class UI : MonoBehaviour
         m_finalMessageText.text = "DEAD";
         m_announcementText.enabled = true;
         m_announcementText.text = "Press R to Restart";
+
+        m_isPlayerDead = true;
     }
 
     private void OnLevelClear()

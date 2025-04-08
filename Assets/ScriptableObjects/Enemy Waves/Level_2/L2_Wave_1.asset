@@ -15,8 +15,8 @@ MonoBehaviour:
   m_weightedSpawns:
   - {fileID: 11400000, guid: d7088d91f72cea6419b811078ad21bcb, type: 2}
   - {fileID: 11400000, guid: e185f0c057f53024cba2cf604163f48a, type: 2}
-  - {fileID: 11400000, guid: c753d69d123094a6d8bc17455c2af4e0, type: 2}
   - {fileID: 11400000, guid: 839c87b460772a64bada72f7a73a2130, type: 2}
+  - {fileID: 11400000, guid: 317eff5759df7456a80b3fd0c0f4b2e5, type: 2}
   - {fileID: 11400000, guid: 1360c58274cfc2349a63bedc09624e03, type: 2}
   m_waveTime: 20
-  m_maxEnemyCount: 10
+  m_maxEnemyCount: 12

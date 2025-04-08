@@ -232,7 +232,7 @@ public class WaveManager : MonoBehaviour
             
             // Checking spawn security
             RaycastHit2D[] hits = new RaycastHit2D[10];
-            int hitNum = Physics2D.CircleCastNonAlloc(spawnPos, 10.0f, Vector2.zero, hits, 0.0f,
+            int hitNum = Physics2D.CircleCastNonAlloc(spawnPos, 15.0f, Vector2.zero, hits, 0.0f,
                 m_maskCheck);
             if (hitNum == 0)
             {
