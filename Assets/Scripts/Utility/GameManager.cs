@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private bool m_playerWon = false;
     private int m_curLevel = 1;
     private bool m_canRestart = false;
+    private bool m_canPause = true;
     
     private void Awake()
     {
@@ -42,7 +43,11 @@ public class GameManager : MonoBehaviour
 
         if (scene.name == "Main Menu")
         {
-            Destroy(gameObject);
+            m_canPause = false;
+        }
+        else
+        {
+            m_canPause = true;
         }
 
         // TODO: This is bad...
@@ -96,7 +101,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.Escape) && !m_gamePaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !m_gamePaused && m_canPause)
         {
             m_gamePaused = true;
             SingletonMaster.Instance.UI.PauseGame();

@@ -15,6 +15,7 @@ public class UI : MonoBehaviour
     public GameObject m_playerHealthBar;
     public GameObject m_enemyHealthBarPrefab;
     public GameObject m_durabilityBarPrefab;
+    public GameObject m_worldSpaceUIParent;
     public GameObject m_pauseMenu;
 
     // private bool shrinkingTriggered = false; // Ensures shrinking starts only once per wave
@@ -108,7 +109,7 @@ public class UI : MonoBehaviour
         Debug.Log("Added health bar: " + healthComponent.gameObject);
         if (healthComponent.gameObject.CompareTag("Enemy"))
         {
-            GameObject newHealthBar = Instantiate(m_enemyHealthBarPrefab, transform, true);
+            GameObject newHealthBar = Instantiate(m_enemyHealthBarPrefab, m_worldSpaceUIParent.transform, true);
             HealthBar healthBarComp = newHealthBar.GetComponent<HealthBar>();
             healthBarComp.m_healthComp = healthComponent;
             return newHealthBar;
@@ -118,7 +119,7 @@ public class UI : MonoBehaviour
 
     public GameObject AddDurabilityBar(DurabilityComponent durability)
     {
-        GameObject newDurabilityBar = Instantiate(m_durabilityBarPrefab, transform, true);
+        GameObject newDurabilityBar = Instantiate(m_durabilityBarPrefab, m_worldSpaceUIParent.transform, true);
         DurabilityBar durabilityBarComp = newDurabilityBar.GetComponent<DurabilityBar>();
         durabilityBarComp.m_durabilityComp = durability;
         return newDurabilityBar;

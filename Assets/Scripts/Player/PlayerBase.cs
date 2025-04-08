@@ -209,21 +209,68 @@ public class PlayerBase : MonoBehaviour
     
     private void CheckBestRopeTargetToConnect()
     {
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-        
-        RaycastHit2D[] results = new RaycastHit2D[20];
-        int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
-            results, 0.0f, m_connectableLayers);
-
-        float minDist = float.MaxValue;
-
-        GameObject curBestTarget = null;
-        for (int i = 0; i < num; i++)
+        if (!GameManager.Instance.m_gamePaused)
         {
-            float distToPlayer = (results[i].transform.position - transform.position).magnitude;
-            if (distToPlayer <= m_connectRadius && m_linkedObjects.Count <= m_maxRopeConnections)
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            RaycastHit2D[] results = new RaycastHit2D[20];
+            int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                results, 0.0f, m_connectableLayers);
+
+            float minDist = float.MaxValue;
+
+            GameObject curBestTarget = null;
+            for (int i = 0; i < num; i++)
             {
-                if (!m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                float distToPlayer = (results[i].transform.position - transform.position).magnitude;
+                if (distToPlayer <= m_connectRadius && m_linkedObjects.Count <= m_maxRopeConnections)
+                {
+                    if (!m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                    {
+                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            curBestTarget = results[i].rigidbody.gameObject;
+                        }
+                    }
+                }
+            }
+
+            // Setting the best target & doing highlight visuals
+            if (curBestTarget != null && curBestTarget != m_bestRopeConnectTarget)
+            {
+                if (m_bestRopeConnectTarget != null)
+                {
+                    m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                }
+
+                m_bestRopeConnectTarget = curBestTarget;
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
+            }
+            else if (curBestTarget == null && m_bestRopeConnectTarget != null)
+            {
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                m_bestRopeConnectTarget = null;
+            }
+        }
+    }
+    
+    private void CheckBestRopeTargetToDisconnect()
+    {
+        if (!GameManager.Instance.m_gamePaused)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            RaycastHit2D[] results = new RaycastHit2D[20];
+            int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                results, 0.0f, m_connectableLayers);
+
+            float minDist = float.MaxValue;
+            GameObject curBestTarget = null;
+            for (int i = 0; i < num; i++)
+            {
+                if (m_linkedObjects.Contains(results[i].rigidbody.gameObject))
                 {
                     float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
                     if (dist < minDist)
@@ -233,75 +280,37 @@ public class PlayerBase : MonoBehaviour
                     }
                 }
             }
-        }
 
-        // Setting the best target & doing highlight visuals
-        if (curBestTarget != null && curBestTarget != m_bestRopeConnectTarget)
-        {
-            if (m_bestRopeConnectTarget != null)
+            if (curBestTarget != null && curBestTarget != m_bestRopeDisconnectTarget)
             {
-                m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
-            }
-
-            m_bestRopeConnectTarget = curBestTarget;
-            m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
-        }
-        else if (curBestTarget == null && m_bestRopeConnectTarget != null)
-        {
-            m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
-            m_bestRopeConnectTarget = null;
-        }
-    }
-    
-    private void CheckBestRopeTargetToDisconnect()
-    {
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-        
-        RaycastHit2D[] results = new RaycastHit2D[20];
-        int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
-            results, 0.0f, m_connectableLayers);
-
-        float minDist = float.MaxValue;
-        GameObject curBestTarget = null;
-        for (int i = 0; i < num; i++)
-        {
-            if (m_linkedObjects.Contains(results[i].rigidbody.gameObject))
-            {
-                float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
-                if (dist < minDist)
+                if (m_bestRopeDisconnectTarget != null)
                 {
-                    minDist = dist;
-                    curBestTarget = results[i].rigidbody.gameObject;
+                    m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().HideHighlight();
                 }
+
+                m_bestRopeDisconnectTarget = curBestTarget;
+                m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
             }
-        }
-                
-        if (curBestTarget != null && curBestTarget != m_bestRopeDisconnectTarget)
-        {
-            if (m_bestRopeDisconnectTarget != null)
+            else if (curBestTarget == null && m_bestRopeDisconnectTarget != null)
             {
                 m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                m_bestRopeDisconnectTarget = null;
             }
-
-            m_bestRopeDisconnectTarget = curBestTarget;
-            m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
-        }
-        else if (curBestTarget == null && m_bestRopeDisconnectTarget != null)
-        {
-            m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().HideHighlight();
-            m_bestRopeDisconnectTarget = null;
         }
     }
     
     private void HighlightConnections()
     {
-        if (m_bestRopeConnectTarget != null && m_bestRopeDisconnectTarget == null)
+        if (!GameManager.Instance.m_gamePaused)
         {
-            m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
-        }
-        else if (m_bestRopeConnectTarget == null && m_bestRopeDisconnectTarget != null)
-        {
-            m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
+            if (m_bestRopeConnectTarget != null && m_bestRopeDisconnectTarget == null)
+            {
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
+            }
+            else if (m_bestRopeConnectTarget == null && m_bestRopeDisconnectTarget != null)
+            {
+                m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
+            }
         }
     }
 
@@ -350,7 +359,7 @@ public class PlayerBase : MonoBehaviour
 
     public void RopeConnect(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !GameManager.Instance.m_gamePaused)
         {
             if (m_bestRopeConnectTarget != null)
             {
@@ -365,7 +374,7 @@ public class PlayerBase : MonoBehaviour
 
     public void RopeDisconnect(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && !GameManager.Instance.m_gamePaused)
         {
             if (m_bestRopeDisconnectTarget != null)
             {

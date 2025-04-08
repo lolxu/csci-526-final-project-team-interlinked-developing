@@ -13,6 +13,13 @@ public class SceneTransitionButton : MonoBehaviour
     
     public void TransitionScene()
     {
+        Time.timeScale = 1.0f;
+
+        if (m_loadScene == "Main Menu")
+        {
+            MetricsManager.Instance.Send();
+        }
+        
         m_levelData.m_needsTutorial = m_showTutorial;
         m_levelData.m_needsLevelName = m_showLevelName;
         SceneManager.LoadScene(m_loadScene);
