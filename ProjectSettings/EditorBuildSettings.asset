@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Beta/Main Menu.unity
     guid: bc34d1d932452de42822772cbf8e2751
   - enabled: 1
-    path: Assets/Scenes/Alpha Levels/Prototype - Tutorial.unity
-    guid: efe077c611eeffe4aa5f644b33b596fd
-  - enabled: 1
     path: Assets/Scenes/Beta/Beta-Cavern.unity
     guid: fd8007316d188af4e94c20db640844a7
   - enabled: 1
