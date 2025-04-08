@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433, y: -285.93546}
-  m_SizeDelta: {x: 683.69, y: 152.2471}
+  m_AnchoredPosition: {x: 960, y: -581.6854}
+  m_SizeDelta: {x: 683.68994, y: 152.2471}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &132222127
 MonoBehaviour:
@@ -391,8 +391,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 440, y: -86}
-  m_SizeDelta: {x: 685.84, y: 134.4945}
+  m_AnchoredPosition: {x: 960, y: -388.31464}
+  m_SizeDelta: {x: 685.8401, y: 134.4945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &554498123
 MonoBehaviour:
@@ -528,7 +528,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433, y: -442}
+  m_AnchoredPosition: {x: 960, y: -733.3707}
   m_SizeDelta: {x: 169.74939, y: 51.123596}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577289406
@@ -1100,7 +1100,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433, y: -442}
+  m_AnchoredPosition: {x: 960, y: -834.1747}
   m_SizeDelta: {x: 169.74939, y: 51.123596}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &712680377
@@ -2182,7 +2182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 433, y: -67.24725}
+  m_AnchoredPosition: {x: 960, y: -287.51077}
   m_SizeDelta: {x: 685.84, y: 134.4945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392917049
@@ -2885,7 +2885,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427, y: -361.42194}
+  m_AnchoredPosition: {x: 960, y: -581.6855}
   m_SizeDelta: {x: 687.4678, y: 353.8549}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1764627292
@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852442400}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
@@ -3590,7 +3590,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2068512436}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
