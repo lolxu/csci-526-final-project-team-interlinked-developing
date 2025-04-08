@@ -15,6 +15,7 @@ public class UI : MonoBehaviour
     public GameObject m_playerHealthBar;
     public GameObject m_enemyHealthBarPrefab;
     public GameObject m_durabilityBarPrefab;
+    public GameObject m_pauseMenu;
 
     // private bool shrinkingTriggered = false; // Ensures shrinking starts only once per wave
     private int m_killCount = 0;
@@ -182,5 +183,18 @@ public class UI : MonoBehaviour
         yield return new WaitForSeconds(duration);
         
         m_finalMessageText.enabled = false;
+    }
+
+    public void PauseGame()
+    {
+        m_pauseMenu.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
+
+    public void ResumeGame()
+    {
+        m_pauseMenu.SetActive(false);
+        Time.timeScale = 1.0f;
+        GameManager.Instance.m_gamePaused = false;
     }
 }
