@@ -1,0 +1,7037 @@
+{
+  "-OMyIveBbZRp5NZrIFPd": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.4000000059604645
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638792999356247868",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.20000000298023224,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyNJUnvZcC6kWw2tqY": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793011102563633",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1111111119389534,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyR83W6c8oFJsqh9B-": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793021319564246",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMySDCk6wb4u3tON5qf": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793024102185934",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMySSqvo0-Llj4f9S-G": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793024892283476",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMySrfbSjEoML6DOu6A": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793025908429669",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyT9eU7jeahqUB_eqD": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -18.61888885498047,
+            "y": -10.551084518432617
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793026104507551",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyU2678S6jiWWQd8Nt": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793028824580511",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyUcVKi9NxTynVN2S6": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.75
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793029622544828",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.27272728085517883,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMygHJ7AhyCtMR-qWFR": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793063685319181",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyhOHu_U7PKUxaKWew": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793066442619393",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.3333333432674408,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyi-AUEU3PNrMOPN4W": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793068114752674",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyiDC1T4pPDwyV6XwP": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -10.685155868530273,
+            "y": 12.741311073303223
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793068598186995",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1666666716337204,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyij2ZCkxE93-42K_Q": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 1.0729117393493652,
+            "y": 8.720562934875488
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793069746981021",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.2857142984867096,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMykB94xZMqHT1yKvoR": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793073863741594",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMykWuQLw4m3upyYU_w": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793074288950408",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.20000000298023224,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMykemIwsuB4eDl2PL8": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793075160610271",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMykyY1F9H0Yw6UF0Ks": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793075919870957",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMym4DYAx8IpjI3z4e_": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -28.371978759765625,
+            "y": -0.40891122817993164
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793078292411917",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMymqzFC6WpYBI4o6it": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.25
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -31.46573257446289,
+            "y": -14.437928199768066
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793079365753027",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMynQUlG3uh3SK0e03o": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793081994239423",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.07692307978868484,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMynqVt5ymp-OSavCHB": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.3333333432674408
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -35.3286247253418,
+            "y": -6.435803413391113
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793082919693008",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.125,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyoWX-FQWhjqt6dT6i": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793084309502274",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.0714285746216774,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMypLIbLlE1OFZ6cSzt": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -3.2918753623962402,
+            "y": -4.590155601501465
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793087240483233",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.09090909361839294,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyq7_TJxqduT-f6-F3": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793089421840891",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyr2rm_Y8ktpGOXOT9": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.25
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 1.8002322912216187,
+            "y": -15.142205238342285
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793090523294221",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMyrbd_O9ILzCTTojFv": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.25
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793092793260745",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMysIg6n7Po9nhsTN0E": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 28.398494720458984,
+            "y": 6.702735900878906
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793094758765559",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.0625,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMysmLj-88QHleEdv94": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.20000000298023224
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 2.3030707836151123,
+            "y": -10.355891227722168
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793095566589288",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.125,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-OMz3sT2aGmOi5eFEW89": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 2,
+        "m_deathLocations": [
+          {
+            "x": 10.312886238098145,
+            "y": -3.2903378009796143
+          },
+          {
+            "x": -1.6805274486541748,
+            "y": -10.888540267944336
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793126642911069",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.09677419066429138,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ON1_RaeOPYOTgAOy2Ie": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793716876846751",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ON1_UwK_eWBQ-o40CoG": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638793717004476479",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ON6W44cPyQ1jwJ1Y3FQ": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794543703783514"
+  },
+  "-ON6Wtz_N_ufZlrrvMLY": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines"
+      }
+    ],
+    "m_sessionID": "638794546452790540"
+  },
+  "-ON6XaNqO1nDrCo9TmoH": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794548100260011"
+  },
+  "-ON6XsDFKYs01TcNpyNs": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          32,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          21,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794548713355036"
+  },
+  "-ON80Sf0mBelxl52p0Ex": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          20,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          17,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794796745373984"
+  },
+  "-ON86-eKOwyw21x4UGet": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          13,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794811116290268"
+  },
+  "-ON86E4HoLe74YG-ibEd": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638794811999673170"
+  },
+  "-ONBTQ6qoB8tiqnNm6I-": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795376126414963"
+  },
+  "-ONBTtXRegVZdAdaZma8": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795377187751871"
+  },
+  "-ONBVllhtc0bl6vHvnjA": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.20000000298023224
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          15,
+          18,
+          3,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          4,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795380867220272",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1428571492433548,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONBX1zbmsO93bq38TtI": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 2,
+        "m_deathLocations": [
+          {
+            "x": 4.079183578491211,
+            "y": -2.5147929191589355
+          },
+          {
+            "x": 7.255932331085205,
+            "y": 7.146244049072266
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          11,
+          0.5,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795384786143859"
+  },
+  "-ONBdcUFPcIpLkU3Sd6Q": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.09090909361839294
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.20000000298023224
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -17.02979278564453,
+            "y": -10.179368019104004
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          12,
+          12,
+          9,
+          8
+        ],
+        "m_ropeDisconnectionMetrics": [
+          6,
+          1,
+          2,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795402753566755",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONBeXIpZI7mH3-35f7t": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          14,
+          18,
+          6,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          3,
+          2,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795406246703566",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.10000000149011612,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONBfbzR4rz_YQ-G8FmW": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.25
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          13,
+          12,
+          14,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          4,
+          4,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795408945286427",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONBgkAmSReDqPcUmf5J": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.1666666716337204
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.25
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          15,
+          23,
+          8,
+          7
+        ],
+        "m_ropeDisconnectionMetrics": [
+          6,
+          8,
+          1,
+          1
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795411193282369",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONBjHPyFLhY8Ysg7hfg": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.3333333432674408
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          18,
+          17,
+          8,
+          8
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          3,
+          2,
+          3
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          9,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795417357906969",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.08695652335882187,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONC1H4zG8WZOQ3WkjS1": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795470082186886"
+  },
+  "-ONC1Pr8pNPPmFHCQLED": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795470357585539"
+  },
+  "-ONC1jRyYP7pqHgQqfmU": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795471276906607"
+  },
+  "-ONC4L4wDyS3zLTiW8T5": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795477978598572"
+  },
+  "-ONC6-set0E0v8h_WOEC": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          9,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795482320716014"
+  },
+  "-ONCDJ0Smnbkr2Vz-PzD": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795501527198738"
+  },
+  "-ONCM5YU4AWX4nJiTdwR": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795524674459836"
+  },
+  "-ONCMFbc8mWrcER68ddh": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795525187177357"
+  },
+  "-ONCMZ2ZFH-woI2Ci5vj": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795525695604640"
+  },
+  "-ONCMvfzJNI6ZDzaqCqY": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795526708425937"
+  },
+  "-ONCNxjINbnUpw33BOYC": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          13,
+          1,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795529173423423"
+  },
+  "-ONCOTBpBLYhUaPxCGvM": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795530996173679"
+  },
+  "-ONCOagpme3QqoVulBzp": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795531142614526"
+  },
+  "-ONCOpt3YMHBeZjB23pQ": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795531841941367"
+  },
+  "-ONCPabonB2YzTedAgLI": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795533729588578"
+  },
+  "-ONCPkPAfMCwLYL_Va-8": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795534311237025"
+  },
+  "-ONCPsFoXU5PPDxYfaH2": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795534574886104"
+  },
+  "-ONCQ81sfE56glns1lGY": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795535294782377"
+  },
+  "-ONCQMvgnuS2U6shifX6": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795535894140481"
+  },
+  "-ONCQf2Lo4zRLLPTXoRX": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          9,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795536385714441"
+  },
+  "-ONCQm9SAZzIw4ltjpxb": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795536901152503"
+  },
+  "-ONCR-7YR0tSmCP896jI": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795537228934483"
+  },
+  "-ONCRF7VJhh2yhAuPiIh": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795537882662771"
+  },
+  "-ONCRrg9YGjLMtNtQl-1": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795539586204878"
+  },
+  "-ONCSQnXC-DGhCTCJL1M": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.2857142984867096
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          13,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          6,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795540251401536",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCSZdv4-F3dJyMATtY": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795541616105783"
+  },
+  "-ONCSi1VLpQbmAMBeDuB": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795541904687496"
+  },
+  "-ONCT1wHS0TU7qIOhpkI": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795542469584005",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCTN_txNAJ2jmJITtk": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795543350271488",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCTxBm-gKr6X4A9FuL": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          11,
+          6,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          2,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795544394398791",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.3333333432674408,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCVMZyPZYJi-WDnGaM": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          13,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795548691880333"
+  },
+  "-ONCWHDJYcDc2LRcDZpR": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          10,
+          9,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          7,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795550438289234",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.4000000059604645,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCX49WZXYZi8tnJFrc": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          15,
+          13,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          9,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795552502035783",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.3333333432674408,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONCjBiODHpNQ_-5RaKk": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795587208805040",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCjRVkDkXu3WaoQYEO": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795588368033500",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCkE4wD41Bfut_lD6I": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795590379039050",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCl4s2eisSvXFqQHA8": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795592785223660",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCum0dl0jTzkR2mkn7": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795618294996329",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCuvDV0_HcVuq0XYxF": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu",
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_weaponStealAttempts": 0,
+        "m_weaponStealSuccesses": 0
+      }
+    ],
+    "m_sessionID": "638795618698646990",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONCxDykgDK-9AH9PQcc": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795624746363819"
+  },
+  "-OND7m9DZOj4bkollYTI": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 4,
+        "m_deathLocations": [
+          {
+            "x": -16.660037994384766,
+            "y": 0.30086416006088257
+          },
+          {
+            "x": -16.660037994384766,
+            "y": 0.02513071522116661
+          },
+          {
+            "x": -16.005882263183594,
+            "y": -0.5042110085487366
+          },
+          {
+            "x": -15.524093627929688,
+            "y": -0.016548432409763336
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795654602918841"
+  },
+  "-OND8hHHdOag3h5WhINp": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 39.983787536621094,
+            "y": 16.047597885131836
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795657276881408"
+  },
+  "-ONDAspTDuODv362qsa6": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          11,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795662609335199"
+  },
+  "-ONDBoHXHMDJ3GoGKe-8": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795665255027493"
+  },
+  "-ONDEJMS_KaQfiClFQg0": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.30000001192092896
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.125
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          19,
+          19,
+          9,
+          15
+        ],
+        "m_ropeDisconnectionMetrics": [
+          8,
+          8,
+          4,
+          4
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          12,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          2,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795667965336720",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.19512194395065308,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDFVGfIhhSPiAQYQGa": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 10.309659957885742,
+            "y": 2.3811800479888916
+          }
+        ],
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          16,
+          9,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795673993361071",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1428571492433548,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDFhaersxHgeXg8StQ": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795675749221317"
+  },
+  "-ONDG7TTDu5LUo9aJ2Ej": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          10,
+          10,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          6,
+          7,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795675945743814",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.30000001192092896,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDK21Du0gipXaVyDDT": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795686935743073"
+  },
+  "-ONDK_JdAUPNfURT1MsP": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -17.854469299316406,
+            "y": -0.6001772880554199
+          }
+        ],
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          13,
+          3,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          6,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795687690904089",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.5,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDWYZvi2WwXTKh865D": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          10,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795719603014457"
+  },
+  "-ONDWuMk63A--Yr3wR55": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          13,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795720243843136",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDXKdrlC_UHQl5-VCY": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          8,
+          2,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795721269041921",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.0625,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDYllJxELu9DI1TUTU": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.1666666716337204
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          17,
+          24,
+          10
+        ],
+        "m_ropeDisconnectionMetrics": [
+          8,
+          6,
+          14,
+          1
+        ]
+      }
+    ],
+    "m_sessionID": "638795722763142277",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.09090909361839294,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0.125,
+        "m_weaponName": "Pistol Turret"
+      }
+    ]
+  },
+  "-ONDbIgSsWdSSzrUm71e": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.05000000074505806
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.2777777910232544
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          13,
+          15,
+          23,
+          14,
+          23
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          10,
+          14,
+          0,
+          2
+        ]
+      }
+    ],
+    "m_sessionID": "638795731481147565",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0.03333333507180214,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONDbqqXCm0JYq8MzdaU": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638795736033921718",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONDd_PaD5si_jfPnxlH": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.23076923191547394
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 2,
+        "m_deathLocations": [
+          {
+            "x": -1.6279317140579224,
+            "y": -2.6810481548309326
+          },
+          {
+            "x": 25.332168579101562,
+            "y": -7.636475086212158
+          }
+        ],
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12.5,
+          10.5,
+          9.5,
+          5.5,
+          2.5
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          4.5,
+          4.5,
+          2.5,
+          0.5
+        ]
+      }
+    ],
+    "m_sessionID": "638795736675278655",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1304347813129425,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      }
+    ]
+  },
+  "-ONGkJDPmlSZDbqVOaSO": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796261943194582"
+  },
+  "-ONGknuce-aYRDDLu3dC": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          11,
+          6,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          3,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796262535319905",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONHDbAMICDEuo-dLZ6O": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796341392087329"
+  },
+  "-ONHDzcDJASr3uZTtKPs": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796342360542763"
+  },
+  "-ONHEIGFGDExdpAMEq8T": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796342963216100"
+  },
+  "-ONHFDw6_P0BQvTgtAz9": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          10,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796345204398986"
+  },
+  "-ONHHOo38ph6tsfHH8Sm": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796351145984821"
+  },
+  "-ONHHmFf1PHTMpqJy_cH": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796351910608462"
+  },
+  "-ONHI4aMnFrZtkmJ6s2Z": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796352813340247"
+  },
+  "-ONHLgpwxrg7VOTOuZO_": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.2222222238779068
+      },
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.1666666716337204
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          8,
+          12,
+          13,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          3,
+          6,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796360451257878",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.10000000149011612,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONH_aRnugsTKfUQrnxP": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796401382562611"
+  },
+  "-ONH_mBddlGr_nJLCBAC": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796401965112073"
+  },
+  "-ONHaFEmQ54bB7B--BtW": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          3,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796403026741144"
+  },
+  "-ONHg4m_AAjZAzf0qECw": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          2,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796418445350171"
+  },
+  "-ONHhBdWhi9OOgZgodbe": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.800000011920929
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          15,
+          13,
+          9,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          10,
+          5,
+          3,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796419958915136",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.09090909361839294,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONHiG9XMWMBPN_VKxpl": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.3333333432674408
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          12,
+          5,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          8,
+          5,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796423698880653",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.25,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONHjrlakSsCE0-zhje8": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.3333333432674408
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": -12.72264289855957,
+            "y": -19.65175437927246
+          }
+        ],
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          26,
+          12,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          16,
+          3,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796426394790255",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONHlexpYL7AwWUgXFIT": {
+    "m_levelMetricsData": [
+      {
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          4,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796432756110000"
+  },
+  "-ONHlp5YibYeRD-nCG6v": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.29411765933036804
+      },
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 0.2666666805744171
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          11,
+          16,
+          11,
+          11
+        ],
+        "m_ropeDisconnectionMetrics": [
+          5,
+          7,
+          7,
+          3
+        ]
+      },
+      {
+        "m_deathCount": 1,
+        "m_deathLocations": [
+          {
+            "x": 6.400134086608887,
+            "y": -14.65931510925293
+          }
+        ],
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          8,
+          2,
+          15,
+          10,
+          2
+        ],
+        "m_ropeDisconnectionMetrics": [
+          4,
+          0,
+          5,
+          4,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796429135859178",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.0833333358168602,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      }
+    ]
+  },
+  "-ONIGNSPsrUoLkJJqqBk": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796516002063650",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      }
+    ]
+  },
+  "-ONIH6bSGsfFbzSMgXs2": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 0.5
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796517787130120"
+  },
+  "-ONIHOmiNWgcOJZV6XL3": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796519072669180",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Pistol Turret"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      },
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Sniper Turret"
+      }
+    ]
+  },
+  "-ONIHmk7ln_l_Va_ohP6": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796519737877340"
+  },
+  "-ONIPqEGGfBbCxZTWrk8": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796541230948100"
+  },
+  "-ONIUU4EFRM3IUFTjZYb": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796553395713180"
+  },
+  "-ONIUZxI4qY_EihZcQMq": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796553593897040"
+  },
+  "-ONIUi0P6pawQwUlQNGk": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796554020747670"
+  },
+  "-ONIXAX8-7j4RyPY04qC": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796560478291340"
+  },
+  "-ONIXBerWMiS5QZySXR9": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796560522803770"
+  },
+  "-ONId6iPxfDEi2KNkNQV": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796578664208806"
+  },
+  "-ONId9RNHWaVTHcubJuV": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796578736659830"
+  },
+  "-ONIpHPLkDuZIkOiIGPG": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Dash",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796609984949958",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0.1666666716337204,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONIpWz_lVSMUbmLONhw": {
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796611117237956",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  },
+  "-ONIpu3LJ5XbIN__amM_": {
+    "m_abilityMetricsData": [
+      {
+        "m_abilityName": "Knock Back",
+        "m_activationRate": 1
+      }
+    ],
+    "m_levelMetricsData": [
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Main Menu"
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Cavern",
+        "m_ropeConnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "m_deathCount": 0,
+        "m_levelName": "Beta-Vines",
+        "m_ropeConnectionMetrics": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "m_ropeDisconnectionMetrics": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "m_sessionID": "638796611936091059",
+    "m_weaponMetricsData": [
+      {
+        "m_stealRate": 0,
+        "m_weaponName": "Mace"
+      }
+    ]
+  }
+}
