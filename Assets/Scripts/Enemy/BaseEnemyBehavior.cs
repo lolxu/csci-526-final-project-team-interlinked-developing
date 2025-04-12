@@ -111,6 +111,14 @@ public class BaseEnemyBehavior : MonoBehaviour
                 }
             }
         }
+        else if (other.collider.CompareTag("Player"))
+        {
+            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
+            if (health != null)
+            {
+                health.DamageEvent.Invoke(m_damage, gameObject);
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
