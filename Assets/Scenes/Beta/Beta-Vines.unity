@@ -1386,7 +1386,7 @@ GameObject:
   m_Component:
   - component: {fileID: 188826552}
   - component: {fileID: 188826553}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1983,7 +1983,7 @@ GameObject:
   - component: {fileID: 287761161}
   - component: {fileID: 287761160}
   - component: {fileID: 287761163}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (2)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -3044,7 +3044,7 @@ GameObject:
   - component: {fileID: 397947734}
   - component: {fileID: 397947733}
   - component: {fileID: 397947732}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (2)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -3422,7 +3422,7 @@ GameObject:
   - component: {fileID: 404066174}
   - component: {fileID: 404066175}
   - component: {fileID: 404066176}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: SpikeStrip_D
   m_TagString: DamageZone
   m_Icon: {fileID: 0}
@@ -3678,7 +3678,7 @@ GameObject:
   - component: {fileID: 505339705}
   - component: {fileID: 505339707}
   - component: {fileID: 505339706}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (3)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -3769,7 +3769,7 @@ GameObject:
   - component: {fileID: 518008472}
   - component: {fileID: 518008471}
   - component: {fileID: 518008470}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Moving Vines (3)
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -4204,7 +4204,7 @@ GameObject:
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &565158623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4219,7 +4219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridOrigin: {x: -39.43, y: -19.31}
   gridSize: {x: 140, y: 72}
-  cellSize: 2.5
+  cellSize: 5
   jsonFile: {fileID: 4900000, guid: 2af774cc40d0d654e8af14b5198451a7, type: 3}
   m_currentLevelName: Beta-Vines
 --- !u!4 &565158624
@@ -4326,7 +4326,7 @@ GameObject:
   - component: {fileID: 597641396}
   - component: {fileID: 597641398}
   - component: {fileID: 597641397}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (2)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -4496,7 +4496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 636507181}
   - component: {fileID: 636507182}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5262,7 +5262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 696943094}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Vine Environmental (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5299,7 +5299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 698943842}
   - component: {fileID: 698943843}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5531,7 +5531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 740149432}
   - component: {fileID: 740149433}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5763,7 +5763,7 @@ GameObject:
   m_Component:
   - component: {fileID: 754865945}
   - component: {fileID: 754865946}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5878,7 +5878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 811201733}
   - component: {fileID: 811201734}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6059,7 +6059,7 @@ GameObject:
   - component: {fileID: 920991765}
   - component: {fileID: 920991764}
   - component: {fileID: 920991763}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Moving Vines (2)
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -6323,7 +6323,7 @@ GameObject:
   - component: {fileID: 941593291}
   - component: {fileID: 941593290}
   - component: {fileID: 941593292}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Vines_edge
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -7002,7 +7002,7 @@ GameObject:
   - component: {fileID: 1046851908}
   - component: {fileID: 1046851907}
   - component: {fileID: 1046851909}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -7177,7 +7177,7 @@ GameObject:
   - component: {fileID: 1058561016}
   - component: {fileID: 1058561018}
   - component: {fileID: 1058561017}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (2)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -7329,7 +7329,7 @@ GameObject:
   - component: {fileID: 1071317248}
   - component: {fileID: 1071317247}
   - component: {fileID: 1071317246}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -7504,7 +7504,7 @@ GameObject:
   - component: {fileID: 1088275358}
   - component: {fileID: 1088275360}
   - component: {fileID: 1088275359}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: SpikeStrip_D
   m_TagString: DamageZone
   m_Icon: {fileID: 0}
@@ -7751,7 +7751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1102146787}
   - component: {fileID: 1102146788}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7836,7 +7836,7 @@ GameObject:
   - component: {fileID: 1113495750}
   - component: {fileID: 1113495751}
   - component: {fileID: 1113495752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -7924,7 +7924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1121939906}
   - component: {fileID: 1121939907}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8011,7 +8011,7 @@ GameObject:
   - component: {fileID: 1125073726}
   - component: {fileID: 1125073725}
   - component: {fileID: 1125073724}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Moving Vines (4)
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -8399,7 +8399,7 @@ GameObject:
   - component: {fileID: 1143234781}
   - component: {fileID: 1143234783}
   - component: {fileID: 1143234782}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -8486,7 +8486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152332262}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8517,7 +8517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1214928837}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8549,7 +8549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1248014997}
   - component: {fileID: 1248014998}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9358,171 +9358,6 @@ PolygonCollider2D:
       - {x: -45, y: -25}
       - {x: 45, y: -25}
   m_UseDelaunayMesh: 0
---- !u!43 &1322005530
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 11
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 42
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 16
-    localAABB:
-      m_Center: {x: 0.00000011920929, y: 0, z: 0}
-      m_Extent: {x: 0.49999988, y: 0.5, z: 0}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 16
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 704
-    _typelessdata: 0000003f000000bf000000000000803f0000008000000080000000800000003f000000bf0000003f000000bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bf000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003ff8ffffbe000000bf0000000000000080000080bf0000000000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003ff8ffffbe0000003f00000000000080bf000000800000008000000080f8ffffbe0000003ff8ffffbe0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf0000003f000000bf0000000000000080000080bf00000000000000800000003f000000bf0000003f000000bf0000003f0000003f000000000000803f0000008000000080000000800000003f0000003f0000003f0000003f000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003f00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bff8ffffbe0000003f00000000000000800000803f0000008000000080f8ffffbe0000003ff8ffffbe0000003ff8ffffbe000000bf00000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003f
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0.00000011920929, y: 0, z: 0}
-    m_Extent: {x: 0.49999988, y: 0.5, z: 0}
-  m_MeshUsageFlags: 0
-  m_CookingOptions: 30
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &1338734629
 GameObject:
   m_ObjectHideFlags: 0
@@ -9616,7 +9451,7 @@ GameObject:
   - component: {fileID: 1372033707}
   - component: {fileID: 1372033706}
   - component: {fileID: 1372033709}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (1)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -9789,7 +9624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387115466}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Vine Environmental (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9821,7 +9656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403100105}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Vine Environmental (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9858,7 +9693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1422894542}
   - component: {fileID: 1422894543}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10504,7 +10339,7 @@ GameObject:
   - component: {fileID: 1457941496}
   - component: {fileID: 1457941498}
   - component: {fileID: 1457941497}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: SpikeStrip_D
   m_TagString: DamageZone
   m_Icon: {fileID: 0}
@@ -10604,7 +10439,7 @@ GameObject:
   - component: {fileID: 1470643288}
   - component: {fileID: 1470643290}
   - component: {fileID: 1470643289}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: SpikeStrip_D
   m_TagString: DamageZone
   m_Icon: {fileID: 0}
@@ -10859,7 +10694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1487389105}
   - component: {fileID: 1487389106}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11349,7 +11184,7 @@ GameObject:
   - component: {fileID: 1592450028}
   - component: {fileID: 1592450030}
   - component: {fileID: 1592450029}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -11440,7 +11275,7 @@ GameObject:
   - component: {fileID: 1618716900}
   - component: {fileID: 1618716899}
   - component: {fileID: 1618716898}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (1)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -11698,6 +11533,171 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!43 &1670751421
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: 0.00000011920929, y: 0, z: 0}
+      m_Extent: {x: 0.49999988, y: 0.5, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 0000003f000000bf000000000000803f0000008000000080000000800000003f000000bf0000003f000000bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bf000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003ff8ffffbe000000bf0000000000000080000080bf0000000000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003ff8ffffbe0000003f00000000000080bf000000800000008000000080f8ffffbe0000003ff8ffffbe0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf0000003f000000bf0000000000000080000080bf00000000000000800000003f000000bf0000003f000000bf0000003f0000003f000000000000803f0000008000000080000000800000003f0000003f0000003f0000003f000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003f00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bff8ffffbe0000003f00000000000000800000803f0000008000000080f8ffffbe0000003ff8ffffbe0000003ff8ffffbe000000bf00000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0.00000011920929, y: 0, z: 0}
+    m_Extent: {x: 0.49999988, y: 0.5, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &1691597725
 GameObject:
   m_ObjectHideFlags: 0
@@ -11822,7 +11822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1735896309}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Vine Environmental (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12003,7 +12003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1765497054}
   - component: {fileID: 1765497055}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12086,7 +12086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1773917916}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12782,7 +12782,7 @@ GameObject:
   - component: {fileID: 1874461630}
   - component: {fileID: 1874461629}
   - component: {fileID: 1874461628}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Moving Vines (1)
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -13286,7 +13286,7 @@ GameObject:
   - component: {fileID: 1982869193}
   - component: {fileID: 1982869192}
   - component: {fileID: 1982869191}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (3)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -14301,7 +14301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092309560}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14336,7 +14336,7 @@ GameObject:
   - component: {fileID: 2102045538}
   - component: {fileID: 2102045537}
   - component: {fileID: 2102045540}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: VineEnd (3)
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -14605,7 +14605,7 @@ GameObject:
   - component: {fileID: 2138735526}
   - component: {fileID: 2138735528}
   - component: {fileID: 2138735527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -14694,7 +14694,7 @@ GameObject:
   - component: {fileID: 2141713387}
   - component: {fileID: 2141713389}
   - component: {fileID: 2141713388}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: VineBegin (3)
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}

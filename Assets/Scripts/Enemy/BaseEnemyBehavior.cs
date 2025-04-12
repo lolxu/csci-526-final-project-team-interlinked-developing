@@ -124,20 +124,4 @@ public class BaseEnemyBehavior : MonoBehaviour
             }
         }
     }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Player"))
-        {
-            HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
-            if (health != null)
-            {
-                health.DamageEvent.Invoke(m_damage, gameObject);
-            }
-        }
-        else if (other.collider.CompareTag("Border"))
-        {
-            m_healthComponent.DamageEvent.Invoke(0.1f, gameObject);
-        }
-    }
 }

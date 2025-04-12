@@ -48,9 +48,11 @@ MonoBehaviour:
   m_waves: []
   m_waveCoolDown: 10
   m_spawnPadding: 5
-  m_canSpawn: 1
   m_maskCheck:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 2057
+  m_forceNotSpawn: 0
+  m_waveDangers: []
+  m_waveEnvironmentals: []
+  m_allWaveDangers: []
   m_enemies: []
-  m_damagedEnemies: []
