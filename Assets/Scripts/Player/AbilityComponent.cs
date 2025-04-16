@@ -51,9 +51,6 @@ public class AbilityComponent : MonoBehaviour
         float scale = m_curve.Evaluate((float)(m_maxUse - m_use) / m_maxUse) * m_scaleFactor;
         transform.localScale = Vector3.one * scale;
         m_orgScale = transform.localScale;
-        
-        // Start spawn as trigger
-        GetComponent<Collider2D>().isTrigger = true;
 
         if (!m_showPrompt)
         {
@@ -241,13 +238,5 @@ public class AbilityComponent : MonoBehaviour
         {
             Destroy(gameObject);
         });
-    }
-    
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag("Background") && GetComponent<Collider2D>().isTrigger)
-        {
-            GetComponent<Collider2D>().isTrigger = false;
-        }
     }
 }

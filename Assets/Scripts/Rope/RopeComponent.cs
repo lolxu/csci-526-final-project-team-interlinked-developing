@@ -12,9 +12,11 @@ public class RopeComponent : MonoBehaviour
     public List<GameObject> m_receivedFrom = new List<GameObject>();
     public List<GameObject> m_ropeLinksEnemy = new List<GameObject>();
     public List<GameObject> m_ropeLinksPlayer = new List<GameObject>();
+    public List<GameObject> m_ropeLinksEnvironmental = new List<GameObject>();
     public int m_ropeLength = 20;
     public bool m_isConnectedToPlayer = false;
     public bool m_isConnectedToEnemy = false;
+    public bool m_isEnvironmental = false;
     public bool m_isEnemy;
     // public bool m_isStrongConnection = false;
 
@@ -27,16 +29,18 @@ public class RopeComponent : MonoBehaviour
     private Rigidbody2D m_anchorObject;
     private GameObject m_rope;
 
-    [Header("Rope Physics Settings")] 
-    private float m_maxTension = 100.0f;
+    // [Header("Rope Physics Settings")] 
+    private float m_maxTension = 200.0f;
     private float m_tensionDuration = 0.75f;
 
-    [Header("Enemy Rope Settings")]
-    [SerializeField] private Color m_orgEnemyRopeColor;
+    private Color m_orgEnemyRopeColor;
     private float m_ropeStressTimer = 0.0f;
     private bool m_isStealing = false;
 
     [Header("Visual Settings")] 
+    [SerializeField] private LineRenderer m_playerRopeLine;
+    [SerializeField] private LineRenderer m_enemyRopeLine;
+    [SerializeField] private LineRenderer m_environmentRopeLine;
     [SerializeField] private GameObject m_highlight;
     [SerializeField] private Color m_connectColor = Color.white;
     [SerializeField] private Color m_disconnectColor = Color.cyan;
@@ -53,9 +57,12 @@ public class RopeComponent : MonoBehaviour
         
         m_rope = GameObject.FindGameObjectWithTag("Rope");
         m_anchorObject = GetComponent<Rigidbody2D>();
-        
-        SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
+
+        if (SingletonMaster.Instance != null)
+        {
+            SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
+            SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
+        }
 
         yield return null;
         
@@ -72,12 +79,21 @@ public class RopeComponent : MonoBehaviour
                 GenerateRope(nextConnected);
             }
         }
+        
+        // Coloring
+        if (m_enemyRopeLine != null)
+        {
+            m_orgEnemyRopeColor = m_enemyRopeLine.startColor;
+        }
     }
 
     private void OnDisable()
     {
-        SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        if (SingletonMaster.Instance != null)
+        {
+            SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
+            SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        }
     }
     
     private void OnPlayerDeath(GameObject obj)
@@ -216,6 +232,21 @@ public class RopeComponent : MonoBehaviour
             Vector3 vec = connectTo.transform.position - transform.position;
             Vector3 vecUnit = vec / length;
 
+            if (receiver.m_isConnectedToPlayer)
+            {
+                receiver.m_playerRopeLine.positionCount = length;
+            }
+
+            if (receiver.m_isConnectedToEnemy)
+            {
+                receiver.m_enemyRopeLine.positionCount = length;
+            }
+
+            if (receiver.m_isEnvironmental)
+            {
+                receiver.m_environmentRopeLine.positionCount = length;
+            }
+            
             for (int i = 0; i < length; i++)
             {
                 // Instantiating a rope link
@@ -231,6 +262,10 @@ public class RopeComponent : MonoBehaviour
                 {
                     // Debug.Log("Add Enemy rope");
                     receiver.m_ropeLinksEnemy.Add(link); // Store rope assets to the receiving end (enemy)
+                }
+                if (receiver.m_isEnvironmental && receiver.m_ropeLinksEnvironmental.Count < length)
+                {
+                    receiver.m_ropeLinksEnvironmental.Add(link);
                 }
                 
                 // Setting up joints
@@ -291,6 +326,7 @@ public class RopeComponent : MonoBehaviour
                 Destroy(m_ropeLinksPlayer[i]);
             }
             m_ropeLinksPlayer.Clear();
+            m_playerRopeLine.positionCount = 0;
             
             for (int i = m_receivedFrom.Count - 1; i >= 0; --i)
             {
@@ -330,6 +366,7 @@ public class RopeComponent : MonoBehaviour
             Destroy(m_ropeLinksEnemy[i]);
         }
         m_ropeLinksEnemy.Clear();
+        m_enemyRopeLine.positionCount = 0;
 
         if (!gameObject.CompareTag("Enemy"))
         {
@@ -352,6 +389,47 @@ public class RopeComponent : MonoBehaviour
         Destroy(m_enemyJoint);
     }
 
+    // Updating rope line renderer
+    private void Update()
+    {
+        if (m_playerRopeLine != null)
+        {
+            // Updating player ropes
+            var playerPoints = new Vector3[m_playerRopeLine.positionCount];
+            for (int i = 0; i < m_playerRopeLine.positionCount; i++)
+            {
+                playerPoints[i] = m_ropeLinksPlayer[i].transform.position;
+            }
+
+            m_playerRopeLine.SetPositions(playerPoints);
+        }
+
+        if (m_enemyRopeLine != null)
+        {
+            // Updating enemy ropes
+            var enemyPoints = new Vector3[m_enemyRopeLine.positionCount];
+            for (int i = 0; i < m_enemyRopeLine.positionCount; i++)
+            {
+                enemyPoints[i] = m_ropeLinksEnemy[i].transform.position;
+            }
+
+            m_enemyRopeLine.SetPositions(enemyPoints);
+        }
+        
+        if (m_environmentRopeLine != null)
+        {
+            // Updating environmental ropes
+            var envPoints = new Vector3[m_environmentRopeLine.positionCount];
+            for (int i = 0; i < m_environmentRopeLine.positionCount; i++)
+            {
+                envPoints[i] = m_ropeLinksEnvironmental[i].transform.position;
+            }
+
+            m_environmentRopeLine.SetPositions(envPoints);
+        }
+
+    }
+
     private void FixedUpdate()
     {
         // if (gameObject.CompareTag("Enemy"))
@@ -367,34 +445,20 @@ public class RopeComponent : MonoBehaviour
                 {
                     // Debug.Log("Adding stress");
                     m_ropeStressTimer += Time.fixedDeltaTime;
+                    
+                    Color tmp = m_enemyRopeLine.startColor;
+                    tmp.r += 0.75f * Time.fixedDeltaTime;
+                    tmp.r = Mathf.Clamp01(tmp.r);
 
-                    foreach (var rope in m_ropeLinksEnemy)
-                    {
-                        var sp = rope.GetComponent<SpriteRenderer>();
-                        if (sp != null)
-                        {
-                            Color tmp = sp.color;
-                            tmp.r += 0.75f * Time.fixedDeltaTime;
-                            tmp.r = Mathf.Clamp01(tmp.r);
-                            sp.color = tmp;
-                        }
-                    }
+                    m_enemyRopeLine.startColor = tmp;
+                    m_enemyRopeLine.endColor = tmp;
                     
                     // Also go through all enemy connected items
                     foreach (var connected in m_connectedTo)
                     {
                         RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
-                        foreach (var connectedRope in connectedRC.m_ropeLinksEnemy)
-                        {
-                            var sp = connectedRope.GetComponent<SpriteRenderer>();
-                            if (sp != null)
-                            {
-                                Color tmp = sp.color;
-                                tmp.r += 0.75f * Time.fixedDeltaTime;
-                                tmp.r = Mathf.Clamp01(tmp.r);
-                                sp.color = tmp;
-                            }
-                        }
+                        connectedRC.m_enemyRopeLine.startColor = tmp;
+                        connectedRC.m_enemyRopeLine.endColor = tmp;
                     }
 
                     if (m_ropeStressTimer > m_tensionDuration)
@@ -408,27 +472,32 @@ public class RopeComponent : MonoBehaviour
                     // Debug.Log("Resetting stress");
                     m_ropeStressTimer = 0.0f;
                     
-                    foreach (var rope in m_ropeLinksEnemy)
-                    {
-                        var sp = rope.GetComponent<SpriteRenderer>();
-                        if (sp != null)
-                        {
-                            sp.color = m_orgEnemyRopeColor;
-                        }
-                    }
+                    m_enemyRopeLine.startColor = m_orgEnemyRopeColor;
+                    m_enemyRopeLine.endColor = m_orgEnemyRopeColor;
                     
                     // Also go through all enemy connected items
                     foreach (var connected in m_connectedTo)
                     {
                         RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
-                        foreach (var connectedRope in connectedRC.m_ropeLinksEnemy)
-                        {
-                            var sp = connectedRope.GetComponent<SpriteRenderer>();
-                            if (sp != null)
-                            {
-                                sp.color = m_orgEnemyRopeColor;
-                            }
-                        }
+                        connectedRC.m_ropeStressTimer = 0.0f;
+                        connectedRC.m_enemyRopeLine.startColor = m_orgEnemyRopeColor;
+                        connectedRC.m_enemyRopeLine.endColor = m_orgEnemyRopeColor;
+                    }
+                }
+            }
+            else if (m_enemyJoint != null && !m_isConnectedToPlayer)
+            {
+                m_ropeStressTimer = 0.0f;
+                    
+                // Also go through all enemy connected items
+                foreach (var connected in m_connectedTo)
+                {
+                    RopeComponent connectedRC = connected.GetComponent<RopeComponent>();
+                    if (!connectedRC.m_isStealing)
+                    {
+                        connectedRC.m_ropeStressTimer = 0.0f;
+                        connectedRC.m_enemyRopeLine.startColor = m_orgEnemyRopeColor;
+                        connectedRC.m_enemyRopeLine.endColor = m_orgEnemyRopeColor;
                     }
                 }
             }
