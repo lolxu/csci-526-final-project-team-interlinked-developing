@@ -68,6 +68,8 @@ public class PlayerBase : MonoBehaviour
     private GameObject m_bestRopeConnectTarget = null;
     private GameObject m_bestRopeDisconnectTarget = null;
 
+    private bool m_isRagdolling = false;
+
     private void Start()
     {
         // Adding self to linked object list first
@@ -183,11 +185,23 @@ public class PlayerBase : MonoBehaviour
         if (!m_isDashing)
         {
             m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
-            if (m_RB.velocity.magnitude > m_maxSpeed)
+            if (!m_isRagdolling && m_RB.velocity.magnitude > m_maxSpeed)
             {
                 m_RB.velocity = m_moveDirection * m_maxSpeed;
             }
         }
+    }
+
+    public void StartRagdoll()
+    {
+        StartCoroutine(Ragdoll());
+    }
+
+    private IEnumerator Ragdoll()
+    {
+        m_isRagdolling = true;
+        yield return new WaitForSeconds(0.15f);
+        m_isRagdolling = false;
     }
 
     /// <summary>
