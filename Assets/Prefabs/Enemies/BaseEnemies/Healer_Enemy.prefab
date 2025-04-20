@@ -211,7 +211,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7110431426642639497}
   - component: {fileID: 8543131379425653034}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: PlayerRopeLineRend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3396762080557399090}
   - component: {fileID: 7019885287748269087}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: EnemyRopeLineRend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -769,7 +769,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 90886
+  m_InstanceId: 48826
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -824,6 +824,7 @@ MonoBehaviour:
     m_Bits: 9156
   m_invisibleThreshold: 5
   m_moveTarget: {fileID: 0}
+  m_willTurnToPlayer: 0
   m_face: {fileID: 3826137646337250007}
   m_faceMoveFactor: 0.05
   m_healRate: 1
@@ -874,7 +875,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 53eb2b1c72877f04f9c206bab1cc2f2a, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0.48235294, g: 0.30980393, b: 0.3254902, a: 1}
   m_playerRopeLine: {fileID: 8543131379425653034}
   m_enemyRopeLine: {fileID: 7019885287748269087}
   m_environmentRopeLine: {fileID: 0}

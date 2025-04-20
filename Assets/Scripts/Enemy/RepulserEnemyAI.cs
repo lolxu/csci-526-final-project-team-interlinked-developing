@@ -136,11 +136,13 @@ public class RepulserEnemyAI : BaseEnemyAI
             GetComponent<HealthComponent>().m_canDamage = false;
             
             // Telegraph
+            Color orgColor = m_spRend.color;
             m_spRend.DOColor(Color.white, 0.05f)
                 .SetLoops(6, LoopType.Yoyo)
                 .SetEase(Ease.InOutFlash)
                 .OnComplete(() =>
                 {
+                    m_spRend.color = orgColor;
                     if (m_canRepulse)
                     {
                         StartCoroutine(Repulse());

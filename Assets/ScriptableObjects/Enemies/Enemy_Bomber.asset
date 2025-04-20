@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
-  m_Name: Enemy_Dummy
+  m_Name: Enemy_Bomber
   m_EditorClassIdentifier: 
   enemy:
     m_enemy:
-      m_prefab: {fileID: 886753084398298527, guid: 4c721eeb2f80f6c48a46276126e24685, type: 3}
+      m_prefab: {fileID: 4391433643842635490, guid: 4fdedd6dc0b60fb40af0fd1964b55bc5, type: 3}
       m_enemyType: 0
       m_lootSpawnRate: 0
-    m_weightedValue: 0
+    m_weightedValue: 0.39

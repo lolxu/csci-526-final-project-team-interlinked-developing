@@ -182,8 +182,8 @@ GameObject:
   - component: {fileID: 2905448263325385452}
   - component: {fileID: 436806470346549242}
   - component: {fileID: 2130488640538756867}
-  - component: {fileID: 90904698669713516}
   - component: {fileID: 8435994360362539128}
+  - component: {fileID: 5079428870532273447}
   - component: {fileID: 2038047035373425448}
   - component: {fileID: 2854056256068457334}
   - component: {fileID: 4903961094447468995}
@@ -204,8 +204,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1169958412738435987}
   - {fileID: 4163509153718093929}
@@ -352,36 +352,10 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 35788
+  m_InstanceId: 53508
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
---- !u!114 &90904698669713516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604919702340034380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec92de9615154745b48db438a9f5a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_names:
-  - John
-  - Bobby
-  - Luis
-  - Some random dude
-  - Enemy_1
-  - LOL
-  - Lmao
-  m_healthComponent: {fileID: 2038047035373425448}
-  m_damage: 2
-  m_damageReduceFactor: 0.25
-  m_collisionVelocityThreshold: 15
-  m_AI: {fileID: 8435994360362539128}
-  m_spriteRenderer: {fileID: 651320514751257666}
 --- !u!114 &8435994360362539128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +388,26 @@ MonoBehaviour:
   m_dasherState: 2
   m_telegraph: {fileID: 9181377765597417470}
   m_dashMult: 45
+--- !u!114 &5079428870532273447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604919702340034380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 832f77a5c0ed80e4c90018f2ac5afb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_names: []
+  m_healthComponent: {fileID: 2038047035373425448}
+  m_damage: 3
+  m_damageReduceFactor: 0.25
+  m_collisionVelocityThreshold: 10
+  m_AI: {fileID: 8435994360362539128}
+  m_spriteRenderer: {fileID: 651320514751257666}
+  m_dashPickup: {fileID: 7574045754775299820, guid: c4beca56fd037154bba0da95d5e7aa3f, type: 3}
 --- !u!114 &2038047035373425448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,7 +744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5251470645202589871}
   - component: {fileID: 6484473076872526888}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: PlayerRopeLineRend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -884,7 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104808991600361037}
   - component: {fileID: 2868812436368058936}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: EnemyRopeLineRend
   m_TagString: Untagged
   m_Icon: {fileID: 0}
