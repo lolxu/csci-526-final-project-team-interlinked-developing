@@ -21,6 +21,7 @@ public class ProjectileEnemyBehavior : BaseEnemyBehavior
         base.Start();
 
         m_shootTimer = m_fireCooldown;
+        m_healthComponent.SetHealthBarOffset(-1.5f);
     }
 
     protected override void OnDisable()

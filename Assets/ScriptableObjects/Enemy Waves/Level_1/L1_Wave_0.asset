@@ -18,5 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 805dcad5201f0f445b6ca46a3adbef2b, type: 2}
   - {fileID: 11400000, guid: defd449d7aa90204e949aa6e916e56a5, type: 2}
   - {fileID: 11400000, guid: 5f9f10b67d4c69341a9bb437a446b345, type: 2}
+  - {fileID: 11400000, guid: 1360c58274cfc2349a63bedc09624e03, type: 2}
   m_waveTime: 60
   m_maxEnemyCount: 20

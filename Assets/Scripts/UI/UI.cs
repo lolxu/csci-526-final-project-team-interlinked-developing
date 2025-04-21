@@ -105,13 +105,14 @@ public class UI : MonoBehaviour
     }
 
 
-    public GameObject AddHealthBar(HealthComponent healthComponent)
+    public GameObject AddHealthBar(HealthComponent healthComponent, float offset = -1.0f)
     {
         Debug.Log("Added health bar: " + healthComponent.gameObject);
         if (healthComponent.gameObject.CompareTag("Enemy"))
         {
             GameObject newHealthBar = Instantiate(m_enemyHealthBarPrefab, m_worldSpaceUIParent.transform, true);
             HealthBar healthBarComp = newHealthBar.GetComponent<HealthBar>();
+            healthBarComp.m_offset.y = offset;
             healthBarComp.m_healthComp = healthComponent;
             return newHealthBar;
         }

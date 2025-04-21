@@ -137,12 +137,13 @@ public class BaseEnemyAI : MonoBehaviour
             // Turning to player
             if (m_willTurnToPlayer)
             {
-                if (m_moveTarget != null)
+                if (m_moveTarget != null && !GetComponent<Collider2D>().isTrigger)
                 {
                     Vector3 toTarget = (m_moveTarget.transform.position - transform.position).normalized;
                     Quaternion targetQuat = Quaternion.LookRotation(toTarget, Vector3.forward);
-                    m_RB.MoveRotation(targetQuat);
-
+                    Quaternion rotQuat = Quaternion.Slerp(transform.rotation, targetQuat, Time.deltaTime * 10.0f);
+                    m_RB.MoveRotation(rotQuat);
+                    
                     faceDir = transform.InverseTransformDirection(faceDir);
                 }
             }
