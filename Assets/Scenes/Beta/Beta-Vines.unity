@@ -1950,7 +1950,7 @@ GameObject:
   - component: {fileID: 249251788}
   - component: {fileID: 249251787}
   - component: {fileID: 249251786}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_U
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -2577,7 +2577,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 2050113427}
@@ -2891,7 +2890,7 @@ GameObject:
   - component: {fileID: 345772338}
   - component: {fileID: 345772337}
   - component: {fileID: 345772336}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_D
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -3053,7 +3052,7 @@ GameObject:
   - component: {fileID: 374617289}
   - component: {fileID: 374617288}
   - component: {fileID: 374617287}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_R
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -3183,7 +3182,7 @@ GameObject:
   - component: {fileID: 387491690}
   - component: {fileID: 387491689}
   - component: {fileID: 387491688}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_L
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -3484,7 +3483,7 @@ GameObject:
   - component: {fileID: 397140739}
   - component: {fileID: 397140741}
   - component: {fileID: 397140740}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_R
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -3663,7 +3662,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 1815775220}
@@ -4244,171 +4242,6 @@ SpriteShapeRenderer:
     m_Center: {x: -12.495449, y: 4.96571, z: 0}
     m_Extent: {x: 4.126661, y: 5.7482653, z: 0}
   m_SpriteSortPoint: 0
---- !u!43 &409506507
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 11
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 42
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 16
-    localAABB:
-      m_Center: {x: 0.00000011920929, y: 0, z: 0}
-      m_Extent: {x: 0.49999988, y: 0.5, z: 0}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 16
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 704
-    _typelessdata: 0000003f000000bf000000000000803f0000008000000080000000800000003f000000bf0000003f000000bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bf000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003ff8ffffbe000000bf0000000000000080000080bf0000000000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003ff8ffffbe0000003f00000000000080bf000000800000008000000080f8ffffbe0000003ff8ffffbe0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf0000003f000000bf0000000000000080000080bf00000000000000800000003f000000bf0000003f000000bf0000003f0000003f000000000000803f0000008000000080000000800000003f0000003f0000003f0000003f000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003f00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bff8ffffbe0000003f00000000000000800000803f0000008000000080f8ffffbe0000003ff8ffffbe0000003ff8ffffbe000000bf00000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003f
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: 0.00000011920929, y: 0, z: 0}
-    m_Extent: {x: 0.49999988, y: 0.5, z: 0}
-  m_MeshUsageFlags: 0
-  m_CookingOptions: 30
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &505339704
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4301,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -5121,7 +4953,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -5333,7 +5164,7 @@ GameObject:
   - component: {fileID: 659540478}
   - component: {fileID: 659540480}
   - component: {fileID: 659540479}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_D
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -5674,7 +5505,7 @@ GameObject:
   - component: {fileID: 678293286}
   - component: {fileID: 678293288}
   - component: {fileID: 678293287}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_U
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -6589,6 +6420,171 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!43 &776675039
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 11
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: 0.00000011920929, y: 0, z: 0}
+      m_Extent: {x: 0.49999988, y: 0.5, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020003000100000003000400010005000400030006000400050004000600070002000800000000000900030001000a00020004000b00010003000c00050007000d00040005000e00060006000f000700
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 0000003f000000bf000000000000803f0000008000000080000000800000003f000000bf0000003f000000bf0000003f0000003f00000000000000800000803f00000080000000800000003f0000003f0000003f0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bf000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003ff8ffffbe000000bf0000000000000080000080bf0000000000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003ff8ffffbe0000003f00000000000080bf000000800000008000000080f8ffffbe0000003ff8ffffbe0000003f0000003f00000000000000000000803f0000008000000080000000800000003f0000003f0000003f000000bf0000003f000000bf0000000000000080000080bf00000000000000800000003f000000bf0000003f000000bf0000003f0000003f000000000000803f0000008000000080000000800000003f0000003f0000003f0000003f000000340000003f00000000000000800000803f0000008000000080f8ffffbe0000003f0000003f0000003f00000034000000bf0000000000000080000080bf00000000000000800000003f000000bff8ffffbe000000bff8ffffbe0000003f00000000000000800000803f0000008000000080f8ffffbe0000003ff8ffffbe0000003ff8ffffbe000000bf00000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe000000bff8ffffbe0000000000000000000080bf000000800000008000000080f8ffffbe000000bff8ffffbe0000003f
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: 0.00000011920929, y: 0, z: 0}
+    m_Extent: {x: 0.49999988, y: 0.5, z: 0}
+  m_MeshUsageFlags: 0
+  m_CookingOptions: 30
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1 &786991849
 GameObject:
   m_ObjectHideFlags: 0
@@ -6715,7 +6711,7 @@ GameObject:
   - component: {fileID: 822491225}
   - component: {fileID: 822491224}
   - component: {fileID: 822491226}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Trap Spawner_L
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -7919,7 +7915,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 155903641}
@@ -7986,7 +7981,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -8146,7 +8140,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 273231445}
@@ -8686,7 +8679,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -9085,7 +9077,7 @@ GameObject:
   - component: {fileID: 1140282999}
   - component: {fileID: 1140282998}
   - component: {fileID: 1140282997}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Trap Spawner_R
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -9227,7 +9219,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -10232,7 +10223,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 298838252}
@@ -11857,7 +11847,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -11952,7 +11941,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 2133726239}
@@ -12085,7 +12073,7 @@ GameObject:
   - component: {fileID: 1650998070}
   - component: {fileID: 1650998069}
   - component: {fileID: 1650998068}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Trap Spawner_U
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -13215,7 +13203,7 @@ GameObject:
   - component: {fileID: 1859558033}
   - component: {fileID: 1859558035}
   - component: {fileID: 1859558034}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Boundary_L
   m_TagString: Border
   m_Icon: {fileID: 0}
@@ -13983,7 +13971,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 2002768908}
@@ -15420,7 +15407,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 0}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 1958758451}
@@ -15439,7 +15425,7 @@ GameObject:
   - component: {fileID: 2114923111}
   - component: {fileID: 2114923110}
   - component: {fileID: 2114923109}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: Trap Spawner_B
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -15715,7 +15701,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}
@@ -15809,7 +15794,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 9069e0b755600a94d98097f4ae598fc7, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 0}
   m_enemyRopeLine: {fileID: 0}
   m_environmentRopeLine: {fileID: 0}

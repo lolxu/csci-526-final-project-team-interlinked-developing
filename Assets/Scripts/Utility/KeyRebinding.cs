@@ -27,6 +27,8 @@ public class KeyRebinding : MonoBehaviour
         
         // SingletonMaster.Instance.PlayerBase.m_input.SwitchCurrentActionMap("UI");
 
+        m_action.action.Disable();
+        
         m_rebindOp = m_action.action.PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation =>
@@ -38,6 +40,7 @@ public class KeyRebinding : MonoBehaviour
                 
                 m_rebindOp.Dispose();
                 
+                m_action.action.Enable();
                 m_startRebindObject.SetActive(true);
                 m_waitingForInputObject.SetActive(false);
                 
