@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // TODO: Refactor this into a loot class
 public class AbilityComponent : MonoBehaviour
@@ -27,8 +29,14 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private float m_scaleFactor = 1.25f;
     [SerializeField] private List<Color> m_collectedColor = new List<Color>();
     [SerializeField] private List<SpriteRenderer> m_spriteRenderers = new List<SpriteRenderer>();
+    
+    [Header("Control Prompts Settings")]
+    [SerializeField] private InputActionReference m_connectAction;
+    [SerializeField] private InputActionReference m_disconnectAction;
     [SerializeField] private GameObject m_connectPrompt;
+    [SerializeField] private TMP_Text m_connectText;
     [SerializeField] private GameObject m_disconnectPrompt;
+    [SerializeField] private TMP_Text m_disconnectText;
     [SerializeField] private bool m_showPrompt = false;
 
     private List<Color> m_uncollectedColor = new List<Color>();
@@ -65,6 +73,9 @@ public class AbilityComponent : MonoBehaviour
         
         // Record spawn
         MetricsManager.Instance.m_metricsData.RecordAblitySpawn(m_ability.m_name);
+        
+        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath);
+        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath);
     }
     
     private void OnDisable()

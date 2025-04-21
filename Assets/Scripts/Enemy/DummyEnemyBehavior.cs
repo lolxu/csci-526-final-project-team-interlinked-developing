@@ -1,15 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DummyEnemyBehavior : BaseEnemyBehavior
 {
     [Header("Dummy Enemy Stuff")] 
+    [SerializeField] private InputActionReference m_connectAction;
+    [SerializeField] private InputActionReference m_disconnectAction;
     [SerializeField] private GameObject m_connectPrompt;
+    [SerializeField] private TMP_Text m_connectText;
     [SerializeField] private GameObject m_disconnectPrompt;
-
+    [SerializeField] private TMP_Text m_disconnectText;
+    
     public bool m_canShowPrompt = true;
     private bool m_isPromptDone = false;
     
@@ -24,6 +30,9 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
         {
             m_healthComponent.m_canDamage = false;
         }
+        
+        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath);
+        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath);
     }
 
     private void OnDestroy()

@@ -148,7 +148,7 @@ public class PlayerBase : MonoBehaviour
         if (this != null)
         {
             transform.position = Vector3.zero;
-            StartCoroutine(InitCoroutine());
+            // StartCoroutine(InitCoroutine());
         }
     }
 
