@@ -192,7 +192,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 85464
+  m_InstanceId: 149488
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -214,14 +214,13 @@ MonoBehaviour:
   m_healRate: 1
   m_ropeComponent: {fileID: -5117696569558385193}
   m_lifeTime: 20
-  m_isLootDrop: 1
-  m_scaleFactor: 1.25
+  m_scaleFactor: 1
   m_curve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.45
+      value: 0.5
       inSlope: 1.2710603
       outSlope: 1.2710603
       tangentMode: 0
@@ -276,7 +275,6 @@ MonoBehaviour:
   m_usingRopePrefab: {fileID: 3641976607573275392, guid: 168f6edc041dd1d4cb43d6e5ac28c48c, type: 3}
   m_enemyJoint: {fileID: 0}
   m_playerJoint: {fileID: 0}
-  m_orgEnemyRopeColor: {r: 0, g: 0, b: 0, a: 0}
   m_playerRopeLine: {fileID: 204098981344008146}
   m_enemyRopeLine: {fileID: 754906485751417795}
   m_environmentRopeLine: {fileID: 0}

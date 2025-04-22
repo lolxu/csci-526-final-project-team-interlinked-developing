@@ -5599,7 +5599,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 116082
+  m_InstanceId: 146358
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 0.49999988, y: 0.5, z: 0}
@@ -5680,7 +5680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3434637514046789246
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6101,6 +6101,7 @@ MonoBehaviour:
   m_durabilityBarPrefab: {fileID: 5424962578393945063, guid: fd261cd7d1a4760498bda6da1ba53440, type: 3}
   m_worldSpaceUIParent: {fileID: 3612410093238872894}
   m_pauseMenu: {fileID: 5975638652322006839}
+  m_waveProgress: {fileID: 1150161039212198770}
   m_waveFill: {fileID: 2946028737100865433}
 --- !u!1 &1410939397747540304
 GameObject:
@@ -15172,6 +15173,10 @@ PrefabInstance:
     - target: {fileID: 5683406291791493052, guid: db086cff2dd85e9489d4fe12ea8c13ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6982682725439411100, guid: db086cff2dd85e9489d4fe12ea8c13ff, type: 3}
+      propertyPath: m_fontSize
+      value: 175.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

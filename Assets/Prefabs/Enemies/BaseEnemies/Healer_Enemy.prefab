@@ -769,7 +769,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48826
+  m_InstanceId: 150596
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_collisionVelocityThreshold: 10
   m_AI: {fileID: 7662859868917245747}
   m_spriteRenderer: {fileID: 7648340625148783983}
-  m_healthPickup: {fileID: 1181414071359833202, guid: 43a6779384e388846a94ae04450dfaba, type: 3}
+  m_healthPickup: {fileID: 1181414071359833202, guid: 6aaa44ba98ceb7d4f9bbb345c24faf93, type: 3}
 --- !u!114 &1017989350836072483
 MonoBehaviour:
   m_ObjectHideFlags: 0

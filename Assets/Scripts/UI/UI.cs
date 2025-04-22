@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     public GameObject m_durabilityBarPrefab;
     public GameObject m_worldSpaceUIParent;
     public GameObject m_pauseMenu;
+    public GameObject m_waveProgress;
     public Image m_waveFill;
 
     // private bool shrinkingTriggered = false; // Ensures shrinking starts only once per wave
@@ -32,7 +33,7 @@ public class UI : MonoBehaviour
     private int m_maxConnections = 0;
     private bool m_isPlayerDead = false;
 
-    private bool m_canIncreaseProgress = true;
+    private bool m_canIncreaseProgress = false;
 
     private void Start()
     {
@@ -67,6 +68,12 @@ public class UI : MonoBehaviour
 
     private void OnUpdateWave(EnemySpawnScriptable wave)
     {
+        if (!m_waveProgress.activeInHierarchy)
+        {
+            m_canIncreaseProgress = true;
+            m_waveProgress.SetActive(true);
+        }
+        
         Debug.Log($"New wave started! Wave Time: {wave.m_waveTime}");
         m_waveCount++;
         // shrinkingTriggered = false; // Reset shrinking flag for the new wave

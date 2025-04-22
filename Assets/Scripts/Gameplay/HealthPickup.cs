@@ -20,7 +20,6 @@ public class HealthPickup : MonoBehaviour
     [SerializeField] private float m_healRate = 1.0f;
     [SerializeField] private RopeComponent m_ropeComponent;
     [SerializeField] private float m_lifeTime = 20.0f;
-    [SerializeField] private bool m_isLootDrop = true;
     
     [Header("Visual Settings")]
     [SerializeField] private float m_scaleFactor = 1.5f;
@@ -42,16 +41,7 @@ public class HealthPickup : MonoBehaviour
 
     private void Awake()
     {
-        if (m_isLootDrop)
-        {
-            m_healValue = Random.Range(1, m_maxValue);
-            float scale = m_curve.Evaluate((float)m_healValue / m_maxValue) * m_scaleFactor;
-            transform.localScale = Vector3.one * scale;
-        }
-        else
-        {
-            m_healValue = m_maxValue;
-        }
+        m_healValue = m_maxValue;
 
         foreach (var sp in m_spriteRenderers)
         {
