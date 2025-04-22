@@ -39,6 +39,7 @@ public class SpawnComponent : MonoBehaviour
 
             if (m_intersectCnt <= 0)
             {
+                SingletonMaster.Instance.FeelManager.m_wallParticles.PlayFeedbacks(transform.position);
                 m_col.isTrigger = false;
             }
         }

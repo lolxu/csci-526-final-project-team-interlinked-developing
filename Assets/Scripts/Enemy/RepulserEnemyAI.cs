@@ -20,8 +20,11 @@ public class RepulserEnemyAI : BaseEnemyAI
     [SerializeField] private LayerMask m_knockBackMask;
     [SerializeField] private float m_knockBackStrength = 500.0f;
     [SerializeField] private float m_playerKnockbackMult = 75.0f;
+    [SerializeField] private float m_telegraphTime = 0.75f;
+    [SerializeField] private ParticleSystem m_telegraphParticles;
 
     private SpriteRenderer m_spRend;
+    private Color m_orgColor;
     
     private bool m_repulseCooled = true;
     private bool m_canRepulse = true;
@@ -40,6 +43,11 @@ public class RepulserEnemyAI : BaseEnemyAI
         }
 
         m_spRend = GetComponent<SpriteRenderer>();
+        m_orgColor = m_spRend.color;
+        var main = m_telegraphParticles.main;
+        main.duration = m_telegraphTime;
+        var shape = m_telegraphParticles.shape;
+        shape.radius = m_repulseRange;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -65,6 +73,8 @@ public class RepulserEnemyAI : BaseEnemyAI
     {
         if (obj == gameObject && m_canRepulse)
         {
+            m_spRend.DOKill(true);
+            m_spRend.color = m_orgColor;
             m_canRepulse = false;
         }
     }
@@ -136,13 +146,13 @@ public class RepulserEnemyAI : BaseEnemyAI
             GetComponent<HealthComponent>().m_canDamage = false;
             
             // Telegraph
-            Color orgColor = m_spRend.color;
-            m_spRend.DOColor(Color.white, 0.05f)
+            m_telegraphParticles.Play();
+            m_spRend.DOColor(Color.white, m_telegraphTime / 6)
                 .SetLoops(6, LoopType.Yoyo)
                 .SetEase(Ease.InOutFlash)
                 .OnComplete(() =>
                 {
-                    m_spRend.color = orgColor;
+                    m_spRend.color = m_orgColor;
                     if (m_canRepulse)
                     {
                         StartCoroutine(Repulse());
@@ -161,6 +171,8 @@ public class RepulserEnemyAI : BaseEnemyAI
     {
         Vector3 orgScale = transform.localScale;
         transform.DOScale(orgScale * 2.0f, 0.1f).SetEase(Ease.InOutExpo);
+        
+        SingletonMaster.Instance.FeelManager.m_enemyRepulse.PlayFeedbacks(transform.position);
         
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, m_repulseRange, Vector2.zero, 0.0f, m_knockBackMask);
         foreach (var hit in hits)

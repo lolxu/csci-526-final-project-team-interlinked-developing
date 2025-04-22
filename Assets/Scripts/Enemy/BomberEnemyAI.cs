@@ -19,8 +19,11 @@ public class BomberEnemyAI : BaseEnemyAI
     [SerializeField] private LayerMask m_knockBackMask;
     [SerializeField] private float m_knockBackStrength = 500.0f;
     [SerializeField] private float m_playerKnockbackMult = 75.0f;
+    [SerializeField] private float m_telegraphTime = 0.75f;
+    [SerializeField] private ParticleSystem m_telegraphParticles;
 
     private SpriteRenderer m_spRend;
+    private Color m_orgColor;
     
     private bool m_canExplode = true;
     private bool m_isExploding = false;
@@ -36,6 +39,11 @@ public class BomberEnemyAI : BaseEnemyAI
         }
 
         m_spRend = GetComponent<SpriteRenderer>();
+        m_orgColor = m_spRend.color;
+        var main = m_telegraphParticles.main;
+        main.duration = m_telegraphTime;
+        var shape = m_telegraphParticles.shape;
+        shape.radius = m_bombRange;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
@@ -61,6 +69,8 @@ public class BomberEnemyAI : BaseEnemyAI
     {
         if (obj == gameObject && m_canExplode)
         {
+            m_spRend.DOKill(true);
+            m_spRend.color = m_orgColor;
             m_canExplode = false;
         }
     }
@@ -120,35 +130,47 @@ public class BomberEnemyAI : BaseEnemyAI
             m_isExploding = true;
             
             // Telegraph
-            m_spRend.DOColor(Color.white, 0.05f)
+            m_telegraphParticles.Play();
+            m_spRend.DOColor(Color.white, m_telegraphTime / 6)
                 .SetLoops(6, LoopType.Yoyo)
                 .SetEase(Ease.InOutFlash)
                 .OnComplete(() =>
                 {
-                    SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks();
-                    
-                    RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, m_bombRange, Vector2.zero, 0.0f, m_knockBackMask);
-                    foreach (var hit in hits)
+                    if (m_canExplode)
                     {
-                        if (hit.rigidbody.gameObject != gameObject)
-                        {
-                            hit.rigidbody.AddExplosionForce(m_knockBackStrength, transform.position, m_bombRange);
+                        m_spRend.color = m_orgColor;
+                        SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks();
+                        SingletonMaster.Instance.FeelManager.m_enemyExplode.PlayFeedbacks(transform.position);
 
-                            var hc = hit.rigidbody.gameObject.GetComponent<HealthComponent>();
-                            if (hc != null)
+                        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, m_bombRange, Vector2.zero,
+                            0.0f, m_knockBackMask);
+                        foreach (var hit in hits)
+                        {
+                            if (hit.rigidbody.gameObject != gameObject)
                             {
-                                hc.DamageEvent.Invoke(m_bombDamage, gameObject);
-                            }
-                            
-                            if (hit.rigidbody.CompareTag("Player"))
-                            {
-                                SingletonMaster.Instance.PlayerBase.StartRagdoll();
-                                hit.rigidbody.AddExplosionForce(m_knockBackStrength * m_playerKnockbackMult, transform.position, m_bombRange);
+                                hit.rigidbody.AddExplosionForce(m_knockBackStrength, transform.position, m_bombRange);
+
+                                var hc = hit.rigidbody.gameObject.GetComponent<HealthComponent>();
+                                if (hc != null)
+                                {
+                                    hc.DamageEvent.Invoke(m_bombDamage, gameObject);
+                                }
+
+                                if (hit.rigidbody.CompareTag("Player"))
+                                {
+                                    SingletonMaster.Instance.PlayerBase.StartRagdoll();
+                                    hit.rigidbody.AddExplosionForce(m_knockBackStrength * m_playerKnockbackMult,
+                                        transform.position, m_bombRange);
+                                }
                             }
                         }
-                    }
 
-                    gameObject.GetComponent<HealthComponent>().DamageEvent.Invoke(1000.0f, gameObject);
+                        gameObject.GetComponent<HealthComponent>().DamageEvent.Invoke(1000.0f, gameObject);
+                    }
+                    else
+                    {
+                        m_isExploding = false;
+                    }
                 });
         }
     }
