@@ -42,8 +42,8 @@ public class RopeComponent : MonoBehaviour
     [SerializeField] private LineRenderer m_enemyRopeLine;
     [SerializeField] private LineRenderer m_environmentRopeLine;
     [SerializeField] private GameObject m_highlight;
-    [SerializeField] private Color m_connectColor = Color.white;
-    [SerializeField] private Color m_disconnectColor = Color.cyan;
+    private Color m_connectColor = Color.cyan;
+    private Color m_disconnectColor = Color.white;
     [SerializeField] private float m_colorAlpha = 0.5f;
 
     private IEnumerator Start()
