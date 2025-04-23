@@ -6,9 +6,11 @@ using Random = UnityEngine.Random;
 
 public class ObstacleSpawner : MonoBehaviour
 {
+    [Header("Trap Spawner Settings")]
     public List<GameObject> m_traps;
     public float m_minTimeout = 5.0f;
     public float m_maxTimeout = 20.0f;
+    public bool m_isRandomSpawn = true;
 
     private float m_timeout = 0.0f;
     private float m_timer = 0.0f;
@@ -26,18 +28,30 @@ public class ObstacleSpawner : MonoBehaviour
         {
             m_timer = 0.0f;
             m_timeout = Random.Range(m_minTimeout, m_maxTimeout);
-            
-            SpawnObstacleRandomly();
+
+            if (m_isRandomSpawn)
+            {
+                SpawnObstacleRandomly();
+            }
+            else
+            {
+                SpawnObstacle();
+            }
         }
 
         m_timer += Time.deltaTime;
+    }
+
+    private void SpawnObstacle()
+    {
+        Vector3 spawnPos = transform.position;
+        Instantiate(m_traps[Random.Range(0, m_traps.Count)], spawnPos, transform.rotation);
     }
 
     private void SpawnObstacleRandomly()
     {
         float randX = Random.Range(-m_collider.size.x / 2.0f + transform.position.x, m_collider.size.x / 2.0f + transform.position.x);
         Vector3 spawnPos = new Vector3(randX, transform.position.y, 0.0f);
-
         Instantiate(m_traps[Random.Range(0, m_traps.Count)], spawnPos, transform.rotation);
     }
 
