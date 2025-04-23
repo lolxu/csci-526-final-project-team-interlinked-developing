@@ -69,9 +69,9 @@ public class BomberEnemyAI : BaseEnemyAI
     {
         if (obj == gameObject && m_canExplode)
         {
-            m_spRend.DOKill(true);
             m_spRend.color = m_orgColor;
             m_canExplode = false;
+            m_spRend.DOKill(true);
         }
     }
     

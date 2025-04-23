@@ -352,7 +352,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 80078
+  m_InstanceId: 39920
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_willTurnToPlayer: 1
   m_face: {fileID: 1554663015417709803}
   m_faceMoveFactor: 0.05
-  m_dashTimeout: 2
+  m_dashTimeout: 4
   m_dashDuration: 0.25
   m_dashRange: 8
   m_dasherState: 2
@@ -465,8 +465,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 2868812436368058936}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 1049227968464032005}
-  m_connectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
   m_colorAlpha: 0.5
 --- !u!114 &4903961094447468995
 MonoBehaviour:

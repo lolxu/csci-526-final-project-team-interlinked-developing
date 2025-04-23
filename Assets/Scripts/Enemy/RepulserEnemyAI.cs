@@ -73,9 +73,9 @@ public class RepulserEnemyAI : BaseEnemyAI
     {
         if (obj == gameObject && m_canRepulse)
         {
-            m_spRend.DOKill(true);
             m_spRend.color = m_orgColor;
             m_canRepulse = false;
+            m_spRend.DOKill(true);
         }
     }
     
@@ -124,14 +124,9 @@ public class RepulserEnemyAI : BaseEnemyAI
             {
                 m_repulserState = RepulserState.Idle;
             }
-            else if (!m_isRepulsing)
+            else
             {
-                if (m_cooldownRoutine != null)
-                {
-                    StopCoroutine(m_cooldownRoutine);
-                    m_repulseCooled = true;
-                    m_repulserState = RepulserState.MovingToPlayer;
-                }
+                m_repulserState = RepulserState.MovingToPlayer;
             }
         }
     }
@@ -140,7 +135,6 @@ public class RepulserEnemyAI : BaseEnemyAI
     {
         if (!m_isRepulsing && m_repulseCooled && m_canRepulse)
         {
-            m_repulseCooled = false;
             m_isRepulsing = true;
             
             GetComponent<HealthComponent>().m_canDamage = false;
@@ -160,7 +154,6 @@ public class RepulserEnemyAI : BaseEnemyAI
                     else
                     {
                         m_isRepulsing = false;
-                        m_repulseCooled = true;
                         GetComponent<HealthComponent>().m_canDamage = true;
                     }
                 });
@@ -209,6 +202,7 @@ public class RepulserEnemyAI : BaseEnemyAI
     
     private IEnumerator RepulseCooldown()
     {
+        m_repulseCooled = false;
         yield return new WaitForSeconds(m_repulseTimeout);
         m_repulseCooled = true;
     }

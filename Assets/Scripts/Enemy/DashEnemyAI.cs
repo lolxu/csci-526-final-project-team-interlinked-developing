@@ -63,6 +63,7 @@ public class DashEnemyAI : BaseEnemyAI
         if (obj == gameObject && m_canDash)
         {
             m_canDash = false;
+            m_telegraph.DOKill(true);
         }
     }
     
@@ -116,7 +117,6 @@ public class DashEnemyAI : BaseEnemyAI
     {
         if (!m_isDashing && m_dashCooled && m_canDash)
         {
-            m_dashCooled = false;
             m_isDashing = true;
             
             GetComponent<HealthComponent>().m_canDamage = false;
@@ -148,7 +148,6 @@ public class DashEnemyAI : BaseEnemyAI
                     else
                     {
                         m_isDashing = false;
-                        m_dashCooled = true;
                         GetComponent<HealthComponent>().m_canDamage = true;
                     }
                 });
@@ -184,6 +183,7 @@ public class DashEnemyAI : BaseEnemyAI
 
     private IEnumerator DashCooldown()
     {
+        m_dashCooled = false;
         yield return new WaitForSeconds(m_dashTimeout);
         m_dashCooled = true;
     }
@@ -201,14 +201,9 @@ public class DashEnemyAI : BaseEnemyAI
             {
                 m_dasherState = DasherState.Idle;
             }
-            else if (!m_isDashing)
+            else
             {
-                if (m_cooldownRoutine != null)
-                {
-                    StopCoroutine(m_cooldownRoutine);
-                    m_dashCooled = true;
-                    m_dasherState = DasherState.MovingToPlayer;
-                }
+                m_dasherState = DasherState.MovingToPlayer;
             }
         }
     }
