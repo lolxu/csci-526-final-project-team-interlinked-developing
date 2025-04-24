@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -29,7 +30,6 @@ public class DangerComponent : MonoBehaviour
         if (m_canMove && m_telegraphEnd != null && m_lineRenderer != null)
         {
             Vector3 telegraphEndPos = m_telegraphEnd.transform.localPosition;
-            // telegraphEndPos.y += transform.localScale.y / 4.0f;
             m_lineRenderer.SetPosition(1, telegraphEndPos);
             m_moveSequence = DOTween.Sequence();
             TweenMove();
@@ -87,34 +87,26 @@ public class DangerComponent : MonoBehaviour
                 m_lineRenderer.enabled = false;
             }));
 
-        float pathMoveTime = m_moveTime / m_pathObjects.Count;
+        float pathTime = m_moveTime / m_pathObjects.Count;
         foreach (var pathObject in m_pathObjects)
         {
             Vector3 pathPos = pathObject.transform.position;
-            Bounds bounds = GetComponent<Renderer>().bounds;
-            float heightOffset = bounds.extents.y;
-            Vector3 adjustedPos = new Vector3(
-                pathPos.x,
-                pathPos.y - heightOffset, // Subtract the height offset to align top with pathPos
-                pathPos.z
-            );
+            float heightOffset = transform.localScale.y / 2.0f;
+
+            Vector3 adjustedPos = pathPos;
+            adjustedPos -= heightOffset * transform.up;
+            
+            Debug.Log(adjustedPos);
+
             m_moveSequence.Append(transform
-                .DOMove(adjustedPos, pathMoveTime)
+                .DOMove(adjustedPos, pathTime)
                 .SetEase(m_moveStyle));
         }
-
+        
         m_moveSequence.OnComplete(() =>
         {
             Destroy(gameObject);
         });
-        
-        // m_moveSequence.Append(transform
-        //     .DOMove(m_end.transform.position, m_moveTime)
-        //     .SetEase(m_moveStyle)
-        //     .OnComplete(() =>
-        //     {
-        //         Destroy(gameObject);
-        //     }));
     }
 
     // Use trigger for moving danger
