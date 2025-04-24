@@ -48,6 +48,7 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private float m_faceMoveFactor = 0.25f;
     [SerializeField] private MMF_Player m_dashParticles;
     [SerializeField] private MMF_Player m_knockBackParticles;
+    public GameObject m_ropeRangeIndicator;
     public bool m_isFollowCam = true;
 
     [Header("Ability")] 
@@ -96,6 +97,9 @@ public class PlayerBase : MonoBehaviour
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+        m_ropeRangeIndicator.transform.localScale =
+            new Vector3(m_connectRadius * 2, m_connectRadius * 2, m_connectRadius * 2);
     }
 
     private void OnUnlinkedItem(GameObject obj, GameObject instigator)

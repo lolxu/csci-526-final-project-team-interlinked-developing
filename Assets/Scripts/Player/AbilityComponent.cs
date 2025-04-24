@@ -74,8 +74,8 @@ public class AbilityComponent : MonoBehaviour
         // Record spawn
         MetricsManager.Instance.m_metricsData.RecordAblitySpawn(m_ability.m_name);
         
-        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath);
-        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath);
+        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
     }
     
     private void OnDisable()

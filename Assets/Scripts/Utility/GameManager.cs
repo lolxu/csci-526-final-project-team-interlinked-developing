@@ -51,9 +51,19 @@ public class GameManager : MonoBehaviour
         }
 
         // TODO: This is bad...
-        SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-        SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
+        if (SingletonMasterObject != null)
+        {
+            SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
+            SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
+            SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
+
+            SingletonMaster.Instance.PlayerBase.m_ropeRangeIndicator.SetActive(m_levelData.m_needsRopeRangeIndicator);
+        }
+        else
+        {
+            Debug.LogError("No Singleton Instances found...");
+        }
+        
     }
 
     private void OnDisable()
