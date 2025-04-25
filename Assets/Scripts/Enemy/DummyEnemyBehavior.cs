@@ -15,6 +15,9 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
     [SerializeField] private TMP_Text m_connectText;
     [SerializeField] private GameObject m_disconnectPrompt;
     [SerializeField] private TMP_Text m_disconnectText;
+
+    [SerializeField] private GameObject m_leftClickIcon;
+    [SerializeField] private GameObject m_rightClickIcon;
     
     public bool m_canShowPrompt = true;
     private bool m_isPromptDone = false;
@@ -31,8 +34,24 @@ public class DummyEnemyBehavior : BaseEnemyBehavior
             m_healthComponent.m_canDamage = false;
         }
         
-        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string connectText = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string disconnectText = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        if (connectText == "Left Button")
+        {
+            m_connectText.enabled = false;
+            m_leftClickIcon.SetActive(true);
+        }
+
+        if (disconnectText == "Right Button")
+        {
+            m_disconnectText.enabled = false;
+            m_rightClickIcon.SetActive(true);
+        }
+        
+        m_connectText.text = connectText;
+        m_disconnectText.text = disconnectText;
+        
     }
 
     private void OnDestroy()

@@ -218,3 +218,5 @@ MonoBehaviour:
   m_scale: 0.75
   m_showEase: 24
   m_disappearEase: 35
+  m_cross_A: {fileID: 2209593932252263647}
+  m_cross_B: {fileID: 3339854755128188838}

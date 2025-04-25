@@ -832,7 +832,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 45622
+  m_InstanceId: 169998
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_moveTarget: {fileID: 0}
   m_willTurnToPlayer: 1
   m_face: {fileID: 4925757018695563263}
-  m_faceMoveFactor: 0.1
+  m_faceMoveFactor: 0.15
 --- !u!114 &9111909743220841265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,8 +875,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_canDamage: 1
-  m_health: 12
-  m_maxHealth: 12
+  m_health: 15
+  m_maxHealth: 15
   m_invincibleTime: 1
   m_cooldownRecoverRate: 1
   DamageEvent:
@@ -919,8 +919,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 2510649722856773776}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 6333895745200811055}
-  m_connectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
   m_colorAlpha: 0.5
 --- !u!114 &4993418699178152605
 MonoBehaviour:

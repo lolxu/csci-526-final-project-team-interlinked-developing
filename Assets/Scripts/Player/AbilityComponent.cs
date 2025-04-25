@@ -46,6 +46,9 @@ public class AbilityComponent : MonoBehaviour
     [SerializeField] private int m_use = 0;
     private float m_despawnTimer = 0.0f;
     private Vector3 m_orgScale;
+    
+    [SerializeField] private GameObject m_leftClickIcon;
+    [SerializeField] private GameObject m_rightClickIcon;
 
     private bool m_isFirstTime = true;
     private void Start()
@@ -74,8 +77,24 @@ public class AbilityComponent : MonoBehaviour
         // Record spawn
         MetricsManager.Instance.m_metricsData.RecordAblitySpawn(m_ability.m_name);
         
-        m_connectText.text = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-        m_disconnectText.text = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string connectText = InputControlPath.ToHumanReadableString(m_connectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string disconnectText = InputControlPath.ToHumanReadableString(m_disconnectAction.action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        if (connectText == "Left Button")
+        {
+            m_connectText.enabled = false;
+            m_leftClickIcon.SetActive(true);
+        }
+
+        if (disconnectText == "Right Button")
+        {
+            m_disconnectText.enabled = false;
+            m_rightClickIcon.SetActive(true);
+        }
+        
+        m_connectText.text = connectText;
+        m_disconnectText.text = disconnectText;
+        
     }
     
     private void OnDisable()
