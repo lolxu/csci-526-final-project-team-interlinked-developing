@@ -27,10 +27,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6839203773940049152}
+  m_Father: {fileID: 1063454291956483891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &3230716838134326094
 LineRenderer:
@@ -5087,8 +5087,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1063454291956483891}
-  - {fileID: 1377321407514455171}
-  - {fileID: 5205850156137480347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6727002669772865151
@@ -5202,10 +5200,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6839203773940049152}
+  m_Father: {fileID: 1063454291956483891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &554107386182682694
 LineRenderer:
@@ -5350,6 +5348,8 @@ Transform:
   - {fileID: 1724571082384018417}
   - {fileID: 6178325377119449515}
   - {fileID: 3256123338056974753}
+  - {fileID: 1377321407514455171}
+  - {fileID: 5205850156137480347}
   m_Father: {fileID: 6839203773940049152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6902331857217089705
@@ -5492,7 +5492,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 169388
+  m_InstanceId: 254440
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -5610,7 +5610,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 3230716838134326094}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 2635382784723982788}
-  m_colorAlpha: 0.5
 --- !u!114 &162134962197473779
 MonoBehaviour:
   m_ObjectHideFlags: 0

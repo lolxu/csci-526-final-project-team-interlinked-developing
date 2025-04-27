@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
-  m_Name: Enemy_Gun
+  m_Name: Enemy_SniperGun
   m_EditorClassIdentifier: 
   enemy:
     m_enemy:
-      m_prefab: {fileID: 4182519058032308907, guid: f8cdd0b32943b7d4eacfbca1ea051142, type: 3}
+      m_prefab: {fileID: 4391433643842635490, guid: 595f7d652d5960e43bac15ff38617cd4, type: 3}
       m_enemyType: 0
       m_lootSpawnRate: 0
-    m_weightedValue: 0.2
+    m_weightedValue: 0.075

@@ -661,7 +661,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6839203773940049152}
+  m_Father: {fileID: 4091340810580616183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &8736226488175195948
 LineRenderer:
@@ -795,8 +795,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4091340810580616183}
-  - {fileID: 2411269151763144688}
-  - {fileID: 7469986478719959505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5480249787703433419
@@ -829,7 +827,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6839203773940049152}
+  m_Father: {fileID: 4091340810580616183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &5705474398055435474
 LineRenderer:
@@ -1143,6 +1141,8 @@ Transform:
   - {fileID: 6686907496410468659}
   - {fileID: 2425021570514977824}
   - {fileID: 8067712435570198003}
+  - {fileID: 2411269151763144688}
+  - {fileID: 7469986478719959505}
   m_Father: {fileID: 6839203773940049152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7725201509369877595
@@ -1285,7 +1285,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 143854
+  m_InstanceId: 255288
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -1400,7 +1400,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 5705474398055435474}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 849763524191477061}
-  m_colorAlpha: 0.5
 --- !u!114 &7069290628190573300
 MonoBehaviour:
   m_ObjectHideFlags: 0
