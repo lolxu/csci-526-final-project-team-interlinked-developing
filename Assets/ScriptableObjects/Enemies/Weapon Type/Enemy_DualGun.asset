@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
-  m_Name: Enemy_Pistol
+  m_Name: Enemy_DualGun
   m_EditorClassIdentifier: 
   enemy:
     m_enemy:

@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   m_needsTutorial: 0
+  m_needsLevelName: 0
+  m_needsRopeRangeIndicator: 0
   m_levelNames:
   - Main Menu
   - Beta-Cavern
   - Beta-Vines
-  m_waveCount: 000000000400000005000000
+  - Beta-Factory
+  m_waveCount: 00000000040000000500000005000000

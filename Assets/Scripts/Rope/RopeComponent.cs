@@ -42,9 +42,9 @@ public class RopeComponent : MonoBehaviour
     [SerializeField] private LineRenderer m_enemyRopeLine;
     [SerializeField] private LineRenderer m_environmentRopeLine;
     [SerializeField] private GameObject m_highlight;
-    private Color m_connectColor = Color.cyan;
+    private Color m_connectColor = new Color(0.0f, 0.5647059f, 1.0f, 1.0f);
     private Color m_disconnectColor = Color.white;
-    [SerializeField] private float m_colorAlpha = 0.5f;
+    private float m_colorAlpha = 1.0f;
 
     private IEnumerator Start()
     {
@@ -512,7 +512,18 @@ public class RopeComponent : MonoBehaviour
     
     public void ShowHighlight(bool isConnection)
     {
-        m_highlight.GetComponent<SpriteRenderer>().color = isConnection ? m_connectColor : m_disconnectColor;
+        if (m_highlight.GetComponent<SpriteRenderer>() != null)
+        {
+            m_highlight.GetComponent<SpriteRenderer>().color = isConnection ? m_connectColor : m_disconnectColor;
+        }
+        else
+        {
+            foreach (var spriteRenderer in m_highlight.GetComponentsInChildren<SpriteRenderer>())
+            {
+                spriteRenderer.color = isConnection ? m_connectColor : m_disconnectColor;
+            }
+        }
+        
         m_highlight.SetActive(true);
     }
     
