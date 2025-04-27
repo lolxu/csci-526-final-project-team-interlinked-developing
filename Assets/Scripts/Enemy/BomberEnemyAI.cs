@@ -131,6 +131,7 @@ public class BomberEnemyAI : BaseEnemyAI
             
             // Telegraph
             m_telegraphParticles.Play();
+            m_spRend.color = m_orgColor;
             m_spRend.DOColor(Color.white, m_telegraphTime / 6)
                 .SetLoops(6, LoopType.Yoyo)
                 .SetEase(Ease.InOutFlash)
