@@ -123,15 +123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1288623042125281327, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_InstanceId
-      value: -578072
+      value: -161838
       objectReference: {fileID: 0}
     - target: {fileID: 1829588942597929290, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_maxSpeed
-      value: 2.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1829588942597929290, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_acceleration
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1829588942597929290, guid: dfee9bca8416b764ba213b1a5d15f804, type: 3}
       propertyPath: m_raycastDistance
