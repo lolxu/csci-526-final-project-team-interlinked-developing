@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         if (SingletonMasterObject != null)
         {
             SingletonMaster.Instance.PlayerAbilities.ResetAbilities();
-            SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerWin);
+            SingletonMaster.Instance.EventManager.LevelClearEvent.AddListener(OnPlayerLevelClear);
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
 
             SingletonMaster.Instance.PlayerBase.m_ropeRangeIndicator.SetActive(m_levelData.m_needsRopeRangeIndicator);
@@ -68,13 +68,14 @@ public class GameManager : MonoBehaviour
 
     private void OnDisable()
     {
-        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerWin);
+        SingletonMaster.Instance.EventManager.LevelClearEvent.RemoveListener(OnPlayerLevelClear);
         SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
     }
 
-    private void OnPlayerWin()
+    private void OnPlayerLevelClear()
     {
         m_playerWon = true;
+        m_levelData.SetLevelCompletion(SceneManager.GetActiveScene().name);
     }
     
     private void OnPlayerDeath(GameObject arg0)
