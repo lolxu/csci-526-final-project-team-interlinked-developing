@@ -13,7 +13,7 @@ public class SceneTransitionButton : MonoBehaviour
     public bool m_showLevelName = false;
     public LevelDataScriptable m_levelData;
 
-    public void OnEnable()
+    private void OnEnable()
     {
         if (!m_showTutorial)
         {
