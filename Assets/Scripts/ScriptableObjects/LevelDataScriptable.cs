@@ -46,5 +46,13 @@ namespace ScriptableObjects
 
             return ind;
         }
+
+        public void UnlockAllLevels()
+        {
+            for (int i = 0; i < m_levelUnlocked.Count; i++)
+            {
+                m_levelUnlocked[i] = true;
+            }
+        }
     }
 }
