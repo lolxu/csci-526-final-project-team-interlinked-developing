@@ -18,7 +18,7 @@ public class SceneTransitionButton : MonoBehaviour
         if (!m_showTutorial)
         {
             int ind = m_levelData.FindLevelIndex(m_loadScene);
-            if (!m_levelData.m_levelCompleted[ind])
+            if (!m_levelData.m_levelUnlocked[ind])
             {
                 GetComponent<Button>().interactable = false;
             }

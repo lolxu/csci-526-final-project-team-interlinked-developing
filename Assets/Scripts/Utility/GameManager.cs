@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
         else
         {
             m_canPause = true;
+            
+            m_levelData.SetLevelUnlocked(scene.name);
         }
 
         // TODO: This is bad...
@@ -75,7 +77,7 @@ public class GameManager : MonoBehaviour
     private void OnPlayerLevelClear()
     {
         m_playerWon = true;
-        m_levelData.SetLevelCompletion(SceneManager.GetActiveScene().name);
+        m_levelData.SetLevelUnlocked(SceneManager.GetActiveScene().name);
     }
     
     private void OnPlayerDeath(GameObject arg0)

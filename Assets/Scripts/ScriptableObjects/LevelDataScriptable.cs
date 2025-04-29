@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ScriptableObjects
 {
@@ -11,9 +12,9 @@ namespace ScriptableObjects
         public bool m_needsRopeRangeIndicator = false;
         public List<string> m_levelNames = new List<string>();
         public List<int> m_waveCount = new List<int>();
-        public List<bool> m_levelCompleted = new List<bool>();
+        public List<bool> m_levelUnlocked = new List<bool>();
 
-        public void SetLevelCompletion(string levelName)
+        public void SetLevelUnlocked(string levelName)
         {
             bool found = false;
             int ind = -1;
@@ -28,7 +29,7 @@ namespace ScriptableObjects
 
             if (found)
             {
-                m_levelCompleted[ind] = true;
+                m_levelUnlocked[ind] = true;
             }
         }
 
