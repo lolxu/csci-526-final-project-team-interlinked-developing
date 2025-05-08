@@ -12,11 +12,16 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Game Things")] 
     public PlayerBase PlayerBase;
-    public LootManager LootManager;
     public UI UI;
 
     [Header("Event Manager")] 
     public EventManager EventManager;
+
+    [Header("Enemy Wave Manager")] 
+    public WaveManager WaveManager;
+
+    [Header("Ability Manager")] 
+    public AbilityManager AbilityManager;
 
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;
@@ -24,16 +29,11 @@ public class SingletonMaster : MonoBehaviour
     public PlayerAbilityListScriptable PlayerAbilities;
 
     [Header("Juice Settings")] 
-    public CameraShake CameraShakeManager;
     public FeelManager FeelManager;
     
     [Header("Constants")]
-    public int UNCONNECTED_LAYER = 6;
+    public int CONNECTABLE_LAYER = 6;
     public int PLAYER_LAYER = 7;
-
-    [Header("Scene Names")] 
-    public string HubName = "Prototype - Hub";
-    public string BattlefieldName = "Prototype - Battlefield";
 
     private bool m_restart = false;
     

@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 
 public class MeleeComponent : MonoBehaviour
 {
+    [Header("Scriptable Object")] 
+    public WeaponScriptable m_objectData;
+    
     [Header("Damage Settings")] 
     [SerializeField] private float m_playerDamage = 3.0f;
-    [SerializeField] private float m_damage = 10.0f;
-    [SerializeField] private float m_velocityThreshold = 2.0f;
     [SerializeField] private float m_knockBackStrength = 100.0f;
     
     [Header("Visual Settings")] 
@@ -18,6 +19,9 @@ public class MeleeComponent : MonoBehaviour
     [Header("Durability")] 
     public DurabilityComponent m_durabilityComponent;
 
+    private float m_damage = 8.0f;
+    private float m_velocityThreshold = 10.0f;
+    
     private Rigidbody2D m_RB;
     private bool m_canDamage = false;
     private bool m_isMouseDown = false;
@@ -32,6 +36,14 @@ public class MeleeComponent : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
+
+        m_damage = m_objectData.m_physicalDamage;
+        m_velocityThreshold = m_objectData.m_physicalDamageVelocityThreshold;
+        
+        // Record Spawn
+        MetricsManager.Instance.m_metricsData.RecordWeaponSpawn(m_objectData.m_name);
     }
 
     private void OnDisable()
@@ -41,6 +53,17 @@ public class MeleeComponent : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
+    }
+    
+    private void OnStealSuccess(GameObject obj, GameObject enemy)
+    {
+        // Record Steal
+        if (obj == gameObject)
+        {
+            MetricsManager.Instance.m_metricsData.RecordWeaponSteal(m_objectData.m_name);
+        }
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -91,12 +114,6 @@ public class MeleeComponent : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-
-        if (m_isMouseDown)
-        {
-            
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

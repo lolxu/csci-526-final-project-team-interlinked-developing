@@ -6,24 +6,39 @@ using Random = UnityEngine.Random;
 
 public class BaseEnemyAI : MonoBehaviour
 {
+    // A simple state machine...
+    public enum EnemyAIState
+    {
+        Moving,
+        TugOfWar,
+        Attack,
+        Idle
+    }
+    public EnemyAIState m_state = EnemyAIState.Idle;
+    
     [Header("Movement Settings")] 
     public float m_acceleration = 10.0f;
-    public float m_maxSpeed = 50.0f;
+    public float m_maxSpeed = 6.0f;
     public int m_numDirections = 12;
     public float m_raycastDistance = 5.0f;
+    public float m_surroundDistance = 6.0f;
     public LayerMask m_pathfindIgnoreMasks;
-    
-    [Header("Visual Settings")]
+    public Vector2 m_moveDirection { private set; get; } = Vector2.zero;
+    [SerializeField] protected float m_invisibleThreshold = 5.0f;
+    [SerializeField] protected GameObject m_moveTarget;
+
+    [Header("Visual Settings")] 
+    [SerializeField] protected bool m_willTurnToPlayer = false;
     [SerializeField] protected GameObject m_face;
     [SerializeField] protected float m_faceMoveFactor = 0.25f;
+    
+    protected bool m_overrideMovement = false;
 
-    private List<Vector2> m_pathfindDirections = new List<Vector2>();
-    private Rigidbody2D m_RB;
-    private Vector2 m_randomDestinationDisp;
-    private Vector2 m_moveDirection = Vector2.zero;
-    private bool m_overrideMovement = false;
+    protected List<Vector2> m_pathfindDirections = new List<Vector2>();
+    protected Rigidbody2D m_RB;
+    protected Vector2 m_randomDestinationDisp;
 
-    private void Start()
+    protected virtual void Start()
     {
         m_RB = GetComponent<Rigidbody2D>();
         m_randomDestinationDisp = Random.insideUnitCircle.normalized;
@@ -41,13 +56,20 @@ public class BaseEnemyAI : MonoBehaviour
             m_pathfindDirections.Add(newDir);
         }
         
-        m_randomDestinationDisp = Random.insideUnitCircle.normalized * 5.0f;
+        m_randomDestinationDisp = Random.insideUnitCircle.normalized * m_surroundDistance;
+        
+        // Setting state
+        m_state = EnemyAIState.Moving;
+        if (SingletonMaster.Instance.PlayerBase != null)
+        {
+            m_moveTarget = SingletonMaster.Instance.PlayerBase.gameObject;
+        }
         
         SingletonMaster.Instance.EventManager.StealStartedEvent.AddListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.AddListener(OnStealEnded);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         SingletonMaster.Instance.EventManager.StealStartedEvent.RemoveListener(OnStealStarted);
         SingletonMaster.Instance.EventManager.StealEndedEvent.RemoveListener(OnStealEnded);
@@ -57,7 +79,7 @@ public class BaseEnemyAI : MonoBehaviour
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = false;
+            m_state = EnemyAIState.Moving;
         }
     }
 
@@ -65,11 +87,11 @@ public class BaseEnemyAI : MonoBehaviour
     {
         if (enemy == gameObject)
         {
-            m_overrideMovement = true;
+            m_state = EnemyAIState.TugOfWar;
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         // Use a value based algorithm to pick directions
         // Raycast to all directions and check for obstacles
@@ -77,67 +99,108 @@ public class BaseEnemyAI : MonoBehaviour
         // Highest it is meaning the more close to the player it is.
 
         // Getting player directions with some randomization
-        if (SingletonMaster.Instance.PlayerBase != null)
+        if (SingletonMaster.Instance.PlayerBase != null && m_moveTarget != null)
         {
-            Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
+            Vector3 targetPos = m_moveTarget.transform.position;
+            Vector3 faceDir = (targetPos - transform.position).normalized;
 
-            Vector3 faceDir = Vector3.zero;
             if (!m_overrideMovement)
             {
-                MoveToPlayer();
-                faceDir = (playerPos - transform.position).normalized;
-            }
-            else
-            {
-                // Debug.Log("Tug of war");
-                Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
-                m_moveDirection = -playerDir;
-                faceDir = m_moveDirection;
-                
-                // Moving using the best direction
-                m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+                // Debug.Log(m_state);
+                switch (m_state)
+                {
+                    case EnemyAIState.Moving:
+                    {
+                        MoveBehavior();
+                        break;
+                    }
+                    case EnemyAIState.TugOfWar:
+                    {
+                        // Moving against player movement - TUG OF WAR mechanic
+                        TugOfWarBehavior();
+                        faceDir = m_moveDirection;
+                        break;
+                    }
+                    case EnemyAIState.Attack:
+                    {
+                        AttackBehavior();
+                        break;
+                    }
+                    case EnemyAIState.Idle:
+                    {
+                        IdleBehavior();
+                        break;
+                    }
+                }
             }
             
+            // Turning to player
+            if (m_willTurnToPlayer)
+            {
+                if (m_moveTarget != null && !GetComponent<Collider2D>().isTrigger)
+                {
+                    Vector3 toTarget = (m_moveTarget.transform.position - transform.position).normalized;
+                    Quaternion targetQuat = Quaternion.LookRotation(toTarget, Vector3.forward);
+                    Quaternion rotQuat = Quaternion.Slerp(transform.rotation, targetQuat, Time.deltaTime * 10.0f);
+                    m_RB.MoveRotation(rotQuat);
+                    
+                    faceDir = transform.InverseTransformDirection(faceDir);
+                }
+            }
+            
+            // moving face
             m_face.transform.localPosition = faceDir * m_faceMoveFactor;
-        }
-    }
-
-    private void MoveToPlayer()
-    {
-        Vector3 playerPos = SingletonMaster.Instance.PlayerBase.transform.position;
-        Vector3 targetPos = Vector2.zero;
-        if (Vector3.Distance(playerPos, transform.position) > 5.5f)
-        {
-            targetPos = playerPos + new Vector3(m_randomDestinationDisp.x, m_randomDestinationDisp.y, 0.0f);
         }
         else
         {
-            targetPos = playerPos;
+            m_state = EnemyAIState.Idle;
         }
+    }
 
-        Vector3 toPlayerVec3 = targetPos - transform.position;
-        Vector2 toPlayer = toPlayerVec3;
-        toPlayer = toPlayer.normalized;
+    protected virtual void IdleBehavior()
+    {
+        
+    }
 
-        Debug.DrawLine(transform.position, transform.position + new Vector3(toPlayer.x, toPlayer.y, 0.0f) * 10.0f,
+    protected virtual void AttackBehavior()
+    {
+        
+    }
+    
+    protected virtual void TugOfWarBehavior()
+    {
+        Vector3 playerDir = SingletonMaster.Instance.PlayerBase.m_moveDirection;
+        m_moveDirection = -playerDir;
+        m_RB.velocity += m_moveDirection * m_acceleration * 10.0f * Time.fixedDeltaTime;
+    }
+
+    protected virtual void MoveBehavior()
+    {
+        Vector3 toTargetVec3 = GetTargetPosition() - transform.position;
+        Vector2 toTarget = toTargetVec3;
+        toTarget = toTarget.normalized;
+
+        Debug.DrawLine(transform.position, transform.position + new Vector3(toTarget.x, toTarget.y, 0.0f) * 10.0f,
             Color.red);
-
+        
         // Calculating direction values
         float bestDotVal = -2.0f;
         Vector2 bestDirection = Vector2.zero;
         foreach (var direction in m_pathfindDirections)
         {
-            Debug.DrawLine(transform.position,
-                transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
-
-            float dotVal = Vector2.Dot(direction, toPlayer);
+            float dotVal = Vector2.Dot(direction, toTarget);
 
             // Raycast to check for obstacles
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, m_raycastDistance,
-                ~m_pathfindIgnoreMasks);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, m_raycastDistance, ~m_pathfindIgnoreMasks);
             if (hit)
             {
                 dotVal = -1.0f;
+                m_moveDirection -= direction;
+            }
+            else
+            {
+                Debug.DrawLine(transform.position,
+                    transform.position + new Vector3(direction.x, direction.y, 0.0f) * m_raycastDistance, Color.cyan);
             }
 
             // Checking dot values
@@ -147,18 +210,13 @@ public class BaseEnemyAI : MonoBehaviour
                 bestDirection = direction;
             }
         }
+        
+        m_moveDirection += bestDirection;
+        m_moveDirection = m_moveDirection.normalized;
 
-        if (bestDotVal > 0.15f)
-        {
-            m_moveDirection = bestDirection;
-        }
-        else
-        {
-            m_moveDirection = Vector2.zero;
-        }
-
+        // The actual move direction
         Debug.DrawLine(transform.position,
-            transform.position + new Vector3(bestDirection.x, bestDirection.y, 0.0f) * m_raycastDistance,
+            transform.position + new Vector3(m_moveDirection.x, m_moveDirection.y, 0.0f) * 5.0f,
             Color.magenta);
 
         // Moving using the best direction
@@ -166,5 +224,21 @@ public class BaseEnemyAI : MonoBehaviour
         {
             m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
         }
+    }
+
+    protected virtual Vector3 GetTargetPosition()
+    {
+        Vector3 myTargetPos = m_moveTarget.transform.position;
+        Vector3 targetPos;
+        if (Vector3.Distance(myTargetPos, transform.position) > m_surroundDistance)
+        {
+            targetPos = myTargetPos + new Vector3(m_randomDestinationDisp.x, m_randomDestinationDisp.y, 0.0f);
+        }
+        else
+        {
+            targetPos = myTargetPos;
+        }
+
+        return targetPos;
     }
 }

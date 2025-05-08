@@ -6,17 +6,19 @@ TagManager:
   tags:
   - Enemy
   - Rope
-  - Loot
   - Background
   - Linkable
   - Garbage
-  - Shop
   - DamageZone
+  - EnemyProjectile
+  - Shop
+  - Loot
+  - Border
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Moving Obstacles
   - Water
   - UI
   - Connectable
@@ -25,8 +27,8 @@ TagManager:
   - Enemy
   - Bullet
   - Dangerous
-  - 
-  - 
+  - Arena
+  - Walls
   - 
   - 
   - 

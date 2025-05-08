@@ -15,6 +15,7 @@ public class BaseEnemyBehavior : MonoBehaviour
     public List<string> m_names = new List<string>();
     public HealthComponent m_healthComponent;
     public float m_damage = 2.0f;
+    [SerializeField] private float m_damageReduceFactor = 0.25f;
     public float m_collisionVelocityThreshold = 10.0f;
     
     [Header("AI Settings")]
@@ -24,36 +25,24 @@ public class BaseEnemyBehavior : MonoBehaviour
     [SerializeField] private SpriteRenderer m_spriteRenderer;
     
     public float m_lootDropRate { get; set; } = 0.0f;
-
+    
     private bool m_canBeTossed = false;
     private Color m_orgColor;
     private Vector3 m_orgScale;
     
     // private Sequence m_damageTween = null;
     private Coroutine m_damageSequence = null;
-    
-    /// <summary>
-    /// Overwrite this for custom start behavior
-    /// </summary>
-    protected virtual void OnStart() { }
-    
-    /// <summary>
-    /// Overwrite this for custom update behavior
-    /// </summary>
-    protected virtual void OnUpdate() { }
 
-    private void Start()
+    protected virtual void Start()
     {
         m_orgColor = m_spriteRenderer.color;
         m_orgScale = transform.localScale;
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
-        
-        OnStart();
     }
     
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
@@ -61,23 +50,31 @@ public class BaseEnemyBehavior : MonoBehaviour
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
     {
-        if (obj == gameObject && instigator.CompareTag("Player"))
+        if (instigator != null)
         {
-            m_canBeTossed = false;
+            if (obj == gameObject && instigator.CompareTag("Player"))
+            {
+                m_damage /= m_damageReduceFactor;
+                m_canBeTossed = false;
+            }
         }
     }
 
     private void OnLinked(GameObject obj, GameObject instigator)
     {
-        if (obj == gameObject && instigator.CompareTag("Player"))
+        if (instigator != null)
         {
-            m_canBeTossed = true;
+            if (obj == gameObject && instigator.CompareTag("Player"))
+            {
+                m_damage *= m_damageReduceFactor;
+                m_canBeTossed = true;
+            }
         }
     }
     
-    private void Update()
+    protected virtual void Update()
     {
-        OnUpdate();
+        
     }
 
     protected virtual void OnDamaged(float amount)
@@ -88,15 +85,17 @@ public class BaseEnemyBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Checking colliding force
-        if (!other.gameObject.CompareTag("Rope") && m_canBeTossed)
+        // TODO: Change how we code this later...
+        if (!other.gameObject.CompareTag("Rope") && !other.gameObject.CompareTag("Loot") && !other.gameObject.CompareTag("Player"))
         {
             float relativeVel = other.relativeVelocity.magnitude;
             if (relativeVel > m_collisionVelocityThreshold)
             {
                 // Remap relative velocity magnitude to health
-                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.35f, 0.0f, m_healthComponent.m_maxHealth * 0.3f);
+                relativeVel = Mathf.Clamp(relativeVel, 0.0f, m_collisionVelocityThreshold * 1.5f);
+                relativeVel = relativeVel.Remap(m_collisionVelocityThreshold, m_collisionVelocityThreshold * 1.5f, 0.0f, m_healthComponent.m_maxHealth * 0.35f);
                 
-                // Debug.Log(relativeVel);
+                Debug.Log("Damage: " + relativeVel);
                 m_healthComponent.DamageEvent.Invoke(relativeVel, gameObject);
 
                 if (other.gameObject.CompareTag("Enemy"))
@@ -109,12 +108,7 @@ public class BaseEnemyBehavior : MonoBehaviour
                 }
             }
         }
-        
-    }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Player"))
+        else if (other.collider.CompareTag("Player"))
         {
             HealthComponent health = other.gameObject.GetComponent<HealthComponent>();
             if (health != null)

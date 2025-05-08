@@ -33,7 +33,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Rope operations",
+                    "name": "Rope Connect",
+                    "type": "Button",
+                    "id": "129af516-edba-4f8e-926d-a85c5d2f387b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rope Disconnect",
                     "type": "Button",
                     "id": "7b97125d-2d18-4efc-af37-93e7bdc164a2",
                     "expectedControlType": "",
@@ -42,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
+                    "name": "Activate Ability",
                     "type": "Button",
                     "id": "852140f2-7766-474d-8707-702459ba45f3",
                     "expectedControlType": "",
@@ -451,12 +460,12 @@
                 },
                 {
                     "name": "",
-                    "id": "1c04ea5f-b012-41d1-a6f7-02e963b52893",
-                    "path": "<Keyboard>/e",
+                    "id": "00ee0d62-5d57-40ed-b9b8-501a020149f9",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Activate Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -467,7 +476,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Interact",
+                    "action": "Activate Ability",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -500,18 +509,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Rope operations",
+                    "action": "Rope Disconnect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b78b1961-be92-45f9-8499-ff0a93b6824a",
-                    "path": "<Keyboard>/space",
+                    "id": "a82e4dbf-aaa6-44aa-bc03-7e9993db1877",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Rope operations",
+                    "action": "Rope Connect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

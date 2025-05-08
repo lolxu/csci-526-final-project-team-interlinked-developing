@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +14,7 @@ public class DurabilityComponent : MonoBehaviour
     [SerializeField] private float m_lifeTime = 20.0f;
     
     [Header("Visual Settings")]
-    [SerializeField] private float m_shrinkSpeed = 1.25f;
+    [SerializeField] private float m_shrinkTime = 0.25f;
     [SerializeField] private List<SpriteRenderer> m_spriteRends = new List<SpriteRenderer>();
     [SerializeField] private List<Color> m_playerConnectedTint = new List<Color>();
     [SerializeField] private List<Color> m_enemyConnectedTint = new List<Color>();
@@ -26,7 +27,6 @@ public class DurabilityComponent : MonoBehaviour
     private bool m_isConnectedByEnemy = false;
     private bool m_isConnectedByPlayer = false;
     private GameObject m_durabilityBar = null;
-    private Coroutine m_despawnSequence = null;
 
     private void Start()
     {
@@ -125,14 +125,15 @@ public class DurabilityComponent : MonoBehaviour
 
     private void Update()
     {
-        if (m_despawnSequence == null)
+        if (!m_isDespawning)
         {
             if (!m_isConnected)
             {
                 m_timer += Time.deltaTime;
                 if (m_timer >= m_lifeTime)
                 {
-                    m_despawnSequence = StartCoroutine(DespawnSequence());
+                    m_isDespawning = true;
+                    DespawnSequence();
                 }
             }
             else
@@ -140,30 +141,27 @@ public class DurabilityComponent : MonoBehaviour
                 m_timer = 0.0f;
             }
 
-
-            if (m_currentDurability == 0)
+            if (m_currentDurability <= 0)
             {
                 RopeComponent rc = GetComponent<RopeComponent>();
-                if (rc != null && !m_isDespawning)
+                if (rc != null && !m_isDespawning && SingletonMaster.Instance.PlayerBase != null)
                 {
                     m_isDespawning = true;
                     rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
-                    m_despawnSequence = StartCoroutine(DespawnSequence());
+                    DespawnSequence();
                 }
             }
         }
     }
 
-    private IEnumerator DespawnSequence()
+    private void DespawnSequence()
     {
+        // Change the layer to default to be not considered for linking!!!! --------------------------------- IMPORTANT
         gameObject.layer = 0;
-        while (transform.localScale.x >= 0.0f)
+
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
-            transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
-            yield return null;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 }

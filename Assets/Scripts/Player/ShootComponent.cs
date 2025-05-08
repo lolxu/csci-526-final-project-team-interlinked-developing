@@ -16,6 +16,9 @@ public class ShootComponent : MonoBehaviour
         Shotgun
     }
 
+    [Header("Scriptable Object")] 
+    public WeaponScriptable m_objectData;
+
     [Header("Fire Projectile Settings")] 
     public GunType m_type;
     public GameObject m_playerBulletPrefab;
@@ -25,9 +28,6 @@ public class ShootComponent : MonoBehaviour
     public int m_penetrationChange = 0;
     public bool m_canShoot = false;
     public bool m_canAutoAim = false;
-
-    [Header("Ability Settings")] 
-    [SerializeField] private AbilityScriptable m_autoAimAbility;
     public float m_autoAimRadius = 10.0f;
     
     [Header("Visual Settings")]
@@ -44,9 +44,8 @@ public class ShootComponent : MonoBehaviour
     [Header("Durability")] 
     public DurabilityComponent m_durabilityComponent;
     
-    [Header("Damage Settings")]
-    [SerializeField] private float m_damage = 1.5f;
-    [SerializeField] private float m_velocityThreshold = 10.0f;
+    private float m_damage = 1.5f;
+    private float m_velocityThreshold = 10.0f;
     
     private Rigidbody2D m_RB;
     private float m_fireTimeout = 0.0f;
@@ -70,16 +69,45 @@ public class ShootComponent : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
+        
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.AddListener(OnStealSuccess);
 
         if (m_laser != null)
         {
             m_orgLaserGrad = m_laser.colorGradient;
         }
+
+        m_damage = m_objectData.m_physicalDamage;
+        m_velocityThreshold = m_objectData.m_physicalDamageVelocityThreshold;
+        
+        // Record spawn
+        MetricsManager.Instance.m_metricsData.RecordWeaponSpawn(m_objectData.m_name);
+    }
+    
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
+        SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
+        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
+        
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
+        
+        SingletonMaster.Instance.EventManager.StealSuccessEvent.RemoveListener(OnStealSuccess);
     }
 
     private void OnPlayerDeath(GameObject obj)
     {
         m_canShoot = false;
+    }
+    
+    private void OnStealSuccess(GameObject obj, GameObject enemy)
+    {
+        // Record steal
+        if (obj == gameObject)
+        {
+            MetricsManager.Instance.m_metricsData.RecordWeaponSteal(m_objectData.m_name);
+        }
     }
 
     private void OnUnlinked(GameObject obj, GameObject instigator)
@@ -190,16 +218,6 @@ public class ShootComponent : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        SingletonMaster.Instance.EventManager.StartFireEvent.RemoveListener(StartFiring);
-        SingletonMaster.Instance.EventManager.StopFireEvent.RemoveListener(StopFiring);
-        SingletonMaster.Instance.EventManager.PlayerDeathEvent.RemoveListener(OnPlayerDeath);
-        
-        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinked);
-        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinked);
-    }
-
     private void FixedUpdate()
     {
         
@@ -208,24 +226,24 @@ public class ShootComponent : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        m_canAutoAim = m_autoAimAbility.m_enabled && m_canShoot;
+        m_canAutoAim = m_canShoot;
         
         Vector2 myPos = transform.position;
         Vector2 muzzlePosition = m_muzzle.transform.position;
         
         // AIMING !!!!
-        if (m_canShoot)
+        // TODO: Change this lol (so terrible)
+        if (m_canShoot && m_canAutoAim)
         {
-            Vector3 selfToTarget = Camera.main.ScreenToWorldPoint(Mouse.current.position.value) - transform.position;
-
-            if (m_canAutoAim)
-            {
-                selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
-            }
+            Vector3 selfToTarget = Vector3.zero;
+            selfToTarget = AutoAim(selfToTarget, LayerMask.GetMask("Enemy"));
             
             // Rotating the gun
-            float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
-            m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            if (m_hasTarget)
+            {
+                float angle = Mathf.Atan2(selfToTarget.y, selfToTarget.x) * Mathf.Rad2Deg;
+                m_gun.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+            }
         }
         else if (m_isOwnerEnemy)
         {
@@ -243,9 +261,11 @@ public class ShootComponent : MonoBehaviour
         
         if (m_canShoot)
         {
+            // Debug.Log("Player is shooting");
             // SHOOTING!!
-            if (m_isMouseDown && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
+            if (m_hasTarget && m_playerBulletPrefab != null && m_durabilityComponent.m_currentDurability > 0)
             {
+                // Debug.Log("Player has target");
                 // Here's the shooty controls
                 if (m_fireTimeout <= 0.0f)
                 {
@@ -317,11 +337,14 @@ public class ShootComponent : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             RaycastHit2D enemy = results[i];
-            float dist = Vector2.Distance(enemy.transform.position, transform.position);
-            if (dist < minDist)
+            if (!enemy.collider.isTrigger)
             {
-                minDist = dist;
-                bestTarget = enemy.collider.gameObject;
+                float dist = Vector2.Distance(enemy.transform.position, transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    bestTarget = enemy.collider.gameObject;
+                }
             }
         }
             
@@ -344,7 +367,7 @@ public class ShootComponent : MonoBehaviour
     {
         m_muzzleFlash.intensity = m_muzzleFlashIntensity;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, m_muzzle.transform.position, Quaternion.identity);
         BasePlayerBullet bulletScript = bullet.GetComponent<BasePlayerBullet>();
         bulletScript.m_owner = gameObject;
         
@@ -386,8 +409,6 @@ public class ShootComponent : MonoBehaviour
                 }
             }
         }
-        
     }
-    
     
 }

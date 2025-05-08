@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c39772bcc2acad40acb2111d5d15d1f, type: 3}
+  m_Name: Enemy_SniperGun
+  m_EditorClassIdentifier: 
+  enemy:
+    m_enemy:
+      m_prefab: {fileID: 4391433643842635490, guid: 595f7d652d5960e43bac15ff38617cd4, type: 3}
+      m_enemyType: 0
+      m_lootSpawnRate: 0
+    m_weightedValue: 0.075

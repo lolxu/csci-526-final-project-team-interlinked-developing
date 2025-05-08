@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f73a5de0afdb4544093e2a1b4ef00121, type: 3}
+  m_Name: KnockbackPickup
+  m_EditorClassIdentifier: 
+  loot:
+    m_loot:
+      m_prefab: {fileID: 7574045754775299820, guid: 3332ffc786193ee45857fff55d3aad37, type: 3}
+      m_lootType: 0
+    m_weightedValue: 0.247

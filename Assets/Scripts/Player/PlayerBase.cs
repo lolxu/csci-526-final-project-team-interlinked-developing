@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
+using MoreMountains.Feedbacks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -21,12 +22,21 @@ public class PlayerBase : MonoBehaviour
     public float m_acceleration = 50.0f;
     public float m_maxSpeed = 100.0f;
     public Vector2 m_moveDirection;
+    public Vector2 m_lastMoveDirection { private set; get; }
     
     [Header("Rope Settings")]
     public GameObject m_rope;
     public float m_clickRadius = 1.0f;
     public float m_connectRadius = 10.0f;
+    public int m_maxRopeConnections = 5;
+    public int m_curRopeConnections = 0;
+    public bool m_canPowerThrow = true;
+    public float m_throwStrength = 10.0f;
+    public float m_throwAutoTargetRadius = 10.0f;
+    public float m_throwAutoTargetRange = 10.0f;
+    public LayerMask m_throwTargetMask;
     public GameObject m_linkObjectsParent;
+    public LayerMask m_connectableLayers;
     public List<GameObject> m_linkedObjects = new List<GameObject>();
     private List<Vector3> m_linkedDisplacements = new List<Vector3>();
     private List<Vector3> m_ropeDisplacements = new List<Vector3>();
@@ -36,6 +46,13 @@ public class PlayerBase : MonoBehaviour
     [SerializeField] private float m_cameraZoomFactor = 0.025f;
     [SerializeField] private GameObject m_face;
     [SerializeField] private float m_faceMoveFactor = 0.25f;
+    [SerializeField] private MMF_Player m_dashParticles;
+    [SerializeField] private MMF_Player m_knockBackParticles;
+    public GameObject m_ropeRangeIndicator;
+    public bool m_isFollowCam = true;
+
+    [Header("Ability")] 
+    public bool m_isDashing = false;
 
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
@@ -49,6 +66,11 @@ public class PlayerBase : MonoBehaviour
 
     private bool m_isInitiated = false;
 
+    private GameObject m_bestRopeConnectTarget = null;
+    private GameObject m_bestRopeDisconnectTarget = null;
+
+    private bool m_isRagdolling = false;
+
     private void Start()
     {
         // Adding self to linked object list first
@@ -60,19 +82,35 @@ public class PlayerBase : MonoBehaviour
         m_orgScale = transform.localScale;
 
         m_healthComponent.m_isLinked = true;
+
+        if (m_isFollowCam)
+        {
+            m_cinemachine.m_Follow = transform;
+        }
+        else
+        {
+            m_cinemachine.m_Lens.OrthographicSize = 20.0f;
+        }
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinkedItem);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinkedItem);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+        m_ropeRangeIndicator.transform.localScale =
+            new Vector3(m_connectRadius * 2, m_connectRadius * 2, m_connectRadius * 2);
     }
 
     private void OnUnlinkedItem(GameObject obj, GameObject instigator)
     {
-        if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+        // TODO: There are some exceptions here
+        if (obj != null && instigator != null)
         {
-            m_linkedObjects.Remove(obj);
+            if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
+            {
+                m_linkedObjects.Remove(obj);
+            }
         }
     }
 
@@ -114,7 +152,7 @@ public class PlayerBase : MonoBehaviour
         if (this != null)
         {
             transform.position = Vector3.zero;
-            StartCoroutine(InitCoroutine());
+            // StartCoroutine(InitCoroutine());
         }
     }
 
@@ -147,11 +185,27 @@ public class PlayerBase : MonoBehaviour
         
         Vector3 faceDir = new Vector3(hori, vert, 0.0f) * m_faceMoveFactor;
         m_face.transform.localPosition = faceDir;
-        
-        if (m_RB.velocity.magnitude < m_maxSpeed)
+
+        if (!m_isDashing)
         {
             m_RB.velocity += m_moveDirection * m_acceleration * Time.fixedDeltaTime;
+            if (!m_isRagdolling && m_RB.velocity.magnitude > m_maxSpeed)
+            {
+                m_RB.velocity = m_moveDirection * m_maxSpeed;
+            }
         }
+    }
+
+    public void StartRagdoll()
+    {
+        StartCoroutine(Ragdoll());
+    }
+
+    private IEnumerator Ragdoll()
+    {
+        m_isRagdolling = true;
+        yield return new WaitForSeconds(0.15f);
+        m_isRagdolling = false;
     }
 
     /// <summary>
@@ -166,74 +220,189 @@ public class PlayerBase : MonoBehaviour
     void Update()
     {
         CameraZoomControl();
+        CheckBestRopeTargetToConnect();
+        CheckBestRopeTargetToDisconnect();
+        HighlightConnections();
+    }
+    
+    private void CheckBestRopeTargetToConnect()
+    {
+        if (!GameManager.Instance.m_gamePaused)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            RaycastHit2D[] results = new RaycastHit2D[20];
+            int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                results, 0.0f, m_connectableLayers);
+
+            float minDist = float.MaxValue;
+
+            GameObject curBestTarget = null;
+            for (int i = 0; i < num; i++)
+            {
+                float distToPlayer = (results[i].transform.position - transform.position).magnitude;
+                if (distToPlayer <= m_connectRadius && m_linkedObjects.Count <= m_maxRopeConnections)
+                {
+                    if (!m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                    {
+                        float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            curBestTarget = results[i].rigidbody.gameObject;
+                        }
+                    }
+                }
+            }
+
+            // Setting the best target & doing highlight visuals
+            if (curBestTarget != null && curBestTarget != m_bestRopeConnectTarget)
+            {
+                if (m_bestRopeConnectTarget != null)
+                {
+                    m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                }
+
+                m_bestRopeConnectTarget = curBestTarget;
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
+            }
+            else if (curBestTarget == null && m_bestRopeConnectTarget != null)
+            {
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                m_bestRopeConnectTarget = null;
+            }
+        }
+    }
+    
+    private void CheckBestRopeTargetToDisconnect()
+    {
+        if (!GameManager.Instance.m_gamePaused)
+        {
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
+
+            RaycastHit2D[] results = new RaycastHit2D[20];
+            int num = Physics2D.CircleCastNonAlloc(mouseWorldPos, m_clickRadius, Vector2.zero,
+                results, 0.0f, m_connectableLayers);
+
+            float minDist = float.MaxValue;
+            GameObject curBestTarget = null;
+            for (int i = 0; i < num; i++)
+            {
+                if (m_linkedObjects.Contains(results[i].rigidbody.gameObject))
+                {
+                    float dist = Vector3.Distance(results[i].transform.position, mouseWorldPos);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        curBestTarget = results[i].rigidbody.gameObject;
+                    }
+                }
+            }
+
+            if (curBestTarget != null && curBestTarget != m_bestRopeDisconnectTarget)
+            {
+                if (m_bestRopeDisconnectTarget != null)
+                {
+                    m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                }
+
+                m_bestRopeDisconnectTarget = curBestTarget;
+                m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
+            }
+            else if (curBestTarget == null && m_bestRopeDisconnectTarget != null)
+            {
+                m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().HideHighlight();
+                m_bestRopeDisconnectTarget = null;
+            }
+        }
+    }
+    
+    private void HighlightConnections()
+    {
+        if (!GameManager.Instance.m_gamePaused)
+        {
+            if (m_bestRopeConnectTarget != null && m_bestRopeDisconnectTarget == null)
+            {
+                m_bestRopeConnectTarget.GetComponent<RopeComponent>().ShowHighlight(true);
+            }
+            else if (m_bestRopeConnectTarget == null && m_bestRopeDisconnectTarget != null)
+            {
+                m_bestRopeDisconnectTarget.GetComponent<RopeComponent>().ShowHighlight(false);
+            }
+        }
     }
 
     private void CameraZoomControl()
     {
-        // This can have some real issue with floats
-        Vector2 minCorner = new Vector2(float.MaxValue, float.MaxValue);
-        Vector2 maxCorner = new Vector2(float.MinValue, float.MinValue);
-
-        foreach (var link in m_linkedObjects)
+        if (m_isFollowCam)
         {
-            if (link != null)
-            {
-                Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
+            // This can have some real issue with floats
+            Vector2 minCorner = new Vector2(float.MaxValue, float.MaxValue);
+            Vector2 maxCorner = new Vector2(float.MinValue, float.MinValue);
 
-                maxCorner = Vector2.Max(maxCorner, pos);
-                minCorner = Vector2.Min(minCorner, pos);
+            foreach (var link in m_linkedObjects)
+            {
+                if (link != null)
+                {
+                    Vector2 pos = Camera.main.WorldToScreenPoint(link.transform.position);
+
+                    maxCorner = Vector2.Max(maxCorner, pos);
+                    minCorner = Vector2.Min(minCorner, pos);
+                }
             }
+
+            m_cinemachine.m_Lens.OrthographicSize =
+                Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
         }
-        
-        m_cinemachine.m_Lens.OrthographicSize = Vector2.Distance(minCorner, maxCorner) * m_cameraZoomFactor + m_orgZoom;
     }
     
     public void Move(InputAction.CallbackContext context)
     {
         m_moveDirection = context.ReadValue<Vector2>();
-    }
-    
-    public void Fire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            SingletonMaster.Instance.EventManager.StartFireEvent.Invoke();
-        }
-        else
-        {
-            SingletonMaster.Instance.EventManager.StopFireEvent.Invoke();
-        }
-    }
 
-    public void RopeOperations(InputAction.CallbackContext context)
-    {
+        if (m_moveDirection.magnitude > 0.0f)
+        {
+            m_lastMoveDirection = m_moveDirection;
+        }
+        
+        // For tutorial
         if (context.started)
         {
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.value);
-
-            // Checking if mouse hits the unconnected hit boxes
-            RaycastHit2D pickupHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Connectable"));
-            if (pickupHit)
+            if (GameManager.Instance.m_levelData.m_needsTutorial)
             {
-                Rigidbody2D hitBody = pickupHit.rigidbody;
-                // Double checking in case weird shit adds this thing twice
-                if (!m_linkedObjects.Contains(hitBody.gameObject))
-                {
-                    RequestRopeConnect(hitBody);
-                    return;
-                }
+                SingletonMaster.Instance.EventManager.TutorialPlayerMoved.Invoke();
             }
+        }
+    }
 
-            // Checking if mouse hits connected items
-            RaycastHit2D removeHit = Physics2D.CircleCast(mouseWorldPos, m_clickRadius, Vector2.zero,
-                0.0f, LayerMask.GetMask("Connectable"));
-            if (removeHit && removeHit.rigidbody != m_RB)
+    public void RopeConnect(InputAction.CallbackContext context)
+    {
+        if (context.started && !GameManager.Instance.m_gamePaused)
+        {
+            if (m_bestRopeConnectTarget != null)
             {
-                if (m_linkedObjects.Contains(removeHit.rigidbody.gameObject))
-                {
-                    RemoveLinkedObject(removeHit.rigidbody.gameObject);
-                }
+                // TODO: We need to change this...
+                int level = SceneManager.GetActiveScene().buildIndex;
+                int wave = SingletonMaster.Instance.WaveManager.m_waveCount;
+                MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, wave, true);
+                RequestRopeConnect(m_bestRopeConnectTarget.GetComponent<Rigidbody2D>());
+            }
+        }
+    }
+
+    public void RopeDisconnect(InputAction.CallbackContext context)
+    {
+        if (context.started && !GameManager.Instance.m_gamePaused)
+        {
+            if (m_bestRopeDisconnectTarget != null)
+            {
+                // TODO: We need to change this...
+                int level = SceneManager.GetActiveScene().buildIndex;
+                int wave = SingletonMaster.Instance.WaveManager.m_waveCount;
+                MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, wave, false);
+                
+                // Honing in to the nearest enemy / dangerous object
+                RemoveLinkedObject(m_bestRopeDisconnectTarget);
             }
         }
     }
@@ -246,12 +415,14 @@ public class PlayerBase : MonoBehaviour
         m_drawpos = hitBody.position;
         
         // Do a distance check - For Player
-        float dist = (hitBody.transform.position - transform.position).magnitude;
-        if (dist <= m_connectRadius)
+        // float dist = (hitBody.transform.position - transform.position).magnitude;
+        // if (dist <= m_connectRadius && m_linkedObjects.Count <= m_maxRopeConnections)
         {
             Debug.Log("Connected " + hitObject + " to player"); 
             m_ropeComponent.GenerateRope(hitObject);
         }
+        m_bestRopeConnectTarget.GetComponent<RopeComponent>().HideHighlight();
+        m_bestRopeConnectTarget = null;
     }
 
     // For removing linked objects
@@ -261,7 +432,90 @@ public class PlayerBase : MonoBehaviour
         if (targetRope != null)
         {
             targetRope.DetachRope(gameObject);
+            targetRope.HideHighlight();
+
+            if (m_canPowerThrow)
+            {
+                StartCoroutine(AutomaticThrowToNearestTarget(obj));
+            }
+
+            m_bestRopeDisconnectTarget = null;
         }
+    }
+
+    private IEnumerator AutomaticThrowToNearestTarget(GameObject obj)
+    {
+        // TODO: Tweak This
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        RaycastHit2D[] results = new RaycastHit2D[20];
+        Vector2 oldPos = obj.transform.position;
+
+        yield return null;
+
+        if (obj != null)
+        {
+            Vector2 newPos = obj.transform.position;
+
+            Vector2 moveDir = (newPos - oldPos).normalized;
+            Debug.Log(moveDir);
+            int hits = Physics2D.CircleCastNonAlloc(rb.position, m_throwAutoTargetRadius, moveDir, results,
+                m_throwAutoTargetRange, m_throwTargetMask);
+
+            float minDist = float.MaxValue;
+            GameObject curBestTarget = null;
+            for (int i = 0; i < hits; i++)
+            {
+                if (results[i].collider.gameObject != obj)
+                {
+                    Vector2 toTarget = results[i].transform.position - obj.transform.position;
+                    float dist = Vector3.Distance(results[i].transform.position, rb.position);
+
+                    if (Vector2.Dot(moveDir, toTarget) > 0.5f)
+                    {
+                        if (dist < minDist)
+                        {
+                            minDist = dist;
+                            curBestTarget = results[i].collider.gameObject;
+                        }
+                    }
+                }
+            }
+
+            if (curBestTarget != null)
+            {
+                // StartCoroutine(ThrowToTarget(rb, curBestTarget));
+                Vector2 throwDir = (curBestTarget.transform.position - obj.transform.position).normalized;
+
+                Vector3 drawDir = throwDir;
+                Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
+                rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
+            }
+            else
+            {
+                Debug.Log("No Target Found...");
+            }
+        }
+    }
+    
+    // Ability Stuff
+    public void ActivateAbility(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Trying to Activate Abilities");
+            SingletonMaster.Instance.AbilityManager.ActivateAbility.Invoke(AbilityManager.AbilityTypes.Dash);
+            SingletonMaster.Instance.AbilityManager.ActivateAbility.Invoke(AbilityManager.AbilityTypes.Knockback);
+        }
+    }
+
+    public void PlayDashParticles()
+    {
+        m_dashParticles.PlayFeedbacks();
+    }
+
+    public void PlayKnockbackParticles()
+    {
+        m_knockBackParticles.PlayFeedbacks();
     }
     
 }

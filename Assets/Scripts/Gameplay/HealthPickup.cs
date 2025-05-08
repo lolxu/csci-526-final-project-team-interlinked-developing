@@ -1,18 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+// TODO: Refactor this into a loot class
 public class HealthPickup : MonoBehaviour
 {
     
     [Header("Health pickup settings")]
-    public float m_healValue = 5.0f;
+    public float m_healValue = 10.0f;
     public float m_maxValue = 10.0f;
+    public bool m_canDespawn = true;
     [SerializeField] private float m_healRate = 1.0f;
     [SerializeField] private RopeComponent m_ropeComponent;
     [SerializeField] private float m_lifeTime = 20.0f;
@@ -20,26 +24,33 @@ public class HealthPickup : MonoBehaviour
     [Header("Visual Settings")]
     [SerializeField] private float m_scaleFactor = 1.5f;
     [SerializeField] private AnimationCurve m_curve;
-    [SerializeField] private Color m_uncollectedColor;
-    [SerializeField] private Color m_collectedColor;
-    [SerializeField] private float m_shrinkSpeed = 1.25f;
+    [SerializeField] private float m_shrinkTime = 0.15f;
+    [SerializeField] private List<Color> m_collectedColor = new List<Color>();
+    [SerializeField] private List<SpriteRenderer> m_spriteRenderers = new List<SpriteRenderer>();
     
     [Header("Damage Settings")]
     [SerializeField] private float m_damage = 1.5f;
     [SerializeField] private float m_velocityThreshold = 10.0f;
-    
+
+    private List<Color> m_uncollectedColor = new List<Color>();
     private Coroutine shrinkCoroutine = null;
     private float m_despawnTimer = 0.0f;
-    private SpriteRenderer m_spriteRend;
+    
     private bool m_isHealing = false;
+    private bool m_isDespawning = false;
+
+    private void Awake()
+    {
+        m_healValue = m_maxValue;
+
+        foreach (var sp in m_spriteRenderers)
+        {
+            m_uncollectedColor.Add(sp.color);
+        }
+    }
 
     private void Start()
     {
-        m_spriteRend = GetComponent<SpriteRenderer>();
-        m_healValue = Random.Range(1, m_maxValue);
-        float scale = m_curve.Evaluate((float)m_healValue / m_maxValue) * m_scaleFactor;
-        transform.localScale = Vector3.one * scale;
-
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinked);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinked);
     }
@@ -55,7 +66,10 @@ public class HealthPickup : MonoBehaviour
         if (obj == gameObject && instigator.CompareTag("Player"))
         {
             m_isHealing = false;
-            m_spriteRend.color = m_uncollectedColor;
+            for (int i = 0; i < m_spriteRenderers.Count; i++)
+            {
+                m_spriteRenderers[i].color = m_uncollectedColor[i];
+            }
         }
     }
 
@@ -64,13 +78,18 @@ public class HealthPickup : MonoBehaviour
         if (obj == gameObject && instigator.CompareTag("Player"))
         {
             m_isHealing = true;
-            m_spriteRend.color = m_collectedColor;
+            for (int i = 0; i < m_spriteRenderers.Count; i++)
+            {
+                m_spriteRenderers[i].color = m_collectedColor[i];
+            }
+            
+            m_despawnTimer = 0.0f;
         }
     }
 
     private void Update()
     {
-        if (shrinkCoroutine == null && SingletonMaster.Instance.PlayerBase != null)
+        if (!m_isDespawning && SingletonMaster.Instance.PlayerBase != null)
         {
             if (m_isHealing)
             {
@@ -89,41 +108,39 @@ public class HealthPickup : MonoBehaviour
                         {
                             m_healValue = 0.0f;
                             m_ropeComponent.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
-                            shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                            m_isDespawning = true;
+                            ShrinkSequence();
                         }
                     }
                 }
             }
             else
             {
-                m_despawnTimer += Time.deltaTime;
-                if (m_despawnTimer >= m_lifeTime)
+                if (m_canDespawn)
                 {
-                    shrinkCoroutine = StartCoroutine(ShrinkSequence());
+                    m_despawnTimer += Time.deltaTime;
+                    if (m_despawnTimer >= m_lifeTime)
+                    {
+                        m_isDespawning = true;
+                        ShrinkSequence();
+                    }
+                }
+                else
+                {
+                    m_despawnTimer = 0.0f;
                 }
             }
         }
     }
 
-    public void StartShrinking()
-    {
-        if (shrinkCoroutine == null)
-        {
-            shrinkCoroutine = StartCoroutine(ShrinkSequence());
-        }
-    }
-
-    private IEnumerator ShrinkSequence()
+    private void ShrinkSequence()
     {
         gameObject.layer = 0;
-        while (transform.localScale.x >= 0.0f)
+        
+        transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
-            transform.localScale -= Vector3.one * m_shrinkSpeed * Time.fixedDeltaTime;
-            yield return null;
-        }
-        transform.localScale = Vector3.zero;
-        yield return null;
-        Destroy(gameObject);
+            Destroy(gameObject);
+        });
     }
 
     private void OnCollisionEnter2D(Collision2D other)

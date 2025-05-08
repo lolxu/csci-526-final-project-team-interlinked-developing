@@ -12,12 +12,9 @@ public class EnemyScriptable : ScriptableObject
         public enum EnemyType
         {
             Basic,
-            Brute,
-            Stealer,
-            Shooter,
-            Shield,
+            Projectile,
             Spawner,
-            Teleporter
+            Thief
         }
 
         public GameObject m_prefab;

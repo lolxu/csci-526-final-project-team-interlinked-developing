@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58be473a5f2c4bc7a1fb1e2d83aa7177, type: 3}
+  m_Name: LevelData
+  m_EditorClassIdentifier: 
+  m_needsTutorial: 0
+  m_needsLevelName: 0
+  m_needsRopeRangeIndicator: 0
+  m_levelNames:
+  - Main Menu
+  - Beta-Cavern
+  - Beta-Vines
+  - Beta-Factory
+  m_waveCount: 00000000040000000500000005000000
+  m_levelUnlocked: 01000000

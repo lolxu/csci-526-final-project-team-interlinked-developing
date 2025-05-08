@@ -7197,7 +7197,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1984795940}
         m_TargetAssemblyTypeName: PlayerControl, Assembly-CSharp
-        m_MethodName: RopeOperations
+        m_MethodName: RopeDisconnect
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
