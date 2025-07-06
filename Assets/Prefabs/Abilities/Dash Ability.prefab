@@ -50,3 +50,4 @@ MonoBehaviour:
     m_Bits: 2039
   m_abilityType: 0
   m_dashMult: 35
+  castSound: {fileID: 8300000, guid: e8939c29a7ef9e04c9d1bd47b46a025a, type: 3}

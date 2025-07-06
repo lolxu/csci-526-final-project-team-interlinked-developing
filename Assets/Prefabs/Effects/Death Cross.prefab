@@ -220,3 +220,4 @@ MonoBehaviour:
   m_disappearEase: 35
   m_cross_A: {fileID: 2209593932252263647}
   m_cross_B: {fileID: 3339854755128188838}
+  castSound: {fileID: 8300000, guid: 0a9e0237b163c2846a9718181e4faf54, type: 3}

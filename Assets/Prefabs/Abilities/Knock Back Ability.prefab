@@ -51,3 +51,4 @@ MonoBehaviour:
     m_Bits: 576
   m_knockBackRadius: 10
   m_knockBackStrength: 1000
+  castSound: {fileID: 8300000, guid: f222fbb9f95395b40a871eb70a0fad5a, type: 3}

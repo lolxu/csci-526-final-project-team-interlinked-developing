@@ -12,6 +12,8 @@ public class DashAbility : MonoBehaviour
     [SerializeField] private AbilityManager.AbilityTypes m_abilityType;
     [SerializeField] private float m_dashMult = 100.0f;
 
+    public AudioClip castSound; // Free's sound
+
     private Color m_orgColor;
 
     private bool m_canActivate = true;
@@ -48,7 +50,9 @@ public class DashAbility : MonoBehaviour
             GameObject player = pb.gameObject;
             
             pb.PlayDashParticles();
-            
+
+            AudioManager.Instance.PlayPlayerSFX(castSound); // Free's sound
+
             Vector2 dashDir = pb.m_moveDirection;
 
             if (dashDir.magnitude < 0.01f)

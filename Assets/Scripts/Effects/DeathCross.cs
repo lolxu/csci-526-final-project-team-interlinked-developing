@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
+
 public class DeathCross : MonoBehaviour
 {
     [SerializeField] private float m_animTime = 0.25f;
@@ -13,10 +14,14 @@ public class DeathCross : MonoBehaviour
     [SerializeField] private SpriteRenderer m_cross_A;
     [SerializeField] private SpriteRenderer m_cross_B;
 
+    public AudioClip castSound; // Free's sound
+
     private Vector3 m_finalScale;
 
     private void OnEnable()
     {
+        AudioManager.Instance.PlayOtherSFX(castSound); // Free's sound
+
         m_finalScale = new Vector3(m_scale, m_scale, m_scale);
         transform.localScale = Vector3.zero;
 
