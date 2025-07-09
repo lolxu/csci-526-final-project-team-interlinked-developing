@@ -13,8 +13,6 @@ public class KnockBackAbility : MonoBehaviour
     [SerializeField] private float m_knockBackRadius = 10.0f;
     [SerializeField] private float m_knockBackStrength = 100.0f;
 
-    public AudioClip castSound; // Free's sound
-
     private bool m_canActivate = true;
     
     private void Start()
@@ -47,7 +45,7 @@ public class KnockBackAbility : MonoBehaviour
             
             pb.PlayKnockbackParticles();
 
-            AudioManager.Instance.PlayPlayerSFX(castSound); // Free's sound
+            SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerKnockback"); // Free's sound
 
             RaycastHit2D[] hits = Physics2D.CircleCastAll(playerPos, m_knockBackRadius, Vector2.zero, 0.0f, m_knockBackMask);
             foreach (var hit in hits)

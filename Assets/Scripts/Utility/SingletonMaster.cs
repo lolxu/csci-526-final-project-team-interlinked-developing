@@ -30,6 +30,7 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Juice Settings")] 
     public FeelManager FeelManager;
+    public AudioManager AudioManager;
     
     [Header("Constants")]
     public int CONNECTABLE_LAYER = 6;

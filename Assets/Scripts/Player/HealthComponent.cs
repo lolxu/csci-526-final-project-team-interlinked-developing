@@ -169,6 +169,9 @@ public class HealthComponent : MonoBehaviour
                         StopAllCoroutines();
                         DeathEvent.Invoke(instigator);
                     }
+                    
+                    // Play Player Hit sfx
+                    SingletonMaster.Instance.AudioManager.PlayOtherSFX("PlayerHit");
                 }
                 else if (gameObject.CompareTag("Enemy"))
                 {
@@ -202,6 +205,9 @@ public class HealthComponent : MonoBehaviour
                         }
                         DeathEvent.Invoke(gameObject);
                     }
+                    
+                    // Play Enemy Hit sfx
+                    SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyHit");
                 }
             }
         }

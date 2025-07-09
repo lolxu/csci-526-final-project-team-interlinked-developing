@@ -1,40 +1,91 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
-
     public AudioSource sfxPlayerSource;
     public AudioSource sfxOtherSource;
     public AudioSource musicSource;
     public AudioSource uiSource;
 
-    private void Awake()
+    [Serializable]
+    public class AudioEntry
     {
-        if (Instance == null)
+        public string m_audioName;
+        public AudioClip m_audioClip;
+    }
+    
+    [Serializable]
+    public class AudioLibrary
+    {
+        public List<AudioEntry> m_audioEntries = new List<AudioEntry>();
+    }
+
+    public AudioLibrary m_audioLibrary;
+
+    public void PlayPlayerSFX(string audioName, AudioClip clip = null)
+    {
+        // Find the audio name first
+        bool found = false;
+        foreach (var entry in m_audioLibrary.m_audioEntries)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (entry.m_audioName == audioName)
+            {
+                found = true;
+                sfxPlayerSource.pitch = Random.Range(0.85f, 1.15f);
+                sfxPlayerSource.PlayOneShot(entry.m_audioClip);
+            }
         }
-        else
+        
+        if (!found && clip != null)
         {
-            Destroy(gameObject);
+            sfxPlayerSource.pitch = Random.Range(0.85f, 1.15f);
+            sfxPlayerSource.PlayOneShot(clip);
         }
     }
 
-    public void PlayPlayerSFX(AudioClip clip)
+    public void PlayOtherSFX(string audioName, AudioClip clip = null)
     {
-        if (clip != null) sfxPlayerSource.PlayOneShot(clip);
+        // Find the audio name first
+        bool found = false;
+        foreach (var entry in m_audioLibrary.m_audioEntries)
+        {
+            if (entry.m_audioName == audioName)
+            {
+                found = true;
+                sfxOtherSource.pitch = Random.Range(0.85f, 1.15f);
+                sfxOtherSource.PlayOneShot(entry.m_audioClip);
+            }
+        }
+        
+        if (!found && clip != null)
+        {
+            sfxOtherSource.pitch = Random.Range(0.85f, 1.15f);
+            sfxOtherSource.PlayOneShot(clip);
+        }
     }
 
-    public void PlayOtherSFX(AudioClip clip)
+    public void PlayUI(string audioName, AudioClip clip = null)
     {
-        if (clip != null) sfxOtherSource.PlayOneShot(clip);
-    }
-
-    public void PlayUI(AudioClip clip)
-    {
-        if (clip != null) uiSource.PlayOneShot(clip);
+        // Find the audio name first
+        bool found = false;
+        foreach (var entry in m_audioLibrary.m_audioEntries)
+        {
+            if (entry.m_audioName == audioName)
+            {
+                found = true;
+                uiSource.pitch = Random.Range(0.85f, 1.15f);
+                uiSource.PlayOneShot(entry.m_audioClip);
+            }
+        }
+        
+        if (!found && clip != null)
+        {
+            uiSource.pitch = Random.Range(0.85f, 1.15f);
+            uiSource.PlayOneShot(clip);
+        }
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)

@@ -14,13 +14,11 @@ public class DeathCross : MonoBehaviour
     [SerializeField] private SpriteRenderer m_cross_A;
     [SerializeField] private SpriteRenderer m_cross_B;
 
-    public AudioClip castSound; // Free's sound
-
     private Vector3 m_finalScale;
 
     private void OnEnable()
     {
-        AudioManager.Instance.PlayOtherSFX(castSound); // Free's sound
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyDeath"); // Free's sound
 
         m_finalScale = new Vector3(m_scale, m_scale, m_scale);
         transform.localScale = Vector3.zero;

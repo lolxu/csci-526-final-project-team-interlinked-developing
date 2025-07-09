@@ -564,3 +564,15 @@ MonoBehaviour:
   sfxOtherSource: {fileID: 1385728639407068693}
   musicSource: {fileID: 2697375298008341857}
   uiSource: {fileID: 7896015515985439992}
+  m_audioLibrary:
+    m_audioEntries:
+    - m_audioName: PlayerHit
+      m_audioClip: {fileID: 8300000, guid: 5621e1ade82f3f440bb4fad14ebd1837, type: 3}
+    - m_audioName: EnemyHit
+      m_audioClip: {fileID: 8300000, guid: 09d6d2de63d89ce49beda6ee59b07b59, type: 3}
+    - m_audioName: EnemyDeath
+      m_audioClip: {fileID: 8300000, guid: 0a9e0237b163c2846a9718181e4faf54, type: 3}
+    - m_audioName: PlayerDash
+      m_audioClip: {fileID: 8300000, guid: e8939c29a7ef9e04c9d1bd47b46a025a, type: 3}
+    - m_audioName: PlayerKnockback
+      m_audioClip: {fileID: 8300000, guid: f222fbb9f95395b40a871eb70a0fad5a, type: 3}
