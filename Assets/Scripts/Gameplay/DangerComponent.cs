@@ -76,6 +76,10 @@ public class DangerComponent : MonoBehaviour
     {
         Color orgStartColor = m_lineRenderer.startColor;
         Color orgEndColor = m_lineRenderer.endColor;
+        
+        // Play Audio
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("TrapLaser");
+        
         m_moveSequence.Append(m_lineRenderer
             .DOColor(new Color2(m_lineRenderer.startColor, m_lineRenderer.endColor),
                 new Color2(Color.white, Color.white), 0.25f)

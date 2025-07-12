@@ -576,3 +576,5 @@ MonoBehaviour:
       m_audioClip: {fileID: 8300000, guid: e8939c29a7ef9e04c9d1bd47b46a025a, type: 3}
     - m_audioName: PlayerKnockback
       m_audioClip: {fileID: 8300000, guid: f222fbb9f95395b40a871eb70a0fad5a, type: 3}
+    - m_audioName: TrapLaser
+      m_audioClip: {fileID: 8300000, guid: b6446bd5d1da5fc4aba06dfd1d5f8ceb, type: 3}
