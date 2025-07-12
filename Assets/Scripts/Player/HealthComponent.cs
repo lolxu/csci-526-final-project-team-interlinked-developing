@@ -227,12 +227,17 @@ public class HealthComponent : MonoBehaviour
             Vector2 deathPos = transform.position;
             MetricsManager.Instance.m_metricsData.RecordDeath(level, deathPos);
             
+            // Rope Disconnect Audio
+            SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerDeath");
+            
             Destroy(gameObject);
         }
         else if (gameObject.CompareTag("Enemy"))
         {
             SingletonMaster.Instance.FeelManager.m_enemyDeath.PlayFeedbacks(transform.position);
             SingletonMaster.Instance.EventManager.EnemyDeathEvent.Invoke(gameObject);
+            
+            SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyDeath"); // Free's sound
         }
         else
         {

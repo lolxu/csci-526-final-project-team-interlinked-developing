@@ -35,6 +35,7 @@ public class AudioManager : MonoBehaviour
             {
                 found = true;
                 sfxPlayerSource.pitch = Random.Range(0.85f, 1.15f);
+                sfxPlayerSource.volume = Random.Range(0.9f, 1.0f);
                 sfxPlayerSource.PlayOneShot(entry.m_audioClip);
             }
         }
@@ -42,6 +43,7 @@ public class AudioManager : MonoBehaviour
         if (!found && clip != null)
         {
             sfxPlayerSource.pitch = Random.Range(0.85f, 1.15f);
+            sfxPlayerSource.volume = Random.Range(0.9f, 1.0f);
             sfxPlayerSource.PlayOneShot(clip);
         }
     }
@@ -56,6 +58,7 @@ public class AudioManager : MonoBehaviour
             {
                 found = true;
                 sfxOtherSource.pitch = Random.Range(0.85f, 1.15f);
+                sfxOtherSource.volume = Random.Range(0.9f, 1.0f);
                 sfxOtherSource.PlayOneShot(entry.m_audioClip);
             }
         }
@@ -63,6 +66,7 @@ public class AudioManager : MonoBehaviour
         if (!found && clip != null)
         {
             sfxOtherSource.pitch = Random.Range(0.85f, 1.15f);
+            sfxOtherSource.volume = Random.Range(0.9f, 1.0f);
             sfxOtherSource.PlayOneShot(clip);
         }
     }
@@ -77,6 +81,7 @@ public class AudioManager : MonoBehaviour
             {
                 found = true;
                 uiSource.pitch = Random.Range(0.85f, 1.15f);
+                uiSource.volume = Random.Range(0.9f, 1.0f);
                 uiSource.PlayOneShot(entry.m_audioClip);
             }
         }
@@ -84,6 +89,7 @@ public class AudioManager : MonoBehaviour
         if (!found && clip != null)
         {
             uiSource.pitch = Random.Range(0.85f, 1.15f);
+            uiSource.volume = Random.Range(0.9f, 1.0f);
             uiSource.PlayOneShot(clip);
         }
     }

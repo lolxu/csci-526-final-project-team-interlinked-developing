@@ -137,6 +137,10 @@ public class RopeComponent : MonoBehaviour
     private void OnJointBreak2D(Joint2D brokenJoint)
     {
         Debug.Log("ROPE BROKE!!");
+        
+        // Play Audio
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyRopeSnap");
+        
         if (brokenJoint == m_enemyJoint && !m_isEnemy)
         {
             m_isConnectedToEnemy = false;

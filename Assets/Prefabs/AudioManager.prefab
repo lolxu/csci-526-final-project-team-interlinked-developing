@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -427,7 +427,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -578,3 +578,11 @@ MonoBehaviour:
       m_audioClip: {fileID: 8300000, guid: f222fbb9f95395b40a871eb70a0fad5a, type: 3}
     - m_audioName: TrapLaser
       m_audioClip: {fileID: 8300000, guid: b6446bd5d1da5fc4aba06dfd1d5f8ceb, type: 3}
+    - m_audioName: PlayerLink
+      m_audioClip: {fileID: 8300000, guid: 5e30cd3c14047b147bef38f7d1cafeb8, type: 3}
+    - m_audioName: PlayerRelease
+      m_audioClip: {fileID: 8300000, guid: 84340c17434a473459e16f5303aa5c17, type: 3}
+    - m_audioName: EnemyRopeSnap
+      m_audioClip: {fileID: 8300000, guid: 23729a6510c3dac4c9af182ee75095ea, type: 3}
+    - m_audioName: PlayerDeath
+      m_audioClip: {fileID: 8300000, guid: eb5820e802695ce48a36e11c1580c143, type: 3}

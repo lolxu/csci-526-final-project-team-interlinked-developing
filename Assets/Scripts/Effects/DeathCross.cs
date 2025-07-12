@@ -18,8 +18,6 @@ public class DeathCross : MonoBehaviour
 
     private void OnEnable()
     {
-        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyDeath"); // Free's sound
-
         m_finalScale = new Vector3(m_scale, m_scale, m_scale);
         transform.localScale = Vector3.zero;
 

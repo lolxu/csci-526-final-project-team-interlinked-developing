@@ -386,6 +386,9 @@ public class PlayerBase : MonoBehaviour
                 int wave = SingletonMaster.Instance.WaveManager.m_waveCount;
                 MetricsManager.Instance.m_metricsData.RecordRopeOperations(level, wave, true);
                 RequestRopeConnect(m_bestRopeConnectTarget.GetComponent<Rigidbody2D>());
+                
+                // Rope Connect Audio
+                SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerLink");
             }
         }
     }
@@ -403,6 +406,9 @@ public class PlayerBase : MonoBehaviour
                 
                 // Honing in to the nearest enemy / dangerous object
                 RemoveLinkedObject(m_bestRopeDisconnectTarget);
+                
+                // Rope Disconnect Audio
+                SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerRelease");
             }
         }
     }
