@@ -586,3 +586,49 @@ MonoBehaviour:
       m_audioClip: {fileID: 8300000, guid: 23729a6510c3dac4c9af182ee75095ea, type: 3}
     - m_audioName: PlayerDeath
       m_audioClip: {fileID: 8300000, guid: eb5820e802695ce48a36e11c1580c143, type: 3}
+    - m_audioName: EnemyDash
+      m_audioClip: {fileID: 8300000, guid: 44edc9fb46b3d5b4fa08c9ab35fff8fe, type: 3}
+    - m_audioName: EnemyExplode
+      m_audioClip: {fileID: 8300000, guid: 8c1b44c98b2f2434bbb01e829f1c6e60, type: 3}
+    - m_audioName: EnemyKnockBack
+      m_audioClip: {fileID: 8300000, guid: 260c449b9d8c3c644a50a658dbdc966c, type: 3}
+    - m_audioName: EnemyShoot_1
+      m_audioClip: {fileID: 8300000, guid: 16f7a617fbd693446a999388cafa2374, type: 3}
+    - m_audioName: EnemyShoot_2
+      m_audioClip: {fileID: 8300000, guid: 144680c8cb96c7f4c8627492fa5b0aa8, type: 3}
+    - m_audioName: EnemyShoot_3
+      m_audioClip: {fileID: 8300000, guid: c738069de486a634281200508cad3efa, type: 3}
+    - m_audioName: EnemySpellCharge
+      m_audioClip: {fileID: 8300000, guid: 319107f7f93a1704d9423dae1c28b5de, type: 3}
+    - m_audioName: EnemyTankCharge
+      m_audioClip: {fileID: 8300000, guid: 8095b80b1b505504d8d6ed6b4a807d35, type: 3}
+    - m_audioName: EnemyTankShoot
+      m_audioClip: {fileID: 8300000, guid: d7aa3c48b16d85d4380c0c0b2f21adab, type: 3}
+    - m_audioName: EnemyHitBySpikeball
+      m_audioClip: {fileID: 8300000, guid: 73fcf235d0cf5d649be7aadcabc3d7e2, type: 3}
+    - m_audioName: TerrainChange
+      m_audioClip: {fileID: 8300000, guid: 64a2bf7cae4dd724f8719241365851c1, type: 3}
+    - m_audioName: PlayerShootPistol
+      m_audioClip: {fileID: 8300000, guid: 1b4418ba52fc52745aada1515c265094, type: 3}
+    - m_audioName: PlayerAbsorbHealthPack
+      m_audioClip: {fileID: 8300000, guid: 1b852e620822a9a47b8fcf2abc27278d, type: 3}
+    - m_audioName: PlayerShootSniper
+      m_audioClip: {fileID: 8300000, guid: 01501cadea5b4334b831d027f2af4065, type: 3}
+    - m_audioName: PlayerWeaponBreak
+      m_audioClip: {fileID: 8300000, guid: 9b6ddf28f060adf42939d28ac7cf15c5, type: 3}
+    - m_audioName: UIPauseMenu
+      m_audioClip: {fileID: 8300000, guid: 3589306fa08387b4c9ad852f9cd7739c, type: 3}
+    - m_audioName: UIButtonTouch
+      m_audioClip: {fileID: 8300000, guid: d552def129fa5a84ea5136120eff108a, type: 3}
+    - m_audioName: UIStartGame
+      m_audioClip: {fileID: 8300000, guid: c2bee8b325f39424298b3130c9b94634, type: 3}
+    - m_audioName: UIButtonClick
+      m_audioClip: {fileID: 8300000, guid: 77fc154243aae5f4db08c623b502a4dc, type: 3}
+    - m_audioName: MusicCavern
+      m_audioClip: {fileID: 8300000, guid: 852f953ba54721746a3326ce751a419c, type: 3}
+    - m_audioName: MusicFactory
+      m_audioClip: {fileID: 8300000, guid: 5e8fb51e1c156e746b9d883b46fd1cc6, type: 3}
+    - m_audioName: MusicVine
+      m_audioClip: {fileID: 8300000, guid: a19ccc585322bea41800b3d8f6942b80, type: 3}
+    - m_audioName: MusicMainMenu
+      m_audioClip: {fileID: 8300000, guid: cc71e7a3316a31342b62f8f53f305b89, type: 3}
