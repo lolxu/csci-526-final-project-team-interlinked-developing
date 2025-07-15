@@ -576,3 +576,30 @@ MonoBehaviour:
       m_audioClip: {fileID: 8300000, guid: e8939c29a7ef9e04c9d1bd47b46a025a, type: 3}
     - m_audioName: PlayerKnockback
       m_audioClip: {fileID: 8300000, guid: f222fbb9f95395b40a871eb70a0fad5a, type: 3}
+<<<<<<< Updated upstream
+=======
+    - m_audioName: TrapLaser
+      m_audioClip: {fileID: 8300000, guid: b6446bd5d1da5fc4aba06dfd1d5f8ceb, type: 3}
+    - m_audioName: PlayerLink
+      m_audioClip: {fileID: 8300000, guid: 5e30cd3c14047b147bef38f7d1cafeb8, type: 3}
+    - m_audioName: PlayerRelease
+      m_audioClip: {fileID: 8300000, guid: 84340c17434a473459e16f5303aa5c17, type: 3}
+    - m_audioName: EnemyRopeSnap
+      m_audioClip: {fileID: 8300000, guid: 23729a6510c3dac4c9af182ee75095ea, type: 3}
+    - m_audioName: PlayerDeath
+      m_audioClip: {fileID: 8300000, guid: eb5820e802695ce48a36e11c1580c143, type: 3}
+    - m_audioName: EnemyHitByMace
+      m_audioClip: {fileID: 8300000, guid: 73fcf235d0cf5d649be7aadcabc3d7e2, type: 3}
+    - m_audioName: PlayerAbsorbHealthPack
+      m_audioClip: {fileID: 8300000, guid: 1b852e620822a9a47b8fcf2abc27278d, type: 3}
+    - m_audioName: PlayerShootPistol
+      m_audioClip: {fileID: 8300000, guid: 1b4418ba52fc52745aada1515c265094, type: 3}
+    - m_audioName: PlayerShootSniper
+      m_audioClip: {fileID: 8300000, guid: 01501cadea5b4334b831d027f2af4065, type: 3}
+    - m_audioName: UIStartGame
+      m_audioClip: {fileID: 8300000, guid: c2bee8b325f39424298b3130c9b94634, type: 3}
+    - m_audioName: UIButtonClick
+      m_audioClip: {fileID: 8300000, guid: 77fc154243aae5f4db08c623b502a4dc, type: 3}
+    - m_audioName: UIPauseMenu
+      m_audioClip: {fileID: 8300000, guid: 3589306fa08387b4c9ad852f9cd7739c, type: 3}
+>>>>>>> Stashed changes
