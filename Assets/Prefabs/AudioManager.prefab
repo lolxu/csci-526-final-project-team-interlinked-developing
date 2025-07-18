@@ -624,11 +624,13 @@ MonoBehaviour:
       m_audioClip: {fileID: 8300000, guid: c2bee8b325f39424298b3130c9b94634, type: 3}
     - m_audioName: UIButtonClick
       m_audioClip: {fileID: 8300000, guid: 77fc154243aae5f4db08c623b502a4dc, type: 3}
-    - m_audioName: MusicCavern
-      m_audioClip: {fileID: 8300000, guid: 852f953ba54721746a3326ce751a419c, type: 3}
-    - m_audioName: MusicFactory
-      m_audioClip: {fileID: 8300000, guid: 5e8fb51e1c156e746b9d883b46fd1cc6, type: 3}
-    - m_audioName: MusicVine
-      m_audioClip: {fileID: 8300000, guid: a19ccc585322bea41800b3d8f6942b80, type: 3}
-    - m_audioName: MusicMainMenu
-      m_audioClip: {fileID: 8300000, guid: cc71e7a3316a31342b62f8f53f305b89, type: 3}
+  m_musicLibrary:
+    m_musicEntries:
+    - m_musicName: MusicCavern
+      m_musicClip: {fileID: 8300000, guid: 852f953ba54721746a3326ce751a419c, type: 3}
+    - m_musicName: MusicVine
+      m_musicClip: {fileID: 8300000, guid: a19ccc585322bea41800b3d8f6942b80, type: 3}
+    - m_musicName: MusicFactory
+      m_musicClip: {fileID: 8300000, guid: 5e8fb51e1c156e746b9d883b46fd1cc6, type: 3}
+    - m_musicName: MusicMainMenu
+      m_musicClip: {fileID: 8300000, guid: cc71e7a3316a31342b62f8f53f305b89, type: 3}

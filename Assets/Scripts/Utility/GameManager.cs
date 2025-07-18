@@ -65,6 +65,27 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("No Singleton Instances found...");
         }
+
+        PlayMusicBasedOnScene(scene.name);
+    }
+
+    private void PlayMusicBasedOnScene(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "Main Menu":
+                SingletonMaster.Instance.AudioManager.PlayMusic("MusicMainMenu");
+                break;
+            case "Cavern":
+                SingletonMaster.Instance.AudioManager.PlayMusic("MusicCavern");
+                break;
+            case "Vines":
+                SingletonMaster.Instance.AudioManager.PlayMusic("MusicVines");
+                break;
+            case "Factory":
+                SingletonMaster.Instance.AudioManager.PlayMusic("MusicFactory");
+                break;
+        }
         
     }
 

@@ -23,7 +23,21 @@ public class AudioManager : MonoBehaviour
         public List<AudioEntry> m_audioEntries = new List<AudioEntry>();
     }
 
+    [Serializable]
+    public class MusicEntry
+    {
+        public string m_musicName;
+        public AudioClip m_musicClip;
+    }
+
+    [Serializable]
+    public class MusicLibrary
+    {
+        public List<MusicEntry> m_musicEntries = new List<MusicEntry>();
+    }
+
     public AudioLibrary m_audioLibrary;
+    public MusicLibrary m_musicLibrary;
 
     public void PlayPlayerSFX(string audioName, AudioClip clip = null)
     {
@@ -94,13 +108,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayMusic(AudioClip clip, bool loop = true)
+    public void PlayMusic(string musicName, bool loop = true)
     {
-        if (clip != null)
+        foreach (var entry in m_musicLibrary.m_musicEntries)
         {
-            musicSource.clip = clip;
-            musicSource.loop = loop;
-            musicSource.Play();
+            if (entry.m_musicName == musicName)
+            {
+                musicSource.clip = entry.m_musicClip;
+                musicSource.loop = loop;
+                musicSource.Play();
+            }
         }
     }
 
