@@ -15,6 +15,8 @@ public class EventManager : MonoBehaviour
     public UnityEvent<float> CooldownStarted = new UnityEvent<float>();
     public UnityEvent LevelClearEvent = new UnityEvent();
     public UnityEvent PlayerWinEvent = new UnityEvent();
+    public UnityEvent KillingSpreeStartEvent = new UnityEvent();
+    public UnityEvent KillingSpreeEndEvent = new UnityEvent();
     
     [Header("Connection Events")]
     // Object, Instigator

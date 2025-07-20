@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,6 +10,10 @@ public class AudioManager : MonoBehaviour
     public AudioSource sfxOtherSource;
     public AudioSource musicSource;
     public AudioSource uiSource;
+
+    private bool m_stopMusic = false;
+    private bool m_playIntenseMusic = false;
+    private Coroutine m_musicCoroutine;
 
     [Serializable]
     public class AudioEntry
@@ -27,7 +32,10 @@ public class AudioManager : MonoBehaviour
     public class MusicEntry
     {
         public string m_musicName;
-        public AudioClip m_musicClip;
+        public List<AudioClip> m_musicClips = new List<AudioClip>();
+        public List<AudioClip> m_intenseMusicClips = new List<AudioClip>();
+        public AudioClip m_oneShotStartTransition;
+        public AudioClip m_oneShotEndTransition;
     }
 
     [Serializable]
@@ -38,6 +46,28 @@ public class AudioManager : MonoBehaviour
 
     public AudioLibrary m_audioLibrary;
     public MusicLibrary m_musicLibrary;
+
+    private void Start()
+    {
+        SingletonMaster.Instance.EventManager.KillingSpreeStartEvent.AddListener(KillingSpreeStarted);
+        SingletonMaster.Instance.EventManager.KillingSpreeEndEvent.AddListener(KillingSpreeEnded);
+    }
+
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.KillingSpreeStartEvent.RemoveListener(KillingSpreeStarted);
+        SingletonMaster.Instance.EventManager.KillingSpreeEndEvent.RemoveListener(KillingSpreeEnded);
+    }
+
+    private void KillingSpreeStarted()
+    {
+        m_playIntenseMusic = true;
+    }
+
+    private void KillingSpreeEnded()
+    {
+        m_playIntenseMusic = false;
+    }
 
     public void PlayPlayerSFX(string audioName, AudioClip clip = null)
     {
@@ -114,8 +144,34 @@ public class AudioManager : MonoBehaviour
         {
             if (entry.m_musicName == musicName)
             {
-                musicSource.clip = entry.m_musicClip;
-                musicSource.loop = loop;
+                StartPlayingMusicClips(entry.m_musicClips, entry.m_intenseMusicClips);
+            }
+        }
+    }
+
+    private void StartPlayingMusicClips(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips)
+    {
+        m_stopMusic = false;
+        m_musicCoroutine = StartCoroutine(MusicCoroutine(m_musicClips, intenseMusicClips));
+    }
+
+    private IEnumerator MusicCoroutine(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips)
+    {
+        while (!m_stopMusic)
+        {
+            while (musicSource.isPlaying)
+            {
+                yield return null;
+            }
+
+            if (m_playIntenseMusic)
+            {
+                musicSource.clip = intenseMusicClips[Random.Range(0, intenseMusicClips.Count)];
+                musicSource.Play();
+            }
+            else
+            {
+                musicSource.clip = m_musicClips[Random.Range(0, m_musicClips.Count)];
                 musicSource.Play();
             }
         }
@@ -123,6 +179,8 @@ public class AudioManager : MonoBehaviour
 
     public void StopMusic()
     {
+        m_stopMusic = true;
+        StopCoroutine(m_musicCoroutine);
         musicSource.Stop();
     }
 }

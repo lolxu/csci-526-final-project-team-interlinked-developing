@@ -22,6 +22,9 @@ public class SingletonMaster : MonoBehaviour
 
     [Header("Ability Manager")] 
     public AbilityManager AbilityManager;
+    
+    [Header("Killing Spree Manager")]
+    public KillingSpreeManager KillingSpreeManager;
 
     [Header("Scriptable Objects")] 
     public WeightedRandomScriptable WeightedRandomItems;

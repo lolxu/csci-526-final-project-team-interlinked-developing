@@ -627,10 +627,28 @@ MonoBehaviour:
   m_musicLibrary:
     m_musicEntries:
     - m_musicName: MusicCavern
-      m_musicClip: {fileID: 8300000, guid: 852f953ba54721746a3326ce751a419c, type: 3}
-    - m_musicName: MusicVine
-      m_musicClip: {fileID: 8300000, guid: a19ccc585322bea41800b3d8f6942b80, type: 3}
+      m_musicClips:
+      - {fileID: 8300000, guid: 104ffccd68c1dcd4191356cbd34e5659, type: 3}
+      - {fileID: 8300000, guid: 69d857dc2dc3077448a8622b267be5a2, type: 3}
+      m_intenseMusicClips:
+      - {fileID: 8300000, guid: f7f1540efa7093b4a8388c929407f327, type: 3}
+      - {fileID: 8300000, guid: ef21a81f2862b0d4f87ddef04c614aae, type: 3}
+      m_oneShotStartTransition: {fileID: 0}
+      m_oneShotEndTransition: {fileID: 0}
+    - m_musicName: MusicVines
+      m_musicClips:
+      - {fileID: 8300000, guid: 5a9948284551556469c87463bc2137e2, type: 3}
+      - {fileID: 8300000, guid: 53ab94452f5e6f845b7305f0663c6b8a, type: 3}
+      m_intenseMusicClips:
+      - {fileID: 8300000, guid: 867676700f9c3004ebc1bb2b8da490c3, type: 3}
+      - {fileID: 8300000, guid: 26359e14e37ac024d9744487b5814418, type: 3}
+      m_oneShotStartTransition: {fileID: 8300000, guid: 84b99483eb3972246b7cc95ca1b1e6f8, type: 3}
+      m_oneShotEndTransition: {fileID: 8300000, guid: b2f7adfe5e4309d41a5db01819dd98c2, type: 3}
     - m_musicName: MusicFactory
-      m_musicClip: {fileID: 8300000, guid: 5e8fb51e1c156e746b9d883b46fd1cc6, type: 3}
-    - m_musicName: MusicMainMenu
-      m_musicClip: {fileID: 8300000, guid: cc71e7a3316a31342b62f8f53f305b89, type: 3}
+      m_musicClips:
+      - {fileID: 8300000, guid: 550a89c4fdf18f44d8d69e76d3f454d5, type: 3}
+      m_intenseMusicClips:
+      - {fileID: 8300000, guid: 406992fddeb816844a78100270c8d418, type: 3}
+      - {fileID: 8300000, guid: 725a04a39124a444ea2968a70d4ab6e2, type: 3}
+      m_oneShotStartTransition: {fileID: 8300000, guid: 7ed4322dccc06054ba9d15c67dfb13e7, type: 3}
+      m_oneShotEndTransition: {fileID: 8300000, guid: e3a3d13718dfd4942905ab19ddba686b, type: 3}

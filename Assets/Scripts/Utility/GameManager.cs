@@ -99,6 +99,9 @@ public class GameManager : MonoBehaviour
     {
         m_playerWon = true;
         m_levelData.SetLevelUnlocked(SceneManager.GetActiveScene().name);
+        
+        // Stop Music
+        SingletonMaster.Instance.AudioManager.StopMusic();
     }
     
     private void OnPlayerDeath(GameObject arg0)
