@@ -144,19 +144,20 @@ public class AudioManager : MonoBehaviour
         {
             if (entry.m_musicName == musicName)
             {
-                StartPlayingMusicClips(entry.m_musicClips, entry.m_intenseMusicClips);
+                StartPlayingMusicClips(entry.m_musicClips, entry.m_intenseMusicClips, entry.m_oneShotStartTransition, entry.m_oneShotEndTransition);
             }
         }
     }
 
-    private void StartPlayingMusicClips(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips)
+    private void StartPlayingMusicClips(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips,  AudioClip oneShotStartTransition, AudioClip oneShotEndTransition)
     {
         m_stopMusic = false;
-        m_musicCoroutine = StartCoroutine(MusicCoroutine(m_musicClips, intenseMusicClips));
+        m_musicCoroutine = StartCoroutine(MusicCoroutine(m_musicClips, intenseMusicClips, oneShotStartTransition, oneShotEndTransition));
     }
 
-    private IEnumerator MusicCoroutine(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips)
+    private IEnumerator MusicCoroutine(List<AudioClip> m_musicClips, List<AudioClip> intenseMusicClips,  AudioClip oneShotStartTransition, AudioClip oneShotEndTransition)
     {
+        bool isPlayingIntense = false;
         while (!m_stopMusic)
         {
             while (musicSource.isPlaying)
@@ -166,11 +167,21 @@ public class AudioManager : MonoBehaviour
 
             if (m_playIntenseMusic)
             {
+                if (!isPlayingIntense)
+                {
+                    isPlayingIntense = true;
+                    musicSource.PlayOneShot(oneShotStartTransition);
+                }
                 musicSource.clip = intenseMusicClips[Random.Range(0, intenseMusicClips.Count)];
                 musicSource.Play();
             }
             else
             {
+                if (isPlayingIntense)
+                {
+                    isPlayingIntense = false;
+                    musicSource.PlayOneShot(oneShotEndTransition);
+                }
                 musicSource.clip = m_musicClips[Random.Range(0, m_musicClips.Count)];
                 musicSource.Play();
             }
