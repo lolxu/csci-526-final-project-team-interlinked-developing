@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class KillingSpreeManager : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class KillingSpreeManager : MonoBehaviour
         {
             m_hasKillingSpree = true;
             SingletonMaster.Instance.EventManager.KillingSpreeStartEvent.Invoke();
+            SingletonMaster.Instance.FeelManager.m_killingSpreeStart.PlayFeedbacks();
         }
     }
 
@@ -44,6 +47,7 @@ public class KillingSpreeManager : MonoBehaviour
             if (m_hasKillingSpree)
             {
                 SingletonMaster.Instance.EventManager.KillingSpreeEndEvent.Invoke();
+                SingletonMaster.Instance.FeelManager.m_killingSpreeEnd.PlayFeedbacks();
                 m_hasKillingSpree = false;
             }
             
