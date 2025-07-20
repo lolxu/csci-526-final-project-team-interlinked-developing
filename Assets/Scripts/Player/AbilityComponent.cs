@@ -14,7 +14,7 @@ public class AbilityComponent : MonoBehaviour
     public int m_maxUse = 5;
     public bool m_canDespawn = true;
     [SerializeField] private SpriteRenderer m_spriteRenderer;
-    [SerializeField] private AbilityManager.AbilityTypes m_type;
+    public AbilityManager.AbilityTypes m_type;
     [SerializeField] private Color m_coolDownColor;
     [SerializeField] private RopeComponent m_ropeComponent;
     [SerializeField] private float m_lifeTime = 10.0f;
@@ -128,7 +128,9 @@ public class AbilityComponent : MonoBehaviour
 
     private void OnAbilityActivated(AbilityManager.AbilityTypes type)
     {
-        if (m_isConnected && m_type == type && m_canActivate && m_use < m_maxUse)
+        if (m_isConnected && m_type == type && m_canActivate && m_use < m_maxUse && 
+            (SingletonMaster.Instance.PlayerBase.m_dashPool.Count > 0 && SingletonMaster.Instance.PlayerBase.m_dashPool[^1] == this || 
+             SingletonMaster.Instance.PlayerBase.m_knockBackPool.Count > 0 && SingletonMaster.Instance.PlayerBase.m_knockBackPool[^1] == this))
         {
             m_use++;
             float scale = m_curve.Evaluate((float)(m_maxUse - m_use) / m_maxUse) * m_scaleFactor;
@@ -186,6 +188,8 @@ public class AbilityComponent : MonoBehaviour
             m_isConnected = false;
             m_ability.RemoveLink();
 
+            SingletonMaster.Instance.PlayerBase.RemoveAbilityFromStack(this);
+
             if (m_canActivate)
             {
                 for (int i = 0; i < m_spriteRenderers.Count; i++)
@@ -219,6 +223,9 @@ public class AbilityComponent : MonoBehaviour
                 m_showPrompt = false;
                 SingletonMaster.Instance.EventManager.TutorialPlayerLinkedAbility.Invoke();
             }
+            
+            // Add to player's ability stack
+            SingletonMaster.Instance.PlayerBase.AddAbilityToStack(this);
         }
     }
     
@@ -266,6 +273,7 @@ public class AbilityComponent : MonoBehaviour
         
         transform.DOScale(Vector3.zero, m_shrinkTime).SetEase(Ease.InSine).OnComplete(() =>
         {
+            SingletonMaster.Instance.PlayerBase.RemoveAbilityFromStack(this);
             Destroy(gameObject);
         });
     }

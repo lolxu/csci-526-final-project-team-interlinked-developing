@@ -54,6 +54,9 @@ public class PlayerBase : MonoBehaviour
     [Header("Ability")] 
     public bool m_isDashing = false;
 
+    public List<AbilityComponent> m_dashPool = new List<AbilityComponent>();
+    public List<AbilityComponent> m_knockBackPool = new List<AbilityComponent>();
+    
     private Rigidbody2D m_RB;
     private SpriteRenderer m_spriteRenderer;
     private Color m_orgColor;
@@ -523,5 +526,25 @@ public class PlayerBase : MonoBehaviour
     {
         m_knockBackParticles.PlayFeedbacks();
     }
-    
+
+    public void AddAbilityToStack(AbilityComponent ability)
+    {
+        switch (ability.m_type)
+        {
+            case AbilityManager.AbilityTypes.Dash:
+                Debug.Log("Trying to Add Dash Ability to Pool");
+                m_dashPool.Add(ability);
+                break;
+            case AbilityManager.AbilityTypes.Knockback:
+                Debug.Log("Trying to Add Knockback Ability to Pool");
+                m_knockBackPool.Add(ability);
+                break;
+        }
+    }
+
+    public void RemoveAbilityFromStack(AbilityComponent ability)
+    {
+        m_dashPool.Remove(ability);
+        m_knockBackPool.Remove(ability);
+    }
 }
