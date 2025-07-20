@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath(GameObject arg0)
     {
         m_canRestart = true;
+        SingletonMaster.Instance.AudioManager.StopMusic();
     }
 
     private void Update()
