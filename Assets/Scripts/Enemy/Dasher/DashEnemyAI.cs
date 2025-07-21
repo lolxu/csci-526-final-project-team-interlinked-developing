@@ -156,6 +156,8 @@ public class DashEnemyAI : BaseEnemyAI
 
     private IEnumerator Dash(Vector3 direction)
     {
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyDash");
+        
         float timer = 0.0f;
         while (timer < m_dashDuration)
         {

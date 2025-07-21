@@ -162,6 +162,8 @@ public class RepulserEnemyAI : BaseEnemyAI
 
     private IEnumerator Repulse()
     {
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyKnockBack");
+        
         Vector3 orgScale = transform.localScale;
         transform.DOScale(orgScale * 2.0f, 0.1f).SetEase(Ease.InOutExpo);
         

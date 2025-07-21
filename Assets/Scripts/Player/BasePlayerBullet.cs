@@ -38,7 +38,16 @@ public class BasePlayerBullet : MonoBehaviour
         if (m_bulletType == BulletType.Scanhit)
         {
             SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks(transform.position, 0.25f);
-            // SingletonMaster.Instance.CameraShakeManager.Shake(5.0f, 0.15f);
+
+            SingletonMaster.Instance.AudioManager.PlayPlayerSFX(m_bulletTargetTag == "Enemy"
+                ? "PlayerShootSniper"
+                : "EnemyShoot_3");
+        }
+        else
+        {
+            SingletonMaster.Instance.AudioManager.PlayPlayerSFX(m_bulletTargetTag == "Enemy"
+                ? "PlayerShootPistol"
+                : "EnemyShoot_1");
         }
     }
 

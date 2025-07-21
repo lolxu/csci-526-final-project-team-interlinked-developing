@@ -39,6 +39,8 @@ public class MovingEnvironmentals : MonoBehaviour
         gameObject.SetActive(true);
         transform.DOMove(m_end.transform.position, m_moveDuration)
             .SetEase(m_ease);
+        
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("TerrainChange");
 
         if (m_needsPath)
         {
@@ -57,6 +59,8 @@ public class MovingEnvironmentals : MonoBehaviour
     {
         transform.DOMove(m_start, m_moveDuration)
             .SetEase(m_ease);
+        
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("TerrainChange");
     }
 
     private void OnDrawGizmos()

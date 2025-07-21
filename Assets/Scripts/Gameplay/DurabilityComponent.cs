@@ -148,6 +148,7 @@ public class DurabilityComponent : MonoBehaviour
                 {
                     m_isDespawning = true;
                     rc.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
+                    SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerWeaponBreak");
                     DespawnSequence();
                 }
             }

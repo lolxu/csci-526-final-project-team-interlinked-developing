@@ -69,9 +69,9 @@ public class BomberEnemyAI : BaseEnemyAI
     {
         if (obj == gameObject && m_canExplode)
         {
+            m_spRend.DOKill();
             m_spRend.color = m_orgColor;
             m_canExplode = false;
-            m_spRend.DOKill(true);
         }
     }
     
@@ -140,6 +140,8 @@ public class BomberEnemyAI : BaseEnemyAI
                 {
                     if (m_canExplode)
                     {
+                        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyExplode");
+                        
                         m_spRend.color = m_orgColor;
                         SingletonMaster.Instance.FeelManager.m_cameraShake.PlayFeedbacks();
                         SingletonMaster.Instance.FeelManager.m_enemyExplode.PlayFeedbacks(transform.position);

@@ -84,6 +84,8 @@ public class ProjectileEnemyBehavior : BaseEnemyBehavior
         float timer = 0.0f;
         float rate = 1.0f / m_summonTime;
         
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemySpellCharge");
+        
         while (timer < m_summonTime)
         {
             timer += Time.deltaTime;

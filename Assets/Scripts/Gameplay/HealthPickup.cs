@@ -109,6 +109,7 @@ public class HealthPickup : MonoBehaviour
                             m_healValue = 0.0f;
                             m_ropeComponent.DetachRope(SingletonMaster.Instance.PlayerBase.gameObject);
                             m_isDespawning = true;
+                            SingletonMaster.Instance.AudioManager.PlayPlayerSFX("PlayerAbsorbHealthPack");
                             ShrinkSequence();
                         }
                     }

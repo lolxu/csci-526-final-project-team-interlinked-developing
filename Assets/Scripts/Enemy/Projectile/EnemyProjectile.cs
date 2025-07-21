@@ -57,6 +57,8 @@ public class EnemyProjectile : MonoBehaviour
         m_isDoneSpawning = true;
         m_collider.includeLayers = m_affectedLayer;
         GetComponent<SpriteRenderer>().color = m_spawnedColor;
+        
+        SingletonMaster.Instance.AudioManager.PlayOtherSFX("EnemyTankShoot");
     }
 
     private void FixedUpdate()
