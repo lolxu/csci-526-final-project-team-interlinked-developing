@@ -54,6 +54,10 @@ public class PlayerBase : MonoBehaviour
     [Header("Ability")] 
     public bool m_isDashing = false;
 
+    [Header("Killing Spree Settings")] 
+    [SerializeField] private float m_movementMultiplier = 1.25f;
+    [SerializeField] private float m_throwMultiplier = 1.5f;
+
     public List<AbilityComponent> m_dashPool = new List<AbilityComponent>();
     public List<AbilityComponent> m_knockBackPool = new List<AbilityComponent>();
     
@@ -73,6 +77,7 @@ public class PlayerBase : MonoBehaviour
     private GameObject m_bestRopeDisconnectTarget = null;
 
     private bool m_isRagdolling = false;
+    private bool m_isKillingSpree = false;
 
     private void Start()
     {
@@ -97,6 +102,9 @@ public class PlayerBase : MonoBehaviour
         
         SingletonMaster.Instance.EventManager.LinkEvent.AddListener(OnLinkedItem);
         SingletonMaster.Instance.EventManager.UnlinkEvent.AddListener(OnUnlinkedItem);
+        
+        SingletonMaster.Instance.EventManager.KillingSpreeStartEvent.AddListener(OnKillingSpreeStart);
+        SingletonMaster.Instance.EventManager.KillingSpreeEndEvent.AddListener(OnKillingSpreeEnd);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -105,9 +113,27 @@ public class PlayerBase : MonoBehaviour
             new Vector3(m_connectRadius * 2, m_connectRadius * 2, m_connectRadius * 2);
     }
 
+    private void OnDisable()
+    {
+        SingletonMaster.Instance.EventManager.LinkEvent.RemoveListener(OnLinkedItem);
+        SingletonMaster.Instance.EventManager.UnlinkEvent.RemoveListener(OnUnlinkedItem);
+        
+        SingletonMaster.Instance.EventManager.KillingSpreeStartEvent.RemoveListener(OnKillingSpreeStart);
+        SingletonMaster.Instance.EventManager.KillingSpreeEndEvent.RemoveListener(OnKillingSpreeEnd);
+    }
+
+    private void OnKillingSpreeEnd()
+    {
+        m_isKillingSpree = false;
+    }
+
+    private void OnKillingSpreeStart()
+    {
+        m_isKillingSpree =  true;
+    }
+
     private void OnUnlinkedItem(GameObject obj, GameObject instigator)
     {
-        // TODO: There are some exceptions here
         if (obj != null && instigator != null)
         {
             if (m_linkedObjects.Contains(obj) && instigator.CompareTag("Player"))
@@ -159,25 +185,6 @@ public class PlayerBase : MonoBehaviour
         }
     }
 
-    private IEnumerator InitCoroutine()
-    {
-        // yield return new WaitForSeconds(0.5f);
-        yield return null;
-        for (int i = 0; i < m_linkedObjects.Count; i++)
-        {
-            // Debug.Log(m_linkedDisplacements[i]);
-            m_linkedObjects[i].transform.position = transform.position + m_linkedDisplacements[i];
-            m_linkedObjects[i].GetComponent<Rigidbody2D>().isKinematic = false;
-        }
-        
-        for (int i = 0; i < m_rope.transform.childCount; i++)
-        {
-            Rigidbody2D rb = m_rope.transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>();
-            m_rope.transform.GetChild(i).position = transform.position + m_ropeDisplacements[i];
-            rb.isKinematic = false;
-        }
-    }
-
     /// <summary>
     /// For physics based movements
     /// </summary>
@@ -195,6 +202,11 @@ public class PlayerBase : MonoBehaviour
             if (!m_isRagdolling && m_RB.velocity.magnitude > m_maxSpeed)
             {
                 m_RB.velocity = m_moveDirection * m_maxSpeed;
+
+                if (m_isKillingSpree)
+                {
+                    m_RB.velocity *= m_movementMultiplier;
+                }
             }
         }
     }
@@ -497,7 +509,15 @@ public class PlayerBase : MonoBehaviour
 
                 Vector3 drawDir = throwDir;
                 Debug.DrawLine(obj.transform.position, obj.transform.position + drawDir * 10.0f, Color.green, 10.0f);
-                rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
+
+                if (m_isKillingSpree)
+                {
+                    rb.AddForce(throwDir.normalized * m_throwStrength * m_throwMultiplier, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(throwDir.normalized * m_throwStrength, ForceMode2D.Impulse);
+                }
             }
             else
             {
