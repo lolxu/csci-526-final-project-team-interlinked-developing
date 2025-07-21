@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         m_playerWon = false;
@@ -60,22 +65,19 @@ public class GameManager : MonoBehaviour
             SingletonMaster.Instance.EventManager.PlayerDeathEvent.AddListener(OnPlayerDeath);
 
             SingletonMaster.Instance.PlayerBase.m_ropeRangeIndicator.SetActive(m_levelData.m_needsRopeRangeIndicator);
+            
+            PlayMusicBasedOnScene(scene.name);
         }
         else
         {
             Debug.LogError("No Singleton Instances found...");
         }
-
-        PlayMusicBasedOnScene(scene.name);
     }
 
     private void PlayMusicBasedOnScene(string sceneName)
     {
         switch (sceneName)
         {
-            case "Main Menu":
-                SingletonMaster.Instance.AudioManager.PlayMusic("MusicMainMenu");
-                break;
             case "Cavern":
                 SingletonMaster.Instance.AudioManager.PlayMusic("MusicCavern");
                 break;
