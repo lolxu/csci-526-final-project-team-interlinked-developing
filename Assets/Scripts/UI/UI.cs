@@ -205,8 +205,11 @@ public class UI : MonoBehaviour
 
     public void PauseGame()
     {
+        SingletonMaster.Instance.AudioManager.PlayUISFX("UIPauseMenu");
         m_pauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        
+        AudioListener.pause = true;
     }
 
     public void ResumeGame()
@@ -214,6 +217,8 @@ public class UI : MonoBehaviour
         m_pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
         GameManager.Instance.m_gamePaused = false;
+        
+        AudioListener.pause = false;
     }
 
     private void SetupWaveUI()

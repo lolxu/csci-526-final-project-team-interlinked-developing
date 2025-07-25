@@ -115,7 +115,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayUI(string audioName, AudioClip clip = null)
+    public void PlayUISFX(string audioName, AudioClip clip = null)
     {
         // Find the audio name first
         bool found = false;

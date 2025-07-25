@@ -5407,6 +5407,8 @@ MonoBehaviour:
   m_ropeRangeIndicator: {fileID: 6350096877897920468}
   m_isFollowCam: 1
   m_isDashing: 0
+  m_movementMultiplier: 1.25
+  m_throwMultiplier: 1.5
   m_dashPool: []
   m_knockBackPool: []
 --- !u!114 &3487075262399259084
@@ -5601,7 +5603,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 136656
+  m_InstanceId: 80068
   m_LocalBounds:
     m_Center: {x: 0.00000011920929, y: 0, z: 0}
     m_Extent: {x: 0.49999988, y: 0.5, z: 0}
@@ -8642,6 +8644,7 @@ MonoBehaviour:
   m_showTutorial: 0
   m_showLevelName: 0
   m_levelData: {fileID: 11400000, guid: 0e27cf05644bc8843b3755f76a701bfd, type: 2}
+  m_transitionSFX: {fileID: 182819127259022294, guid: 8e64ad6c9e7d3a141bf58de2473533bb, type: 3}
 --- !u!1 &5486014065886433393
 GameObject:
   m_ObjectHideFlags: 0
@@ -8801,6 +8804,7 @@ GameObject:
   - component: {fileID: 6963180986233357729}
   - component: {fileID: 836239819568664112}
   - component: {fileID: 126069504668623504}
+  - component: {fileID: 3771040308097182756}
   m_Layer: 5
   m_Name: Resume Button
   m_TagString: Untagged
@@ -8922,6 +8926,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3771040308097182756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914130202878397886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65602e07e97d71c48b50366dbe19cb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5975638652322006839
 GameObject:
   m_ObjectHideFlags: 0

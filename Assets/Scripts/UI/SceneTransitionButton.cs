@@ -13,6 +13,8 @@ public class SceneTransitionButton : MonoBehaviour
     public bool m_showLevelName = false;
     public LevelDataScriptable m_levelData;
 
+    [SerializeField] private GameObject m_transitionSFX;
+
     private void OnEnable()
     {
         if (!m_showTutorial)
@@ -37,6 +39,8 @@ public class SceneTransitionButton : MonoBehaviour
         {
             MetricsManager.Instance.Send();
         }
+
+        Instantiate(m_transitionSFX);
         
         m_levelData.m_needsTutorial = m_showTutorial;
         m_levelData.m_needsLevelName = m_showLevelName;
