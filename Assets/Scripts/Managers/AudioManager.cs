@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -194,4 +195,9 @@ public class AudioManager : MonoBehaviour
         StopCoroutine(m_musicCoroutine);
         musicSource.Stop();
     }
+
+    // public void PauseAudio(bool flag)
+    // {
+    //     AudioListener.pause = flag;
+    // }
 }

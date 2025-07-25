@@ -41,6 +41,7 @@ public class SceneTransitionButton : MonoBehaviour
         }
 
         Instantiate(m_transitionSFX);
+        // AudioListener.pause = false;
         
         m_levelData.m_needsTutorial = m_showTutorial;
         m_levelData.m_needsLevelName = m_showLevelName;

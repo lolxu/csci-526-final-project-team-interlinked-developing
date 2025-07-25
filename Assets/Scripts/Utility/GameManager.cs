@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     private GameObject SingletonMasterObject;
 
     private bool m_playerWon = false;
-    private int m_curLevel = 1;
     private bool m_canRestart = false;
     private bool m_canPause = true;
     
@@ -131,8 +130,7 @@ public class GameManager : MonoBehaviour
                     // Show level name for new level
                     m_levelData.m_needsLevelName = true;
                     
-                    m_curLevel++;
-                    SceneManager.LoadScene(m_levelData.m_levelNames[m_curLevel]);
+                    SceneManager.LoadScene(m_levelData.m_levelNames[SceneManager.GetActiveScene().buildIndex + 1]);
                 }
                 else
                 {
