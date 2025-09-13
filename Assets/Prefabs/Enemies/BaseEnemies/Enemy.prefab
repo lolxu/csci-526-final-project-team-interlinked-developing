@@ -268,7 +268,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 48554
+  m_InstanceId: 40052
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}
@@ -381,9 +381,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 8587848885381267784}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 7315378239255767664}
-  m_connectColor: {r: 1, g: 1, b: 1, a: 1}
-  m_disconnectColor: {r: 0, g: 1, b: 1, a: 1}
-  m_colorAlpha: 0.5
 --- !u!114 &6347559345938559381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,7 +516,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 90
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -653,7 +650,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 90
     numCapVertices: 0
     alignment: 0
     textureMode: 0

@@ -123,7 +123,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 90
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -423,7 +423,7 @@ LineRenderer:
       m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
+    numCornerVertices: 90
     numCapVertices: 0
     alignment: 0
     textureMode: 0
@@ -1077,7 +1077,6 @@ MonoBehaviour:
   m_enemyRopeLine: {fileID: 3312148001965257281}
   m_environmentRopeLine: {fileID: 0}
   m_highlight: {fileID: 7479246409768848869}
-  m_colorAlpha: 0.5
 --- !u!114 &-3779267154878166289
 MonoBehaviour:
   m_ObjectHideFlags: 0
